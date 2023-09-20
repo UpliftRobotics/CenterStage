@@ -19,7 +19,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class UpliftRobot
 {
-    DcMotorEx leftFront, rightFront, leftBack, rightBack;
+    DcMotorEx leftFront, rightFront, leftBack, rightBack, pl;
+
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
 
