@@ -1,18 +1,12 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
 
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.IMU;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.Core.toolkit.vision.MainVisionDrive;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -23,6 +17,8 @@ public class UpliftRobot
 
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
+//    OpenCvCamera webcam;
+
 
     public UpliftRobot(LinearOpMode opMode) {
         this.opMode = opMode;
@@ -38,7 +34,14 @@ public class UpliftRobot
         leftBack = hardwareMap.get(DcMotorEx.class, "left_back");
         rightBack = hardwareMap.get(DcMotorEx.class, "right_back");
 
+//        initializeCamera();
+
     }
+
+//    public OpenCvCamera getWebcam()
+//    {
+//        return webcam;
+//    }
 
     public DcMotor getLeftFront() {
         return leftFront;
@@ -56,5 +59,28 @@ public class UpliftRobot
         return rightFront;
     }
 
-
-}
+//    public void initializeCamera()
+//    {
+//
+//        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+//        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+//
+//
+//        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+//            @Override
+//            public void onOpened()
+//            {
+//
+//                webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
+////
+////                pipeline3 = new ConeAlignmentRed(opMode.telemetry);
+////                webcam.setPipeline(pipeline3);
+////                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+//            }
+//
+//            @Override
+//            public void onError(int errorCode) {
+            }
+//        });
+//    }
+//}
