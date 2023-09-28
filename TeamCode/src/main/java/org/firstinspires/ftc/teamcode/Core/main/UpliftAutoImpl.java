@@ -52,9 +52,11 @@ public class UpliftAutoImpl extends UpliftAuto {
     {
         double deltaX = finalX - robot.getWorldX();
         double deltaY = finalY - robot.getWorldY();
+
         double dist = hypot(deltaX, deltaY);
 
         double relAngle = toDegrees(atan2UL(deltaY, deltaX));
+
         double deltaAngle = finalAngle - robot.getWorldAngle();
         double turnVal = deltaAngle / finalAngle;
 
@@ -89,15 +91,17 @@ public class UpliftAutoImpl extends UpliftAuto {
 
             deltaX = finalX - robot.getWorldX();
             deltaY = finalY - robot.getWorldY();
+
             dist = hypot(deltaX, deltaY);
 
-            relAngle = atan2(deltaY, deltaX);
+            relAngle = toDegrees(atan2UL(deltaY, deltaX));
+
             deltaAngle = finalAngle - robot.getWorldAngle();
             turnVal = deltaAngle / finalAngle;
 
         }
 
-        
+
 
 
     }
