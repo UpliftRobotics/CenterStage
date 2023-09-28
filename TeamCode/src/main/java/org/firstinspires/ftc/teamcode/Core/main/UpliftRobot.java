@@ -15,9 +15,15 @@ public class UpliftRobot
 {
     DcMotorEx leftFront, rightFront, leftBack, rightBack;
 
+    double worldX;
+    double worldY;
+    double worldAngle;
+
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
 //    OpenCvCamera webcam;
+
+
 
 
     public UpliftRobot(LinearOpMode opMode) {
@@ -59,7 +65,19 @@ public class UpliftRobot
         return rightFront;
     }
 
-//    public void initializeCamera()
+    public double getWorldX() {
+        return worldX;
+    }
+
+    public double getWorldY() {
+        return worldY;
+    }
+
+    public double getWorldAngle() {
+        return worldAngle;
+    }
+
+    //    public void initializeCamera()
 //    {
 //
 //        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
