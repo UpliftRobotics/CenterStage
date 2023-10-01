@@ -50,14 +50,14 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void goToPos(double finalX, double finalY, double finalAngle, double vel, double tol)
     {
-        double deltaX = finalX - robot.getWorldX();
-        double deltaY = finalY - robot.getWorldY();
+        double deltaX = finalX - robot.worldX;
+        double deltaY = finalY - robot.worldY;
 
         double dist = hypot(deltaX, deltaY);
 
         double relAngle = toDegrees(atan2UL(deltaY, deltaX));
 
-        double deltaAngle = finalAngle - robot.getWorldAngle();
+        double deltaAngle = finalAngle - robot.worldAngle;
         double turnVal = deltaAngle / finalAngle;
 
         while(dist > tol)
@@ -89,14 +89,14 @@ public class UpliftAutoImpl extends UpliftAuto {
             robot.getRightBack().setPower(rbPow / maxVal);
             robot.getRightFront().setPower(rfPow / maxVal);
 
-            deltaX = finalX - robot.getWorldX();
-            deltaY = finalY - robot.getWorldY();
+            deltaX = finalX - robot.worldX;
+            deltaY = finalY - robot.worldY;
 
             dist = hypot(deltaX, deltaY);
 
             relAngle = toDegrees(atan2UL(deltaY, deltaX));
 
-            deltaAngle = finalAngle - robot.getWorldAngle();
+            deltaAngle = finalAngle - robot.worldAngle;
             turnVal = deltaAngle / finalAngle;
 
         }

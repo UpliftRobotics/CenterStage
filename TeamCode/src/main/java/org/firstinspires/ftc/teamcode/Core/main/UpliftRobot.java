@@ -15,10 +15,16 @@ public class UpliftRobot
 {
     DcMotorEx leftFront, rightFront, leftBack, rightBack;
 
-    double worldX;
-    double worldY;
-    double worldAngle;
+    public double worldX = 0;
+    public double worldY = 0;
+    public double rawAngle = 0;
+    public double worldAngle = 0;
 
+    public static double wheelRadius = 19/25.4; // in inches
+    public static double wheelCircumference = wheelRadius * (2 * Math.PI); // in inches
+    public static double COUNTS_PER_INCH = (720 * 4) / wheelCircumference;
+    public static double robotEncoderWheelDistance = 15.7;
+    public static double horizontalEncoderInchesPerDegreeOffset = 0.0275;
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
 //    OpenCvCamera webcam;
@@ -63,18 +69,6 @@ public class UpliftRobot
 
     public DcMotor getRightFront() {
         return rightFront;
-    }
-
-    public double getWorldX() {
-        return worldX;
-    }
-
-    public double getWorldY() {
-        return worldY;
-    }
-
-    public double getWorldAngle() {
-        return worldAngle;
     }
 
     //    public void initializeCamera()
