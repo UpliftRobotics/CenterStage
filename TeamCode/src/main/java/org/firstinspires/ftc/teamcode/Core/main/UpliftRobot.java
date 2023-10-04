@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -25,6 +26,18 @@ public class UpliftRobot
     public static double COUNTS_PER_INCH = (720 * 4) / wheelCircumference;
     public static double robotEncoderWheelDistance = 15.7;
     public static double horizontalEncoderInchesPerDegreeOffset = 0.0275;
+
+
+    public static final Point blueLeftStack = new Point(67.5, 70);
+    public static final Point blueMiddleStack = new Point(67.5, 70);
+    public static final Point blueRightStack = new Point(67.5, 70);
+
+    public static final Point redLeftStack = new Point(67.5, 70);
+    public static final Point redMiddleStack = new Point(67.5, 70);
+    public static final Point redRightStack = new Point(67.5, 70);
+
+
+
     public LinearOpMode opMode;
     public HardwareMap hardwareMap;
 //    OpenCvCamera webcam;
