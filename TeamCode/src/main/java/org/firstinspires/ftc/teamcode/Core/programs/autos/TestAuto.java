@@ -21,7 +21,7 @@ public class TestAuto extends UpliftAutoImpl {
 
     @Override
     public void body() throws InterruptedException {
-        goToPos(robot.blueLeftStack.x, robot.blueRightStack.y, 90, 0.5, 0.1);
+        goToPos(0, 5, 0, 0.2, 0.2);
     }
 
     @Override

@@ -4,10 +4,9 @@ import android.util.Log;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
-
+import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 
 public class Odometry implements Runnable {
 
@@ -36,10 +35,12 @@ public class Odometry implements Runnable {
         while(t != null && !opMode.isStopRequested() && opMode.opModeIsActive()) {
             updatePosition();
             Log.i("Odometry:", "X: " + robot.worldX + "   Y: " + robot.worldY + "   Angle: " + robot.worldAngle);
+
             opMode.telemetry.addData("X", robot.worldX);
             opMode.telemetry.addData("Y", robot.worldY);
             opMode.telemetry.addData("X", robot.worldAngle);
             opMode.telemetry.update();
+
         }
     }
 
