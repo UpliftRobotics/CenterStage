@@ -5,6 +5,7 @@ import android.util.Log;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 
@@ -59,7 +60,6 @@ public class Odometry implements Runnable {
         double deltaLeftDistance = finalLeftDistance - initialLeftDistance;
         double deltaRightDistance = finalRightDistance - initialRightDistance;
         double deltaCenterDistance = finalCenterDistance - initialCenterDistance;
-
 
         double changeInRobotOrientation = Math.toDegrees((deltaLeftDistance - deltaRightDistance) / (UpliftRobot.robotEncoderWheelDistance));
         double deltaHorizontal = deltaCenterDistance - (changeInRobotOrientation * UpliftRobot.horizontalEncoderInchesPerDegreeOffset);

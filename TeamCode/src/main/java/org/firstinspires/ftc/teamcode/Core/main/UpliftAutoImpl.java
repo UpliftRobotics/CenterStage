@@ -19,6 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 
 public class UpliftAutoImpl extends UpliftAuto {
@@ -29,7 +30,6 @@ public class UpliftAutoImpl extends UpliftAuto {
     @Override
     public void initHardware() {
         robot = new UpliftRobot(this);
-
     }
 
     @Override
@@ -66,7 +66,7 @@ public class UpliftAutoImpl extends UpliftAuto {
             double rfPow = sin(toRadians(relAngle) - (0.25 * PI)) * vel - turnVal;
             double lbPow = sin(toRadians(relAngle) - (0.25 * PI)) * vel + turnVal;
             double rbPow = sin(toRadians(relAngle) + (0.25 * PI)) * vel - turnVal;
-//
+
             // find max total input out of the 4 motors
             double maxVal = abs(lfPow);
             if (abs(rfPow) > maxVal) {

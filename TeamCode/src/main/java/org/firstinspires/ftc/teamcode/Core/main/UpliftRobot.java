@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -15,17 +16,18 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class UpliftRobot
 {
-    DcMotorEx leftFront, rightFront, leftBack, rightBack;
+    public Odometry odometry;
+    DcMotor leftFront, rightFront, leftBack, rightBack;
 
-    public double worldX = 0;
-    public double worldY = 0;
-    public double rawAngle = 0;
-    public double worldAngle = 0;
+    public double worldX;
+    public double worldY;
+    public double rawAngle;
+    public double worldAngle;
 
     public static double wheelRadius = 19/25.4; // in inches
     public static double wheelCircumference = wheelRadius * (2 * Math.PI); // in inches
     public static double COUNTS_PER_INCH = (720 * 4) / wheelCircumference;
-    public static double robotEncoderWheelDistance = 15.7;
+    public static double robotEncoderWheelDistance = 12.73;
     public static double horizontalEncoderInchesPerDegreeOffset = 0.0275;
 
 
@@ -49,16 +51,17 @@ public class UpliftRobot
     public UpliftRobot(LinearOpMode opMode) {
         this.opMode = opMode;
         getHardware();
+        odometry = new Odometry(this);
     }
 
     public void getHardware() {
 
         hardwareMap = opMode.hardwareMap;
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "left_front");
-        rightFront = hardwareMap.get(DcMotorEx.class, "right_front");
-        leftBack = hardwareMap.get(DcMotorEx.class, "left_back");
-        rightBack = hardwareMap.get(DcMotorEx.class, "right_back");
+        leftFront = hardwareMap.get(DcMotor.class, "left_front");
+        rightFront = hardwareMap.get(DcMotor.class, "right_front");
+        leftBack = hardwareMap.get(DcMotor.class, "left_back");
+        rightBack = hardwareMap.get(DcMotor.class, "right_back");
 
 //        initializeCamera();
 
@@ -68,7 +71,13 @@ public class UpliftRobot
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);    }
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
 
 //    public OpenCvCamera getWebcam()
 //    {

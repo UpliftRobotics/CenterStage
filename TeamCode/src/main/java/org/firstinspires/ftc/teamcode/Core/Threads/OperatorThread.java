@@ -33,6 +33,7 @@ public class OperatorThread extends Thread
 
 
 
+
 //                robot.opMode.telemetry.addData("magnet", robot.getMagnet().isPressed());
 //                robot.opMode.telemetry.addData("odoRight" , robot.getOdoRight().getCurrentPosition());
 //                robot.opMode.telemetry.update();

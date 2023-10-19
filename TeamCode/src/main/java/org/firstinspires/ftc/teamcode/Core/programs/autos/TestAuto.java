@@ -14,18 +14,27 @@ public class TestAuto extends UpliftAutoImpl {
 
     public void initHardware() {
 
+        robot = new UpliftRobot(this);
+        odom = robot.odometry;
+
     }
 
     @Override
     public void initAction() {
-
+//        robot = new UpliftRobot(this);
     }
 
 
     @Override
     public void body() throws InterruptedException {
         odom.setOdometryPosition(0, 0, 0);
-        goToPos(0, 5, 0, 0.2, 0.2);
+
+//        robot.worldX = 0;
+//        robot.worldY = 0;
+//        robot.worldAngle = 0; // in degrees
+//        robot.rawAngle = 0;
+
+//        goToPos(15, 15, 0, 0.2, 0.2);
     }
 
     @Override
