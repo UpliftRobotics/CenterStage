@@ -1,11 +1,17 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
 
+import android.text.method.Touch;
+import android.transition.Slide;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
@@ -17,7 +23,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class UpliftRobot
 {
     public Odometry odometry;
-    DcMotor leftFront, rightFront, leftBack, rightBack;
+    DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft,slideRight, extension;
+    Servo intakeAngleRight, intakeAngleLeft, depositArm, depositWrist, depositTwist, grabber;
+    CRServo intakeRoller;
+    TouchSensor extensionTouch;
 
     public double worldX;
     public double worldY;
@@ -63,20 +72,53 @@ public class UpliftRobot
         leftBack = hardwareMap.get(DcMotor.class, "left_back");
         rightBack = hardwareMap.get(DcMotor.class, "right_back");
 
+        slideLeft = hardwareMap.get(DcMotor.class, "slide_left");
+        slideRight = hardwareMap.get(DcMotor.class, "slide_right");
+        extension = hardwareMap.get(DcMotor.class, "extension");
+
+        intakeRoller = hardwareMap.get(CRServo.class, "intake_roller");
+        intakeAngleRight = hardwareMap.get(Servo.class, "intake_angle_right");
+        intakeAngleLeft = hardwareMap.get(Servo.class, "intake_angle_left");
+        depositArm = hardwareMap.get(Servo.class, "deposit_arm");
+        depositWrist = hardwareMap.get(Servo.class, "deposit_wrist");
+        depositTwist = hardwareMap.get(Servo.class, "deposit_twist");
+        grabber = hardwareMap.get(Servo.class, "grabber");
+
+        extensionTouch = hardwareMap.get(TouchSensor.class, "extension_touch");
+
+
+
+
+
+
+
+
+
+
 //        initializeCamera();
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        slideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        slideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        extension.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        slideLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        slideRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        extension.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
     }
 
 //    public OpenCvCamera getWebcam()
@@ -87,18 +129,55 @@ public class UpliftRobot
     public DcMotor getLeftFront() {
         return leftFront;
     }
-
     public DcMotor getLeftBack() {
         return leftBack;
     }
-
     public DcMotor getRightBack() {
         return rightBack;
     }
-
     public DcMotor getRightFront() {
         return rightFront;
     }
+    public DcMotor getSlideLeft() {
+        return slideLeft;
+    }
+    public DcMotor getSlideRight() {
+        return slideRight;
+    }
+    public DcMotor getExtension() {
+        return extension;
+    }
+    public CRServo getIntakeRoller() {
+        return intakeRoller;
+    }
+    public Servo getIntakeAngleRight() {
+        return intakeAngleRight;
+    }
+    public Servo getIntakeAngleLeft() {
+        return intakeAngleLeft;
+    }
+    public Servo getDepositArm() {
+        return depositArm;
+    }
+    public Servo getDepositWrist() {
+        return depositWrist;
+    }
+    public Servo getDepositTwist() {
+        return depositTwist;
+    }
+    public Servo getGrabber() {
+        return grabber;
+    }
+    public TouchSensor getExtensionTouch()
+    {
+        return extensionTouch;
+    }
+
+
+
+
+
+
 
     //    public void initializeCamera()
 //    {

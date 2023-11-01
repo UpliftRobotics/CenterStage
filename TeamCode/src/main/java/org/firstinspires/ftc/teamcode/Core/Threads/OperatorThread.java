@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Core.Threads;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -53,6 +54,10 @@ public class OperatorThread extends Thread
 //                robot.opMode.telemetry.addData("Operator error ", e.getMessage());
 //                robot.opMode.telemetry.addData("Operator error stack", sw.toString());
             }
+
+            intake();
+            slides();
+
         }
     }
 
@@ -72,4 +77,73 @@ public class OperatorThread extends Thread
                 "name=" + OPERATOR_NAME +
                 '}';
     }
+
+    public void intake ()
+    {
+        robot.getIntakeRoller().setPower(robot.opMode.gamepad2.left_stick_y);
+    }
+    public void slides () {
+        robot.getSlideRight().setPower(robot.opMode.gamepad2.right_stick_y);
+        robot.getSlideLeft().setPower(robot.opMode.gamepad2.right_stick_y);
+
+
+    }
+    public void liftSlides() {
+        if(robot.opMode.gamepad2.a ){
+            robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            robot.getSlideRight().setTargetPosition(500);
+            robot.getSlideLeft().setTargetPosition(500);
+
+            robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            robot.getSlideRight().setPower(.5);
+            robot.getSlideRight().setPower(.5);
+        }
+
+
+
+
+        public void SetSlideJoyStick(){
+            robot.getSlideLeft().setPower(Range.clip(robot.opMode.gamepad2.right_stick_y,
+                    -1,1));
+            robot.getSlideRight().setPower(Range.clip(robot.opMode.gamepad2.right_stick_y,
+                    -1,1));
+        }
+
+        public void ResetOutakeTouchSensor() {
+            if(robot.opMode.gamepad2.b ){
+                while(!robot.getExtensionTouch().isPressed()) {
+                    robot.getSlideRight().setPower(.5);
+                    robot.getSlideRight().setPower(.5);}
+            }
+        }
+    }
+
+
+
+    public void Extension() {
+        if(robot.opMode.gamepad2.a ){
+
+            robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            robot.getSlideRight().setTargetPosition(500);
+            robot.getSlideLeft().setTargetPosition(500);
+
+            robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            robot.getSlideRight().setPower(.5);
+            robot.getSlideRight().setPower(.5);
+        }
+
+
+
+    }
+}
+
 }

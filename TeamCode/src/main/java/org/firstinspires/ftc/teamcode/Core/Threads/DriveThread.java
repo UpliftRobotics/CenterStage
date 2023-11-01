@@ -45,6 +45,11 @@ public class DriveThread extends Thread
                 robot.opMode.telemetry.addData("X", robot.worldAngle);
                 robot.opMode.telemetry.update();
 
+                if (robot.getExtensionTouch().getValue() == 1 && robot.getExtension().getPower() != 0)
+                {
+                    robot.getExtension().setPower(0);
+                }
+
 
 
                 // todo: validate user responsiveness and set sleep
@@ -107,5 +112,15 @@ public class DriveThread extends Thread
         return "DriveThread{" +
                 "name=" + DRIVER_NAME +
                 '}';
+    }
+    public void extension()
+    {
+        robot.getExtension().setPower(robot.opMode.gamepad1.right_trigger);
+        robot.getExtension().setPower(-robot.opMode.gamepad1.left_trigger);
+
+        if (robot.opMode.gamepad1.left_bumper)
+        {
+            robot.getExtension().setTargetPosition(0);
+        }
     }
 }
