@@ -112,6 +112,7 @@ public class UpliftRobot
         slideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         extension.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
