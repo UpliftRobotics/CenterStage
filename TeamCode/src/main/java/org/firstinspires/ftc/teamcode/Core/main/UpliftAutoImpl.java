@@ -55,12 +55,13 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         double dist = hypot(deltaX, deltaY);
 
-        double relAngle = toDegrees(atan2UL(deltaY, deltaX));
+        double relAngle = toDegrees(atan2UL(deltaY, deltaX)) - robot.worldAngle;
 
         double deltaAngle = finalAngle - robot.worldAngle;
-        double turnVal = deltaAngle / finalAngle;
+//        double turnVal = deltaAngle / finalAngle;
+        double turnVal = 0;
 
-        while(dist > tol)
+        while(abs(dist) > tol)
         {
             double lfPow = sin(toRadians(relAngle) + (0.25 * PI)) * vel + turnVal;
             double rfPow = sin(toRadians(relAngle) - (0.25 * PI)) * vel - turnVal;
@@ -94,12 +95,14 @@ public class UpliftAutoImpl extends UpliftAuto {
 
             dist = hypot(deltaX, deltaY);
 
-            relAngle = toDegrees(atan2UL(deltaY, deltaX));
+            relAngle = toDegrees(atan2UL(deltaY, deltaX)) - robot.worldAngle;
 
             deltaAngle = finalAngle - robot.worldAngle;
-            turnVal = deltaAngle / finalAngle;
-
+//            turnVal = deltaAngle / finalAngle;
+            turnVal = 0;
         }
+
+
 
 
 

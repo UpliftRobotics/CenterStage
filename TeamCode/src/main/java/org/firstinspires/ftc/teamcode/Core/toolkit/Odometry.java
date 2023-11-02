@@ -39,7 +39,7 @@ public class Odometry implements Runnable {
 
             opMode.telemetry.addData("X", robot.worldX);
             opMode.telemetry.addData("Y", robot.worldY);
-            opMode.telemetry.addData("X", robot.worldAngle);
+            opMode.telemetry.addData("Angle", robot.worldAngle);
             opMode.telemetry.update();
 
         }
@@ -78,7 +78,7 @@ public class Odometry implements Runnable {
     }
 
     public int getLeftTicks() {
-        return leftEncoder.getCurrentPosition();
+        return -leftEncoder.getCurrentPosition();
     }
 
     public int getRightTicks() {
@@ -86,7 +86,7 @@ public class Odometry implements Runnable {
     }
 
     public int getCenterTicks() {
-        return -centerEncoder.getCurrentPosition();
+        return centerEncoder.getCurrentPosition();
     }
 
     public void setOdometryPosition(double x, double y, double angle) {

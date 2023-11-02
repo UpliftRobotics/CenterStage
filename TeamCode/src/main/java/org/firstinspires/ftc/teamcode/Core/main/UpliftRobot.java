@@ -33,12 +33,16 @@ public class UpliftRobot
     public double rawAngle;
     public double worldAngle;
 
+    public static double COUNTS_PER_REV = 8192;
+    //2048
     public static double wheelRadius = 19/25.4; // in inches
     public static double wheelCircumference = wheelRadius * (2 * Math.PI); // in inches
-    public static double COUNTS_PER_INCH = (720 * 4) / wheelCircumference;
+    public static double COUNTS_PER_INCH = COUNTS_PER_REV / wheelCircumference;
+    //(720 * 4) / wheelCircumference;
     public static double robotEncoderWheelDistance = 12.73;
-    public static double horizontalEncoderInchesPerDegreeOffset = 0.0275;
-
+    public static double horizontalEncoderInchesPerDegreeOffset = 0;
+    //0.0275
+    //1.37480
 
     public static final Point blueLeftStack = new Point(67.5, 70);
     public static final Point blueMiddleStack = new Point(67.5, 70);
@@ -108,6 +112,10 @@ public class UpliftRobot
         slideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         extension.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -119,6 +127,10 @@ public class UpliftRobot
         extension.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
 //    public OpenCvCamera getWebcam()

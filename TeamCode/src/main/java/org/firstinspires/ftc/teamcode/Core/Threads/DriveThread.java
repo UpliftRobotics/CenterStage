@@ -40,6 +40,7 @@ public class DriveThread extends Thread
 
                 teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_trigger,robot.opMode.gamepad1.left_trigger, robot);
 
+<<<<<<< Updated upstream
                 robot.opMode.telemetry.addData("X", robot.worldX);
                 robot.opMode.telemetry.addData("Y", robot.worldY);
                 robot.opMode.telemetry.addData("X", robot.worldAngle);
@@ -50,6 +51,8 @@ public class DriveThread extends Thread
                     robot.getExtension().setPower(0);
                 }
 
+=======
+>>>>>>> Stashed changes
 
 
                 // todo: validate user responsiveness and set sleep

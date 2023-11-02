@@ -24,7 +24,6 @@ public class TestAuto extends UpliftAutoImpl {
 //        robot = new UpliftRobot(this);
     }
 
-
     @Override
     public void body() throws InterruptedException {
         odom.setOdometryPosition(0, 0, 0);
@@ -34,7 +33,7 @@ public class TestAuto extends UpliftAutoImpl {
 //        robot.worldAngle = 0; // in degrees
 //        robot.rawAngle = 0;
 
-//        goToPos(15, 15, 0, 0.2, 0.2);
+        goToPos(0, 24, 0, 0.5, 1);
     }
 
     @Override
