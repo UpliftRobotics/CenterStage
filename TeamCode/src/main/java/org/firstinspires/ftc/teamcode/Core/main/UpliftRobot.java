@@ -52,6 +52,11 @@ public class UpliftRobot
     public static final Point redMiddleStack = new Point(67.5, 70);
     public static final Point redRightStack = new Point(67.5, 70);
 
+    // direction constants
+    public static final int CLOCKWISE = 1;
+    public static final int COUNTER_CLOCKWISE = 2;
+    public static final int QUICKEST_DIRECTION = 0;
+
 
 
     public LinearOpMode opMode;
@@ -112,7 +117,7 @@ public class UpliftRobot
         slideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         extension.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        
+
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

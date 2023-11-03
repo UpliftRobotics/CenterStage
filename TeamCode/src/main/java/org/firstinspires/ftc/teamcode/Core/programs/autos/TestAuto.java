@@ -33,7 +33,7 @@ public class TestAuto extends UpliftAutoImpl {
 //        robot.worldAngle = 0; // in degrees
 //        robot.rawAngle = 0;
 
-        goToPos(0, 24, 0, 0.5, 1);
+        driveToPosition(0, 12, 1, 0 );
     }
 
     @Override
