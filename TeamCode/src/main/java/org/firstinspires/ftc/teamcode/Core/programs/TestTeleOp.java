@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Core.programs;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
@@ -34,12 +35,36 @@ public class TestTeleOp extends UpliftTele {
                 driverThread.start();
                 operatorThread.start();
                 odom.setOdometryPosition(0, 0, 0);
+
+                robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+                robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+
+
         }
 
         @Override
 
-        public void bodyLoop() throws InterruptedException {
+        public void bodyLoop() throws InterruptedException
+        {
 
+                //telemetry.addData("touch sensor" , robot.getExtensionTouch().getValue());
+//                telemetry.addData("slide left ", robot.getSlideLeft().getCurrentPosition());
+//                telemetry.addData("slide right ", robot.getSlideRight().getCurrentPosition());
+//                telemetry.addData("right stick y", robot.opMode.gamepad2.right_stick_y);
+                telemetry.addData("right trigger", robot.opMode.gamepad1.right_trigger);
+                telemetry.addData("left trigger", robot.opMode.gamepad1.left_trigger);
+                telemetry.addData("extension", robot.getExtension().getCurrentPosition());
+
+
+                telemetry.update();
         }
 
         @Override

@@ -63,6 +63,40 @@ public class UpliftRobot
     public HardwareMap hardwareMap;
 //    OpenCvCamera webcam;
 
+    // robot constants
+    //inake pos
+    public double intakeStorePos = .5;
+    public double intakeGroundPos = 0;
+    public double intake2Pixel = .2;
+    public double intake3Pixel = .3;
+    public double intake4Pixel = .4;
+    public double intake5Pixel = .5;
+
+    //deposit arm pos
+    public double depositPick = 0;
+    public double depositHold = .2;
+    public double depositBack = 1;
+
+    //deposit wrist pos
+    public double wristPick = 0;
+    public double wristHold = .2;
+    public double wristBack = .5;
+
+    //twister pos
+    public double twistReset = .25;
+    public double twistPosIncremnt = .25;
+
+    //grabber pos
+    public double grabberOpen = 1;
+    public double grabberClose = 0;
+
+    public int depositStage = 0;
+
+
+
+
+
+
 
 
 
@@ -108,7 +142,6 @@ public class UpliftRobot
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
-        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
