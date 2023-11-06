@@ -3,7 +3,8 @@ package org.firstinspires.ftc.teamcode.Core.toolkit;
 import android.util.Log;
 
 public class UpliftMath {
-    public static double truncate(double val) {
+    public static double truncate(double val)
+    {
         return (((int)(val * 1000)) / 1000.0);
     }
 
