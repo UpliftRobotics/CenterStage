@@ -229,9 +229,10 @@ public class UpliftAutoImpl extends UpliftAuto {
             maxVal = 1 / sqrt(2);
         }
 
+
         // set the scaled powers
-        robot.getLeftFront().setPower(lf / maxVal);
-        robot.getRightFront().setPower(rf / maxVal);
+        robot.getLeftFront().setPower(1 * (lf / maxVal));
+        robot.getRightFront().setPower(1 * (rf / maxVal));
         robot.getLeftBack().setPower(lb / maxVal);
         robot.getRightBack().setPower(rb / maxVal);
     }

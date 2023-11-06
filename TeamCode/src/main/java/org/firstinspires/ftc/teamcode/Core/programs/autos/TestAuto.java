@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Core.programs.autos;
 
+import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.QUICKEST_DIRECTION;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
@@ -25,15 +27,15 @@ public class TestAuto extends UpliftAutoImpl {
     }
 
     @Override
-    public void body() throws InterruptedException {
+    public void body() throws InterruptedException
+    {
         odom.setOdometryPosition(0, 0, 0);
 
-//        robot.worldX = 0;
-//        robot.worldY = 0;
-//        robot.worldAngle = 0; // in degrees
-//        robot.rawAngle = 0;
+        driveToPosition(0, 48, 0.6, 105);
 
-        driveToPosition(0, 12, 1, 0 );
+        Thread.sleep(20000);
+//        driveToPosition(0, 12, 0.5, 0 );
+
     }
 
     @Override
