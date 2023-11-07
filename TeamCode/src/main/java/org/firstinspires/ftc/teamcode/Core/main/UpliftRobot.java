@@ -65,30 +65,32 @@ public class UpliftRobot
 
     // robot constants
     //inake pos
-    public double intakeStorePos = .5;
-    public double intakeGroundPos = 0;
-    public double intake2Pixel = .2;
-    public double intake3Pixel = .3;
-    public double intake4Pixel = .4;
-    public double intake5Pixel = .5;
+    public double intakeStorePos = .52;
+    public double intakeGroundPos = .425;
+    public double intake2Pixel = .47;
+    public double intake3Pixel = .49;
+    public double intake4Pixel = .50;
+    public double intake5Pixel = .52;
 
     //deposit arm pos
-    public double depositPick = 0;
-    public double depositHold = .2;
-    public double depositBack = 1;
+    public double depositPick = .175;
+    public double depositPick2 = 0.18;
+    public double depositHold = .39;
+    public double depositBack = .92;
 
     //deposit wrist pos
-    public double wristPick = 0;
-    public double wristHold = .2;
-    public double wristBack = .5;
+    public double wristPick = .43;
+    public double wristPick2 = .37;
+    public double wristHold = .5;
+    public double wristBack = .15;
 
     //twister pos
-    public double twistReset = .25;
+    public double twistReset = .3;
     public double twistPosIncremnt = .25;
 
     //grabber pos
-    public double grabberOpen = 1;
-    public double grabberClose = 0;
+    public double grabberOpen = .55;
+    public double grabberClose = 1;
 
     public int depositStage = 0;
 

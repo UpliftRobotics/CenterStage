@@ -45,7 +45,11 @@ public class TestTeleOp extends UpliftTele {
                 robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-
+                robot.getDepositArm().setPosition(robot.depositHold);
+                robot.getDepositWrist().setPosition(robot.wristHold);
+                robot.getDepositTwist().setPosition(robot.twistReset);
+                robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
+                robot.getGrabber().setPosition(robot.grabberClose);
 
 
         }

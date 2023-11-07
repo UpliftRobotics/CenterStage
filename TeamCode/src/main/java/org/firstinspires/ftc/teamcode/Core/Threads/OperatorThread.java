@@ -32,11 +32,13 @@ public class OperatorThread extends Thread
             try
             {
                 intake();
+                intakeAngle();
                 slides();
                 deposit();
                 drop();
                 rightTwister();
                 leftTwister();
+                reset();
 
 
 
@@ -152,21 +154,22 @@ public class OperatorThread extends Thread
             {
                 robot.getGrabber().setPosition(robot.grabberOpen);
                 robot.getDepositWrist().setPosition(robot.wristPick);
+                Thread.sleep(50);
                 robot.getDepositArm().setPosition(robot.depositPick);
-
-                sleep(200);
-
+                Thread.sleep(200);
+                robot.getDepositWrist().setPosition(robot.wristPick2);
+                Thread.sleep(200);
                 robot.getGrabber().setPosition(robot.grabberClose);
-                sleep(100);
-
+                Thread.sleep(500);
+                robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);
+                Thread.sleep(500);
                 robot.getDepositArm().setPosition(robot.depositHold);
-                robot.getDepositWrist().setPosition(robot.wristHold);
                 robot.depositStage++;
             }
-            if (robot.depositStage == 1)
+            else if (robot.depositStage == 1)
             {
                 robot.getDepositArm().setPosition(robot.depositBack);
-                robot.getDepositTwist().setPosition(robot.wristBack);
+                robot.getDepositWrist().setPosition(robot.wristBack);
                 robot.depositStage++;
             }
         }
@@ -227,14 +230,14 @@ public class OperatorThread extends Thread
         {
             robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
 
-            robot.getSlideRight().setTargetPosition(0);
-            robot.getSlideLeft().setTargetPosition(0);
-
-            robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            robot.getSlideRight().setPower(-.5);
-            robot.getSlideRight().setPower(-.5);
+//            robot.getSlideRight().setTargetPosition(0);
+//            robot.getSlideLeft().setTargetPosition(0);
+//
+//            robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//            robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//            robot.getSlideRight().setPower(-.5);
+//            robot.getSlideRight().setPower(-.5);
 
             robot.getDepositArm().setPosition(robot.depositHold);
             robot.getDepositWrist().setPosition(robot.wristHold);
