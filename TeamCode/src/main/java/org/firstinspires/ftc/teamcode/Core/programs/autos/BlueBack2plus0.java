@@ -27,48 +27,40 @@ public class BlueBack2plus0 extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
+        int location = robot.pipeline.location;
         odom.setOdometryPosition(48, 0, 180);
 
         //left
+        if(location == 0 || location == -1 ) {
+            //drop position
+            driveToPosition(4, 10, 0.6, 90);
+            Thread.sleep(1000);
 
-        //drop position
-        driveToPosition(4, 10, 0.6, 90);
-        Thread.sleep(1000);
-
-        //extension position
-        driveToPosition(15, 27, 0.5, 93);
-
-
-
+        }
 
         //middle
+        if(location == 1 ) {
 
-        //drop position
-        driveToPosition(4, 18, 0.6, 90);
-        Thread.sleep(1000);
+            //drop position
+            driveToPosition(4, 18, 0.6, 90);
+            Thread.sleep(1000);
 
-
-        //extension position
-        driveToPosition(15, 27, 0.5, 93);
-
-
+        }
 
         // right
 
-        //drop position
-        driveToPosition(4, 25, 0.6, 90);
-        Thread.sleep(1000);
-
-        //extension position
-        driveToPosition(15, 27, 0.5, 93);
+        if(location == 2 ) {
+            //drop position
+            driveToPosition(4, 25, 0.6, 90);
+            Thread.sleep(1000);
+        }
 
         //park
+        //extension position
+        driveToPosition(15, 27, 0.5, 93);
         driveToPosition(10, 42, 0.6, 93);
         driveToPosition(0, 44, 0.6, 93);
 
-
-
-        Thread.sleep(20000);
 
     }
 

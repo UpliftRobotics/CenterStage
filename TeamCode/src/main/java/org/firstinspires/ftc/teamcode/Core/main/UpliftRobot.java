@@ -12,6 +12,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStage;
+
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
@@ -27,6 +29,8 @@ public class UpliftRobot
     Servo intakeAngleRight, intakeAngleLeft, depositArm, depositWrist, depositTwist, grabber;
     CRServo intakeRoller;
     TouchSensor extensionTouch;
+    public CenterStage pipeline;
+    public OpenCvCamera webcam;
 
     public double worldX;
     public double worldY;
@@ -138,7 +142,7 @@ public class UpliftRobot
 
 
 
-//        initializeCamera();
+        initializeCamera();
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -230,28 +234,30 @@ public class UpliftRobot
 
 
 
-    //    public void initializeCamera()
-//    {
-//
-//        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-//        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-//
-//
-//        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
-//            @Override
-//            public void onOpened()
-//            {
-//
-//                webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
-////
-////                pipeline3 = new ConeAlignmentRed(opMode.telemetry);
-////                webcam.setPipeline(pipeline3);
-////                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
-//            }
-//
-//            @Override
-//            public void onError(int errorCode) {
+    public void initializeCamera()
+  {
+
+       int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+       webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+
+
+     webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {          @Override
+           public void onOpened()
+           {
+             webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
+
+               pipeline = new CenterStage(opMode.telemetry);
+               webcam.setPipeline(pipeline);
+               webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
-//        });
-//    }
-//}
+
+            @Override
+           public void onError(int errorCode) {
+            }
+        });
+    }
+
+    public OpenCvCamera getWebcam() {
+        return webcam;
+    }
+}
