@@ -250,7 +250,7 @@ public class UpliftRobot
                pipelineRed = new CenterStageRed(opMode.telemetry);
 
                //changes this before each match depending on color
-               webcam.setPipeline(pipelineBlue);
+               webcam.setPipeline(pipelineRed);
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
 

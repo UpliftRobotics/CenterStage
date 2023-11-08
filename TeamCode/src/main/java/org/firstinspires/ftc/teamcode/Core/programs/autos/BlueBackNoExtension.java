@@ -7,8 +7,9 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@Autonomous(name = "BlueBack2plus0", group = "Opmodes")
-public class BlueBack2plus0 extends UpliftAutoImpl
+@Autonomous(name = "BlueBackNoExtension", group = "Opmodes")
+
+public class BlueBackNoExtension extends UpliftAutoImpl
 {
     Odometry odom;
 
@@ -22,6 +23,10 @@ public class BlueBack2plus0 extends UpliftAutoImpl
     @Override
     public void initAction() {
 //        robot = new UpliftRobot(this);
+        robot.getGrabber().setPosition(robot.grabberClose);
+        robot.getDepositArm().setPosition(0.5);
+        robot.getDepositWrist().setPosition(0.3);
+        robot.getDepositTwist().setPosition(0.3);
     }
 
     @Override
@@ -33,35 +38,59 @@ public class BlueBack2plus0 extends UpliftAutoImpl
         //left
         if(location == 0 || location == -1 ) {
             //drop position
-            driveToPosition(4, 10, 0.6, 90);
+            driveToPosition(4, 12, 0.6, 90);
             Thread.sleep(1000);
+
+            deposit();
+            Thread.sleep(500);
+            drop();
+
+            //outtake position
+            driveToPosition(23, 20, 0.5, 93);
 
         }
 
         //middle
-        if(location == 1 ) {
-
+        if(location == 1 )
+        {
             //drop position
             driveToPosition(4, 18, 0.6, 90);
             Thread.sleep(1000);
 
+            deposit();
+            Thread.sleep(500);
+            drop();
+
+            //outtake position
+            driveToPosition(30, 27, 0.5, 93);
         }
 
         // right
 
-        if(location == 2 ) {
+        if(location == 2 )
+        {
             //drop position
             driveToPosition(4, 25, 0.6, 90);
             Thread.sleep(1000);
+
+            deposit();
+            Thread.sleep(500);
+            drop();
+
+            Thread.sleep(1000);
+
+            //outtake position
+            driveToPosition(42, 16, 0.5, 93);
         }
 
+        intake(-1);
+        Thread.sleep(5000);
+
+
+
         //park
-        //extension position
-        driveToPosition(15, 27, 0.5, 93);
-
-
         driveToPosition(10, 42, 0.6, 93);
-        driveToPosition(0, 44, 0.6, 93);
+        driveToPosition(0, 46, 0.6, 93);
 
 
     }

@@ -26,7 +26,7 @@ public class VisionTest extends UpliftAutoImpl {
 
     @Override
     public void body() throws InterruptedException {
-        int location = robot.pipeline.location;
+        int location = robot.pipelineRed.location;
 
         if(location == 0 || location == -1 ) {
             robot.getWebcam().stopRecordingPipeline();
