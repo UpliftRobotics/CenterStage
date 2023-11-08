@@ -1,23 +1,20 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
 
-import android.text.method.Touch;
-import android.transition.Slide;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
-import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStage;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageBlue;
 
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageRed;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -29,7 +26,8 @@ public class UpliftRobot
     Servo intakeAngleRight, intakeAngleLeft, depositArm, depositWrist, depositTwist, grabber;
     CRServo intakeRoller;
     TouchSensor extensionTouch;
-    public CenterStage pipeline;
+    public CenterStageBlue pipelineBlue;
+    public CenterStageRed pipelineRed;
     public OpenCvCamera webcam;
 
     public double worldX;
@@ -248,8 +246,11 @@ public class UpliftRobot
            {
              webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
 
-               pipeline = new CenterStage(opMode.telemetry);
-               webcam.setPipeline(pipeline);
+               pipelineBlue = new CenterStageBlue(opMode.telemetry);
+               pipelineRed = new CenterStageRed(opMode.telemetry);
+
+               //changes this before each match depending on color
+               webcam.setPipeline(pipelineBlue);
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
 
