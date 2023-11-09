@@ -37,7 +37,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     @Override
-    public void initAction() {
+    public void initAction() throws InterruptedException {
 
     }
 

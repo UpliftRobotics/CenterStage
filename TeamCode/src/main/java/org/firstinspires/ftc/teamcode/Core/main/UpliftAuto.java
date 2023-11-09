@@ -6,7 +6,7 @@ public abstract class UpliftAuto extends LinearOpMode {
 
     public abstract void initHardware();
 
-    public abstract void initAction();
+    public abstract void initAction() throws InterruptedException;
 
     public abstract void body() throws InterruptedException;
 

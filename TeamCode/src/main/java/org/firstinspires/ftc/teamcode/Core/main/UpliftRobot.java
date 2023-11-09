@@ -68,17 +68,16 @@ public class UpliftRobot
     // robot constants
     //inake pos
     public double intakeStorePos = .52;
-    public double intakeGroundPos = .425;
-    public double intake2Pixel = .47;
-    public double intake3Pixel = .49;
-    public double intake4Pixel = .50;
-    public double intake5Pixel = .52;
-
+    public double intakeGroundPos = .405;
+    public double intake2Pixel = .428;
+    public double intake3Pixel = .453;
+    public double intake4Pixel = .478;
+    public double intake5Pixel = .497;
     //deposit arm pos
     public double depositPick = .175;
     public double depositPick2 = 0.18;
     public double depositHold = .39;
-    public double depositBack = .92;
+    public double depositBack = .87;
 
     //deposit wrist pos
     public double wristPick = .43;
@@ -241,7 +240,8 @@ public class UpliftRobot
        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
 
-     webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {          @Override
+     webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+         @Override
            public void onOpened()
            {
              webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);

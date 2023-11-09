@@ -128,10 +128,10 @@ public class OperatorThread extends Thread
         //robot.getSlideLeft().setPower(.5 * robot.opMode.gamepad2.right_stick_y);
 
     }
-    public void intakeAngle()
-    {
+    public void intakeAngle() throws InterruptedException {
         if (robot.opMode.gamepad2.x)
         {
+            Thread.sleep(1000);
             if(robot.getIntakeAngleRight().getPosition() == robot.intakeStorePos) {
                 robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);}
             else if (robot.getIntakeAngleRight().getPosition() == robot.intakeGroundPos) {

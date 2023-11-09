@@ -30,8 +30,8 @@ public class CenterStageRed extends OpenCvPipeline {
     public Mat processFrame(Mat input) {
         System.out.println("Thread2: " + Thread.currentThread().getName());
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
-        Scalar lowHSV = new Scalar(10, 80, 60);
-        Scalar highHSV = new Scalar(30, 255, 255);
+        Scalar lowHSV = new Scalar(0, 161, 60);
+        Scalar highHSV = new Scalar(235, 255, 255);
 
         Core.inRange(mat, lowHSV, highHSV, mat);
 

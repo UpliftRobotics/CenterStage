@@ -22,8 +22,21 @@ public class TestAuto extends UpliftAutoImpl {
     }
 
     @Override
-    public void initAction() {
+    public void initAction() throws InterruptedException {
 //        robot = new UpliftRobot(this);
+
+        robot.getIntakeAngleRight().setPosition(robot.intake2Pixel);
+        Thread.sleep(10000);
+        robot.getIntakeAngleRight().setPosition(robot.intake3Pixel);
+        Thread.sleep(10000);
+        robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);
+        Thread.sleep(10000);
+        robot.getIntakeAngleRight().setPosition(robot.intake5Pixel);
+        Thread.sleep(10000);
+
+
+//        robot.getIntakeRoller().setPower(.5);
+
     }
 
     @Override

@@ -34,5 +34,5 @@ public class VisionTest extends UpliftAutoImpl {
             Thread.sleep(10000);
 
         }
-          }
+    }
 }

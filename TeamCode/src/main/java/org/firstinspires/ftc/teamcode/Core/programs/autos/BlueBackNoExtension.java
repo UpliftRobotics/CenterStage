@@ -23,6 +23,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
     @Override
     public void initAction() {
 //        robot = new UpliftRobot(this);
+        robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
         robot.getGrabber().setPosition(robot.grabberClose);
         robot.getDepositArm().setPosition(0.5);
         robot.getDepositWrist().setPosition(0.3);
@@ -38,15 +39,15 @@ public class BlueBackNoExtension extends UpliftAutoImpl
         //left
         if(location == 0 || location == -1 ) {
             //drop position
-            driveToPosition(4, 12, 0.6, 90);
+            driveToPosition(5, 12, 0.6, 90);
             Thread.sleep(1000);
 
             deposit();
             Thread.sleep(500);
-            drop();
+            robot.getGrabber().setPosition(robot.grabberOpen);
 
             //outtake position
-            driveToPosition(23, 20, 0.5, 93);
+            driveToPosition(23, 18, 0.5, 93);
 
         }
 
@@ -54,15 +55,15 @@ public class BlueBackNoExtension extends UpliftAutoImpl
         if(location == 1 )
         {
             //drop position
-            driveToPosition(4, 18, 0.6, 90);
+            driveToPosition(5, 18, 0.6, 90);
             Thread.sleep(1000);
 
             deposit();
             Thread.sleep(500);
-            drop();
+            robot.getGrabber().setPosition(robot.grabberOpen);
 
             //outtake position
-            driveToPosition(30, 27, 0.5, 93);
+            driveToPosition(30, 25, 0.5, 93);
         }
 
         // right
@@ -70,27 +71,33 @@ public class BlueBackNoExtension extends UpliftAutoImpl
         if(location == 2 )
         {
             //drop position
-            driveToPosition(4, 25, 0.6, 90);
+            driveToPosition(5, 25, 0.6, 90);
             Thread.sleep(1000);
 
             deposit();
             Thread.sleep(500);
-            drop();
+            robot.getGrabber().setPosition(robot.grabberOpen);
 
             Thread.sleep(1000);
 
             //outtake position
             driveToPosition(42, 16, 0.5, 93);
+
         }
 
-        intake(-1);
-        Thread.sleep(5000);
+        drop();
+        Thread.sleep(1000);
+
+        robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);
+        intake(-0.2);
+        Thread.sleep(2000);
+        intake(0);
 
 
 
         //park
         driveToPosition(10, 42, 0.6, 93);
-        driveToPosition(0, 46, 0.6, 93);
+        driveToPosition(2, 43, 0.6, 100);
 
 
     }
