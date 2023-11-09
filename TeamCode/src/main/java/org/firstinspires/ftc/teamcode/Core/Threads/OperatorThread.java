@@ -154,22 +154,32 @@ public class OperatorThread extends Thread
             {
                 robot.getGrabber().setPosition(robot.grabberOpen);
                 robot.getDepositWrist().setPosition(robot.wristPick);
-                Thread.sleep(50);
+                Thread.sleep(500);
                 robot.getDepositArm().setPosition(robot.depositPick);
-                Thread.sleep(200);
+                Thread.sleep(500);
+                robot.getDepositArm().setPosition(robot.depositPick2);
+                Thread.sleep(400);
                 robot.getDepositWrist().setPosition(robot.wristPick2);
+                robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);
                 Thread.sleep(200);
                 robot.getGrabber().setPosition(robot.grabberClose);
                 Thread.sleep(500);
-                robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);
-                Thread.sleep(500);
+
                 robot.getDepositArm().setPosition(robot.depositHold);
                 robot.depositStage++;
             }
             else if (robot.depositStage == 1)
             {
-                robot.getDepositArm().setPosition(robot.depositBack);
                 robot.getDepositWrist().setPosition(robot.wristBack);
+                robot.getDepositArm().setPosition(.5);
+                Thread.sleep(300);
+                robot.getDepositArm().setPosition(.6);
+                Thread.sleep(300);
+                robot.getDepositArm().setPosition(.7);
+                Thread.sleep(300);
+                robot.getDepositArm().setPosition(.8);
+                Thread.sleep(300);
+                robot.getDepositArm().setPosition(robot.depositBack);
                 robot.depositStage++;
             }
         }
