@@ -68,7 +68,7 @@ public class UpliftRobot
     // robot constants
     //inake pos
     public double intakeStorePos = .52;
-    public double intakeGroundPos = .405;
+    public double intakeGroundPos = .38 ;
     public double intake2Pixel = .428;
     public double intake3Pixel = .453;
     public double intake4Pixel = .478;
@@ -77,10 +77,10 @@ public class UpliftRobot
     public double depositPick = .175;
     public double depositPick2 = 0.13;
     public double depositHold = .39;
-    public double depositBack = .87;
+    public double depositBack = .75;
 
     //deposit wrist pos
-    public double wristPick = .47;
+    public double wristPick = .45;
     public double wristPick2 = .36;
     public double wristHold = .5;
     public double wristBack = .15;
@@ -131,13 +131,6 @@ public class UpliftRobot
         grabber = hardwareMap.get(Servo.class, "grabber");
 
         extensionTouch = hardwareMap.get(TouchSensor.class, "extension_touch");
-
-
-
-
-
-
-
 
 
 

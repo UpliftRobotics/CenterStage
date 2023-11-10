@@ -7,21 +7,20 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@Autonomous(name = "BlueBackNoExtension", group = "Opmodes")
-public class BlueBackNoExtension extends UpliftAutoImpl
+@Autonomous(name = "RedBackNoExtension", group = "Opmodes")
+public class RedBackNoExtension extends UpliftAutoImpl
 {
     Odometry odom;
 
-    public void initHardware() {
-
+    public void initHardware()
+    {
         robot = new UpliftRobot(this);
         odom = robot.odometry;
-
     }
 
     @Override
-    public void initAction() {
-//        robot = new UpliftRobot(this);
+    public void initAction()
+    {
         robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
         robot.getGrabber().setPosition(robot.grabberClose);
         robot.getDepositArm().setPosition(0.5);
@@ -32,13 +31,13 @@ public class BlueBackNoExtension extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
-        int location = robot.pipelineBlue.location;
-        odom.setOdometryPosition(48, 0, 180);
+        int location = robot.pipelineRed.location;
+        odom.setOdometryPosition(48, 144, 0);
 
         //left
         if(location == 0 || location == -1 ) {
             //drop position
-            driveToPosition(5, 12, 0.6, 90);
+            driveToPosition(10, 110, 0.6, 85);
             Thread.sleep(1000);
 
             deposit();
@@ -46,7 +45,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
             robot.getGrabber().setPosition(robot.grabberOpen);
 
             //outtake position
-            driveToPosition(23, 20, 0.5, 93);
+            driveToPosition(42, 115, 0.5, 85);
 
         }
 
@@ -62,7 +61,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
             robot.getGrabber().setPosition(robot.grabberOpen);
 
             //outtake position
-            driveToPosition(30, 28, 0.5, 93);
+            driveToPosition(30, 25, 0.5, 93);
         }
 
         // right
@@ -80,23 +79,23 @@ public class BlueBackNoExtension extends UpliftAutoImpl
             Thread.sleep(1000);
 
             //outtake position
-            driveToPosition(42, 18, 0.5, 93);
+            driveToPosition(42, 16, 0.5, 93);
 
         }
 
-        drop();
-        Thread.sleep(1000);
-
-        robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);
-        intake(-0.2);
-        Thread.sleep(2000);
-        intake(0);
-
-
-
-        //park
-        driveToPosition(10, 44, 0.6, 93);
-        driveToPosition(2, 47, 0.6, 100);
+//        drop();
+//        Thread.sleep(1000);
+//
+//        robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);
+//        intake(-0.2);
+//        Thread.sleep(2000);
+//        intake(0);
+//
+//
+//
+//        //park
+//        driveToPosition(10, 42, 0.6, 93);
+//        driveToPosition(2, 43, 0.6, 100);
 
 
     }

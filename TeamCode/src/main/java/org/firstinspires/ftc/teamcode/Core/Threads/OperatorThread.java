@@ -170,16 +170,17 @@ public class OperatorThread extends Thread
             }
             else if (robot.depositStage == 1)
             {
-                robot.getDepositWrist().setPosition(robot.wristBack);
-                robot.getDepositArm().setPosition(.5);
-                Thread.sleep(300);
-                robot.getDepositArm().setPosition(.6);
-                Thread.sleep(300);
-                robot.getDepositArm().setPosition(.7);
-                Thread.sleep(300);
-                robot.getDepositArm().setPosition(.8);
-                Thread.sleep(300);
+
+//                robot.getDepositArm().setPosition(.5);
+//                Thread.sleep(300);
+//                robot.getDepositArm().setPosition(.6);
+//                Thread.sleep(300);
+//                robot.getDepositArm().setPosition(.7);
+//                Thread.sleep(300);
+//                robot.getDepositArm().setPosition(.8);
+//                Thread.sleep(300);
                 robot.getDepositArm().setPosition(robot.depositBack);
+                robot.getDepositWrist().setPosition(robot.wristBack);
                 robot.depositStage++;
             }
         }
@@ -189,12 +190,12 @@ public class OperatorThread extends Thread
         if (robot.opMode.gamepad2.right_trigger > .5 && robot.depositStage == 2)
         {
             robot.getGrabber().setPosition(robot.grabberOpen);
-            sleep(500);
-            robot.getDepositArm().setPosition(robot.depositHold);
-            robot.getDepositWrist().setPosition(robot.wristHold);
-            robot.getDepositTwist().setPosition(robot.twistReset);
-            robot.getGrabber().setPosition(robot.grabberClose);
-            robot.depositStage = 0;
+//            sleep(500);
+//            robot.getDepositArm().setPosition(robot.depositHold);
+//            robot.getDepositWrist().setPosition(robot.wristHold);
+//            robot.getDepositTwist().setPosition(robot.twistReset);
+//            robot.getGrabber().setPosition(robot.grabberClose);
+//            robot.depositStage = 0;
 //            robot.slidesDown()
         }
     }
@@ -238,6 +239,7 @@ public class OperatorThread extends Thread
     {
         if ( robot.opMode.gamepad2.dpad_down)
         {
+            robot.depositStage = 0;
             robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
 
 //            robot.getSlideRight().setTargetPosition(0);
