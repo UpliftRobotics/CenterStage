@@ -40,7 +40,7 @@ public class DriveThread extends Thread {
 //                robot.opMode.telemetry.addData("X", robot.worldAngle);
 //                robot.opMode.telemetry.update();
 
-
+                plane();
                 extension();
 
 
@@ -101,6 +101,13 @@ public class DriveThread extends Thread {
         return "DriveThread{" +
                 "name=" + DRIVER_NAME +
                 '}';
+    }
+
+    public void plane () throws InterruptedException {
+        if (robot.opMode.gamepad1.dpad_up)
+        {
+            robot.getPlane().setPosition(0);
+        }
     }
 
     public void extension()

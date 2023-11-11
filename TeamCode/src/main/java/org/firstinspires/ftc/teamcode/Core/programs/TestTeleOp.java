@@ -36,10 +36,11 @@ public class TestTeleOp extends UpliftTele {
                 operatorThread.start();
                 odom.setOdometryPosition(0, 0, 0);
 
+                robot.getPlane().setPosition(0.3);
+
                 robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
 
                 robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);

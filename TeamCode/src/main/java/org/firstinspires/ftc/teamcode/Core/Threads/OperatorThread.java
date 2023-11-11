@@ -131,7 +131,7 @@ public class OperatorThread extends Thread
     public void intakeAngle() throws InterruptedException {
         if (robot.opMode.gamepad2.x)
         {
-            Thread.sleep(1000);
+
             if(robot.getIntakeAngleRight().getPosition() == robot.intakeStorePos) {
                 robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);}
             else if (robot.getIntakeAngleRight().getPosition() == robot.intakeGroundPos) {

@@ -23,7 +23,7 @@ public class UpliftRobot
 {
     public Odometry odometry;
     DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft,slideRight, extension;
-    Servo intakeAngleRight, intakeAngleLeft, depositArm, depositWrist, depositTwist, grabber;
+    Servo intakeAngleRight, intakeAngleLeft, depositArm, depositWrist, depositTwist, grabber, plane;
     CRServo intakeRoller;
     TouchSensor extensionTouch;
     public CenterStageBlue pipelineBlue;
@@ -79,6 +79,7 @@ public class UpliftRobot
     public double depositHold = .39;
     public double depositBack = .75;
 
+
     //deposit wrist pos
     public double wristPick = .45;
     public double wristPick2 = .36;
@@ -129,6 +130,7 @@ public class UpliftRobot
         depositWrist = hardwareMap.get(Servo.class, "deposit_wrist");
         depositTwist = hardwareMap.get(Servo.class, "deposit_twist");
         grabber = hardwareMap.get(Servo.class, "grabber");
+        plane = hardwareMap.get(Servo.class, "plane");
 
         extensionTouch = hardwareMap.get(TouchSensor.class, "extension_touch");
 
@@ -146,6 +148,7 @@ public class UpliftRobot
         slideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         extension.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -215,6 +218,7 @@ public class UpliftRobot
     public Servo getGrabber() {
         return grabber;
     }
+    public Servo getPlane(){return plane;}
     public TouchSensor getExtensionTouch()
     {
         return extensionTouch;

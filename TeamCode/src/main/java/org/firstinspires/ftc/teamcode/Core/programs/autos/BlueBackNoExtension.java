@@ -27,6 +27,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
         robot.getDepositArm().setPosition(0.5);
         robot.getDepositWrist().setPosition(0.3);
         robot.getDepositTwist().setPosition(0.3);
+
     }
 
     @Override
