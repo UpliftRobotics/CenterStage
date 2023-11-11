@@ -75,14 +75,14 @@ public class UpliftRobot
     public double intake5Pixel = .497;
     //deposit arm pos
     public double depositPick = .175;
-    public double depositPick2 = 0.13;
+    public double depositPick2 = 0.11;
     public double depositHold = .39;
-    public double depositBack = .75;
+    public double depositBack = .82;
 
 
     //deposit wrist pos
-    public double wristPick = .45;
-    public double wristPick2 = .36;
+    public double wristPick = .475;
+    public double wristPick2 = .32;
     public double wristHold = .5;
     public double wristBack = .15;
 

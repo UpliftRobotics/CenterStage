@@ -39,6 +39,8 @@ public class OperatorThread extends Thread
                 rightTwister();
                 leftTwister();
                 reset();
+                intakeDown();
+                intakeup();
 
 
 
@@ -93,7 +95,7 @@ public class OperatorThread extends Thread
     }
     public void slides ()
     {
-        double power = .5* -robot.opMode.gamepad2.right_stick_y;
+        double power = .8* -robot.opMode.gamepad2.right_stick_y;
 
         // if going up stop from overextending
         if (power > 0.0)
@@ -166,21 +168,22 @@ public class OperatorThread extends Thread
                 Thread.sleep(500);
 
                 robot.getDepositArm().setPosition(robot.depositHold);
+                robot.getDepositWrist().setPosition(robot.wristPick);
                 robot.depositStage++;
             }
             else if (robot.depositStage == 1)
             {
 
-//                robot.getDepositArm().setPosition(.5);
-//                Thread.sleep(300);
-//                robot.getDepositArm().setPosition(.6);
-//                Thread.sleep(300);
-//                robot.getDepositArm().setPosition(.7);
-//                Thread.sleep(300);
-//                robot.getDepositArm().setPosition(.8);
-//                Thread.sleep(300);
-                robot.getDepositArm().setPosition(robot.depositBack);
                 robot.getDepositWrist().setPosition(robot.wristBack);
+                robot.getDepositArm().setPosition(.5);
+                Thread.sleep(500);
+                robot.getDepositArm().setPosition(.6);
+                Thread.sleep(500);
+                robot.getDepositArm().setPosition(.7);
+                Thread.sleep(500);
+                robot.getDepositArm().setPosition(.8);
+                Thread.sleep(1000);
+                robot.getDepositArm().setPosition(robot.depositBack);
                 robot.depositStage++;
             }
         }
@@ -327,7 +330,21 @@ public class OperatorThread extends Thread
 //            robot.getSlideRight().setPower(.5);
 //            robot.getSlideRight().setPower(.5);
 //        }
+    public void intakeDown()
+    {
+        if(robot.opMode.gamepad2.dpad_left)
+        {
+            robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);
+        }
+    }
 
+    public void intakeup()
+    {
+        if(robot.opMode.gamepad2.dpad_right)
+        {
+            robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);
+        }
+    }
 
 
 //    }
