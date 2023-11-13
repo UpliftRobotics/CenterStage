@@ -37,7 +37,7 @@ public class RedBackNoExtension extends UpliftAutoImpl
         //left
         if(location == 0 || location == -1 ) {
             //drop position
-            driveToPosition(9, 110, 0.6, 85);
+            driveToPosition(11, 110, 0.6, 82);
             Thread.sleep(1000);
 
             deposit();
@@ -45,7 +45,7 @@ public class RedBackNoExtension extends UpliftAutoImpl
             robot.getGrabber().setPosition(robot.grabberOpen);
 
             //outtake position
-            driveToPosition(45, 123, 0.5, 95);
+            driveToPosition(46, 124, 0.5, 95);
 
         }
 
@@ -69,7 +69,7 @@ public class RedBackNoExtension extends UpliftAutoImpl
         if(location == 2 )
         {
             //drop position
-            driveToPosition(7, 125, 0.6, 85);
+            driveToPosition(8, 125, 0.6, 85);
             Thread.sleep(1000);
 
             deposit();
@@ -79,7 +79,7 @@ public class RedBackNoExtension extends UpliftAutoImpl
             Thread.sleep(1000);
 
             //outtake position
-            driveToPosition(25, 118, 0.5, 85);
+            driveToPosition(26, 118, 0.5, 85);
 
         }
 

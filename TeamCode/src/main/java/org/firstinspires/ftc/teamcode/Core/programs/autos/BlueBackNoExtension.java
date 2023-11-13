@@ -39,15 +39,15 @@ public class BlueBackNoExtension extends UpliftAutoImpl
         //left
         if(location == 0 || location == -1 ) {
             //drop position
-            driveToPosition(4, 12, 0.6, 90);
+            driveToPosition(7, 8, 0.6, 90);
             Thread.sleep(1000);
 
             deposit();
-            Thread.sleep(500);
+            Thread.sleep(1000);
             robot.getGrabber().setPosition(robot.grabberOpen);
 
             //outtake position
-            driveToPosition(23, 20, 0.5, 93);
+            driveToPosition(19, 21, 0.5, 93);
 
         }
 
@@ -55,7 +55,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
         if(location == 1 )
         {
             //drop position
-            driveToPosition(4, 18, 0.6, 90);
+            driveToPosition(4, 16, 0.6, 90);
             Thread.sleep(1000);
 
             deposit();
@@ -63,7 +63,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
             robot.getGrabber().setPosition(robot.grabberOpen);
 
             //outtake position
-            driveToPosition(30, 30, 0.5, 93);
+            driveToPosition(28, 28, 0.5, 93);
         }
 
         // right
@@ -71,7 +71,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
         if(location == 2 )
         {
             //drop position
-            driveToPosition(4, 27, 0.6, 90);
+            driveToPosition(5, 25, 0.6, 90);
             Thread.sleep(1000);
 
             deposit();
@@ -81,7 +81,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
             Thread.sleep(1000);
 
             //outtake position
-            driveToPosition(42, 18, 0.5, 93);
+            driveToPosition(40, 19, 0.5, 93);
 
         }
 

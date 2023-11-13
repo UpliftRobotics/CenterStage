@@ -81,7 +81,7 @@ public class UpliftRobot
 
 
     //deposit wrist pos
-    public double wristPick = .475;
+    public double wristPick = .485;
     public double wristPick2 = .32;
     public double wristHold = .5;
     public double wristBack = .15;
@@ -247,11 +247,12 @@ public class UpliftRobot
                pipelineRed = new CenterStageRed(opMode.telemetry);
 
                //changes this before each match depending on color
-               webcam.setPipeline(pipelineRed);
+               webcam.setPipeline(pipelineBlue);
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
+
            public void onError(int errorCode) {
             }
         });

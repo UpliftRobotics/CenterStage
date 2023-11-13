@@ -41,6 +41,7 @@ public class OperatorThread extends Thread
                 reset();
                 intakeDown();
                 intakeup();
+                closeGrabber();
 
 
 
@@ -156,16 +157,17 @@ public class OperatorThread extends Thread
             {
                 robot.getGrabber().setPosition(robot.grabberOpen);
                 robot.getDepositWrist().setPosition(robot.wristPick);
-                Thread.sleep(500);
+                Thread.sleep(400);
                 robot.getDepositArm().setPosition(robot.depositPick);
-                Thread.sleep(500);
-                robot.getDepositArm().setPosition(robot.depositPick2);
                 Thread.sleep(400);
                 robot.getDepositWrist().setPosition(robot.wristPick2);
+                Thread.sleep(400);
+                robot.getDepositArm().setPosition(robot.depositPick2);
+                Thread.sleep(400);
                 robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);
-                Thread.sleep(200);
-                robot.getGrabber().setPosition(robot.grabberClose);
                 Thread.sleep(500);
+                robot.getGrabber().setPosition(robot.grabberClose);
+                Thread.sleep(2000);
 
                 robot.getDepositArm().setPosition(robot.depositHold);
                 robot.getDepositWrist().setPosition(robot.wristPick);
@@ -345,6 +347,17 @@ public class OperatorThread extends Thread
             robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);
         }
     }
+
+    public void closeGrabber()
+    {
+        if(robot.opMode.gamepad2.dpad_down)
+        {
+            robot.getGrabber().setPosition(robot.grabberClose);
+        }
+    }
+
+
+
 
 
 //    }
