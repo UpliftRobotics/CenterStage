@@ -38,19 +38,19 @@ public class TestTeleOp extends UpliftTele {
 
 //                robot.getPlane().setPosition(0.3);
 
-                robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-                robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-                robot.getDepositArm().setPosition(robot.depositHold);
-                robot.getDepositWrist().setPosition(robot.wristHold);
-                robot.getDepositTwist().setPosition(robot.twistReset);
-                robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
-                robot.getGrabber().setPosition(robot.grabberClose);
+//                robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//                robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//
+//                robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//
+//                robot.getDepositArm().setPosition(robot.depositHold);
+//                robot.getDepositWrist().setPosition(robot.wristHold);
+//                robot.getDepositTwist().setPosition(robot.twistReset);
+//                robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
+//                robot.getGrabber().setPosition(robot.grabberClose);
 
 
         }
@@ -64,12 +64,12 @@ public class TestTeleOp extends UpliftTele {
 //                telemetry.addData("slide left ", robot.getSlideLeft().getCurrentPosition());
 //                telemetry.addData("slide right ", robot.getSlideRight().getCurrentPosition());
 //                telemetry.addData("right stick y", robot.opMode.gamepad2.right_stick_y);
-                telemetry.addData("right trigger", robot.opMode.gamepad1.right_trigger);
-                telemetry.addData("left trigger", robot.opMode.gamepad1.left_trigger);
-                telemetry.addData("extension", robot.getExtension().getCurrentPosition());
+//                telemetry.addData("right trigger", robot.opMode.gamepad1.right_trigger);
+//                telemetry.addData("left trigger", robot.opMode.gamepad1.left_trigger);
+//                telemetry.addData("extension", robot.getExtension().getCurrentPosition());
 
 
-                telemetry.update();
+//                telemetry.update();
         }
 
         @Override
