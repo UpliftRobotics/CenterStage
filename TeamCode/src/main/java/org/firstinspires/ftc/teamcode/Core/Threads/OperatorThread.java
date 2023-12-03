@@ -32,16 +32,17 @@ public class OperatorThread extends Thread
             try
             {
                 intake();
-                intakeAngle();
+//                intakeAngle();
                 slides();
                 deposit();
-                drop();
-                rightTwister();
-                leftTwister();
+                rightDrop();
+                leftDrop();
+//                rightTwister();
+//                leftTwister();
                 reset();
-                intakeDown();
-                intakeup();
-                closeGrabber();
+//                intakeDown();
+//                intakeup();
+//                closeGrabber();
 
 
 
@@ -92,7 +93,7 @@ public class OperatorThread extends Thread
 
     public void intake ()
     {
-        robot.getIntakeRoller().setPower(robot.opMode.gamepad2.left_stick_y);
+        robot.getIntake().setPower(.6* robot.opMode.gamepad2.left_stick_y);
     }
     public void slides ()
     {
@@ -132,78 +133,145 @@ public class OperatorThread extends Thread
 
     }
     public void intakeAngle() throws InterruptedException {
-        if (robot.opMode.gamepad2.x)
-        {
-
-            if(robot.getIntakeAngleRight().getPosition() == robot.intakeStorePos) {
-                robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);}
-            else if (robot.getIntakeAngleRight().getPosition() == robot.intakeGroundPos) {
-                robot.getIntakeAngleRight().setPosition(robot.intake2Pixel);}
-            else if (robot.getIntakeAngleRight().getPosition() == robot.intake2Pixel) {
-                robot.getIntakeAngleRight().setPosition(robot.intake3Pixel);}
-            else if (robot.getIntakeAngleRight().getPosition() == robot.intake3Pixel) {
-                robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);}
-            else if (robot.getIntakeAngleRight().getPosition() == robot.intake4Pixel) {
-                robot.getIntakeAngleRight().setPosition(robot.intake5Pixel);}
-            else
-                robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
-        }
+//        if (robot.opMode.gamepad2.x)
+//        {
+//
+//            if(robot.getIntakeAngleRight().getPosition() == robot.intakeStorePos) {
+//                robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);}
+//            else if (robot.getIntakeAngleRight().getPosition() == robot.intakeGroundPos) {
+//                robot.getIntakeAngleRight().setPosition(robot.intake2Pixel);}
+//            else if (robot.getIntakeAngleRight().getPosition() == robot.intake2Pixel) {
+//                robot.getIntakeAngleRight().setPosition(robot.intake3Pixel);}
+//            else if (robot.getIntakeAngleRight().getPosition() == robot.intake3Pixel) {
+//                robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);}
+//            else if (robot.getIntakeAngleRight().getPosition() == robot.intake4Pixel) {
+//                robot.getIntakeAngleRight().setPosition(robot.intake5Pixel);}
+//            else
+//                robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
+//        }
     }
 
-    public void deposit () throws InterruptedException {
-        if(robot.opMode.gamepad2.y )
+    public void deposit () throws InterruptedException
+    {
+        if(robot.opMode.gamepad2.y)
         {
             if (robot.depositStage == 0)
             {
-                robot.getGrabber().setPosition(robot.grabberOpen);
-                robot.getDepositWrist().setPosition(robot.wristPick);
-                Thread.sleep(400);
-                robot.getDepositArm().setPosition(robot.depositPick);
-                Thread.sleep(400);
-                robot.getDepositWrist().setPosition(robot.wristPick2);
-                Thread.sleep(400);
-                robot.getDepositArm().setPosition(robot.depositPick2);
-                Thread.sleep(400);
-                robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);
+                robot.getGrabberRight().setPosition(robot.grabberRightClose);
+                robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
                 Thread.sleep(500);
-                robot.getGrabber().setPosition(robot.grabberClose);
-                Thread.sleep(2000);
-
-                robot.getDepositArm().setPosition(robot.depositHold);
-                robot.getDepositWrist().setPosition(robot.wristPick);
-                robot.depositStage++;
+                robot.getDepositWrist().setPosition(robot.depositWristDrop2);
+//                robot.getArmLeft().setPosition(robot.armLeftHold);
+//                robot.getArmRight().setPosition(robot.armRightHold);
+//                robot.getDepositWrist().setPosition(robot.depositWristHold);
+//                Thread.sleep(200);
+                robot.depositStage = 1;
             }
             else if (robot.depositStage == 1)
             {
-
-                robot.getDepositWrist().setPosition(robot.wristBack);
-                robot.getDepositArm().setPosition(.5);
-                Thread.sleep(500);
-                robot.getDepositArm().setPosition(.6);
-                Thread.sleep(500);
-                robot.getDepositArm().setPosition(.7);
-                Thread.sleep(500);
-                robot.getDepositArm().setPosition(.8);
-                Thread.sleep(1000);
-                robot.getDepositArm().setPosition(robot.depositBack);
-                robot.depositStage++;
+                robot.getArmRight().setPosition(robot.armRightDrop1);
+                robot.getArmLeft().setPosition(robot.armLeftDrop1);
+                Thread.sleep(600);
+                robot.getDepositWrist().setPosition(robot.depositWristDrop1);
+                Thread.sleep(200);
+                robot.depositStage = 2;
             }
+            else if (robot.depositStage == 2)
+            {
+                robot.getArmRight().setPosition(robot.armRightDrop2);
+                robot.getArmLeft().setPosition(robot.armLeftDrop2);
+                robot.getDepositWrist().setPosition(robot.depositWristDrop2);
+                Thread.sleep(200);
+                robot.depositStage = 3;
+            }
+
         }
+//        if(robot.opMode.gamepad2.y )
+//        {
+//            if (robot.depositStage == 0)
+//            {
+//                robot.getGrabber().setPosition(robot.grabberOpen);
+//                robot.getDepositWrist().setPosition(robot.wristPick);
+//                Thread.sleep(400);
+//                robot.getDepositArm().setPosition(robot.depositPick);
+//                Thread.sleep(400);
+//                robot.getDepositWrist().setPosition(robot.wristPick2);
+//                Thread.sleep(400);
+//                robot.getDepositArm().setPosition(robot.depositPick2);
+//                Thread.sleep(400);
+//                robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);
+//                Thread.sleep(500);
+//                robot.getGrabber().setPosition(robot.grabberClose);
+//                Thread.sleep(2000);
+//
+//                robot.getDepositArm().setPosition(robot.depositHold);
+//                robot.getDepositWrist().setPosition(robot.wristPick);
+//                robot.depositStage++;
+//            }
+//            else if (robot.depositStage == 1)
+//            {
+//
+//                robot.getDepositWrist().setPosition(robot.wristBack);
+//                robot.getDepositArm().setPosition(.5);
+//                Thread.sleep(500);
+//                robot.getDepositArm().setPosition(.6);
+//                Thread.sleep(500);
+//                robot.getDepositArm().setPosition(.7);
+//                Thread.sleep(500);
+//                robot.getDepositArm().setPosition(.8);
+//                Thread.sleep(1000);
+//                robot.getDepositArm().setPosition(robot.depositBack);
+//                robot.depositStage++;
+//            }
+//        }
 
     }
-    public void drop () throws InterruptedException {
-        if (robot.opMode.gamepad2.right_trigger > .5 && robot.depositStage == 2)
+    public void rightDrop () throws InterruptedException
+    {
+        if(robot.opMode.gamepad2.right_trigger>.5 && (robot.depositStage == 2 || robot.depositStage == 3))
         {
-            robot.getGrabber().setPosition(robot.grabberOpen);
-//            sleep(500);
-//            robot.getDepositArm().setPosition(robot.depositHold);
-//            robot.getDepositWrist().setPosition(robot.wristHold);
-//            robot.getDepositTwist().setPosition(robot.twistReset);
-//            robot.getGrabber().setPosition(robot.grabberClose);
-//            robot.depositStage = 0;
-//            robot.slidesDown()
+            robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
         }
+        else if(robot.opMode.gamepad2.right_trigger>.5 && robot.depositStage == 0 && robot.getGrabberLeft().getPosition() == robot.grabberLeftOpen)
+        {
+            robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
+            Thread.sleep(400);
+        }
+        else if(robot.opMode.gamepad2.right_trigger>.5 && robot.depositStage == 0 && robot.getGrabberLeft().getPosition() != robot.grabberLeftOpen)
+        {
+            robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
+            Thread.sleep(400);
+        }
+
+//        if (robot.opMode.gamepad2.right_trigger > .5 && robot.depositStage == 2)
+//        {
+//            robot.getGrabber().setPosition(robot.grabberOpen);
+////            sleep(500);
+////            robot.getDepositArm().setPosition(robot.depositHold);
+////            robot.getDepositWrist().setPosition(robot.wristHold);
+////            robot.getDepositTwist().setPosition(robot.twistReset);
+////            robot.getGrabber().setPosition(robot.grabberClose);
+////            robot.depositStage = 0;
+////            robot.slidesDown()
+//        }
     }
+    public void leftDrop () throws InterruptedException
+    {
+        if(robot.opMode.gamepad2.left_trigger>.5 && (robot.depositStage == 2 || robot.depositStage == 3))
+        {
+            robot.getGrabberRight().setPosition(robot.grabberRightOpen);
+        }
+        else if(robot.opMode.gamepad2.left_trigger>.5 && robot.depositStage == 0 && robot.getGrabberRight().getPosition() == robot.grabberRightOpen)
+        {
+            robot.getGrabberRight().setPosition(robot.grabberRightClose);
+            Thread.sleep(400);
+        }
+        else if(robot.opMode.gamepad2.left_trigger>.5 && robot.depositStage == 0 && robot.getGrabberRight().getPosition() != robot.grabberRightOpen)
+        {
+            robot.getGrabberRight().setPosition(robot.grabberRightOpen);
+            Thread.sleep(400);
+        }
+        }
     public void rightTwister() throws InterruptedException {
         if (robot.opMode.gamepad2.right_bumper && robot.depositStage == 2)
         {
@@ -240,38 +308,41 @@ public class OperatorThread extends Thread
         }
 
     }
-    public void reset ()
-    {
-        if ( robot.opMode.gamepad2.dpad_down)
+    public void reset () throws InterruptedException {
+        if(robot.opMode.gamepad2.dpad_down)
         {
+            robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
+            robot.getGrabberRight().setPosition(robot.grabberRightOpen);
+            Thread.sleep(200);
+            robot.getArmLeft().setPosition(robot.armLeftPast);
+            robot.getArmRight().setPosition(robot.armRightPast);
+            Thread.sleep(1500);
+            robot.getDepositWrist().setPosition(robot.depositWristGrab);
+            Thread.sleep(500);
+            robot.getArmLeft().setPosition(robot.armLeftGrab);
+            robot.getArmRight().setPosition(robot.armRightGrab);
             robot.depositStage = 0;
-            robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
-
-//            robot.getSlideRight().setTargetPosition(0);
-//            robot.getSlideLeft().setTargetPosition(0);
-//
-//            robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//            robot.getSlideRight().setPower(-.5);
-//            robot.getSlideRight().setPower(-.5);
-
-            robot.getDepositArm().setPosition(robot.depositHold);
-            robot.getDepositWrist().setPosition(robot.wristHold);
-            robot.getDepositTwist().setPosition(robot.twistReset);
-
-
         }
-
-    }
-    public void hang()
-    {
-//        if (robot.opMode.gamepad2.dpad_left && robot.opMode.gamepad2.left_trigger > .5)
+//        if ( robot.opMode.gamepad2.dpad_down)
 //        {
-//            robot.getHang1().setPosition(robot.hangOpenPos);
-//            robot.getHang2().setPosition(robot.hangOpenPos);
+//            robot.depositStage = 0;
+//            robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
+//
+////            robot.getSlideRight().setTargetPosition(0);
+////            robot.getSlideLeft().setTargetPosition(0);
+////
+////            robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+////            robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+////
+////            robot.getSlideRight().setPower(-.5);
+////            robot.getSlideRight().setPower(-.5);
+//
+//            robot.getDepositArm().setPosition(robot.depositHold);
+//            robot.getDepositWrist().setPosition(robot.wristHold);
+//            robot.getDepositTwist().setPosition(robot.twistReset);
 //        }
     }
+
     public void plane()
     {
 //        if(robot.opMode.gamepad2.dpad_right && robot.opMode.gamepad2.left_trigger >.5)

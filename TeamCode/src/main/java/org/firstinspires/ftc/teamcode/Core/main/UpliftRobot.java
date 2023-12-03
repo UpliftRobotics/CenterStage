@@ -22,9 +22,10 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class UpliftRobot
 {
     public Odometry odometry;
-    DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft,slideRight, extension;
+    DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft,slideRight, extension, intake;
     Servo intakeAngleRight, intakeAngleLeft, depositArm, depositWrist, depositTwist, grabber, plane;
     CRServo intakeRoller;
+    Servo intakeLinkLeft, IntakeLinkRight, grabberLeft, grabberRight, armLeft, armRight;
     TouchSensor extensionTouch;
     public CenterStageBlue pipelineBlue;
     public CenterStageRed pipelineRed;
@@ -96,6 +97,36 @@ public class UpliftRobot
 
     public int depositStage = 0;
 
+    // v2
+    public double armLeftPast = 1;
+    public double armRightPast = 0;
+
+    public double armLeftGrab = .99;
+    public double armRightGrab = .01;
+
+    public double armLeftHold = .8;
+    public double armRightHold = .2;
+
+    public double armLeftDrop1 = .1;
+    public double armRightDrop1 = .9;
+    public double armLeftDrop2 = 0;
+    public double armRightDrop2 = 1;
+
+    public double depositWristGrab = .32;
+    public double depositWristHold = .78;
+    public double depositWristDrop1 = 0;
+    public double depositWristDrop2 = 0;
+
+    public double grabberLeftOpen = .15;
+    public double grabberLeftClose = .51;
+    public double grabberRightOpen = .35;
+    public double grabberRightClose = .01;
+
+
+
+
+
+
 
 
 
@@ -122,6 +153,8 @@ public class UpliftRobot
         slideLeft = hardwareMap.get(DcMotor.class, "slide_left");
         slideRight = hardwareMap.get(DcMotor.class, "slide_right");
         extension = hardwareMap.get(DcMotor.class, "extension");
+        intake = hardwareMap.get(DcMotor.class, "intake");
+
 
         intakeRoller = hardwareMap.get(CRServo.class, "intake_roller");
         intakeAngleRight = hardwareMap.get(Servo.class, "intake_angle_right");
@@ -131,8 +164,17 @@ public class UpliftRobot
         depositTwist = hardwareMap.get(Servo.class, "deposit_twist");
         grabber = hardwareMap.get(Servo.class, "grabber");
         plane = hardwareMap.get(Servo.class, "plane");
+//        intakeLinkLeft = hardwareMap.get(Servo.class, "intake_left");
+//        IntakeLinkRight = hardwareMap.get(Servo.class, "intake_right");
+        grabberLeft = hardwareMap.get(Servo.class, "grabber_left");
+        grabberRight = hardwareMap.get(Servo.class, "grabber_right");
+        armLeft = hardwareMap.get(Servo.class, "arm_left");
+        armRight = hardwareMap.get(Servo.class, "arm_right");
+
 
         extensionTouch = hardwareMap.get(TouchSensor.class, "extension_touch");
+
+
 
 
 
@@ -197,6 +239,10 @@ public class UpliftRobot
     public DcMotor getExtension() {
         return extension;
     }
+    public DcMotor getIntake() {
+        return intake;
+    }
+
     public CRServo getIntakeRoller() {
         return intakeRoller;
     }
@@ -219,6 +265,18 @@ public class UpliftRobot
         return grabber;
     }
     public Servo getPlane(){return plane;}
+    public Servo getIntakeLinkLeft(){return intakeLinkLeft;}
+    public Servo getGetIntakeLinkRight(){return IntakeLinkRight;}
+    public Servo getGrabberLeft(){return grabberLeft;}
+    public Servo getGrabberRight(){return grabberRight;}
+    public Servo getArmLeft(){return armLeft;}
+    public Servo getArmRight(){return armRight;}
+
+
+
+
+
+
     public TouchSensor getExtensionTouch()
     {
         return extensionTouch;

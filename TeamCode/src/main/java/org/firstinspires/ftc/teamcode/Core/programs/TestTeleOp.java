@@ -36,21 +36,20 @@ public class TestTeleOp extends UpliftTele {
                 operatorThread.start();
                 odom.setOdometryPosition(0, 0, 0);
 
-//                robot.getPlane().setPosition(0.3);
 
-//                robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//                robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//
-//                robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//
-//                robot.getDepositArm().setPosition(robot.depositHold);
-//                robot.getDepositWrist().setPosition(robot.wristHold);
-//                robot.getDepositTwist().setPosition(robot.twistReset);
-//                robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
-//                robot.getGrabber().setPosition(robot.grabberClose);
+
+
+                robot.getDepositWrist().setPosition(robot.depositWristDrop2);
+                sleep(300);
+                robot.getGrabberRight().setPosition(robot.grabberRightOpen);
+                robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
+                robot.getArmRight().setPosition(robot.armRightPast);
+                robot.getArmLeft().setPosition(robot.armLeftPast);
+                sleep(500);
+                robot.getDepositWrist().setPosition(robot.depositWristGrab);
+                sleep(500);
+                robot.getArmRight().setPosition(robot.armRightGrab);
+                robot.getArmLeft().setPosition(robot.armLeftGrab);
 
 
         }
