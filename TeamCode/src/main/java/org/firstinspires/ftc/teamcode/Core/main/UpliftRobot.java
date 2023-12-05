@@ -113,7 +113,7 @@ public class UpliftRobot
     public double armRightDrop2 = 1;
 
     public double depositWristGrab = .21;
-    public double depositWristHold = .1;
+    public double depositWristHold = .35;
     public double depositWristDrop1 = 0;
     public double depositWristDrop2 = .1;
 
