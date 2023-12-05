@@ -112,10 +112,10 @@ public class UpliftRobot
     public double armLeftDrop2 = 0;
     public double armRightDrop2 = 1;
 
-    public double depositWristGrab = .32;
-    public double depositWristHold = .78;
+    public double depositWristGrab = .21;
+    public double depositWristHold = .1;
     public double depositWristDrop1 = 0;
-    public double depositWristDrop2 = 0;
+    public double depositWristDrop2 = .1;
 
     public double grabberLeftOpen = .15;
     public double grabberLeftClose = .51;

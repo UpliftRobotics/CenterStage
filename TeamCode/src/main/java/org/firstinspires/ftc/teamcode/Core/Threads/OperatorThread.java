@@ -93,16 +93,16 @@ public class OperatorThread extends Thread
 
     public void intake ()
     {
-        robot.getIntake().setPower(.6* robot.opMode.gamepad2.left_stick_y);
+        robot.getIntake().setPower(-.6* robot.opMode.gamepad2.left_stick_y);
     }
     public void slides ()
     {
-        double power = .8* -robot.opMode.gamepad2.right_stick_y;
+        double power = .6* -robot.opMode.gamepad2.right_stick_y;
 
         // if going up stop from overextending
         if (power > 0.0)
         {
-            if(robot.getSlideRight().getCurrentPosition() < -850  || robot.getSlideLeft().getCurrentPosition() > 850) {
+            if(robot.getSlideRight().getCurrentPosition() > 2150  || robot.getSlideLeft().getCurrentPosition() < -2150) {
                 robot.getSlideLeft().setPower(0);
                 robot.getSlideRight().setPower(0);
             }
@@ -115,7 +115,7 @@ public class OperatorThread extends Thread
         // stop from overretracting
         else
         {
-            if(robot.getSlideRight().getCurrentPosition() > -50  || robot.getSlideLeft().getCurrentPosition() < 50)
+            if(robot.getSlideRight().getCurrentPosition() < 50  || robot.getSlideLeft().getCurrentPosition() > -50)
             {
                 robot.getSlideLeft().setPower(0);
                 robot.getSlideRight().setPower(0);
@@ -160,7 +160,7 @@ public class OperatorThread extends Thread
                 robot.getGrabberRight().setPosition(robot.grabberRightClose);
                 robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
                 Thread.sleep(500);
-                robot.getDepositWrist().setPosition(robot.depositWristDrop2);
+                robot.getDepositWrist().setPosition(robot.depositWristHold);
 //                robot.getArmLeft().setPosition(robot.armLeftHold);
 //                robot.getArmRight().setPosition(robot.armRightHold);
 //                robot.getDepositWrist().setPosition(robot.depositWristHold);
@@ -171,7 +171,7 @@ public class OperatorThread extends Thread
             {
                 robot.getArmRight().setPosition(robot.armRightDrop1);
                 robot.getArmLeft().setPosition(robot.armLeftDrop1);
-                Thread.sleep(600);
+                Thread.sleep(800);
                 robot.getDepositWrist().setPosition(robot.depositWristDrop1);
                 Thread.sleep(200);
                 robot.depositStage = 2;
@@ -316,7 +316,7 @@ public class OperatorThread extends Thread
             Thread.sleep(200);
             robot.getArmLeft().setPosition(robot.armLeftPast);
             robot.getArmRight().setPosition(robot.armRightPast);
-            Thread.sleep(1500);
+            Thread.sleep(600);
             robot.getDepositWrist().setPosition(robot.depositWristGrab);
             Thread.sleep(500);
             robot.getArmLeft().setPosition(robot.armLeftGrab);

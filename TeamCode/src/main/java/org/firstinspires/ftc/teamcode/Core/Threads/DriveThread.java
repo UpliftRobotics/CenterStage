@@ -40,41 +40,41 @@ public class DriveThread extends Thread {
 //                robot.opMode.telemetry.addData("X", robot.worldAngle);
 //                robot.opMode.telemetry.update();
 
-                if(robot.opMode.gamepad1.dpad_right)
-                {
-                    robot.getLeftFront().setPower(0.5);
-                    robot.getRightFront().setPower(-0.5);
-                    robot.getLeftBack().setPower(-0.5);
-                    robot.getRightBack().setPower(0.5);
-                    Thread.sleep(3000);
-                }
+//                if(robot.opMode.gamepad1.dpad_right)
+//                {
+//                    robot.getLeftFront().setPower(0.5);
+//                    robot.getRightFront().setPower(-0.5);
+//                    robot.getLeftBack().setPower(-0.5);
+//                    robot.getRightBack().setPower(0.5);
+//                    Thread.sleep(3000);
+//                }
+//
+//                if(robot.opMode.gamepad1.dpad_left)
+//                {
+//                    robot.getLeftFront().setPower(-0.5);
+//                    robot.getRightFront().setPower(0.5);
+//                    robot.getLeftBack().setPower(0.5);
+//                    robot.getRightBack().setPower(-0.5);
+//                    Thread.sleep(3000);
+//                }
 
-                if(robot.opMode.gamepad1.dpad_left)
-                {
-                    robot.getLeftFront().setPower(-0.5);
-                    robot.getRightFront().setPower(0.5);
-                    robot.getLeftBack().setPower(0.5);
-                    robot.getRightBack().setPower(-0.5);
-                    Thread.sleep(3000);
-                }
+//                if(robot.opMode.gamepad1.dpad_up)
+//                {
+//                    robot.getLeftFront().setPower(0.5);
+//                    robot.getRightFront().setPower(0.5);
+//                    robot.getLeftBack().setPower(0.5);
+//                    robot.getRightBack().setPower(0.5);
+//                    Thread.sleep(3000);
+//                }
 
-                if(robot.opMode.gamepad1.dpad_up)
-                {
-                    robot.getLeftFront().setPower(0.5);
-                    robot.getRightFront().setPower(0.5);
-                    robot.getLeftBack().setPower(0.5);
-                    robot.getRightBack().setPower(0.5);
-                    Thread.sleep(3000);
-                }
-
-                if(robot.opMode.gamepad1.dpad_down)
-                {
-                    robot.getLeftFront().setPower(-0.5);
-                    robot.getRightFront().setPower(-0.5);
-                    robot.getLeftBack().setPower(-0.5);
-                    robot.getRightBack().setPower(-0.5);
-                    Thread.sleep(3000);
-                }
+//                if(robot.opMode.gamepad1.dpad_down)
+//                {
+//                    robot.getLeftFront().setPower(-0.5);
+//                    robot.getRightFront().setPower(-0.5);
+//                    robot.getLeftBack().setPower(-0.5);
+//                    robot.getRightBack().setPower(-0.5);
+//                    Thread.sleep(3000);
+//                }
 
 
 
@@ -143,7 +143,7 @@ public class DriveThread extends Thread {
     public void plane () throws InterruptedException {
         if (robot.opMode.gamepad1.dpad_up)
         {
-            robot.getPlane().setPosition(.6);
+            robot.getPlane().setPosition(.8);
         }
     }
 

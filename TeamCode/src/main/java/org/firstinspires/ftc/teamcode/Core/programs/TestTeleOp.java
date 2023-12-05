@@ -37,6 +37,10 @@ public class TestTeleOp extends UpliftTele {
                 odom.setOdometryPosition(0, 0, 0);
 
 
+//
+//robot.getArmLeft().setPosition(robot.armLeftHold);
+//robot.getArmRight().setPosition(robot.armRightHold);
+//sleep(20000);
 
 
                 robot.getDepositWrist().setPosition(robot.depositWristDrop2);
@@ -51,6 +55,12 @@ public class TestTeleOp extends UpliftTele {
                 robot.getArmRight().setPosition(robot.armRightGrab);
                 robot.getArmLeft().setPosition(robot.armLeftGrab);
 
+                robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.getPlane().setPosition(1);
 
         }
 
@@ -60,15 +70,15 @@ public class TestTeleOp extends UpliftTele {
         {
 
                 //telemetry.addData("touch sensor" , robot.getExtensionTouch().getValue());
-//                telemetry.addData("slide left ", robot.getSlideLeft().getCurrentPosition());
-//                telemetry.addData("slide right ", robot.getSlideRight().getCurrentPosition());
+                telemetry.addData("slide left ", robot.getSlideLeft().getCurrentPosition());
+                telemetry.addData("slide right ", robot.getSlideRight().getCurrentPosition());
 //                telemetry.addData("right stick y", robot.opMode.gamepad2.right_stick_y);
 //                telemetry.addData("right trigger", robot.opMode.gamepad1.right_trigger);
 //                telemetry.addData("left trigger", robot.opMode.gamepad1.left_trigger);
 //                telemetry.addData("extension", robot.getExtension().getCurrentPosition());
 
 
-//                telemetry.update();
+                telemetry.update();
         }
 
         @Override
