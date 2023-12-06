@@ -90,16 +90,22 @@ public class UpliftRobot
     public double armRightDrop = 1;
 
     public double depositWristGrab = .21;
+<<<<<<< Updated upstream
     public double depositWristHold = .35;
 
 
     public double depositWristTransfer = 0;
     public double depositWristDrop = .1;
+=======
+    public double depositWristHold = .4;
+    public double depositWristDrop1 = 0;
+    public double depositWristDrop2 = .05;
+>>>>>>> Stashed changes
 
     public double grabberLeftOpen = .15;
-    public double grabberLeftClose = .51;
+    public double grabberLeftClose = .48;
     public double grabberRightOpen = .35;
-    public double grabberRightClose = .01;
+    public double grabberRightClose = 0;
 
 
 

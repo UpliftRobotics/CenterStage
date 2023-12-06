@@ -21,6 +21,7 @@ public class RedBackNoExtension extends UpliftAutoImpl
     @Override
     public void initAction()
     {
+<<<<<<< Updated upstream
         robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
         robot.getGrabberRight().setPosition(robot.grabberRightClose);
 
@@ -28,6 +29,14 @@ public class RedBackNoExtension extends UpliftAutoImpl
         robot.getArmRight().setPosition(robot.armRightTransfer);
 
         robot.getDepositWrist().setPosition(robot.depositWristTransfer);
+=======
+       robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
+       robot.getArmLeft().setPosition(robot.armLeftDrop1);
+       robot.getArmRight().setPosition(robot.armRightDrop1);
+       robot.getDepositWrist().setPosition(robot.depositWristDrop1);
+
+
+>>>>>>> Stashed changes
     }
 
     @Override
