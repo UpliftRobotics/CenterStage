@@ -24,7 +24,6 @@ public class UpliftRobot
     public Odometry odometry;
     DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft, slideRight, extension, intake;
     Servo armLeft, armRight, grabberLeft, grabberRight, depositWrist, plane, intakeLinkLeft, IntakeLinkRight;
-    TouchSensor extensionTouch;
     public CenterStageBlue pipelineBlue;
     public CenterStageRed pipelineRed;
     public OpenCvCamera webcam;
@@ -76,31 +75,21 @@ public class UpliftRobot
 
     // v2
     public double armLeftPast = 1;
-    public double armRightPast = 0;
-
     public double armLeftGrab = .99;
-    public double armRightGrab = .01;
-
     public double armLeftHold = .8;
-    public double armRightHold = .2;
-
     public double armLeftTransfer = .1;
-    public double armRightTransfer = .9;
     public double armLeftDrop = 0;
+
+    public double armRightPast = 0;
+    public double armRightGrab = .01;
+    public double armRightHold = .2;
+    public double armRightTransfer = .9;
     public double armRightDrop = 1;
 
     public double depositWristGrab = .21;
-<<<<<<< Updated upstream
-    public double depositWristHold = .35;
-
-
-    public double depositWristTransfer = 0;
-    public double depositWristDrop = .1;
-=======
     public double depositWristHold = .4;
-    public double depositWristDrop1 = 0;
-    public double depositWristDrop2 = .05;
->>>>>>> Stashed changes
+    public double depositWristTransfer = 0;
+    public double depositWristDrop = .05;
 
     public double grabberLeftOpen = .15;
     public double grabberLeftClose = .48;
@@ -152,7 +141,6 @@ public class UpliftRobot
         armRight = hardwareMap.get(Servo.class, "arm_right");
 
 
-        extensionTouch = hardwareMap.get(TouchSensor.class, "extension_touch");
 
 
 
@@ -240,10 +228,6 @@ public class UpliftRobot
 
 
 
-    public TouchSensor getExtensionTouch()
-    {
-        return extensionTouch;
-    }
 
 
 

@@ -21,22 +21,14 @@ public class RedBackNoExtension extends UpliftAutoImpl
     @Override
     public void initAction()
     {
-<<<<<<< Updated upstream
         robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
-        robot.getGrabberRight().setPosition(robot.grabberRightClose);
-
         robot.getArmLeft().setPosition(robot.armLeftTransfer);
         robot.getArmRight().setPosition(robot.armRightTransfer);
-
         robot.getDepositWrist().setPosition(robot.depositWristTransfer);
-=======
-       robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
-       robot.getArmLeft().setPosition(robot.armLeftDrop1);
-       robot.getArmRight().setPosition(robot.armRightDrop1);
-       robot.getDepositWrist().setPosition(robot.depositWristDrop1);
+
+        robot.getPlane().setPosition(1);
 
 
->>>>>>> Stashed changes
     }
 
     @Override
@@ -48,10 +40,10 @@ public class RedBackNoExtension extends UpliftAutoImpl
         //left
         if(location == 0 || location == -1 ) {
             //drop position
-            driveToPosition(11, 110, 0.6, 82);
+            driveToPosition(9, 110, 0.6, 82);
             Thread.sleep(1000);
 
-            deposit();
+//            deposit();
             Thread.sleep(500);
 
 
@@ -68,11 +60,12 @@ public class RedBackNoExtension extends UpliftAutoImpl
         if(location == 1 )
         {
             //drop position
-            driveToPosition(8, 118, 0.6, 85);
+            driveToPosition(6, 113, 0.6, 85);
             Thread.sleep(1000);
 
-            deposit();
-            Thread.sleep(500);
+//            ReadyDrop(400,.03);
+
+            Thread.sleep(50000);
 
             drop();
             Thread.sleep(1000);
@@ -89,7 +82,7 @@ public class RedBackNoExtension extends UpliftAutoImpl
             driveToPosition(8, 125, 0.6, 85);
             Thread.sleep(1000);
 
-            deposit();
+//            deposit();
             Thread.sleep(500);
 
             drop();

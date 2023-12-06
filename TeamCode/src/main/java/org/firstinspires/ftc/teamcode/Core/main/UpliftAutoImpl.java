@@ -37,8 +37,13 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     @Override
-    public void initAction() throws InterruptedException {
-
+    public void initAction() throws InterruptedException
+    {
+//        robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//
+//        robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//        robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
 
@@ -402,6 +407,30 @@ public class UpliftAutoImpl extends UpliftAuto {
     {
         robot.getIntake().setPower(power);
     }
+
+//    public void ReadyDrop(int slideHeight, double power)
+//    {
+//        robot.getArmRight().setPosition(robot.armRightDrop);
+//        robot.getArmLeft().setPosition(robot.armLeftDrop);
+//        robot.getDepositWrist().setPosition(robot.depositWristDrop);
+//
+//        robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//
+//        robot.getSlideRight().setTargetPosition(slideHeight);
+//        robot.getSlideLeft().setTargetPosition(-slideHeight);
+//
+//        robot.getSlideLeft().setPower(-power);
+//        robot.getSlideRight().setPower(power);
+//
+//        while (opModeIsActive() && robot.getSlideLeft().isBusy() && robot.getSlideRight().isBusy())
+//        {
+//
+//        }
+//
+//        robot.getSlideRight().setPower(0);
+//        robot.getSlideLeft().setPower(0);
+//    }
 
 
 

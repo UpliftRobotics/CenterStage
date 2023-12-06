@@ -43,7 +43,7 @@ public class TestTeleOp extends UpliftTele {
 //sleep(20000);
 
 
-                robot.getDepositWrist().setPosition(robot.depositWristDrop2);
+                robot.getDepositWrist().setPosition(robot.depositWristDrop);
                 sleep(300);
                 robot.getGrabberRight().setPosition(robot.grabberRightOpen);
                 robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
