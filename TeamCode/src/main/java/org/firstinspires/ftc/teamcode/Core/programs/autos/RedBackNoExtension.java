@@ -21,11 +21,13 @@ public class RedBackNoExtension extends UpliftAutoImpl
     @Override
     public void initAction()
     {
-        robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
-        robot.getGrabber().setPosition(robot.grabberClose);
-        robot.getDepositArm().setPosition(0.5);
-        robot.getDepositWrist().setPosition(0.3);
-        robot.getDepositTwist().setPosition(0.3);
+        robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
+        robot.getGrabberRight().setPosition(robot.grabberRightClose);
+
+        robot.getArmLeft().setPosition(robot.armLeftTransfer);
+        robot.getArmRight().setPosition(robot.armRightTransfer);
+
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer);
     }
 
     @Override
@@ -41,8 +43,12 @@ public class RedBackNoExtension extends UpliftAutoImpl
             Thread.sleep(1000);
 
             deposit();
+            Thread.sleep(500);
+
+
+            drop();
             Thread.sleep(1000);
-            robot.getGrabber().setPosition(robot.grabberOpen);
+
 
             //outtake position
             driveToPosition(46, 124, 0.5, 95);
@@ -58,7 +64,9 @@ public class RedBackNoExtension extends UpliftAutoImpl
 
             deposit();
             Thread.sleep(500);
-            robot.getGrabber().setPosition(robot.grabberOpen);
+
+            drop();
+            Thread.sleep(1000);
 
             //outtake position
             driveToPosition(33, 115, 0.5, 85);
@@ -74,8 +82,8 @@ public class RedBackNoExtension extends UpliftAutoImpl
 
             deposit();
             Thread.sleep(500);
-            robot.getGrabber().setPosition(robot.grabberOpen);
 
+            drop();
             Thread.sleep(1000);
 
             //outtake position
@@ -86,7 +94,6 @@ public class RedBackNoExtension extends UpliftAutoImpl
         drop();
         Thread.sleep(1000);
 
-        robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);
         intake(-0.2);
         Thread.sleep(5000);
         intake(0);

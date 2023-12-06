@@ -317,11 +317,6 @@ public class UpliftAutoImpl extends UpliftAuto {
 
 
     }
-    public void intake ()
-    {
-        robot.getIntakeRoller().setPower(robot.opMode.gamepad2.left_stick_y);
-    }
-
     public void slides ()
     {
         double power = .5* -robot.opMode.gamepad2.right_stick_y;
@@ -358,41 +353,54 @@ public class UpliftAutoImpl extends UpliftAuto {
         //robot.getSlideLeft().setPower(.5 * robot.opMode.gamepad2.right_stick_y);
 
     }
-    public void intakeAngle()
+    public void tranfer()
     {
 
-            if(robot.getIntakeAngleRight().getPosition() == robot.intakeStorePos) {
-                robot.getIntakeAngleRight().setPosition(robot.intakeGroundPos);}
-            else if (robot.getIntakeAngleRight().getPosition() == robot.intakeGroundPos) {
-                robot.getIntakeAngleRight().setPosition(robot.intake2Pixel);}
-            else if (robot.getIntakeAngleRight().getPosition() == robot.intake2Pixel) {
-                robot.getIntakeAngleRight().setPosition(robot.intake3Pixel);}
-            else if (robot.getIntakeAngleRight().getPosition() == robot.intake3Pixel) {
-                robot.getIntakeAngleRight().setPosition(robot.intake4Pixel);}
-            else if (robot.getIntakeAngleRight().getPosition() == robot.intake4Pixel) {
-                robot.getIntakeAngleRight().setPosition(robot.intake5Pixel);}
-            else
-                robot.getIntakeAngleRight().setPosition(robot.intakeStorePos);
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer);
+        robot.getArmLeft().setPosition(robot.armLeftTransfer);
+        robot.getArmRight().setPosition(robot.armRightTransfer);
 
     }
-    public void deposit () throws InterruptedException
+
+    public void deposit(int slidesDist, double slidesPower) throws InterruptedException
     {
-        robot.getDepositArm().setPosition(robot.depositBack);
-        robot.getDepositWrist().setPosition(robot.wristBack);
+        robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.getSlideLeft().setTargetPosition(slidesDist);
+        robot.getSlideRight().setTargetPosition(slidesDist);
+
+        robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        robot.getSlideLeft().setPower(slidesPower);
+        robot.getSlideRight().setPower(slidesPower);
+
+        while (opModeIsActive() && robot.getSlideLeft().isBusy() && robot.getSlideRight().isBusy())
+        {
+
+        }
+
+        robot.getSlideLeft().setPower(0);
+        robot.getSlideRight().setPower(0);
+
+
+        robot.getDepositWrist().setPosition(robot.depositWristDrop);
+        robot.getArmLeft().setPosition(robot.armLeftDrop);
+        robot.getArmRight().setPosition(robot.armRightDrop);
+
+
     }
-    public void drop () throws InterruptedException
+    public void drop() throws InterruptedException
     {
-        robot.getGrabber().setPosition(robot.grabberOpen);
-        sleep(500);
-        robot.getDepositArm().setPosition(robot.depositHold);
-        robot.getDepositWrist().setPosition(robot.wristHold);
-        robot.getDepositTwist().setPosition(robot.twistReset);
-        robot.getGrabber().setPosition(robot.grabberClose);
+        robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
+        robot.getGrabberRight().setPosition(robot.grabberRightOpen);
+
     }
 
     public void intake(double power)
     {
-        robot.getIntakeRoller().setPower(power);
+        robot.getIntake().setPower(power);
     }
 
 

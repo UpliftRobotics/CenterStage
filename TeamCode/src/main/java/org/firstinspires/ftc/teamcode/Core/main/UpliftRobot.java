@@ -22,10 +22,8 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class UpliftRobot
 {
     public Odometry odometry;
-    DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft,slideRight, extension, intake;
-    Servo intakeAngleRight, intakeAngleLeft, depositArm, depositWrist, depositTwist, grabber, plane;
-    CRServo intakeRoller;
-    Servo intakeLinkLeft, IntakeLinkRight, grabberLeft, grabberRight, armLeft, armRight;
+    DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft, slideRight, extension, intake;
+    Servo armLeft, armRight, grabberLeft, grabberRight, depositWrist, plane, intakeLinkLeft, IntakeLinkRight;
     TouchSensor extensionTouch;
     public CenterStageBlue pipelineBlue;
     public CenterStageRed pipelineRed;
@@ -70,30 +68,9 @@ public class UpliftRobot
     //inake pos
     public double intakeStorePos = .52;
     public double intakeGroundPos = .38 ;
-    public double intake2Pixel = .428;
-    public double intake3Pixel = .453;
-    public double intake4Pixel = .478;
-    public double intake5Pixel = .497;
-    //deposit arm pos
-    public double depositPick = .175;
-    public double depositPick2 = 0.11;
-    public double depositHold = .39;
-    public double depositBack = .82;
 
 
-    //deposit wrist pos
-    public double wristPick = .485;
-    public double wristPick2 = .32;
-    public double wristHold = .5;
-    public double wristBack = .15;
 
-    //twister pos
-    public double twistReset = .965;
-    public double twistPosIncremnt = .25;
-
-    //grabber pos
-    public double grabberOpen = .55;
-    public double grabberClose = 1;
 
     public int depositStage = 0;
 
@@ -107,15 +84,17 @@ public class UpliftRobot
     public double armLeftHold = .8;
     public double armRightHold = .2;
 
-    public double armLeftDrop1 = .1;
-    public double armRightDrop1 = .9;
-    public double armLeftDrop2 = 0;
-    public double armRightDrop2 = 1;
+    public double armLeftTransfer = .1;
+    public double armRightTransfer = .9;
+    public double armLeftDrop = 0;
+    public double armRightDrop = 1;
 
     public double depositWristGrab = .21;
     public double depositWristHold = .35;
-    public double depositWristDrop1 = 0;
-    public double depositWristDrop2 = .1;
+
+
+    public double depositWristTransfer = 0;
+    public double depositWristDrop = .1;
 
     public double grabberLeftOpen = .15;
     public double grabberLeftClose = .51;
@@ -156,13 +135,8 @@ public class UpliftRobot
         intake = hardwareMap.get(DcMotor.class, "intake");
 
 
-        intakeRoller = hardwareMap.get(CRServo.class, "intake_roller");
-        intakeAngleRight = hardwareMap.get(Servo.class, "intake_angle_right");
-        intakeAngleLeft = hardwareMap.get(Servo.class, "intake_angle_left");
-        depositArm = hardwareMap.get(Servo.class, "deposit_arm");
+
         depositWrist = hardwareMap.get(Servo.class, "deposit_wrist");
-        depositTwist = hardwareMap.get(Servo.class, "deposit_twist");
-        grabber = hardwareMap.get(Servo.class, "grabber");
         plane = hardwareMap.get(Servo.class, "plane");
 //        intakeLinkLeft = hardwareMap.get(Servo.class, "intake_left");
 //        IntakeLinkRight = hardwareMap.get(Servo.class, "intake_right");
@@ -182,6 +156,8 @@ public class UpliftRobot
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -242,27 +218,8 @@ public class UpliftRobot
     public DcMotor getIntake() {
         return intake;
     }
-
-    public CRServo getIntakeRoller() {
-        return intakeRoller;
-    }
-    public Servo getIntakeAngleRight() {
-        return intakeAngleRight;
-    }
-    public Servo getIntakeAngleLeft() {
-        return intakeAngleLeft;
-    }
-    public Servo getDepositArm() {
-        return depositArm;
-    }
     public Servo getDepositWrist() {
         return depositWrist;
-    }
-    public Servo getDepositTwist() {
-        return depositTwist;
-    }
-    public Servo getGrabber() {
-        return grabber;
     }
     public Servo getPlane(){return plane;}
     public Servo getIntakeLinkLeft(){return intakeLinkLeft;}
