@@ -22,7 +22,8 @@ public class TestTeleOp extends UpliftTele {
         OperatorThread operatorThread;
 
         @Override
-        public void initHardware() {
+        public void initHardware()
+        {
             robot = new UpliftRobot(this);
             odom = robot.odometry;
 

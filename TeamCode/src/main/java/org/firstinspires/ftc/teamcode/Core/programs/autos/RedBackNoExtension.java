@@ -43,7 +43,7 @@ public class RedBackNoExtension extends UpliftAutoImpl
             driveToPosition(9, 110, 0.6, 82);
             Thread.sleep(1000);
 
-//            deposit();
+            deposit(500, 0.1);
             Thread.sleep(500);
 
 
@@ -63,9 +63,9 @@ public class RedBackNoExtension extends UpliftAutoImpl
             driveToPosition(6, 113, 0.6, 85);
             Thread.sleep(1000);
 
-//            ReadyDrop(400,.03);
 
-            Thread.sleep(50000);
+            deposit(500, 0.1);
+            Thread.sleep(500);
 
             drop();
             Thread.sleep(1000);
@@ -82,7 +82,7 @@ public class RedBackNoExtension extends UpliftAutoImpl
             driveToPosition(8, 125, 0.6, 85);
             Thread.sleep(1000);
 
-//            deposit();
+            deposit(500, 0.1);
             Thread.sleep(500);
 
             drop();

@@ -372,8 +372,8 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.getSlideLeft().setTargetPosition(slidesDist);
-        robot.getSlideRight().setTargetPosition(slidesDist);
+        robot.getSlideLeft().setTargetPosition(-slidesDist);
+        robot.getSlideRight().setTargetPosition(-slidesDist);
 
         robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -383,16 +383,18 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         while (opModeIsActive() && robot.getSlideLeft().isBusy() && robot.getSlideRight().isBusy())
         {
-
+            robot.opMode.telemetry.addData("left arm pos", robot.getArmLeft().getPosition());
+            robot.opMode.telemetry.addData("right arm pos", robot.getArmRight().getPosition());
+            robot.opMode.telemetry.update();
         }
 
         robot.getSlideLeft().setPower(0);
         robot.getSlideRight().setPower(0);
 
 
-        robot.getDepositWrist().setPosition(robot.depositWristDrop);
-        robot.getArmLeft().setPosition(robot.armLeftDrop);
-        robot.getArmRight().setPosition(robot.armRightDrop);
+//        robot.getDepositWrist().setPosition(robot.depositWristDrop);
+//        robot.getArmLeft().setPosition(robot.armLeftDrop);
+//        robot.getArmRight().setPosition(robot.armRightDrop);
 
 
     }

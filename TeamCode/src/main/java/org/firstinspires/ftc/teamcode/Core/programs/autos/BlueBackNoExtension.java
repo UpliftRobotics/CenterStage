@@ -49,7 +49,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
 
 
 
-
+            deposit(500, 0.1);
             Thread.sleep(500);
 
             drop();
@@ -67,6 +67,8 @@ public class BlueBackNoExtension extends UpliftAutoImpl
             driveToPosition(4, 16, 0.6, 90);
             Thread.sleep(1000);
 
+
+            deposit(500, 0.1);
             Thread.sleep(500);
 
             drop();
@@ -84,6 +86,7 @@ public class BlueBackNoExtension extends UpliftAutoImpl
             driveToPosition(5, 25, 0.6, 90);
             Thread.sleep(1000);
 
+            deposit(500, 0.1);
             Thread.sleep(500);
 
             drop();

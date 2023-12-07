@@ -75,7 +75,7 @@ public class UpliftRobot
 
     // v2
     public double armLeftPast = 1;
-    public double armLeftGrab = .99;
+    public double armLeftGrab = 1;
     public double armLeftHold = .8;
     public double armLeftTransfer = .1;
     public double armLeftDrop = 0;
@@ -151,7 +151,7 @@ public class UpliftRobot
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        slideRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        slideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
