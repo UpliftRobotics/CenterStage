@@ -60,7 +60,7 @@ public class TestTeleOp extends UpliftTele {
                 robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
                 robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 robot.getPlane().setPosition(1);
 
         }
@@ -73,6 +73,8 @@ public class TestTeleOp extends UpliftTele {
                 //telemetry.addData("touch sensor" , robot.getExtensionTouch().getValue());
                 telemetry.addData("slide left ", robot.getSlideLeft().getCurrentPosition());
                 telemetry.addData("slide right ", robot.getSlideRight().getCurrentPosition());
+                telemetry.addData("slide pos ",                 (robot.getSlideLeft().getCurrentPosition() + robot.getSlideRight().getCurrentPosition()) /2
+                );
 //                telemetry.addData("right stick y", robot.opMode.gamepad2.right_stick_y);
 //                telemetry.addData("right trigger", robot.opMode.gamepad1.right_trigger);
 //                telemetry.addData("left trigger", robot.opMode.gamepad1.left_trigger);
