@@ -90,7 +90,7 @@ public class OperatorThread extends Thread {
 
         // if going up stop from overextending
         if (power < 0.0) {
-            if (robot.getSlideRight().getCurrentPosition() > 2800 || robot.getSlideLeft().getCurrentPosition() > 2800) {
+            if (robot.getSlideRight().getCurrentPosition()  > 2800 || robot.getSlideLeft().getCurrentPosition() > 2800) {
                 robot.getSlideLeft().setPower(0);
                 robot.getSlideRight().setPower(0);
             } else {
@@ -207,6 +207,7 @@ public class OperatorThread extends Thread {
             robot.getDepositWrist().setPosition(robot.depositWristDrop);
             robot.getArmLeft().setPosition(robot.armLeftDrop);
             robot.getArmRight().setPosition(robot.armRightDrop);
+            robot.depositStage = 3;
 
 
         }
