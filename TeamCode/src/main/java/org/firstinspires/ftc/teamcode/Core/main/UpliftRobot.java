@@ -87,7 +87,7 @@ public class UpliftRobot
     public double armRightDrop = 1;
 
     public double depositWristGrab = .21;
-    public double depositWristHold = .4;
+    public double depositWristHold = .45;
     public double depositWristTransfer = 0;
     public double depositWristDrop = .05;
 
@@ -252,7 +252,7 @@ public class UpliftRobot
                pipelineRed = new CenterStageRed(opMode.telemetry);
 
                //changes this before each match depending on color
-               webcam.setPipeline(pipelineBlue);
+               webcam.setPipeline(pipelineRed);
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
 

@@ -7,52 +7,58 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@Autonomous(name = "RedBackNoExtension", group = "Opmodes")
-public class RedBackNoExtension extends UpliftAutoImpl
+@Autonomous(name = "BlueBack2+0", group = "Opmodes")
+public class BlueBack2Plus0 extends UpliftAutoImpl
 {
     Odometry odom;
 
-    public void initHardware()
-    {
+
+    public void initHardware() {
+
         robot = new UpliftRobot(this);
         odom = robot.odometry;
+
     }
 
     @Override
-    public void initAction()
-    {
-        robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
-        robot.getArmLeft().setPosition(robot.armLeftTransfer);
-        robot.getArmRight().setPosition(robot.armRightTransfer);
-        robot.getDepositWrist().setPosition(robot.depositWristTransfer);
+    public void initAction() throws InterruptedException {
 
-        robot.getPlane().setPosition(1);
+//        robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
+        robot.getGrabberRight().setPosition(robot.grabberRightClose);
 
+        Thread.sleep(2000);
+
+        robot.getArmLeft().setPosition(robot.armLeftHold);
+        robot.getArmRight().setPosition(robot.armRightHold);
+
+        robot.getDepositWrist().setPosition(0.5);
 
     }
 
     @Override
     public void body() throws InterruptedException
     {
-        int location = robot.pipelineRed.location;
-        odom.setOdometryPosition(48, 144, 0);
+        int location = robot.pipelineBlue.location;
+        odom.setOdometryPosition(48, 0, 180);
 
         //left
         if(location == 0 || location == -1 ) {
             //drop position
-            driveToPosition(9, 110, 0.6, 82);
+            driveToPosition(30, 6, 0.8, 180);
+            driveToPosition(3, 10, 0.7, 90, 2);
             Thread.sleep(1000);
 
-            deposit(500, 0.1);
+
+
+            deposit(200, 0.1);
             Thread.sleep(500);
 
 
             drop();
             Thread.sleep(1000);
 
-
             //outtake position
-            driveToPosition(46, 124, 0.5, 95);
+            driveToPosition(23, 21, 0.5, 93);
 
         }
 
@@ -60,18 +66,19 @@ public class RedBackNoExtension extends UpliftAutoImpl
         if(location == 1 )
         {
             //drop position
-            driveToPosition(6, 113, 0.6, 85);
+            driveToPosition(30, 6, 0.8, 180);
+            driveToPosition(3, 16, 0.7, 90, 2);
             Thread.sleep(1000);
 
 
-            deposit(500, 0.1);
+            deposit(200, 0.1);
             Thread.sleep(500);
 
             drop();
             Thread.sleep(1000);
 
             //outtake position
-            driveToPosition(33, 115, 0.5, 85);
+            driveToPosition(28, 28, 0.5, 93);
         }
 
         // right
@@ -79,32 +86,33 @@ public class RedBackNoExtension extends UpliftAutoImpl
         if(location == 2 )
         {
             //drop position
-            driveToPosition(8, 125, 0.6, 85);
+            driveToPosition(30, 6, 0.8, 180);
+            driveToPosition(3, 25, 0.7, 90, 2);
             Thread.sleep(1000);
 
-            deposit(500, 0.1);
+            deposit(200, 0.1);
             Thread.sleep(500);
 
             drop();
             Thread.sleep(1000);
 
             //outtake position
-            driveToPosition(26, 118, 0.5, 85);
+            driveToPosition(41, 19, 0.5, 93);
 
         }
 
-        drop();
         Thread.sleep(1000);
 
-        intake(-0.2);
+        intake(-0.175);
         Thread.sleep(5000);
         intake(0);
-//
-//
-//
+
+
         //park
-        driveToPosition(10, 95, 0.6, 93);
-        driveToPosition(7, 95, 0.6, 85);
+        driveToPosition(5, -10, 0.6, 90);
+        reset();
+
+
 
 
     }

@@ -39,7 +39,7 @@ public class OperatorThread extends Thread {
 //                intakeDown();
 //                intakeup();
 //                closeGrabber();
-                drop(.4, 500);
+                drop();
 
 
 //                robot.opMode.telemetry.addData("magnet", robot.getMagnet().isPressed());
@@ -189,60 +189,29 @@ public class OperatorThread extends Thread {
         }
     }
 
-    public void drop(double pow,int wait) throws InterruptedException {
-        if (robot.opMode.gamepad2.a)
-        {
-            robot.getSlideLeft().setPower(-pow);
-            robot.getSlideRight().setPower(-pow);
-            Thread.sleep(wait);
-            robot.getSlideRight().setPower(0);
-            robot.getSlideLeft().setPower(0);
+    public void drop()
+    {
+        if (robot.opMode.gamepad2.a) {
 
+            while (robot.getSlideRight().getCurrentPosition() < 600) {
+
+                //negative power moves slides up
+                robot.getSlideRight().setPower(-0.1);
+                robot.getSlideLeft().setPower(-0.1);
+
+            }
+
+            robot.getSlideLeft().setPower(0);
+            robot.getSlideRight().setPower(0);
+
+            robot.getDepositWrist().setPosition(robot.depositWristDrop);
+            robot.getArmLeft().setPosition(robot.armLeftDrop);
+            robot.getArmRight().setPosition(robot.armRightDrop);
 
 
         }
     }
-
-//            robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//            robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//
-//            robot.getSlideLeft().setTargetPosition(50);
-//            robot.getSlideRight().setTargetPosition(50);
-//
-//            robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//            robot.getSlideLeft().setPower(0.1);
-//            robot.getSlideRight().setPower(0.1);
-//
-//
-//
-//            while (robot.opMode.opModeIsActive() && robot.getSlideLeft().isBusy() && robot.getSlideRight().isBusy())
-//            {
-//                robot.opMode.telemetry.addData("left arm pos", robot.getArmLeft().getPosition());
-//                robot.opMode.telemetry.addData("right arm pos", robot.getArmRight().getPosition());
-//                robot.opMode.telemetry.update();
-//            }
-//
-//            robot.getSlideLeft().setPower(0);
-//            robot.getSlideRight().setPower(0);
-//
-//
-////            robot.getArmRight().setPosition(robot.armRightDrop);
-////            robot.getArmLeft().setPosition(robot.armLeftDrop);
-////            robot.getDepositWrist().setPosition(robot.depositWristDrop);
-//
-////            while (rpos < target || lpos < target)
-////            {
-////                motor.set pow
-////                motor.set pow
-////
-////            }
-////
-////            kill power
-//
-//
-        }
+}
 
 
 

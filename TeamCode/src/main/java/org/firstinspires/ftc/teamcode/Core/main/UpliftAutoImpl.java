@@ -369,32 +369,23 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void deposit(int slidesDist, double slidesPower) throws InterruptedException
     {
-        robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.getDepositWrist().setPosition(robot.depositWristDrop);
+        robot.getArmLeft().setPosition(robot.armLeftDrop);
+        robot.getArmRight().setPosition(robot.armRightDrop);
 
-        robot.getSlideLeft().setTargetPosition(-slidesDist);
-        robot.getSlideRight().setTargetPosition(-slidesDist);
-
-        robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        robot.getSlideLeft().setPower(slidesPower);
-        robot.getSlideRight().setPower(slidesPower);
-
-        while (opModeIsActive() && robot.getSlideLeft().isBusy() && robot.getSlideRight().isBusy())
+        while(robot.getSlideRight().getCurrentPosition() < slidesDist)
         {
-            robot.opMode.telemetry.addData("left arm pos", robot.getArmLeft().getPosition());
-            robot.opMode.telemetry.addData("right arm pos", robot.getArmRight().getPosition());
-            robot.opMode.telemetry.update();
+
+            //negative power moves slides up
+            robot.getSlideRight().setPower(-slidesPower);
+            robot.getSlideLeft().setPower(-slidesPower);
+
         }
 
         robot.getSlideLeft().setPower(0);
         robot.getSlideRight().setPower(0);
 
 
-//        robot.getDepositWrist().setPosition(robot.depositWristDrop);
-//        robot.getArmLeft().setPosition(robot.armLeftDrop);
-//        robot.getArmRight().setPosition(robot.armRightDrop);
 
 
     }
@@ -410,29 +401,31 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getIntake().setPower(power);
     }
 
-//    public void ReadyDrop(int slideHeight, double power)
-//    {
-//        robot.getArmRight().setPosition(robot.armRightDrop);
-//        robot.getArmLeft().setPosition(robot.armLeftDrop);
-//        robot.getDepositWrist().setPosition(robot.depositWristDrop);
-//
-//        robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//        robot.getSlideRight().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//        robot.getSlideRight().setTargetPosition(slideHeight);
-//        robot.getSlideLeft().setTargetPosition(-slideHeight);
-//
-//        robot.getSlideLeft().setPower(-power);
-//        robot.getSlideRight().setPower(power);
-//
-//        while (opModeIsActive() && robot.getSlideLeft().isBusy() && robot.getSlideRight().isBusy())
+    public void reset() throws InterruptedException
+    {
+        robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
+        robot.getGrabberRight().setPosition(robot.grabberRightOpen);
+        Thread.sleep(200);
+        robot.getArmLeft().setPosition(robot.armLeftPast);
+        robot.getArmRight().setPosition(robot.armRightPast);
+        Thread.sleep(600);
+        robot.getDepositWrist().setPosition(robot.depositWristGrab);
+        Thread.sleep(500);
+        robot.getArmLeft().setPosition(robot.armLeftGrab);
+        robot.getArmRight().setPosition(robot.armRightGrab);
+
+//        while(robot.getSlideRight().getCurrentPosition() > 0)
 //        {
+//
+//            //negative power moves slides up
+//            robot.getSlideRight().setPower(0.001);
+//            robot.getSlideLeft().setPower(0.001);
 //
 //        }
 //
-//        robot.getSlideRight().setPower(0);
 //        robot.getSlideLeft().setPower(0);
-//    }
+//        robot.getSlideRight().setPower(0);
+    }
 
 
 
