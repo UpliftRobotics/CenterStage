@@ -37,7 +37,7 @@ public class TestAuto extends UpliftAutoImpl {
 
         odom.setOdometryPosition(0, 0, 0);
 
-        deposit(600, 0.1);
+        deposit(600, 0.1,true );
         Thread.sleep(5000);
 
     }

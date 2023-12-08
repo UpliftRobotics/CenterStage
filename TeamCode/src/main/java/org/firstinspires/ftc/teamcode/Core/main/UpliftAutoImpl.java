@@ -367,20 +367,41 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
-    public void deposit(int slidesDist, double slidesPower) throws InterruptedException
+    public void deposit(int slidesDist, double slidesPower, boolean moveArm) throws InterruptedException
     {
-        robot.getDepositWrist().setPosition(robot.depositWristDrop);
-        robot.getArmLeft().setPosition(robot.armLeftDrop);
-        robot.getArmRight().setPosition(robot.armRightDrop);
-
-        while(robot.getSlideRight().getCurrentPosition() < slidesDist)
+        if (moveArm)
         {
-
-            //negative power moves slides up
-            robot.getSlideRight().setPower(-slidesPower);
-            robot.getSlideLeft().setPower(-slidesPower);
-
+            robot.getDepositWrist().setPosition(robot.depositWristDrop);
+            robot.getArmLeft().setPosition(robot.armLeftDrop);
+            robot.getArmRight().setPosition(robot.armRightDrop);
         }
+        if (robot.getSlideRight().getCurrentPosition() < slidesDist)
+        {
+            while(robot.getSlideRight().getCurrentPosition() < slidesDist)
+            {
+
+                //negative power moves slides up
+                robot.getSlideRight().setPower(-slidesPower);
+                robot.getSlideLeft().setPower(-slidesPower);
+
+            }
+        }
+
+        else
+        {
+            while(robot.getSlideRight().getCurrentPosition() > slidesDist)
+            {
+
+                //positive power moves slides down
+                robot.getSlideRight().setPower(slidesPower);
+                robot.getSlideLeft().setPower(slidesPower);
+
+            }
+        }
+
+
+
+
 
         robot.getSlideLeft().setPower(0);
         robot.getSlideRight().setPower(0);

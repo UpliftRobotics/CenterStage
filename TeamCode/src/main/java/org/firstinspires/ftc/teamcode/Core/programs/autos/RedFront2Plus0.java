@@ -36,6 +36,7 @@ public class RedFront2Plus0 extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
+        int wait = 3000;
         int location = robot.pipelineRed.location;
         odom.setOdometryPosition(100, 144, 0);
 
@@ -45,13 +46,45 @@ public class RedFront2Plus0 extends UpliftAutoImpl
             driveToPosition(100, 95, 0.5, 0);
             Thread.sleep(1000);
 
-            driveToPosition(102, 97, 0.5, 22.5);
+            driveToPosition(103, 98, 0.5, 22.5);
             Thread.sleep(1000);
 
 
             intake(-0.175);
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             intake(0);
+
+
+            driveToPosition(100, 95, 0.5, 22.5);
+            Thread.sleep(200);
+
+            driveToPosition(100, 95, 0.5, 85);
+            Thread.sleep(1000);
+
+            driveToPosition(8, 89, 0.5, 85);
+            Thread.sleep(wait);
+            deposit(400,.1, true);
+            Thread.sleep(1000);
+
+            driveToPosition(5.5, 103, 0.5, 85);
+            Thread.sleep(1000);
+
+            drop();
+
+            Thread.sleep(1000);
+
+            reset();
+            driveToPosition(7, 89, 0.5, 85);
+            Thread.sleep(1000);
+            deposit(10, .01, false);
+            Thread.sleep(1000);
+
+
+
+
+
+
+
 
 //            deposit(400, 0.1);
 //            Thread.sleep(500);
@@ -70,9 +103,47 @@ public class RedFront2Plus0 extends UpliftAutoImpl
         if(location == 1 )
         {
 //            //drop position
-//            driveToPosition(30, 135, 0.8, 0);
-//            driveToPosition(3, 125, 0.7, 90);
-//            Thread.sleep(1000);
+            driveToPosition(100, 95, 0.5, 0);
+            Thread.sleep(1000);
+
+            driveToPosition(100, 98, 0.5, 0);
+            Thread.sleep(1000);
+
+            intake(-0.175);
+            Thread.sleep(3000);
+            intake(0);
+
+            driveToPosition(100, 95, 0.5, 0);
+            Thread.sleep(1000);
+
+            driveToPosition(100, 95, 0.5, 85);
+            Thread.sleep(1000);
+
+            driveToPosition(8, 89, 0.5, 85);
+            Thread.sleep(wait);
+            deposit(400,.1, true);
+            Thread.sleep(1000);
+
+            driveToPosition(5.5, 107, 0.5, 85);
+            Thread.sleep(1000);
+
+            drop();
+            Thread.sleep(1000);
+
+            reset();
+            driveToPosition(7, 89, 0.5, 85);
+            Thread.sleep(1000);
+            deposit(10, .01, false);
+            Thread.sleep(1000);
+
+
+
+
+
+
+
+
+
 //
 //
 //            deposit(400, 0.1);
