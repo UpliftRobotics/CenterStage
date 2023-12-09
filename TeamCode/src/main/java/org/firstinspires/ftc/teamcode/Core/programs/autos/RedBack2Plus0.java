@@ -36,7 +36,7 @@ public class RedBack2Plus0 extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
-        int location = robot.pipelineRed.location;
+        int location = robot.pipelineRedClose.location;
         odom.setOdometryPosition(48, 144, 0);
 
         //left

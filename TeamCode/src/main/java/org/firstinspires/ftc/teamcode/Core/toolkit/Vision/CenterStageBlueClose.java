@@ -9,7 +9,7 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-public class CenterStageBlue extends OpenCvPipeline {
+public class CenterStageBlueClose extends OpenCvPipeline {
     Telemetry telemetry;
     Mat mat = new Mat();
     public int location = -1;
@@ -25,7 +25,7 @@ public class CenterStageBlue extends OpenCvPipeline {
             new Point(150, 100),
             new Point(230, 170));
 
-    public CenterStageBlue(Telemetry t) {
+    public CenterStageBlueClose(Telemetry t) {
         telemetry = t;
     }
 

@@ -36,8 +36,8 @@ public class RedFront2Plus0 extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
-        int wait = 3000;
-        int location = robot.pipelineRed.location;
+        int wait = 2000;
+        int location = robot.pipelineRedFar.location;
         odom.setOdometryPosition(100, 144, 0);
 
         //left
@@ -124,7 +124,7 @@ public class RedFront2Plus0 extends UpliftAutoImpl
             deposit(400,.1, true);
             Thread.sleep(1000);
 
-            driveToPosition(5.5, 107, 0.5, 85);
+            driveToPosition(5, 115, 0.5, 85);
             Thread.sleep(1000);
 
             drop();
@@ -160,10 +160,16 @@ public class RedFront2Plus0 extends UpliftAutoImpl
 
         if(location == 2 )
         {
-//            //drop position
-//            driveToPosition(30, 130, 0.8, 0);
-//            driveToPosition(4.5, 135, 0.7, 90);
-//            Thread.sleep(1000);
+//           //drop position
+            driveToPosition(100, 95, 0.5, 0);
+            Thread.sleep(1000);
+
+            driveToPosition(97, 102, 0.5, -25);
+            Thread.sleep(1000);
+
+            intake(-0.175);
+            Thread.sleep(3000);
+            intake(0);
 //
 //            deposit(400, 0.1);
 //            Thread.sleep(500);

@@ -2,19 +2,20 @@ package org.firstinspires.ftc.teamcode.Core.main;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
-import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageBlue;
+
+import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageBlueClose;
 
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
-import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageRed;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageBlueFar;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageRedClose;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageRedFar;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -24,8 +25,10 @@ public class UpliftRobot
     public Odometry odometry;
     DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft, slideRight, extension, intake;
     Servo armLeft, armRight, grabberLeft, grabberRight, depositWrist, plane, intakeLinkLeft, IntakeLinkRight;
-    public CenterStageBlue pipelineBlue;
-    public CenterStageRed pipelineRed;
+    public CenterStageBlueClose pipelineBlueClose;
+    public CenterStageBlueFar pipelineBlueFar;
+    public CenterStageRedClose pipelineRedClose;
+    public CenterStageRedFar pipelineRedFar;
     public OpenCvCamera webcam;
 
     public double worldX;
@@ -248,11 +251,13 @@ public class UpliftRobot
            {
              webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
 
-               pipelineBlue = new CenterStageBlue(opMode.telemetry);
-               pipelineRed = new CenterStageRed(opMode.telemetry);
+               pipelineBlueClose = new CenterStageBlueClose(opMode.telemetry);
+               pipelineRedClose = new CenterStageRedClose(opMode.telemetry);
+               pipelineBlueFar = new CenterStageBlueFar(opMode.telemetry);
+               pipelineRedFar = new CenterStageRedFar(opMode.telemetry);
 
                //changes this before each match depending on color
-               webcam.setPipeline(pipelineRed);
+               webcam.setPipeline(pipelineRedFar);
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
 
