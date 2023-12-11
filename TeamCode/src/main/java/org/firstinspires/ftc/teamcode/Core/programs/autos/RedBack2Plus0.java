@@ -25,10 +25,10 @@ public class RedBack2Plus0 extends UpliftAutoImpl
 
         Thread.sleep(2000);
 
-        robot.getArmLeft().setPosition(robot.armLeftHold);
-        robot.getArmRight().setPosition(robot.armRightHold);
+        robot.getArmLeft().setPosition(0.7);
+        robot.getArmRight().setPosition(0.3);
 
-        robot.getDepositWrist().setPosition(0.5);
+        robot.getDepositWrist().setPosition(0.6);
 
 
     }
@@ -43,7 +43,7 @@ public class RedBack2Plus0 extends UpliftAutoImpl
         if(location == 0 || location == -1 ) {
             //drop position
             driveToPosition(30, 135, 0.8, 0);
-            driveToPosition(3, 119, 0.7, 90);
+            driveToPosition(4, 119, 0.7, 90);
             Thread.sleep(1000);
 
             deposit(400, 0.1,true );
@@ -52,6 +52,7 @@ public class RedBack2Plus0 extends UpliftAutoImpl
 
             drop();
             Thread.sleep(1000);
+            reset();
 
 
             //outtake position
@@ -64,7 +65,7 @@ public class RedBack2Plus0 extends UpliftAutoImpl
         {
             //drop position
             driveToPosition(30, 135, 0.8, 0);
-            driveToPosition(3, 125, 0.7, 90);
+            driveToPosition(4, 125, 0.7, 90);
             Thread.sleep(1000);
 
 
@@ -73,6 +74,8 @@ public class RedBack2Plus0 extends UpliftAutoImpl
 
             drop();
             Thread.sleep(1000);
+            reset();
+
 
             //outtake position
             driveToPosition(33, 115, 0.5, 85);
@@ -92,6 +95,8 @@ public class RedBack2Plus0 extends UpliftAutoImpl
 
             drop();
             Thread.sleep(1000);
+            reset();
+
 
             //outtake position
             driveToPosition(24, 118, 0.5, 90);
@@ -107,8 +112,8 @@ public class RedBack2Plus0 extends UpliftAutoImpl
 
 
         //park
-        driveToPosition(5, 152, 0.6, 90);
-        reset();
+        driveToPosition(6, 152, 0.6, 90);
+//        reset();
 
     }
 

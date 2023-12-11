@@ -435,17 +435,19 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getArmLeft().setPosition(robot.armLeftGrab);
         robot.getArmRight().setPosition(robot.armRightGrab);
 
-//        while(robot.getSlideRight().getCurrentPosition() > 0)
-//        {
-//
-//            //negative power moves slides up
-//            robot.getSlideRight().setPower(0.001);
-//            robot.getSlideLeft().setPower(0.001);
-//
-//        }
-//
-//        robot.getSlideLeft().setPower(0);
-//        robot.getSlideRight().setPower(0);
+        Thread.sleep(2000);
+
+        while(robot.getSlideRight().getCurrentPosition() > 0)
+        {
+
+            //negative power moves slides up
+            robot.getSlideRight().setPower(0.001);
+            robot.getSlideLeft().setPower(0.001);
+
+        }
+
+        robot.getSlideLeft().setPower(0);
+        robot.getSlideRight().setPower(0);
     }
 
 

@@ -28,10 +28,10 @@ public class BlueBack2Plus0 extends UpliftAutoImpl
 
         Thread.sleep(2000);
 
-        robot.getArmLeft().setPosition(robot.armLeftHold);
-        robot.getArmRight().setPosition(robot.armRightHold);
+        robot.getArmLeft().setPosition(0.7);
+        robot.getArmRight().setPosition(0.3);
 
-        robot.getDepositWrist().setPosition(0.5);
+        robot.getDepositWrist().setPosition(0.6);
 
     }
 
@@ -45,17 +45,19 @@ public class BlueBack2Plus0 extends UpliftAutoImpl
         if(location == 0 || location == -1 ) {
             //drop position
             driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3, 10, 0.7, 90, 2);
+            driveToPosition(3.5, 10, 0.7, 90, 2);
             Thread.sleep(1000);
 
 
 
-            deposit(200, 0.1,true   );
+            deposit(400, 0.1,true);
             Thread.sleep(500);
 
 
             drop();
             Thread.sleep(1000);
+            reset();
+
 
             //outtake position
             driveToPosition(23, 21, 0.5, 93);
@@ -67,15 +69,17 @@ public class BlueBack2Plus0 extends UpliftAutoImpl
         {
             //drop position
             driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3, 16, 0.7, 90, 2);
+            driveToPosition(3.5, 16, 0.7, 90, 2);
             Thread.sleep(1000);
 
 
-            deposit(200, 0.1,true);
+            deposit(400, 0.1,true);
             Thread.sleep(500);
 
             drop();
             Thread.sleep(1000);
+            reset();
+
 
             //outtake position
             driveToPosition(28, 28, 0.5, 93);
@@ -87,14 +91,15 @@ public class BlueBack2Plus0 extends UpliftAutoImpl
         {
             //drop position
             driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3, 25, 0.7, 90, 2);
+            driveToPosition(3.5, 25, 0.7, 90, 2);
             Thread.sleep(1000);
 
-            deposit(200, 0.1,true );
+            deposit(400, 0.1,true );
             Thread.sleep(500);
 
             drop();
             Thread.sleep(1000);
+            reset();
 
             //outtake position
             driveToPosition(41, 19, 0.5, 93);
@@ -110,8 +115,6 @@ public class BlueBack2Plus0 extends UpliftAutoImpl
 
         //park
         driveToPosition(5, -10, 0.6, 90);
-
-        reset();
 
 
 

@@ -55,47 +55,30 @@ public class RedFront2Plus0 extends UpliftAutoImpl
             intake(0);
 
 
-            driveToPosition(100, 95, 0.5, 22.5);
-            Thread.sleep(200);
-
-            driveToPosition(100, 95, 0.5, 85);
-            Thread.sleep(1000);
-
-            driveToPosition(8, 89, 0.5, 85);
-            Thread.sleep(wait);
-            deposit(400,.1, true);
-            Thread.sleep(1000);
-
-            driveToPosition(5.5, 103, 0.5, 85);
-            Thread.sleep(1000);
-
-            drop();
-
-            Thread.sleep(1000);
-
-            reset();
-            driveToPosition(7, 89, 0.5, 85);
-            Thread.sleep(1000);
-            deposit(10, .01, false);
-            Thread.sleep(1000);
-
-
-
-
-
-
-
-
-//            deposit(400, 0.1);
-//            Thread.sleep(500);
+//            driveToPosition(100, 95, 0.5, 22.5);
+//            Thread.sleep(200);
 //
-//
-//            drop();
+//            driveToPosition(100, 95, 0.5, 85);
 //            Thread.sleep(1000);
 //
+//            driveToPosition(8, 89, 0.5, 85);
+//            Thread.sleep(wait);
+//            deposit(400,.1, true);
+//            Thread.sleep(1000);
 //
-//            //outtake position
-//            driveToPosition(43, 124, 0.5, 95);
+//            driveToPosition(5.5, 103, 0.5, 85);
+//            Thread.sleep(1000);
+//
+//            drop();
+//
+//            Thread.sleep(1000);
+//
+//            reset();
+//            driveToPosition(7, 89, 0.5, 85);
+//            Thread.sleep(1000);
+//            deposit(10, .01, false);
+//            Thread.sleep(1000);
+
 
         }
 
@@ -113,47 +96,30 @@ public class RedFront2Plus0 extends UpliftAutoImpl
             Thread.sleep(3000);
             intake(0);
 
-            driveToPosition(100, 95, 0.5, 0);
-            Thread.sleep(1000);
-
-            driveToPosition(100, 95, 0.5, 85);
-            Thread.sleep(1000);
-
-            driveToPosition(8, 89, 0.5, 85);
-            Thread.sleep(wait);
-            deposit(400,.1, true);
-            Thread.sleep(1000);
-
-            driveToPosition(5, 115, 0.5, 85);
-            Thread.sleep(1000);
-
-            drop();
-            Thread.sleep(1000);
-
-            reset();
-            driveToPosition(7, 89, 0.5, 85);
-            Thread.sleep(1000);
-            deposit(10, .01, false);
-            Thread.sleep(1000);
-
-
-
-
-
-
-
-
-
+//            driveToPosition(100, 95, 0.5, 0);
+//            Thread.sleep(1000);
 //
+//            driveToPosition(100, 95, 0.5, 85);
+//            Thread.sleep(1000);
 //
-//            deposit(400, 0.1);
-//            Thread.sleep(500);
+//            driveToPosition(8, 89, 0.5, 85);
+//            Thread.sleep(wait);
+//            deposit(400,.1, true);
+//            Thread.sleep(1000);
+//
+//            driveToPosition(5, 115, 0.5, 85);
+//            Thread.sleep(1000);
 //
 //            drop();
 //            Thread.sleep(1000);
 //
-//            //outtake position
-//            driveToPosition(33, 115, 0.5, 85);
+//            reset();
+//            driveToPosition(7, 89, 0.5, 85);
+//            Thread.sleep(1000);
+//            deposit(10, .01, false);
+//            Thread.sleep(1000);
+
+
         }
 
         // right
@@ -161,24 +127,45 @@ public class RedFront2Plus0 extends UpliftAutoImpl
         if(location == 2 )
         {
 //           //drop position
-            driveToPosition(100, 95, 0.5, 0);
+            driveToPosition(100, 120, 0.7, 0);
             Thread.sleep(1000);
 
-            driveToPosition(97, 102, 0.5, -25);
+            driveToPosition(105, 115, 0.7, -90, 2);
             Thread.sleep(1000);
 
-            intake(-0.175);
+            intake(-0.2);
             Thread.sleep(3000);
             intake(0);
+
+//            driveToPosition(115, 115, 0.7, -90);
+//            Thread.sleep(1000);
 //
-//            deposit(400, 0.1);
-//            Thread.sleep(500);
+//            driveToPosition(115, 100, 0.7, -90);
+//            Thread.sleep(1000);
+//
+//            driveToPosition(10, 110, 0.7, 90);
+//            Thread.sleep(wait);
+//
+//            driveToPosition(5, 120, 0.7, 85);
+//            Thread.sleep(1000);
+//
+//
+//            deposit(400,.1, true);
+//            Thread.sleep(1000);
 //
 //            drop();
 //            Thread.sleep(1000);
 //
-//            //outtake position
-//            driveToPosition(24, 118, 0.5, 90);
+//            reset();
+//            driveToPosition(7, 89, 0.7, 85);
+//            Thread.sleep(1000);
+//            deposit(10, .01, false);
+//            Thread.sleep(1000);
+
+
+
+
+
 
         }
 

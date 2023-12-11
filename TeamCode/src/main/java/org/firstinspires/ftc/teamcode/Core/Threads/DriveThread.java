@@ -140,10 +140,11 @@ public class DriveThread extends Thread {
                 '}';
     }
 
-    public void plane () throws InterruptedException {
+    public void plane () throws InterruptedException
+    {
         if (robot.opMode.gamepad1.dpad_up)
         {
-            robot.getPlane().setPosition(.8);
+            robot.getPlane().setPosition(.6);
         }
     }
 

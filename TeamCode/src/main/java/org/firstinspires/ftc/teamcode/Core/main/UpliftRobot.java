@@ -251,13 +251,13 @@ public class UpliftRobot
            {
              webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
 
-               pipelineBlueClose = new CenterStageBlueClose(opMode.telemetry);
-               pipelineRedClose = new CenterStageRedClose(opMode.telemetry);
-               pipelineBlueFar = new CenterStageBlueFar(opMode.telemetry);
-               pipelineRedFar = new CenterStageRedFar(opMode.telemetry);
+             pipelineBlueClose = new CenterStageBlueClose(opMode.telemetry);
+             pipelineRedClose = new CenterStageRedClose(opMode.telemetry);
+             pipelineBlueFar = new CenterStageBlueFar(opMode.telemetry);
+             pipelineRedFar = new CenterStageRedFar(opMode.telemetry);
 
                //changes this before each match depending on color
-               webcam.setPipeline(pipelineRedFar);
+               webcam.setPipeline(pipelineBlueClose);
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
 
