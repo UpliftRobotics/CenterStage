@@ -8,7 +8,12 @@ import static java.lang.Math.toRadians;
 
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
+import org.firstinspires.ftc.teamcode.Core.toolkit.TurnPID;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 
 public class DriveThread extends Thread {
@@ -76,6 +81,7 @@ public class DriveThread extends Thread {
 //                    Thread.sleep(3000);
 //                }
 
+                alignWithBackDrop();
 
 
                 plane();
@@ -148,6 +154,8 @@ public class DriveThread extends Thread {
         }
     }
 
+
+
     public void extension()
     {
         double power = .5 * (robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
@@ -167,5 +175,36 @@ public class DriveThread extends Thread {
                 robot.getExtension().setPower(power);
             }
         }
+    }
+
+
+
+    public void alignWithBackDrop()
+    {
+        if(robot.opMode.gamepad1.a)
+        {
+            TurnPID pid = new TurnPID(90, 0.013, 0, 0.003);
+            while(robot.opMode.opModeIsActive() && Math.abs(90 - getAbsoluteAngle()) > 1)
+            {
+                double motorPower = pid.update(getAbsoluteAngle());
+                robot.getLeftFront().setPower(-motorPower);
+                robot.getRightFront().setPower(motorPower);
+                robot.getLeftBack().setPower(-motorPower);
+                robot.getRightBack().setPower(motorPower);
+            }
+            stopMotors();
+        }
+    }
+
+    public double getAbsoluteAngle()
+    {
+        return robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+    }
+
+    public void stopMotors() {
+        robot.getLeftFront().setPower(0);
+        robot.getRightFront().setPower(0);
+        robot.getLeftBack().setPower(0);
+        robot.getRightBack().setPower(0);
     }
 }

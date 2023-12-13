@@ -370,6 +370,7 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void extensionPID(int extensionDist, int slowDownDist, double extensionPower)
     {
+        robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         double minPower = 0.1;
         int realSlowDownDist = extensionDist - slowDownDist;

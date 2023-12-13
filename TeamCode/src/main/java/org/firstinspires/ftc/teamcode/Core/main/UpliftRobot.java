@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageBlueClose;
@@ -31,6 +32,8 @@ public class UpliftRobot
     ColorRangeSensor pixelDetector;
 
     DistanceSensor leftAlign, rightAlign;
+
+    public IMU imu;
 
     public CenterStageBlueClose pipelineBlueDepositSide;
 
