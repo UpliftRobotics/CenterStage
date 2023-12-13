@@ -368,23 +368,24 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
-    public void extensionPID(int extensionDist, int slowDownDistFromTargetPos, double extensionPower)
+    public void extensionPID(int extensionDist, int slowDownDist, double extensionPower)
     {
 
         double minPower = 0.1;
+        int realSlowDownDist = extensionDist - slowDownDist;
 
         while(robot.getExtension().getCurrentPosition() < extensionDist)
         {
             double remainingDistance = extensionDist - robot.getExtension().getCurrentPosition();
 
-            if(remainingDistance > slowDownDistFromTargetPos)
+            if(remainingDistance > realSlowDownDist)
             {
                 robot.getExtension().setPower(extensionPower);
             }
             else
             {
                 // Adjust power based on remaining distance
-                double slowdownFactor = remainingDistance / slowDownDistFromTargetPos;
+                double slowdownFactor = remainingDistance / realSlowDownDist;
                 double slowedPower = minPower + (extensionPower - minPower) * slowdownFactor;
 
                 // Set the slowed power to extension
