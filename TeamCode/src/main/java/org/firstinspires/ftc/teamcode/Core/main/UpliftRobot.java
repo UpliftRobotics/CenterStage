@@ -2,8 +2,10 @@ package org.firstinspires.ftc.teamcode.Core.main;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -25,10 +27,16 @@ public class UpliftRobot
     public Odometry odometry;
     DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft, slideRight, extension, intake;
     Servo armLeft, armRight, grabberLeft, grabberRight, depositWrist, plane, intakeLinkLeft, IntakeLinkRight;
-    public CenterStageBlueClose pipelineBlueClose;
-    public CenterStageBlueFar pipelineBlueFar;
-    public CenterStageRedClose pipelineRedClose;
-    public CenterStageRedFar pipelineRedFar;
+
+    ColorRangeSensor pixelDetector;
+
+    DistanceSensor leftAlign, rightAlign;
+
+    public CenterStageBlueClose pipelineBlueDepositSide;
+
+    public CenterStageBlueFar pipelineBlueAudienceSide;
+    public CenterStageRedClose pipelineRedDepositSide;
+    public CenterStageRedFar pipelineRedAudienceSide;
     public OpenCvCamera webcam;
 
     public double worldX;
@@ -122,28 +130,39 @@ public class UpliftRobot
 
         hardwareMap = opMode.hardwareMap;
 
+
+        //wheels
         leftFront = hardwareMap.get(DcMotor.class, "left_front");
         rightFront = hardwareMap.get(DcMotor.class, "right_front");
         leftBack = hardwareMap.get(DcMotor.class, "left_back");
         rightBack = hardwareMap.get(DcMotor.class, "right_back");
 
+        //motors above drivetrain
         slideLeft = hardwareMap.get(DcMotor.class, "slide_left");
         slideRight = hardwareMap.get(DcMotor.class, "slide_right");
         extension = hardwareMap.get(DcMotor.class, "extension");
         intake = hardwareMap.get(DcMotor.class, "intake");
 
 
-
+        //Servos
         depositWrist = hardwareMap.get(Servo.class, "deposit_wrist");
+
         plane = hardwareMap.get(Servo.class, "plane");
-//        intakeLinkLeft = hardwareMap.get(Servo.class, "intake_left");
-//        IntakeLinkRight = hardwareMap.get(Servo.class, "intake_right");
+
         grabberLeft = hardwareMap.get(Servo.class, "grabber_left");
         grabberRight = hardwareMap.get(Servo.class, "grabber_right");
+
         armLeft = hardwareMap.get(Servo.class, "arm_left");
         armRight = hardwareMap.get(Servo.class, "arm_right");
 
+        //intakeLinkLeft = hardwareMap.get(Servo.class, "intake_left");
+        //IntakeLinkRight = hardwareMap.get(Servo.class, "intake_right");
 
+        //sensors
+        pixelDetector = hardwareMap.get(ColorRangeSensor.class, "pixelDetector");
+
+        leftAlign = hardwareMap.get(DistanceSensor.class, "leftAlign");
+        rightAlign = hardwareMap.get(DistanceSensor.class, "rightAlign");
 
 
 
@@ -228,15 +247,16 @@ public class UpliftRobot
 
 
 
-
-
-
-
-
-
-
-
-
+    public ColorRangeSensor getPixelDetector()
+    {
+        return pixelDetector;
+    }
+    public DistanceSensor getLeftAlign() {
+        return leftAlign;
+    }
+    public DistanceSensor getRightAlign() {
+        return rightAlign;
+    }
 
     public void initializeCamera()
   {
@@ -251,13 +271,13 @@ public class UpliftRobot
            {
              webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
 
-             pipelineBlueClose = new CenterStageBlueClose(opMode.telemetry);
-             pipelineRedClose = new CenterStageRedClose(opMode.telemetry);
-             pipelineBlueFar = new CenterStageBlueFar(opMode.telemetry);
-             pipelineRedFar = new CenterStageRedFar(opMode.telemetry);
+             pipelineBlueDepositSide = new CenterStageBlueClose(opMode.telemetry);
+             pipelineRedDepositSide = new CenterStageRedClose(opMode.telemetry);
+             pipelineBlueAudienceSide = new CenterStageBlueFar(opMode.telemetry);
+             pipelineRedAudienceSide = new CenterStageRedFar(opMode.telemetry);
 
-               //changes this before each match depending on color
-               webcam.setPipeline(pipelineBlueClose);
+               //changes this before each match depending on color and side
+               webcam.setPipeline(pipelineRedAudienceSide);
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
             }
 

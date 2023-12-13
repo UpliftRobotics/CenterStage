@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@Autonomous(name = "BlueBack2+0", group = "Opmodes")
-public class BlueBack2Plus0 extends UpliftAutoImpl
+@Autonomous(name = "Blue Deposit Side 2 + 0", group = "Opmodes")
+public class BlueDepositSide2Plus0 extends UpliftAutoImpl
 {
     Odometry odom;
 
@@ -23,7 +23,6 @@ public class BlueBack2Plus0 extends UpliftAutoImpl
     @Override
     public void initAction() throws InterruptedException {
 
-//        robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
         robot.getGrabberRight().setPosition(robot.grabberRightClose);
 
         Thread.sleep(2000);
@@ -38,7 +37,7 @@ public class BlueBack2Plus0 extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
-        int location = robot.pipelineBlueClose.location;
+        int location = robot.pipelineBlueDepositSide.location;
         odom.setOdometryPosition(48, 0, 180);
 
         //left

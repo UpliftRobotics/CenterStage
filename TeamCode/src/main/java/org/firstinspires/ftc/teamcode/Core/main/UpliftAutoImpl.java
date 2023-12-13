@@ -26,9 +26,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
 
+import java.util.concurrent.TimeUnit;
+
 public class UpliftAutoImpl extends UpliftAuto {
 
     public UpliftRobot robot;
+
+    ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
 
 
     @Override
@@ -39,11 +43,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     @Override
     public void initAction() throws InterruptedException
     {
-//        robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//
-//        robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
     }
 
 
@@ -64,60 +64,6 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getRightBack().setPower(0);
     }
 
-//
-//    public void goToPos(double finalX, double finalY, double finalAngle, double vel, double tol)
-//    {
-//        double deltaX = finalX - robot.worldX;
-//        double deltaY = finalY - robot.worldY;
-//
-//        double dist = hypot(deltaX, deltaY);
-//
-//        double relAngle = toDegrees(atan2UL(deltaY, deltaX)) - robot.worldAngle;
-//
-//        double deltaAngle = finalAngle - robot.worldAngle;
-////        double turnVal = deltaAngle / finalAngle;
-//        double turnVal = 0;
-//
-//        while(abs(dist) > tol)
-//        {
-//            double lfPow = sin(toRadians(90 - relAngle) + (0.25 * PI)) * vel + turnVal;
-//            double rfPow = sin(toRadians(90 - relAngle) - (0.25 * PI)) * vel - turnVal;
-//            double lbPow = sin(toRadians(90 - relAngle) - (0.25 * PI)) * vel + turnVal;
-//            double rbPow = sin(toRadians(90 - relAngle) + (0.25 * PI)) * vel - turnVal;
-//
-//            // find max total input out of the 4 motors
-//            double maxVal = abs(lfPow);
-//            if (abs(rfPow) > maxVal) {
-//                maxVal = abs(rfPow);
-//            }
-//            if (abs(lbPow) > maxVal) {
-//                maxVal = abs(lbPow);
-//            }
-//            if (abs(rbPow) > maxVal) {
-//                maxVal = abs(rbPow);
-//            }
-//
-//            if (maxVal < (1 / sqrt(2))) {
-//                maxVal = 1 / sqrt(2);
-//            }
-//
-//            // set the scaled powers
-//            robot.getLeftFront().setPower(lfPow / maxVal);
-//            robot.getLeftBack().setPower(lbPow / maxVal);
-//            robot.getRightBack().setPower(rbPow / maxVal);
-//            robot.getRightFront().setPower(rfPow / maxVal);
-//
-//            deltaX = finalX - robot.worldX;
-//            deltaY = finalY - robot.worldY;
-//
-//            dist = hypot(deltaX, deltaY);
-//
-//            relAngle = toDegrees(atan2UL(deltaY, deltaX)) - robot.worldAngle;
-//
-//            deltaAngle = finalAngle - robot.worldAngle;
-////            turnVal = deltaAngle / finalAngle;
-//            turnVal = 0;
-//        }
 
     public void driveToPosition(double xPosition, double yPosition, double movementSpeed, double tolerance, double targetAngle, int turnDirection) {
         double xDistanceToPoint = xPosition - robot.worldX;
@@ -322,42 +268,6 @@ public class UpliftAutoImpl extends UpliftAuto {
 
 
     }
-    public void slides ()
-    {
-        double power = .5* -robot.opMode.gamepad2.right_stick_y;
-
-        // if going up stop from overextending
-        if (power > 0.0)
-        {
-            if(robot.getSlideRight().getCurrentPosition() < -850  || robot.getSlideLeft().getCurrentPosition() > 850) {
-                robot.getSlideLeft().setPower(0);
-                robot.getSlideRight().setPower(0);
-            }
-            else
-            {
-                robot.getSlideLeft().setPower(power);
-                robot.getSlideRight().setPower(-power);
-            }
-        }
-        else
-        {
-            if(robot.getSlideRight().getCurrentPosition() > -50  || robot.getSlideLeft().getCurrentPosition() < 50)
-            {
-                robot.getSlideLeft().setPower(0);
-                robot.getSlideRight().setPower(0);
-            }
-            else
-            {
-                robot.getSlideLeft().setPower(power);
-                robot.getSlideRight().setPower(-power);
-            }
-        }
-
-
-        //robot.getSlideRight().setPower(.5 * robot.opMode.gamepad2.right_stick_y);
-        //robot.getSlideLeft().setPower(.5 * robot.opMode.gamepad2.right_stick_y);
-
-    }
     public void tranfer()
     {
 
@@ -417,9 +327,71 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
-    public void intake(double power)
+    public void intake(double power) throws InterruptedException {
+        double velocity = power;
+
+        if(velocity > 0)
+        {
+            //intake
+            int pixelsStored = 0;
+
+            while(pixelsStored < 2)
+            {
+                robot.getIntake().setPower(velocity);
+                if(robot.getPixelDetector().getDistance(DistanceUnit.CM) < 2)
+                {
+                    Thread.sleep(100);
+                    pixelsStored++;
+                }
+
+            }
+            robot.getIntake().setPower(0);
+        }
+        else
+        {
+            //outtake
+            timer.startTime();
+            double startTime = timer.seconds();
+
+            while ((robot.getPixelDetector().alpha() == robot.getPixelDetector().red()) && (timer.seconds() - startTime < 3))
+            {
+                robot.getIntake().setPower(velocity);
+            }
+            while(robot.getPixelDetector().alpha() == robot.getPixelDetector().red())
+            {
+                velocity *= 1.1;
+                robot.getIntake().setPower(velocity);
+            }
+
+            robot.getIntake().setPower(0);
+        }
+
+    }
+
+    public void extensionPID(int extensionDist, int slowDownDistFromTargetPos, double extensionPower)
     {
-        robot.getIntake().setPower(power);
+
+        double minPower = 0.1;
+
+        while(robot.getExtension().getCurrentPosition() < extensionDist)
+        {
+            double remainingDistance = extensionDist - robot.getExtension().getCurrentPosition();
+
+            if(remainingDistance > slowDownDistFromTargetPos)
+            {
+                robot.getExtension().setPower(extensionPower);
+            }
+            else
+            {
+                // Adjust power based on remaining distance
+                double slowdownFactor = remainingDistance / slowDownDistFromTargetPos;
+                double slowedPower = minPower + (extensionPower - minPower) * slowdownFactor;
+
+                // Set the slowed power to extension
+                robot.getExtension().setPower(slowedPower);
+            }
+
+        }
     }
 
     public void reset() throws InterruptedException

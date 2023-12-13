@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@Autonomous(name = "RedFront2+0", group = "Opmodes")
-public class RedFront2Plus0 extends UpliftAutoImpl
+@Autonomous(name = "Red Audience Side 2 + 0", group = "Opmodes")
+public class RedAudienceSide2Plus0 extends UpliftAutoImpl
 {
     Odometry odom;
 
@@ -37,7 +37,7 @@ public class RedFront2Plus0 extends UpliftAutoImpl
     public void body() throws InterruptedException
     {
         int wait = 2000;
-        int location = robot.pipelineRedFar.location;
+        int location = robot.pipelineRedAudienceSide.location;
         odom.setOdometryPosition(100, 144, 0);
 
         //left
