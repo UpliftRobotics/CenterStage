@@ -29,7 +29,7 @@ public class UpliftRobot
     DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft, slideRight, extension, intake;
     Servo armLeft, armRight, grabberLeft, grabberRight, depositWrist, plane, intakeLinkLeft, IntakeLinkRight;
 
-    ColorRangeSensor pixelDetector;
+    ColorRangeSensor leftPixelDetector, rightPixelDetector;
 
     DistanceSensor leftAlign, rightAlign;
 
@@ -162,10 +162,11 @@ public class UpliftRobot
         //IntakeLinkRight = hardwareMap.get(Servo.class, "intake_right");
 
         //sensors
-        pixelDetector = hardwareMap.get(ColorRangeSensor.class, "pixelDetector");
-
-        leftAlign = hardwareMap.get(DistanceSensor.class, "leftAlign");
-        rightAlign = hardwareMap.get(DistanceSensor.class, "rightAlign");
+//        leftPixelDetector = hardwareMap.get(ColorRangeSensor.class, "leftPixelDetector");
+        rightPixelDetector = hardwareMap.get(ColorRangeSensor.class, "color");
+//
+//        leftAlign = hardwareMap.get(DistanceSensor.class, "leftAlign");
+//        rightAlign = hardwareMap.get(DistanceSensor.class, "rightAlign");
 
 
 
@@ -250,10 +251,15 @@ public class UpliftRobot
 
 
 
-    public ColorRangeSensor getPixelDetector()
+    public ColorRangeSensor getLeftPixelDetector()
     {
-        return pixelDetector;
+        return leftPixelDetector;
     }
+
+    public ColorRangeSensor getRightPixelDetector() {
+        return rightPixelDetector;
+    }
+
     public DistanceSensor getLeftAlign() {
         return leftAlign;
     }

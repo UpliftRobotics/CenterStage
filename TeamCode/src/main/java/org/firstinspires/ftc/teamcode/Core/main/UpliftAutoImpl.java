@@ -32,8 +32,6 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public UpliftRobot robot;
 
-    ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
-
 
     @Override
     public void initHardware() {
@@ -333,35 +331,57 @@ public class UpliftAutoImpl extends UpliftAuto {
         if(velocity > 0)
         {
             //intake
-            int pixelsStored = 0;
+            int leftPixelStored = 0;
+            int rightPixelStored = 0;
 
-            while(pixelsStored < 2)
+            while(leftPixelStored < 1 && rightPixelStored < 1)
             {
                 robot.getIntake().setPower(velocity);
-                if(robot.getPixelDetector().getDistance(DistanceUnit.CM) < 2)
+                if(robot.getLeftPixelDetector().getDistance(DistanceUnit.CM) < 2)
                 {
-                    Thread.sleep(100);
-                    pixelsStored++;
+                    leftPixelStored++;
                 }
-
+                if(robot.getRightPixelDetector().getDistance(DistanceUnit.CM) < 2)
+                {
+                    rightPixelStored++;
+                }
             }
             robot.getIntake().setPower(0);
         }
         else
         {
             //outtake
+            ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+
             timer.startTime();
             double startTime = timer.seconds();
 
-            while ((robot.getPixelDetector().alpha() == robot.getPixelDetector().red()) && (timer.seconds() - startTime < 3))
+            if((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000))
             {
-                robot.getIntake().setPower(velocity);
+                while (((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000)) && (timer.seconds() - startTime < 3))
+                {
+                    robot.getIntake().setPower(velocity);
+                }
+                while((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000))
+                {
+                    velocity *= 1.1;
+                    robot.getIntake().setPower(velocity);
+                }
             }
-            while(robot.getPixelDetector().alpha() == robot.getPixelDetector().red())
+            else
             {
-                velocity *= 1.1;
-                robot.getIntake().setPower(velocity);
+                while (((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000)) && (timer.seconds() - startTime < 3))
+                {
+                    robot.getIntake().setPower(velocity);
+                }
+                while((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000))
+                {
+                    velocity *= 1.1;
+                    robot.getIntake().setPower(velocity);
+                }
+
             }
+
 
             robot.getIntake().setPower(0);
         }

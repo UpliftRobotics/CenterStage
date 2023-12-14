@@ -32,6 +32,8 @@ public class BlueDepositSide2Plus0 extends UpliftAutoImpl
 
         robot.getDepositWrist().setPosition(0.6);
 
+        robot.webcam.setPipeline(robot.pipelineBlueDepositSide);
+
     }
 
     @Override

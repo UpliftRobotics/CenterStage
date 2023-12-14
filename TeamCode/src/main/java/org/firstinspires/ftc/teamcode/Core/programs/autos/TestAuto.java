@@ -30,15 +30,9 @@ public class TestAuto extends UpliftAutoImpl {
     @Override
     public void body() throws InterruptedException
     {
-
-        robot.opMode.telemetry.addData("left slide pos", robot.getSlideLeft().getCurrentPosition());
-        robot.opMode.telemetry.addData("right slide pos", robot.getSlideRight().getCurrentPosition());
-        robot.opMode.telemetry.update();
-
         odom.setOdometryPosition(0, 0, 0);
 
-        deposit(600, 0.1,true );
-        Thread.sleep(5000);
+        intake(-0.175);
 
     }
 

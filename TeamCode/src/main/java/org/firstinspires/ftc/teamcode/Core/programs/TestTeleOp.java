@@ -71,16 +71,12 @@ public class TestTeleOp extends UpliftTele {
         {
 
                 //telemetry.addData("touch sensor" , robot.getExtensionTouch().getValue());
-                telemetry.addData("slide left ", robot.getSlideLeft().getCurrentPosition());
-                telemetry.addData("slide right ", robot.getSlideRight().getCurrentPosition());
-                telemetry.addData("slide pos ",                 (robot.getSlideLeft().getCurrentPosition() + robot.getSlideRight().getCurrentPosition()) /2
-                );
 //                telemetry.addData("right stick y", robot.opMode.gamepad2.right_stick_y);
 //                telemetry.addData("right trigger", robot.opMode.gamepad1.right_trigger);
 //                telemetry.addData("left trigger", robot.opMode.gamepad1.left_trigger);
 //                telemetry.addData("extension", robot.getExtension().getCurrentPosition());
 
-
+                telemetry.addData("color: ", robot.getRightPixelDetector().alpha());
                 telemetry.update();
         }
 

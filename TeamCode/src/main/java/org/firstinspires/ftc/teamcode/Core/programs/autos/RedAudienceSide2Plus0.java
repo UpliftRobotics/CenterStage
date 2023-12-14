@@ -30,6 +30,7 @@ public class RedAudienceSide2Plus0 extends UpliftAutoImpl
 
         robot.getDepositWrist().setPosition(0.5);
 
+        robot.webcam.setPipeline(robot.pipelineRedAudienceSide);
 
     }
 
