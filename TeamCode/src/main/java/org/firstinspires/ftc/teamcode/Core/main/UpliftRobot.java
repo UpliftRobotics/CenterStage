@@ -53,7 +53,8 @@ public class UpliftRobot
     public static double wheelCircumference = wheelRadius * (2 * Math.PI); // in inches
     public static double COUNTS_PER_INCH = COUNTS_PER_REV / wheelCircumference;
     //(720 * 4) / wheelCircumference;
-    public static double robotEncoderWheelDistance = 12.73;
+    public static double robotEncoderWheelDistance = 8.7007;
+    //12.73
     public static double horizontalEncoderInchesPerDegreeOffset = 0;
     //0.0275
     //1.37480

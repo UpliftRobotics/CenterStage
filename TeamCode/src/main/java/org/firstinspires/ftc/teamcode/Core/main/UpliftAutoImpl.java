@@ -331,38 +331,27 @@ public class UpliftAutoImpl extends UpliftAuto {
         if(velocity > 0)
         {
             //intake
-            int leftPixelStored = 0;
-            int rightPixelStored = 0;
-
-            while(leftPixelStored < 1 && rightPixelStored < 1)
+            while(robot.getLeftPixelDetector().getDistance(DistanceUnit.CM) > 2 && robot.getRightPixelDetector().getDistance(DistanceUnit.CM) > 2)
             {
                 robot.getIntake().setPower(velocity);
-                if(robot.getLeftPixelDetector().getDistance(DistanceUnit.CM) < 2)
-                {
-                    leftPixelStored++;
-                }
-                if(robot.getRightPixelDetector().getDistance(DistanceUnit.CM) < 2)
-                {
-                    rightPixelStored++;
-                }
             }
             robot.getIntake().setPower(0);
         }
         else
         {
             //outtake
-            ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+            ElapsedTime intakeTimer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
 
-            timer.startTime();
-            double startTime = timer.seconds();
+            intakeTimer.startTime();
+            double startTime = intakeTimer.seconds();
 
-            if((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000))
+            if(robot.getRightPixelDetector().getDistance(DistanceUnit.CM) < 2)
             {
-                while (((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000)) && (timer.seconds() - startTime < 3))
+                while((robot.getRightPixelDetector().getDistance(DistanceUnit.CM) < 2) && (intakeTimer.seconds() - startTime < 3))
                 {
                     robot.getIntake().setPower(velocity);
                 }
-                while((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000))
+                while(robot.getRightPixelDetector().getDistance(DistanceUnit.CM) < 2)
                 {
                     velocity *= 1.1;
                     robot.getIntake().setPower(velocity);
@@ -370,11 +359,11 @@ public class UpliftAutoImpl extends UpliftAuto {
             }
             else
             {
-                while (((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000)) && (timer.seconds() - startTime < 3))
+                while((robot.getLeftPixelDetector().getDistance(DistanceUnit.CM) < 2) && (intakeTimer.seconds() - startTime < 3))
                 {
                     robot.getIntake().setPower(velocity);
                 }
-                while((robot.getRightPixelDetector().alpha() > 5000) && (robot.getRightPixelDetector().alpha() < 8000))
+                while((robot.getLeftPixelDetector().getDistance(DistanceUnit.CM) < 2) && (robot.getLeftPixelDetector().alpha() < 8000))
                 {
                     velocity *= 1.1;
                     robot.getIntake().setPower(velocity);
