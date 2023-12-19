@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 public class UpliftAutoImpl extends UpliftAuto {
 
     public UpliftRobot robot;
+    public boolean goPark = false;
 
 
     @Override
@@ -64,6 +65,11 @@ public class UpliftAutoImpl extends UpliftAuto {
 
 
     public void driveToPosition(double xPosition, double yPosition, double movementSpeed, double tolerance, double targetAngle, int turnDirection) {
+        ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+        timer.startTime();
+        double startTime = timer.seconds();
+
+
         double xDistanceToPoint = xPosition - robot.worldX;
         double yDistanceToPoint = yPosition - robot.worldY;
         double distanceToPoint = hypot(xDistanceToPoint, yDistanceToPoint);
@@ -74,14 +80,21 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         double approachZone = 20;
 
-        while (abs(distanceToPoint) > tolerance) {
+        while ((abs(distanceToPoint) > tolerance) )
+        {
+            if(timer.seconds() - startTime < 5)
+            {
+                driveTowards(UpliftMath.slowApproach(movementSpeed, distanceToPoint, approachZone, tolerance), relativeAngle, targetAngle, initialDistanceToPoint, turnDirection);
 
-            driveTowards(UpliftMath.slowApproach(movementSpeed, distanceToPoint, approachZone, tolerance), relativeAngle, targetAngle, initialDistanceToPoint, turnDirection);
-
-            xDistanceToPoint = xPosition - robot.worldX;
-            yDistanceToPoint = yPosition - robot.worldY;
-            distanceToPoint = hypot(xDistanceToPoint, yDistanceToPoint);
-            relativeAngle = toDegrees(UpliftMath.atan2UL(yDistanceToPoint, xDistanceToPoint)) - robot.worldAngle;
+                xDistanceToPoint = xPosition - robot.worldX;
+                yDistanceToPoint = yPosition - robot.worldY;
+                distanceToPoint = hypot(xDistanceToPoint, yDistanceToPoint);
+                relativeAngle = toDegrees(UpliftMath.atan2UL(yDistanceToPoint, xDistanceToPoint)) - robot.worldAngle;
+            }
+            else
+            {
+                goPark = true;
+            }
         }
 
         // arrived at point, so stop
@@ -341,7 +354,6 @@ public class UpliftAutoImpl extends UpliftAuto {
         {
             //outtake
             ElapsedTime intakeTimer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
-
             intakeTimer.startTime();
             double startTime = intakeTimer.seconds();
 

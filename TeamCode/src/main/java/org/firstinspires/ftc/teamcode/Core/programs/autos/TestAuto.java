@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Core.programs.autos;
 import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.QUICKEST_DIRECTION;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
@@ -30,7 +31,20 @@ public class TestAuto extends UpliftAutoImpl {
     @Override
     public void body() throws InterruptedException
     {
+        ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+        timer.startTime();
+
         odom.setOdometryPosition(0, 0, 0);
+
+
+        while(timer.seconds() < 25)
+        {
+            //do auto
+        }
+        //park
+
+
+
 
         intake(-0.175);
 

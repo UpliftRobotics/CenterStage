@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Core.programs.autos;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
@@ -39,82 +40,89 @@ public class BlueDepositSide2Plus0 extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
+
         int location = robot.pipelineBlueDepositSide.location;
         odom.setOdometryPosition(48, 0, 180);
 
-        //left
-        if(location == 0 || location == -1 ) {
-            //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 10, 0.7, 90, 2);
-            Thread.sleep(1000);
-
-
-
-            deposit(400, 0.1,true);
-            Thread.sleep(500);
-
-
-            drop();
-            Thread.sleep(1000);
-            reset();
-
-
-            //outtake position
-            driveToPosition(23, 21, 0.5, 93);
-
-        }
-
-        //middle
-        if(location == 1 )
+        if(!goPark)
         {
-            //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 16, 0.7, 90, 2);
+            //left
+            if(location == 0 || location == -1 ) {
+                //drop position
+                driveToPosition(30, 6, 0.8, 180);
+                driveToPosition(3.5, 10, 0.7, 90, 2);
+                Thread.sleep(1000);
+
+
+
+                deposit(400, 0.1,true);
+                Thread.sleep(500);
+
+
+                drop();
+                Thread.sleep(1000);
+                reset();
+
+
+                //outtake position
+                driveToPosition(23, 21, 0.5, 93);
+
+            }
+
+            //middle
+            if(location == 1 )
+            {
+                //drop position
+                driveToPosition(30, 6, 0.8, 180);
+                driveToPosition(3.5, 16, 0.7, 90, 2);
+                Thread.sleep(1000);
+
+
+                deposit(400, 0.1,true);
+                Thread.sleep(500);
+
+                drop();
+                Thread.sleep(1000);
+                reset();
+
+
+                //outtake position
+                driveToPosition(28, 28, 0.5, 93);
+            }
+
+            // right
+
+            if(location == 2 )
+            {
+                //drop position
+                driveToPosition(30, 6, 0.8, 180);
+                driveToPosition(3.5, 25, 0.7, 90, 2);
+                Thread.sleep(1000);
+
+                deposit(400, 0.1,true );
+                Thread.sleep(500);
+
+                drop();
+                Thread.sleep(1000);
+                reset();
+
+                //outtake position
+                driveToPosition(41, 19, 0.5, 93);
+
+            }
+
             Thread.sleep(1000);
 
+            intake(-0.175);
+            Thread.sleep(5000);
+            intake(0);
 
-            deposit(400, 0.1,true);
-            Thread.sleep(500);
-
-            drop();
-            Thread.sleep(1000);
-            reset();
-
-
-            //outtake position
-            driveToPosition(28, 28, 0.5, 93);
         }
-
-        // right
-
-        if(location == 2 )
-        {
-            //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 25, 0.7, 90, 2);
-            Thread.sleep(1000);
-
-            deposit(400, 0.1,true );
-            Thread.sleep(500);
-
-            drop();
-            Thread.sleep(1000);
-            reset();
-
-            //outtake position
-            driveToPosition(41, 19, 0.5, 93);
-
-        }
-
-        Thread.sleep(1000);
-
-        intake(-0.175);
-        Thread.sleep(5000);
-        intake(0);
 
 
         //park
+
+        driveToPosition(10, -10, 0.6, 90);
         driveToPosition(5, -10, 0.6, 90);
 
 
