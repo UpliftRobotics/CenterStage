@@ -10,6 +10,9 @@ import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
 public class CenterStageBlueFar extends OpenCvPipeline {
+
+    public boolean blueFar = false;
+
     Telemetry telemetry;
     Mat mat = new Mat();
     public int location = -1;
@@ -72,14 +75,17 @@ public class CenterStageBlueFar extends OpenCvPipeline {
 
         if(rightValue > middleValue && rightValue > 0.2) {
             location = 2;
+            blueFar = true;
         }
 
         if(middleValue > .2 && middleValue > rightValue) {
             location = 1;
+            blueFar = true;
         }
 
         else if(0.2 > middleValue && 0.2 > rightValue) {
             location = 0;
+            blueFar = true;
         }
 
         return input;

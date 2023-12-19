@@ -287,8 +287,34 @@ public class UpliftRobot
              pipelineRedAudienceSide = new CenterStageRedFar(opMode.telemetry);
 
                //changes this before each match depending on color and side
-               webcam.setPipeline(pipelineRedAudienceSide);
-               webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+
+//               webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+
+               webcam.setPipeline(pipelineBlueDepositSide);
+
+
+               if(!pipelineBlueDepositSide.blueClose)
+               {
+                   webcam.setPipeline(pipelineBlueAudienceSide);
+
+                   if (!pipelineBlueAudienceSide.blueFar)
+                   {
+                       webcam.setPipeline(pipelineRedDepositSide);
+
+                       if(!pipelineRedDepositSide.redClose)
+                       {
+                           webcam.setPipeline(pipelineRedDepositSide);
+
+                           if (!pipelineRedAudienceSide.redFar)
+                           {
+                               webcam.setPipeline(pipelineRedAudienceSide);
+                           }
+                       }
+
+                   }
+
+               }
+
             }
 
             @Override
