@@ -303,12 +303,8 @@ public class UpliftRobot
 
                        if(!pipelineRedDepositSide.redClose)
                        {
-                           webcam.setPipeline(pipelineRedDepositSide);
-
-                           if (!pipelineRedAudienceSide.redFar)
-                           {
-                               webcam.setPipeline(pipelineRedAudienceSide);
-                           }
+                           webcam.setPipeline(pipelineRedAudienceSide);
+                           
                        }
 
                    }
