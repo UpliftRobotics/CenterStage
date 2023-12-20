@@ -26,12 +26,23 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 public class UpliftRobot
 {
     public Odometry odometry;
-    DcMotor leftFront, rightFront, leftBack, rightBack, slideLeft, slideRight, extension, intake;
-    Servo armLeft, armRight, grabberLeft, grabberRight, depositWrist, plane, intakeLinkLeft, IntakeLinkRight;
 
-    ColorRangeSensor leftPixelDetector, rightPixelDetector;
+    //Drive Motors
+    DcMotor frontLeft, frontRight, backLeft, backRight;
 
-    DistanceSensor leftAlign, rightAlign;
+    //Slide Motors
+    DcMotor slideLeft, slideRight;
+
+    //Other Motors
+    DcMotor extension, intake;
+
+    //Solo Servos
+    Servo grabber, twister, depositWrist, plane, intakeRoller;
+
+    //Dual Servos
+    Servo armLeft, armRight, intakeLeftWrist, intakeRightWrist;
+
+    ColorRangeSensor pixelDetectorLeft, pixelDetectorRight;
 
     public IMU imu;
 
@@ -88,7 +99,7 @@ public class UpliftRobot
 
     public int depositStage = 0;
 
-    // v2
+
     public double armLeftPast = 1;
     public double armLeftGrab = 1;
     public double armLeftHold = .8;
@@ -106,10 +117,9 @@ public class UpliftRobot
     public double depositWristTransfer = 0;
     public double depositWristDrop = .05;
 
-    public double grabberLeftOpen = .15;
-    public double grabberLeftClose = .48;
-    public double grabberRightOpen = .35;
-    public double grabberRightClose = 0;
+    public double grabberOpenPos = 0;
+    public double grabberClosePos = 0;
+
 
 
 
@@ -136,14 +146,15 @@ public class UpliftRobot
 
 
         //wheels
-        leftFront = hardwareMap.get(DcMotor.class, "left_front");
-        rightFront = hardwareMap.get(DcMotor.class, "right_front");
-        leftBack = hardwareMap.get(DcMotor.class, "left_back");
-        rightBack = hardwareMap.get(DcMotor.class, "right_back");
+        frontRight = hardwareMap.get(DcMotor.class, "front_right");
+        frontLeft = hardwareMap.get(DcMotor.class, "front_left");
+        backRight = hardwareMap.get(DcMotor.class, "back_right");
+        backLeft = hardwareMap.get(DcMotor.class, "back_left");
 
         //motors above drivetrain
         slideLeft = hardwareMap.get(DcMotor.class, "slide_left");
         slideRight = hardwareMap.get(DcMotor.class, "slide_right");
+
         extension = hardwareMap.get(DcMotor.class, "extension");
         intake = hardwareMap.get(DcMotor.class, "intake");
 
@@ -153,21 +164,22 @@ public class UpliftRobot
 
         plane = hardwareMap.get(Servo.class, "plane");
 
-        grabberLeft = hardwareMap.get(Servo.class, "grabber_left");
-        grabberRight = hardwareMap.get(Servo.class, "grabber_right");
+        grabber = hardwareMap.get(Servo.class, "grabber");
 
         armLeft = hardwareMap.get(Servo.class, "arm_left");
         armRight = hardwareMap.get(Servo.class, "arm_right");
 
-        //intakeLinkLeft = hardwareMap.get(Servo.class, "intake_left");
-        //IntakeLinkRight = hardwareMap.get(Servo.class, "intake_right");
+        twister = hardwareMap.get(Servo.class, "twister");
+
+        intakeRoller = hardwareMap.get(Servo.class, "intakeRoller");
 
         //sensors
-//        leftPixelDetector = hardwareMap.get(ColorRangeSensor.class, "leftPixelDetector");
-        rightPixelDetector = hardwareMap.get(ColorRangeSensor.class, "color");
-//
-//        leftAlign = hardwareMap.get(DistanceSensor.class, "leftAlign");
-//        rightAlign = hardwareMap.get(DistanceSensor.class, "rightAlign");
+        pixelDetectorLeft = hardwareMap.get(ColorRangeSensor.class, "pixelDetectorLeft");
+        pixelDetectorRight = hardwareMap.get(ColorRangeSensor.class, "pixelDetectorRight");
+
+
+
+
 
 
 
@@ -175,39 +187,37 @@ public class UpliftRobot
 
         initializeCamera();
 
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         slideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         slideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         extension.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
-        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         slideLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         extension.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-
-        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
 //    public OpenCvCamera getWebcam()
@@ -215,58 +225,58 @@ public class UpliftRobot
 //        return webcam;
 //    }
 
-    public DcMotor getLeftFront() {
-        return leftFront;
+    public DcMotor getFrontRight() {
+        return frontRight;
     }
-    public DcMotor getLeftBack() {
-        return leftBack;
+    public DcMotor getFrontLeft() {
+        return frontLeft;
     }
-    public DcMotor getRightBack() {
-        return rightBack;
+    public DcMotor getBackRight() {
+        return backRight;
     }
-    public DcMotor getRightFront() {
-        return rightFront;
+
+    public DcMotor getBackLeft(){
+        return backLeft;
     }
+
+
     public DcMotor getSlideLeft() {
         return slideLeft;
     }
     public DcMotor getSlideRight() {
         return slideRight;
     }
+
     public DcMotor getExtension() {
         return extension;
     }
+
     public DcMotor getIntake() {
         return intake;
     }
+
     public Servo getDepositWrist() {
         return depositWrist;
     }
     public Servo getPlane(){return plane;}
-    public Servo getIntakeLinkLeft(){return intakeLinkLeft;}
-    public Servo getGetIntakeLinkRight(){return IntakeLinkRight;}
-    public Servo getGrabberLeft(){return grabberLeft;}
-    public Servo getGrabberRight(){return grabberRight;}
+
+    public Servo getGrabber(){return grabber;}
+
+
     public Servo getArmLeft(){return armLeft;}
     public Servo getArmRight(){return armRight;}
 
 
 
-    public ColorRangeSensor getLeftPixelDetector()
+    public ColorRangeSensor getPixelDetectorLeft()
     {
-        return leftPixelDetector;
+        return pixelDetectorLeft;
     }
 
-    public ColorRangeSensor getRightPixelDetector() {
-        return rightPixelDetector;
+    public ColorRangeSensor getPixelDetectorRight() {
+        return pixelDetectorRight;
     }
 
-    public DistanceSensor getLeftAlign() {
-        return leftAlign;
-    }
-    public DistanceSensor getRightAlign() {
-        return rightAlign;
-    }
 
     public void initializeCamera()
   {
@@ -304,7 +314,7 @@ public class UpliftRobot
                        if(!pipelineRedDepositSide.redClose)
                        {
                            webcam.setPipeline(pipelineRedAudienceSide);
-                           
+
                        }
 
                    }

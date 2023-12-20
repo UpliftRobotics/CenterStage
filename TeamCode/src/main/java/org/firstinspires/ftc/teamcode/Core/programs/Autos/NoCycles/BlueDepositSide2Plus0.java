@@ -1,7 +1,6 @@
-package org.firstinspires.ftc.teamcode.Core.programs.autos;
+package org.firstinspires.ftc.teamcode.Core.programs.Autos.NoCycles;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
@@ -24,7 +23,7 @@ public class BlueDepositSide2Plus0 extends UpliftAutoImpl
     @Override
     public void initAction() throws InterruptedException {
 
-        robot.getGrabberRight().setPosition(robot.grabberRightClose);
+        robot.getGrabber().setPosition(robot.grabberClosePos);
 
         Thread.sleep(2000);
 
@@ -55,7 +54,7 @@ public class BlueDepositSide2Plus0 extends UpliftAutoImpl
 
 
 
-                deposit(400, 0.1,true);
+                deposit(400, 0.1);
                 Thread.sleep(500);
 
 
@@ -78,7 +77,7 @@ public class BlueDepositSide2Plus0 extends UpliftAutoImpl
                 Thread.sleep(1000);
 
 
-                deposit(400, 0.1,true);
+                deposit(400, 0.1);
                 Thread.sleep(500);
 
                 drop();
@@ -99,7 +98,7 @@ public class BlueDepositSide2Plus0 extends UpliftAutoImpl
                 driveToPosition(3.5, 25, 0.7, 90, 2);
                 Thread.sleep(1000);
 
-                deposit(400, 0.1,true );
+                deposit(400, 0.1);
                 Thread.sleep(500);
 
                 drop();

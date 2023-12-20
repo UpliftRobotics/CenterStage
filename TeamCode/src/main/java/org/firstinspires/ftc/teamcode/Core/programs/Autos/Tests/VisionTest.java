@@ -1,14 +1,10 @@
-package org.firstinspires.ftc.teamcode.Core.programs.autos;
+package org.firstinspires.ftc.teamcode.Core.programs.Autos.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 
-import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.QUICKEST_DIRECTION;
-
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
-import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
-
 
 
 @Autonomous(name = "VisionTest", group = "OpModes")

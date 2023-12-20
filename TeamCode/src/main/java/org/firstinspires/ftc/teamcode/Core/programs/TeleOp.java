@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.Core.programs;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
@@ -10,8 +9,8 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@TeleOp(name = "TestTeleOp", group = "Opmodes")
-public class TestTeleOp extends UpliftTele {
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TestTeleOp", group = "Opmodes")
+public class TeleOp extends UpliftTele {
 
         UpliftRobot robot;
 
@@ -46,13 +45,16 @@ public class TestTeleOp extends UpliftTele {
 
                 robot.getDepositWrist().setPosition(robot.depositWristDrop);
                 sleep(300);
-                robot.getGrabberRight().setPosition(robot.grabberRightOpen);
-                robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
+
+                robot.getGrabber().setPosition(robot.grabberOpenPos);
+
                 robot.getArmRight().setPosition(robot.armRightPast);
                 robot.getArmLeft().setPosition(robot.armLeftPast);
                 sleep(500);
+
                 robot.getDepositWrist().setPosition(robot.depositWristGrab);
                 sleep(500);
+
                 robot.getArmRight().setPosition(robot.armRightGrab);
                 robot.getArmLeft().setPosition(robot.armLeftGrab);
 
@@ -61,6 +63,7 @@ public class TestTeleOp extends UpliftTele {
 
                 robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
                 robot.getPlane().setPosition(1);
 
         }
@@ -69,14 +72,7 @@ public class TestTeleOp extends UpliftTele {
 
         public void bodyLoop() throws InterruptedException
         {
-
-                //telemetry.addData("touch sensor" , robot.getExtensionTouch().getValue());
-//                telemetry.addData("right stick y", robot.opMode.gamepad2.right_stick_y);
-//                telemetry.addData("right trigger", robot.opMode.gamepad1.right_trigger);
-//                telemetry.addData("left trigger", robot.opMode.gamepad1.left_trigger);
-//                telemetry.addData("extension", robot.getExtension().getCurrentPosition());
-
-                telemetry.addData("color: ", robot.getRightPixelDetector().alpha());
+                telemetry.addData("color: ", robot.getPixelDetectorRight().alpha());
                 telemetry.update();
         }
 

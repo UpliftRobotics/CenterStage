@@ -86,11 +86,12 @@ public class DriveThread2 extends Thread {
             TurnPID pid = new TurnPID(90, 0.013, 0, 0.003);
             while(robot.opMode.opModeIsActive() && Math.abs(90 - getAbsoluteAngle()) > 1)
             {
-                double motorPower = pid.update(getAbsoluteAngle());
-                robot.getLeftFront().setPower(-motorPower);
-                robot.getRightFront().setPower(motorPower);
-                robot.getLeftBack().setPower(-motorPower);
-                robot.getRightBack().setPower(motorPower);
+                double speed = pid.update(getAbsoluteAngle());
+
+                robot.getFrontRight().setPower(speed);
+                robot.getFrontLeft().setPower(-speed);
+                robot.getBackRight().setPower(speed);
+                robot.getBackLeft().setPower(-speed);
             }
             stopMotors();
         }
@@ -102,10 +103,10 @@ public class DriveThread2 extends Thread {
     }
 
     public void stopMotors() {
-        robot.getLeftFront().setPower(0);
-        robot.getRightFront().setPower(0);
-        robot.getLeftBack().setPower(0);
-        robot.getRightBack().setPower(0);
+        robot.getFrontRight().setPower(0);
+        robot.getFrontLeft().setPower(0);
+        robot.getBackRight().setPower(0);
+        robot.getBackLeft().setPower(0);
     }
 
     public void end() {

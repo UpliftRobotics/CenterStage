@@ -1,6 +1,4 @@
-package org.firstinspires.ftc.teamcode.Core.programs.autos;
-
-import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.QUICKEST_DIRECTION;
+package org.firstinspires.ftc.teamcode.Core.programs.Autos.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -8,7 +6,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
-import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
 
 @Autonomous(name = "TestAuto", group = "Opmodes")
 public class TestAuto extends UpliftAutoImpl {

@@ -57,10 +57,10 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     public void stopMotors() {
-        robot.getLeftFront().setPower(0);
-        robot.getRightFront().setPower(0);
-        robot.getLeftBack().setPower(0);
-        robot.getRightBack().setPower(0);
+        robot.getFrontRight().setPower(0);
+        robot.getFrontLeft().setPower(0);
+        robot.getBackRight().setPower(0);
+        robot.getBackLeft().setPower(0);
     }
 
 
@@ -192,11 +192,11 @@ public class UpliftAutoImpl extends UpliftAuto {
         }
 
 
-        // set the scaled powers
-        robot.getLeftFront().setPower(1 * (lf / maxVal));
-        robot.getRightFront().setPower(1 * (rf / maxVal));
-        robot.getLeftBack().setPower(lb / maxVal);
-        robot.getRightBack().setPower(rb / maxVal);
+
+        robot.getFrontRight().setPower((rf / maxVal));
+        robot.getFrontLeft().setPower((lf / maxVal));
+        robot.getBackRight().setPower(rb / maxVal);
+        robot.getBackLeft().setPower(lb / maxVal);
     }
 
     public void driveToPosition(double xPosition, double yPosition, double movementSpeed, double targetAngle, int turnDirection) {
@@ -212,10 +212,10 @@ public class UpliftAutoImpl extends UpliftAuto {
     public void spin(double speed) {
         speed = Range.clip(speed, -1, 1);
 
-        robot.getLeftFront().setPower(speed);
-        robot.getRightFront().setPower(-speed);
-        robot.getLeftBack().setPower(speed);
-        robot.getRightBack().setPower(-speed);
+        robot.getFrontRight().setPower(-speed);
+        robot.getFrontLeft().setPower(speed);
+        robot.getBackRight().setPower(-speed);
+        robot.getBackLeft().setPower(speed);
     }
 
     // method to turn a certain number of degrees ( [+] for clockwise and [-] for counter-clockwise )
@@ -288,53 +288,27 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
-    public void deposit(int slidesDist, double slidesPower, boolean moveArm) throws InterruptedException
+    public void deposit(int slidesDist, double slidesPower) throws InterruptedException
     {
-        if (moveArm)
+        robot.getDepositWrist().setPosition(robot.depositWristDrop);
+        robot.getArmLeft().setPosition(robot.armLeftDrop);
+        robot.getArmRight().setPosition(robot.armRightDrop);
+
+        while(robot.getSlideRight().getCurrentPosition() < slidesDist)
+
         {
-            robot.getDepositWrist().setPosition(robot.depositWristDrop);
-            robot.getArmLeft().setPosition(robot.armLeftDrop);
-            robot.getArmRight().setPosition(robot.armRightDrop);
+            //negative power moves slides up
+            robot.getSlideRight().setPower(-slidesPower);
+            robot.getSlideLeft().setPower(-slidesPower);
         }
-        if (robot.getSlideRight().getCurrentPosition() < slidesDist)
-        {
-            while(robot.getSlideRight().getCurrentPosition() < slidesDist)
-            {
-
-                //negative power moves slides up
-                robot.getSlideRight().setPower(-slidesPower);
-                robot.getSlideLeft().setPower(-slidesPower);
-
-            }
-        }
-
-        else
-        {
-            while(robot.getSlideRight().getCurrentPosition() > slidesDist)
-            {
-
-                //positive power moves slides down
-                robot.getSlideRight().setPower(slidesPower);
-                robot.getSlideLeft().setPower(slidesPower);
-
-            }
-        }
-
-
-
-
 
         robot.getSlideLeft().setPower(0);
         robot.getSlideRight().setPower(0);
 
-
-
-
     }
     public void drop() throws InterruptedException
     {
-        robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
-        robot.getGrabberRight().setPosition(robot.grabberRightOpen);
+        robot.getGrabber().setPosition(robot.grabberOpenPos);
 
     }
 
@@ -344,7 +318,7 @@ public class UpliftAutoImpl extends UpliftAuto {
         if(velocity > 0)
         {
             //intake
-            while(robot.getLeftPixelDetector().getDistance(DistanceUnit.CM) > 2 && robot.getRightPixelDetector().getDistance(DistanceUnit.CM) > 2)
+            while(robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) > 2 && robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) > 2)
             {
                 robot.getIntake().setPower(velocity);
             }
@@ -357,35 +331,18 @@ public class UpliftAutoImpl extends UpliftAuto {
             intakeTimer.startTime();
             double startTime = intakeTimer.seconds();
 
-            if(robot.getRightPixelDetector().getDistance(DistanceUnit.CM) < 2)
+            while(((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2)) && (intakeTimer.seconds() - startTime < 3))
             {
-                while((robot.getRightPixelDetector().getDistance(DistanceUnit.CM) < 2) && (intakeTimer.seconds() - startTime < 3))
-                {
-                    robot.getIntake().setPower(velocity);
-                }
-                while(robot.getRightPixelDetector().getDistance(DistanceUnit.CM) < 2)
-                {
-                    velocity *= 1.1;
-                    robot.getIntake().setPower(velocity);
-                }
+                robot.getIntake().setPower(velocity);
             }
-            else
+            while((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2))
             {
-                while((robot.getLeftPixelDetector().getDistance(DistanceUnit.CM) < 2) && (intakeTimer.seconds() - startTime < 3))
-                {
-                    robot.getIntake().setPower(velocity);
-                }
-                while((robot.getLeftPixelDetector().getDistance(DistanceUnit.CM) < 2) && (robot.getLeftPixelDetector().alpha() < 8000))
-                {
-                    velocity *= 1.1;
-                    robot.getIntake().setPower(velocity);
-                }
-
+                velocity *= 1.1;
+                robot.getIntake().setPower(velocity);
             }
-
-
-            robot.getIntake().setPower(0);
         }
+
+        robot.getIntake().setPower(0);
 
     }
 
@@ -419,8 +376,8 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     public void reset() throws InterruptedException
     {
-        robot.getGrabberLeft().setPosition(robot.grabberLeftOpen);
-        robot.getGrabberRight().setPosition(robot.grabberRightOpen);
+        robot.getGrabber().setPosition(robot.grabberOpenPos);
+
         Thread.sleep(200);
         robot.getArmLeft().setPosition(robot.armLeftPast);
         robot.getArmRight().setPosition(robot.armRightPast);

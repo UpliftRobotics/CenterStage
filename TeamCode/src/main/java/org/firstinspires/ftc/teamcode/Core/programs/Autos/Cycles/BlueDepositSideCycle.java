@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Core.programs.autos;
+package org.firstinspires.ftc.teamcode.Core.programs.Autos.Cycles;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -23,7 +23,7 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
     @Override
     public void initAction() throws InterruptedException {
 
-        robot.getGrabberRight().setPosition(robot.grabberRightClose);
+        robot.getGrabber().setPosition(robot.grabberClosePos);
 
         Thread.sleep(2000);
 
@@ -31,6 +31,9 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
         robot.getArmRight().setPosition(0.3);
 
         robot.getDepositWrist().setPosition(0.6);
+
+        robot.webcam.setPipeline(robot.pipelineBlueDepositSide);
+
 
     }
 
@@ -49,7 +52,7 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
 
 
 
-            deposit(400, 0.1,true);
+            deposit(400, 0.1);
             Thread.sleep(500);
 
 
@@ -72,7 +75,7 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
             Thread.sleep(1000);
 
 
-            deposit(400, 0.1,true);
+            deposit(400, 0.1);
             Thread.sleep(500);
 
             drop();
@@ -93,7 +96,7 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
             driveToPosition(3.5, 25, 0.7, 90, 2);
             Thread.sleep(1000);
 
-            deposit(400, 0.1,true );
+            deposit(400, 0.1);
             Thread.sleep(500);
 
             drop();

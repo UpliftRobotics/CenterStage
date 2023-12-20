@@ -114,10 +114,10 @@ public class DriveThread extends Thread {
         if (slowModeInput)
             speedFactor = 0.5f;
 
-        robot.getLeftFront().setPower(speedFactor * (lfPow / maxVal));
-        robot.getLeftBack().setPower(speedFactor * (lbPow / maxVal));
-        robot.getRightBack().setPower(speedFactor * (rbPow / maxVal));
-        robot.getRightFront().setPower(speedFactor * (rfPow / maxVal));
+        robot.getFrontRight().setPower(speedFactor * (rfPow / maxVal));
+        robot.getFrontLeft().setPower(speedFactor * (lfPow / maxVal));
+        robot.getBackRight().setPower(speedFactor * (rbPow / maxVal));
+        robot.getBackLeft().setPower(speedFactor * (lbPow / maxVal));
     }
 
     public void end() {

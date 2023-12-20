@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Core.programs.autos;
+package org.firstinspires.ftc.teamcode.Core.programs.Autos.NoCycles;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -20,15 +20,14 @@ public class RedAudienceSide2Plus0 extends UpliftAutoImpl
 
     @Override
     public void initAction() throws InterruptedException {
-        robot.getGrabberLeft().setPosition(robot.grabberLeftClose);
-//        robot.getGrabberRight().setPosition(robot.grabberRightClose);
+        robot.getGrabber().setPosition(robot.grabberClosePos);
 
         Thread.sleep(2000);
 
-        robot.getArmLeft().setPosition(robot.armLeftHold);
-        robot.getArmRight().setPosition(robot.armRightHold);
+        robot.getArmLeft().setPosition(0.7);
+        robot.getArmRight().setPosition(0.3);
 
-        robot.getDepositWrist().setPosition(0.5);
+        robot.getDepositWrist().setPosition(0.6);
 
         robot.webcam.setPipeline(robot.pipelineRedAudienceSide);
 
