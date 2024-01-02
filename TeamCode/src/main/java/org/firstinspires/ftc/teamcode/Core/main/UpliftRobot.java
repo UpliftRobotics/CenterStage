@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Core.main;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -37,10 +38,12 @@ public class UpliftRobot
     DcMotor extension, intake;
 
     //Solo Servos
-    Servo grabber, twister, depositWrist, plane, intakeRoller;
+    Servo grabber, twister, depositWrist, intakeRoller;
 
     //Dual Servos
-    Servo armLeft, armRight, intakeLeftWrist, intakeRightWrist;
+    Servo armLeft, armRight, intakeArmLeft, intakeArmRight;
+
+    CRServo plane;
 
     ColorRangeSensor pixelDetectorLeft, pixelDetectorRight;
 
@@ -91,8 +94,6 @@ public class UpliftRobot
 
     // robot constants
     //inake pos
-    public double intakeStorePos = .52;
-    public double intakeGroundPos = .38 ;
 
 
 
@@ -100,29 +101,44 @@ public class UpliftRobot
     public int depositStage = 0;
 
 
-    public double armLeftPast = 1;
-    public double armLeftGrab = 1;
-    public double armLeftHold = .8;
-    public double armLeftTransfer = .1;
-    public double armLeftDrop = 0;
 
-    public double armRightPast = 0;
-    public double armRightGrab = .01;
-    public double armRightHold = .2;
-    public double armRightTransfer = .9;
-    public double armRightDrop = 1;
 
-    public double depositWristGrab = .21;
-    public double depositWristHold = .45;
-    public double depositWristTransfer = 0;
-    public double depositWristDrop = .05;
+    public double depositWristStore = .21;
+    public double depositWristTransfer = .45;
+    public double depositWristDrop = 0;
 
     public double grabberOpenPos = 0;
     public double grabberClosePos = 0;
 
+    public double frontRollerStore = 1;
+    public double frontRollerGround = .5;
+    public double frontRollerStack = .6;
 
+    public double intakeArmLeftStore = 1;
+    public double intakeArmLeftStack5 = .4;
+    public double intakeArmLeftStack4 = .3;
+    public double intakeArmLeftStack3 = .2;
+    public double intakeArmLeftStack2 = .1;
+    public double intakeArmLeftGround = 0;
 
+    public double intakeArmRightStore = 0;
+    public double intakeArmRightStack5 = .6;
+    public double intakeArmRigthStack4 = .7;
+    public double intakeArmRightStack3 = .8;
+    public double intakeArmRightStack2 = .9;
+    public double intakeArmRightGround = 1;
 
+    public double armLeftStore = 0;
+    public double armLeftTransfer = .1;
+    public double armLeftDrop = 1;
+
+    public double armRightStore = 1;
+    public double armRightTransfer = .9;
+    public double armRightDrop = 0;
+
+    public double grabberClose1 = 0;
+    public double grabberClose2 = .5;
+    public double grabberOpen = 1;
 
 
 
@@ -161,16 +177,16 @@ public class UpliftRobot
 
         //Servos
         depositWrist = hardwareMap.get(Servo.class, "deposit_wrist");
-
-        plane = hardwareMap.get(Servo.class, "plane");
-
+        plane = hardwareMap.get(CRServo.class, "plane");
         grabber = hardwareMap.get(Servo.class, "grabber");
 
         armLeft = hardwareMap.get(Servo.class, "arm_left");
         armRight = hardwareMap.get(Servo.class, "arm_right");
 
-        twister = hardwareMap.get(Servo.class, "twister");
+        intakeArmLeft = hardwareMap.get(Servo.class, "intake_arm_left");
+        intakeArmRight = hardwareMap.get(Servo.class, "intake_arm_right");
 
+        twister = hardwareMap.get(Servo.class, "twister");
         intakeRoller = hardwareMap.get(Servo.class, "intakeRoller");
 
         //sensors
@@ -202,6 +218,7 @@ public class UpliftRobot
         slideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         extension.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -258,7 +275,7 @@ public class UpliftRobot
     public Servo getDepositWrist() {
         return depositWrist;
     }
-    public Servo getPlane(){return plane;}
+    public CRServo getPlane(){return plane;}
 
     public Servo getGrabber(){return grabber;}
 
@@ -266,6 +283,22 @@ public class UpliftRobot
     public Servo getArmLeft(){return armLeft;}
     public Servo getArmRight(){return armRight;}
 
+    public Servo getTwister()
+    {
+        return twister;
+    }
+    public Servo getIntakeRoller()
+    {
+        return intakeRoller;
+    }
+    public Servo getIntakeArmLeft()
+{
+    return intakeArmLeft;
+}
+    public Servo getIntakeArmRight()
+    {
+        return intakeArmRight;
+    }
 
 
     public ColorRangeSensor getPixelDetectorLeft()

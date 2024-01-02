@@ -31,7 +31,9 @@ public class DriveThread2 extends Thread {
         while (!shutDown) {
             try {
 
-                alignWithBackDrop();
+//                alignWithBackDrop();
+
+                reset();
 
                 plane();
 
@@ -50,12 +52,22 @@ public class DriveThread2 extends Thread {
     {
         if (robot.opMode.gamepad1.dpad_up)
         {
-            robot.getPlane().setPosition(.6);
+            robot.getPlane().setPower(1);
+            Thread.sleep(1000);
+            robot.getPlane().setPower(0);
         }
     }
 
 
 
+    public void reset()
+    {
+        if (robot.opMode.gamepad1.left_bumper)
+        {
+            //lift front roller up, then while retracting the slides towards the robot, rotate the intake to the store
+            //while continuing to rotate the intake motor inwards.
+        }
+    }
     public void extension()
     {
         double power = .5 * (robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
