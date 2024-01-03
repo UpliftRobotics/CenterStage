@@ -99,6 +99,13 @@ public class UpliftRobot
 
 
     public int depositStage = 0;
+    // 0 = intaking pixels
+    // 1 = pixels will be transfered to the grabber
+    // 2 = pixels will be prepped for dropping
+    // 3 = pixels will drop and reset arm back inside and folds intake back out
+
+    public int intakeHeight = 0;
+
 
 
 
@@ -123,7 +130,7 @@ public class UpliftRobot
 
     public double intakeArmRightStore = 0;
     public double intakeArmRightStack5 = .6;
-    public double intakeArmRigthStack4 = .7;
+    public double intakeArmRightStack4 = .7;
     public double intakeArmRightStack3 = .8;
     public double intakeArmRightStack2 = .9;
     public double intakeArmRightGround = 1;
@@ -139,6 +146,16 @@ public class UpliftRobot
     public double grabberClose1 = 0;
     public double grabberClose2 = .5;
     public double grabberOpen = 1;
+
+    public double twisterPos1 = 0;
+    public double twisterPos2 = 0;
+    public double twisterPos3 = 0;
+    public double twisterPos4 = 0;
+    public double twisterPos5 = 0;
+    public double twisterPos6 = 0;
+    public double twisterPos7 = 0;
+
+
 
 
 

@@ -76,6 +76,8 @@ public class DriveThread extends Thread {
 //                    Thread.sleep(3000);
 //                }
 
+                extension();
+                plane();
 
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
@@ -83,6 +85,37 @@ public class DriveThread extends Thread {
                 e.printStackTrace();
 
             }
+        }
+    }
+
+    public void extension()
+    {
+        double power = .5 * (robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
+
+        if (power > 0.0) {
+            if (robot.getExtension().getCurrentPosition() > 850) {
+                robot.getExtension().setPower(0);
+            } else {
+                robot.getExtension().setPower(power);
+            }
+
+        } else {
+            if (robot.getExtension().getCurrentPosition() < 50) {
+                robot.getExtension().setPower(0);
+
+            } else {
+                robot.getExtension().setPower(power);
+            }
+        }
+    }
+
+    public void plane () throws InterruptedException
+    {
+        if (robot.opMode.gamepad1.dpad_up)
+        {
+            robot.getPlane().setPower(1);
+            Thread.sleep(1000);
+            robot.getPlane().setPower(0);
         }
     }
 

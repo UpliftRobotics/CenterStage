@@ -32,13 +32,6 @@ public class DriveThread2 extends Thread {
             try {
 
 //                alignWithBackDrop();
-
-                reset();
-
-                plane();
-
-                extension();
-
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
             } catch (Exception e) {
@@ -48,15 +41,7 @@ public class DriveThread2 extends Thread {
         }
     }
 
-    public void plane () throws InterruptedException
-    {
-        if (robot.opMode.gamepad1.dpad_up)
-        {
-            robot.getPlane().setPower(1);
-            Thread.sleep(1000);
-            robot.getPlane().setPower(0);
-        }
-    }
+
 
 
 
@@ -68,26 +53,7 @@ public class DriveThread2 extends Thread {
             //while continuing to rotate the intake motor inwards.
         }
     }
-    public void extension()
-    {
-        double power = .5 * (robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
 
-        if (power > 0.0) {
-            if (robot.getExtension().getCurrentPosition() > 850) {
-                robot.getExtension().setPower(0);
-            } else {
-                robot.getExtension().setPower(power);
-            }
-
-        } else {
-            if (robot.getExtension().getCurrentPosition() < 50) {
-                robot.getExtension().setPower(0);
-
-            } else {
-                robot.getExtension().setPower(power);
-            }
-        }
-    }
 
 
 
