@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.teamcode.Core.programs.Autos.Cycles;
 
+import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.blueLeftStack;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
 
 
 @Autonomous(name = "Blue Deposit Side Cycle", group = "Opmodes")
@@ -23,7 +26,7 @@ public class BlueAudienceSideCycle extends UpliftAutoImpl
     @Override
     public void initAction() throws InterruptedException {
 
-        robot.getGrabber().setPosition(robot.grabberClosePos);
+        robot.getGrabber().setPosition(robot.grabberClose1);
 
         Thread.sleep(2000);
 
@@ -43,79 +46,95 @@ public class BlueAudienceSideCycle extends UpliftAutoImpl
         int location = robot.pipelineBlueDepositSide.location;
         odom.setOdometryPosition(48, 0, 180);
 
-        //left
-        if(location == 0 || location == -1 ) {
-            //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 10, 0.7, 90, 2);
-            Thread.sleep(1000);
-
-
-
-            deposit(400, 0.1);
-            Thread.sleep(500);
-
-
-            drop();
-            Thread.sleep(1000);
-            reset();
-
-
-            //outtake position
-            driveToPosition(23, 21, 0.5, 93);
-
-        }
-
-        //middle
-        if(location == 1 )
+        if(!goPark)
         {
-            //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 16, 0.7, 90, 2);
-            Thread.sleep(1000);
+            //left
+            if(location == 0 || location == -1 )
+            {
+                //drop position
+                driveToPosition(30, 6, 0.8, 180);
+                driveToPosition(3.5, 10, 0.7, 90, 2);
+                Thread.sleep(1000);
 
 
-            deposit(400, 0.1);
-            Thread.sleep(500);
 
-            drop();
-            Thread.sleep(1000);
-            reset();
+                deposit(400, 0.1);
+                Thread.sleep(500);
 
 
-            //outtake position
-            driveToPosition(28, 28, 0.5, 93);
+                drop();
+                Thread.sleep(1000);
+                reset(true, false);
+
+
+                //outtake position
+                driveToPosition(10, 15, 0.5, 93);
+
+                //extend to outtake
+                extensionPID(400, 200, 0.5);
+
+            }
+
+            //middle
+            if(location == 1 )
+            {
+                //drop position
+                driveToPosition(30, 6, 0.8, 180);
+                driveToPosition(3.5, 16, 0.7, 90, 2);
+                Thread.sleep(1000);
+
+
+                deposit(400, 0.1);
+                Thread.sleep(500);
+
+                drop();
+                Thread.sleep(1000);
+                reset(true, false);
+
+
+                //outtake position
+                driveToPosition(10, 20, 0.5, 93);
+
+                //extend to outtake
+                extensionPID(500, 250, 0.5);
+            }
+
+            // right
+
+            if(location == 2 )
+            {
+                //drop position
+                driveToPosition(30, 6, 0.8, 180);
+                driveToPosition(3.5, 25, 0.7, 90, 2);
+                Thread.sleep(1000);
+
+                deposit(400, 0.1);
+                Thread.sleep(500);
+
+                drop();
+                Thread.sleep(1000);
+                reset(true, false);
+
+                //outtake position
+                driveToPosition(10, 15, 0.5, 93);
+
+                //extend to outtake
+                extensionPID(600, 300, 0.5);
+
+            }
+
+            Thread.sleep(100);
+            intake(-0.175);
+
+            reset(false, true);
+
+            cycles("blue", 2);
         }
-
-        // right
-
-        if(location == 2 )
-        {
-            //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 25, 0.7, 90, 2);
-            Thread.sleep(1000);
-
-            deposit(400, 0.1);
-            Thread.sleep(500);
-
-            drop();
-            Thread.sleep(1000);
-            reset();
-
-            //outtake position
-            driveToPosition(41, 19, 0.5, 93);
-
-        }
-
-        Thread.sleep(1000);
-
-        intake(-0.175);
-        Thread.sleep(5000);
-        intake(0);
 
 
         //park
+
+        driveToPosition(10, -10, 0.6, 90);
         driveToPosition(5, -10, 0.6, 90);
 
 

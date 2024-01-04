@@ -20,7 +20,7 @@ public class RedDepositSide2Plus0 extends UpliftAutoImpl
 
     @Override
     public void initAction() throws InterruptedException {
-        robot.getGrabber().setPosition(robot.grabberClosePos);
+        robot.getGrabber().setPosition(robot.grabberClose1);
 
         Thread.sleep(2000);
 
@@ -51,7 +51,7 @@ public class RedDepositSide2Plus0 extends UpliftAutoImpl
 
             drop();
             Thread.sleep(1000);
-            reset();
+            reset(true, false);
 
 
             //outtake position
@@ -73,7 +73,7 @@ public class RedDepositSide2Plus0 extends UpliftAutoImpl
 
             drop();
             Thread.sleep(1000);
-            reset();
+            reset(true, false);
 
 
             //outtake position
@@ -94,7 +94,7 @@ public class RedDepositSide2Plus0 extends UpliftAutoImpl
 
             drop();
             Thread.sleep(1000);
-            reset();
+            reset(true, false);
 
 
             //outtake position

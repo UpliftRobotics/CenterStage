@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.Core.main;
 import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.CLOCKWISE;
 import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.COUNTER_CLOCKWISE;
 import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.QUICKEST_DIRECTION;
+import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.blueLeftStack;
+import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.redRightStack;
 import static org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath.atan2UL;
 import static java.lang.Math.PI;
 import static java.lang.Math.abs;
@@ -308,11 +310,11 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
     public void drop() throws InterruptedException
     {
-        robot.getGrabber().setPosition(robot.grabberOpenPos);
-
+        robot.getGrabber().setPosition(robot.grabberOpen);
     }
 
-    public void intake(double power) throws InterruptedException {
+    public void intake(double power) throws InterruptedException
+    {
         double velocity = power;
 
         if(velocity > 0)
@@ -331,11 +333,11 @@ public class UpliftAutoImpl extends UpliftAuto {
             intakeTimer.startTime();
             double startTime = intakeTimer.seconds();
 
-            while(((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2)) && (intakeTimer.seconds() - startTime < 3))
+            while(((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2)) && (intakeTimer.seconds() - startTime < 3))
             {
                 robot.getIntake().setPower(velocity);
             }
-            while((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2))
+            while((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2))
             {
                 velocity *= 1.1;
                 robot.getIntake().setPower(velocity);
@@ -367,6 +369,8 @@ public class UpliftAutoImpl extends UpliftAuto {
                 double slowdownFactor = remainingDistance / realSlowDownDist;
                 double slowedPower = minPower + (extensionPower - minPower) * slowdownFactor;
 
+//                double slowedPower = Math.max(minPower + (extensionPower - minPower) * slowdownFactor, extensionPower / 2);
+
                 // Set the slowed power to extension
                 robot.getExtension().setPower(slowedPower);
             }
@@ -374,32 +378,131 @@ public class UpliftAutoImpl extends UpliftAuto {
         }
     }
 
-    public void reset() throws InterruptedException
+    public void reset(boolean slidesDown, boolean extensionIn) throws InterruptedException
     {
-        robot.getGrabber().setPosition(robot.grabberOpenPos);
+        robot.getGrabber().setPosition(robot.grabberOpen);
 
         Thread.sleep(200);
-        robot.getArmLeft().setPosition(robot.armLeftPast);
-        robot.getArmRight().setPosition(robot.armRightPast);
-        Thread.sleep(600);
-        robot.getDepositWrist().setPosition(robot.depositWristGrab);
+
+        robot.getDepositWrist().setPosition(robot.depositWristStore);
+
+        Thread.sleep(200);
+
+        robot.getArmLeft().setPosition(robot.armLeftStore);
+        robot.getArmRight().setPosition(robot.armLeftStore);
+
+        Thread.sleep(200);
+
+        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
+        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
+
+        Thread.sleep(200);
+
+        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+
         Thread.sleep(500);
-        robot.getArmLeft().setPosition(robot.armLeftGrab);
-        robot.getArmRight().setPosition(robot.armRightGrab);
 
-        Thread.sleep(2000);
-
-        while(robot.getSlideRight().getCurrentPosition() > 0)
+        if(slidesDown)
         {
+            while(robot.getSlideRight().getCurrentPosition() > 0)
+            {
 
-            //negative power moves slides up
-            robot.getSlideRight().setPower(0.001);
-            robot.getSlideLeft().setPower(0.001);
+                //negative power moves slides up
+                robot.getSlideRight().setPower(0.001);
+                robot.getSlideLeft().setPower(0.001);
 
+            }
+
+            robot.getSlideLeft().setPower(0);
+            robot.getSlideRight().setPower(0);
         }
 
-        robot.getSlideLeft().setPower(0);
-        robot.getSlideRight().setPower(0);
+        if(extensionIn)
+        {
+            while(robot.getExtension().getCurrentPosition() > 0)
+            {
+
+                robot.getSlideRight().setPower(-0.1);
+
+            }
+
+            robot.getExtension().setPower(0);
+        }
+
+    }
+
+    public void cycles(String color, int numCycles) throws InterruptedException
+    {
+
+        double[] leftStackPos;
+        leftStackPos = new double[numCycles];
+
+        leftStackPos[0] = robot.intakeArmLeftStack5;
+        leftStackPos[1] = robot.intakeArmLeftStack4;
+        leftStackPos[2] = robot.intakeArmLeftStack3;
+        leftStackPos[3] = robot.intakeArmLeftStack2;
+        leftStackPos[4] = robot.intakeArmLeftGround;
+
+        double[] rightStackPos;
+        rightStackPos = new double[numCycles];
+
+        rightStackPos[0] = robot.intakeArmRightStack5;
+        rightStackPos[1] = robot.intakeArmRightStack4;
+        rightStackPos[2] = robot.intakeArmRightStack3;
+        rightStackPos[3] = robot.intakeArmRightStack2;
+        rightStackPos[4] = robot.intakeArmRightGround;
+
+        for(int i = 0; i < numCycles; i++)
+        {
+            //goes to intake position
+            if(color.equals("blue"))
+            {
+                driveToPosition(blueLeftStack.x, blueLeftStack.y, 0.5, blueLeftStack.angle);
+            }
+            else if (color.equals("red"))
+            {
+                driveToPosition(redRightStack.x, redRightStack.y, 0.5, redRightStack.angle);
+            }
+
+            //sets left and right intake arm positions
+            robot.getIntakeArmLeft().setPosition(leftStackPos[i]);
+            robot.getIntakeArmRight().setPosition(rightStackPos[i]);
+
+            Thread.sleep(200);
+
+            //extends to stack
+            extensionPID(600, 300, 0.5);
+
+            //sets roller position
+            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+
+            //intakes pixels
+            intake(0.2);
+
+            //pulls extension back in
+            reset(false, true);
+
+            //goes to deposit position
+            if(color.equals("blue"))
+            {
+                driveToPosition(3.5, 25, 0.7, 90, 2);
+            }
+            else if (color.equals("red"))
+            {
+                driveToPosition(4, 119, 0.7, 90);
+            }
+            Thread.sleep(1000);
+
+            //drops pixel
+            deposit(400, 0.1);
+            Thread.sleep(500);
+            drop();
+
+            Thread.sleep(500);
+
+            //resets slides
+            reset(true, false);
+        }
     }
 
 

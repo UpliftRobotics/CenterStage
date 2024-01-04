@@ -20,7 +20,7 @@ public class RedAudienceSide2Plus0 extends UpliftAutoImpl
 
     @Override
     public void initAction() throws InterruptedException {
-        robot.getGrabber().setPosition(robot.grabberClosePos);
+        robot.getGrabber().setPosition(robot.grabberClose1);
 
         Thread.sleep(2000);
 

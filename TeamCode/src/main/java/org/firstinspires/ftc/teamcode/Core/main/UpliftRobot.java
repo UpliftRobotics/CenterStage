@@ -73,13 +73,13 @@ public class UpliftRobot
     //0.0275
     //1.37480
 
-    public static final Point blueLeftStack = new Point(67.5, 70);
-    public static final Point blueMiddleStack = new Point(67.5, 70);
-    public static final Point blueRightStack = new Point(67.5, 70);
+    public static final Point blueLeftStack = new Point(50, 50, 93);
+    public static final Point blueMiddleStack = new Point(0, 0, 0);
+    public static final Point blueRightStack = new Point(0, 0, 0);
 
-    public static final Point redLeftStack = new Point(67.5, 70);
-    public static final Point redMiddleStack = new Point(67.5, 70);
-    public static final Point redRightStack = new Point(67.5, 70);
+    public static final Point redLeftStack = new Point(0, 0, 0);
+    public static final Point redMiddleStack = new Point(0, 0, 0);
+    public static final Point redRightStack = new Point(67.5, 70, 93);
 
     // direction constants
     public static final int CLOCKWISE = 1;
@@ -113,9 +113,6 @@ public class UpliftRobot
     public double depositWristStore = .21;
     public double depositWristTransfer = .45;
     public double depositWristDrop = 0;
-
-    public double grabberOpenPos = 0;
-    public double grabberClosePos = 0;
 
     public double frontRollerStore = 1;
     public double frontRollerGround = .5;

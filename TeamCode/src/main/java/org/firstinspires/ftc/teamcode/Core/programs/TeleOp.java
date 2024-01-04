@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.Core.programs;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
+import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread2;
 import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
@@ -17,8 +18,12 @@ public class TeleOp extends UpliftTele {
         Odometry odom;
 
 
-        DriveThread driverThread;
+        DriveThread driveThread;
+
+        DriveThread2 driveThread2;
         OperatorThread operatorThread;
+
+
 
         @Override
         public void initHardware()
@@ -27,13 +32,16 @@ public class TeleOp extends UpliftTele {
             odom = robot.odometry;
 
             createDriveThread(robot);
+            createDriveThread2(robot);
             createOperatorThread(robot);
         }
 
         @Override
         public void initAction() {
-                driverThread.start();
+                driveThread.start();
+                driveThread2.start();
                 operatorThread.start();
+
                 odom.setOdometryPosition(0, 0, 0);
 
 
@@ -43,28 +51,28 @@ public class TeleOp extends UpliftTele {
 //sleep(20000);
 
 
-                robot.getDepositWrist().setPosition(robot.depositWristDrop);
-                sleep(300);
-
-                robot.getGrabber().setPosition(robot.grabberOpenPos);
-
-                robot.getArmRight().setPosition(robot.armRightPast);
-                robot.getArmLeft().setPosition(robot.armLeftPast);
-                sleep(500);
-
-                robot.getDepositWrist().setPosition(robot.depositWristGrab);
-                sleep(500);
-
-                robot.getArmRight().setPosition(robot.armRightGrab);
-                robot.getArmLeft().setPosition(robot.armLeftGrab);
-
-                robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-                robot.getPlane().setPosition(1);
+//                robot.getDepositWrist().setPosition(robot.depositWristDrop);
+//                sleep(300);
+//
+//                robot.getGrabber().setPosition(robot.grabberOpenPos);
+//
+//                robot.getArmRight().setPosition(robot.armRightPast);
+//                robot.getArmLeft().setPosition(robot.armLeftPast);
+//                sleep(500);
+//
+//                robot.getDepositWrist().setPosition(robot.depositWristGrab);
+//                sleep(500);
+//
+//                robot.getArmRight().setPosition(robot.armRightGrab);
+//                robot.getArmLeft().setPosition(robot.armLeftGrab);
+//
+//                robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//
+//                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//                robot.getPlane().setPosition(1);
 
         }
 
@@ -79,14 +87,23 @@ public class TeleOp extends UpliftTele {
         @Override
         public void exit()
         {
-                driverThread.end();
+                driveThread.end();
+                driveThread2.end();
                 operatorThread.end();
         }
         public void createDriveThread(UpliftRobot robot1)
         {
 
-                driverThread = new DriveThread(robot1);
-                telemetry.addData("Driver Thread started", driverThread.toString());
+                driveThread = new DriveThread(robot1);
+                telemetry.addData("Driver Thread started", driveThread.toString());
+
+        }
+
+        public void createDriveThread2(UpliftRobot robot1)
+        {
+
+                driveThread2 = new DriveThread2(robot1);
+                telemetry.addData("Driver Thread started", driveThread2.toString());
 
         }
 
