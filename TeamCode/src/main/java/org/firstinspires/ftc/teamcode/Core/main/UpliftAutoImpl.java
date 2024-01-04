@@ -308,9 +308,21 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getSlideRight().setPower(0);
 
     }
-    public void drop() throws InterruptedException
+    public void claw(String instance) throws InterruptedException
     {
-        robot.getGrabber().setPosition(robot.grabberOpen);
+        if(instance.equals("open"))
+        {
+            robot.getGrabber().setPosition(robot.grabberOpen);
+        }
+        else if (instance.equals("close1"))
+        {
+            robot.getGrabber().setPosition(robot.grabberClose1);
+        }
+        else if(instance.equals("close2"))
+        {
+            robot.getGrabber().setPosition(robot.grabberClose2);
+        }
+
     }
 
     public void intake(double power) throws InterruptedException
@@ -496,7 +508,7 @@ public class UpliftAutoImpl extends UpliftAuto {
             //drops pixel
             deposit(400, 0.1);
             Thread.sleep(500);
-            drop();
+            claw("close2");
 
             Thread.sleep(500);
 

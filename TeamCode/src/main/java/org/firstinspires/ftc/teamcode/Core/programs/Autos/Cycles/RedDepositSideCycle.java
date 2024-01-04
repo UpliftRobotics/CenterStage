@@ -56,7 +56,7 @@ public class RedDepositSideCycle extends UpliftAutoImpl
             Thread.sleep(500);
 
 
-            drop();
+            claw("open");
             Thread.sleep(1000);
             reset(true, false);
 
@@ -78,7 +78,7 @@ public class RedDepositSideCycle extends UpliftAutoImpl
             deposit(400, 0.1);
             Thread.sleep(500);
 
-            drop();
+            claw("open");
             Thread.sleep(1000);
             reset(true, false);
 
@@ -99,7 +99,7 @@ public class RedDepositSideCycle extends UpliftAutoImpl
             deposit(400, 0.1);
             Thread.sleep(500);
 
-            drop();
+            claw("open");
             Thread.sleep(1000);
             reset(true, false);
 
