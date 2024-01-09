@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@Autonomous(name = "Blue Deposit Side Cycle", group = "Opmodes")
+@Autonomous(name = "Red Deposit Side Cycle", group = "Opmodes")
 public class RedDepositSideCycle extends UpliftAutoImpl
 {
     Odometry odom;

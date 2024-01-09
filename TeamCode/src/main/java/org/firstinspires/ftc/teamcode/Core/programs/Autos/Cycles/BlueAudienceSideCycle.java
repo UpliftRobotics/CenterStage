@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
 
 
-@Autonomous(name = "Blue Deposit Side Cycle", group = "Opmodes")
+@Autonomous(name = "Blue Audience Side Cycle", group = "Opmodes")
 public class BlueAudienceSideCycle extends UpliftAutoImpl
 {
     Odometry odom;
@@ -62,7 +62,7 @@ public class BlueAudienceSideCycle extends UpliftAutoImpl
                 Thread.sleep(500);
 
 
-                drop();
+//                drop();
                 Thread.sleep(1000);
                 reset(true, false);
 
@@ -87,7 +87,7 @@ public class BlueAudienceSideCycle extends UpliftAutoImpl
                 deposit(400, 0.1);
                 Thread.sleep(500);
 
-                drop();
+//                drop();
                 Thread.sleep(1000);
                 reset(true, false);
 
@@ -111,7 +111,7 @@ public class BlueAudienceSideCycle extends UpliftAutoImpl
                 deposit(400, 0.1);
                 Thread.sleep(500);
 
-                drop();
+//                drop();
                 Thread.sleep(1000);
                 reset(true, false);
 

@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@Autonomous(name = "Blue Deposit Side 2 + 0", group = "Opmodes")
+@Autonomous(name = "Blue Audience Side 2 + 0", group = "Opmodes")
 public class BlueAudienceSide2Plus0 extends UpliftAutoImpl
 {
     Odometry odom;

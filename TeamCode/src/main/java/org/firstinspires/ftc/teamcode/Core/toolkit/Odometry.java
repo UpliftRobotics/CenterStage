@@ -23,9 +23,9 @@ public class Odometry implements Runnable {
     public Odometry(UpliftRobot robot) {
         t = new Thread(this);
         this.robot = robot;
-        this.leftEncoder = robot.getLeftFront();
-        this.rightEncoder = robot.getRightFront();
-        this.centerEncoder = robot.getRightBack();
+        this.leftEncoder = robot.getFrontLeft();
+        this.rightEncoder = robot.getFrontRight();
+        this.centerEncoder = robot.getBackRight();
         this.opMode = robot.opMode;
         t.start();
     }

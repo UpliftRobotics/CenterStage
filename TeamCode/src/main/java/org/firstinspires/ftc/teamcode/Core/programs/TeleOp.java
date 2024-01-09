@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Core.programs;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
-import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread2;
+//import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread2;
 import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
@@ -20,7 +20,7 @@ public class TeleOp extends UpliftTele {
 
         DriveThread driveThread;
 
-        DriveThread2 driveThread2;
+//        DriveThread2 driveThread2;
         OperatorThread operatorThread;
 
 
@@ -32,17 +32,31 @@ public class TeleOp extends UpliftTele {
             odom = robot.odometry;
 
             createDriveThread(robot);
-            createDriveThread2(robot);
+//            createDriveThread2(robot);
             createOperatorThread(robot);
         }
 
         @Override
-        public void initAction() {
+        public void initAction() throws InterruptedException {
                 driveThread.start();
-                driveThread2.start();
+//                driveThread2.start();
                 operatorThread.start();
 
                 odom.setOdometryPosition(0, 0, 0);
+
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+                robot.getArmLeft().setPosition(robot.armLeftReset);
+                robot.getArmRight().setPosition(robot.armRightReset);
+                robot.getDepositWrist().setPosition(robot.depositWristStore);
+                robot.getGrabber().setPosition(robot.grabberClose1);
+
+                Thread.sleep(5000);
+
+                robot.getArmLeft().setPosition(robot.armLeftDrop);
+                robot.getArmRight().setPosition(robot.armRightDrop);
+                robot.getDepositWrist().setPosition(robot.depositWristDrop);
 
 
 //
@@ -88,7 +102,7 @@ public class TeleOp extends UpliftTele {
         public void exit()
         {
                 driveThread.end();
-                driveThread2.end();
+//                driveThread2.end();
                 operatorThread.end();
         }
         public void createDriveThread(UpliftRobot robot1)
@@ -99,13 +113,13 @@ public class TeleOp extends UpliftTele {
 
         }
 
-        public void createDriveThread2(UpliftRobot robot1)
-        {
-
-                driveThread2 = new DriveThread2(robot1);
-                telemetry.addData("Driver Thread started", driveThread2.toString());
-
-        }
+//        public void createDriveThread2(UpliftRobot robot1)
+//        {
+//
+//                driveThread2 = new DriveThread2(robot1);
+//                telemetry.addData("Driver Thread started", driveThread2.toString());
+//
+//        }
 
         public void createOperatorThread(UpliftRobot robot1) {
 
