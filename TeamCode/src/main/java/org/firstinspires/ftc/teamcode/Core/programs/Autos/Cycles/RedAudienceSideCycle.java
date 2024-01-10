@@ -23,16 +23,16 @@ public class RedAudienceSideCycle extends UpliftAutoImpl
     @Override
     public void initAction() throws InterruptedException {
 
-        robot.getGrabber().setPosition(robot.grabberClose1);
+//        robot.getGrabber().setPosition(robot.grabberClose1);
+//
+//        Thread.sleep(2000);
+//
+//        robot.getArmLeft().setPosition(0.7);
+//        robot.getArmRight().setPosition(0.3);
+//
+//        robot.getDepositWrist().setPosition(0.6);
 
-        Thread.sleep(2000);
-
-        robot.getArmLeft().setPosition(0.7);
-        robot.getArmRight().setPosition(0.3);
-
-        robot.getDepositWrist().setPosition(0.6);
-
-        robot.webcam.setPipeline(robot.pipelineBlueDepositSide);
+        robot.webcam.setPipeline(robot.pipelineRedAudienceSide);
 
 
     }
@@ -40,7 +40,7 @@ public class RedAudienceSideCycle extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
-        int location = robot.pipelineBlueDepositSide.location;
+        int location = robot.pipelineRedAudienceSide.location;
         odom.setOdometryPosition(48, 0, 180);
 
         //left

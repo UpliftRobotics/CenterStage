@@ -23,14 +23,16 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
     @Override
     public void initAction() throws InterruptedException {
 
-        robot.getGrabber().setPosition(robot.grabberClose1);
+        claw("close2");
 
-        Thread.sleep(2000);
-
-        robot.getArmLeft().setPosition(0.7);
-        robot.getArmRight().setPosition(0.3);
-
-        robot.getDepositWrist().setPosition(0.6);
+//        robot.getGrabber().setPosition(robot.grabberClose1);
+//
+//        Thread.sleep(2000);
+//
+//        robot.getArmLeft().setPosition(0.7);
+//        robot.getArmRight().setPosition(0.3);
+//
+//        robot.getDepositWrist().setPosition(0.6);
 
         robot.webcam.setPipeline(robot.pipelineBlueDepositSide);
 

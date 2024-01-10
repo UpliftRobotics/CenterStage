@@ -25,8 +25,8 @@ public class CenterStageBlueFar extends OpenCvPipeline {
             new Point(320, 120));
 
     static final Rect MIDDLE_ROI = new Rect(
-            new Point(80, 60),
-            new Point(160,120));
+            new Point(110, 60),
+            new Point(190,120));
 
     public CenterStageBlueFar(Telemetry t) {
         telemetry = t;

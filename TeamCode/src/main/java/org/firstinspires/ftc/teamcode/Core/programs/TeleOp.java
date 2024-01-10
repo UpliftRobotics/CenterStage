@@ -44,19 +44,19 @@ public class TeleOp extends UpliftTele {
 
                 odom.setOdometryPosition(0, 0, 0);
 
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-                robot.getArmLeft().setPosition(robot.armLeftReset);
-                robot.getArmRight().setPosition(robot.armRightReset);
-                robot.getDepositWrist().setPosition(robot.depositWristStore);
-                robot.getGrabber().setPosition(robot.grabberClose1);
-
-                Thread.sleep(5000);
-
-                robot.getArmLeft().setPosition(robot.armLeftDrop);
-                robot.getArmRight().setPosition(robot.armRightDrop);
-                robot.getDepositWrist().setPosition(robot.depositWristDrop);
+//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+//                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+//                robot.getArmLeft().setPosition(robot.armLeftReset);
+//                robot.getArmRight().setPosition(robot.armRightReset);
+//                robot.getDepositWrist().setPosition(robot.depositWristStore);
+//                robot.getGrabber().setPosition(robot.grabberClose1);
+//
+//                Thread.sleep(5000);
+//
+//                robot.getArmLeft().setPosition(robot.armLeftDrop);
+//                robot.getArmRight().setPosition(robot.armRightDrop);
+//                robot.getDepositWrist().setPosition(robot.depositWristDrop);
 
 
 //
@@ -94,8 +94,8 @@ public class TeleOp extends UpliftTele {
 
         public void bodyLoop() throws InterruptedException
         {
-                telemetry.addData("color: ", robot.getPixelDetectorRight().alpha());
-                telemetry.update();
+//                telemetry.addData("color: ", robot.getPixelDetectorRight().alpha());
+//                telemetry.update();
         }
 
         @Override

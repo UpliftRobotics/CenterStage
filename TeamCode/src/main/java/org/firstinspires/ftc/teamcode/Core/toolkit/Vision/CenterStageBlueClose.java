@@ -21,8 +21,8 @@ public class CenterStageBlueClose extends OpenCvPipeline {
 //            new Point(60, 170));
 
     static final Rect LEFT_ROI = new Rect(
-            new Point(30, 60),
-            new Point(90, 120));
+            new Point(50, 60),
+            new Point(110, 120));
 
     static final Rect MIDDLE_ROI = new Rect(
             new Point(180, 60),

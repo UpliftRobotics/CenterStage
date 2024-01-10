@@ -18,12 +18,12 @@ public class CenterStageRedClose extends OpenCvPipeline {
     public int location = -1;
 
     static final Rect MIDDLE_ROI = new Rect(
-            new Point(60, 100),
-            new Point(120, 170));
+            new Point(120, 60),
+            new Point(200, 120));
 
     static final Rect RIGHT_ROI = new Rect(
-            new Point(240, 100),
-            new Point(320, 170));
+            new Point(240, 60),
+            new Point(320, 120));
 
     public CenterStageRedClose(Telemetry t) {
         telemetry = t;

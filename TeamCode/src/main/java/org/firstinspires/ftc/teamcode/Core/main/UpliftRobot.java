@@ -145,8 +145,8 @@ public class UpliftRobot
     public double armRightReset = .5;
 
     public double grabberClose1 = .4;
-    public double grabberClose2 = .5;
-    public double grabberOpen = 1;
+    public double grabberClose2 = .55;
+    public double grabberOpen = 0.5;
 
     public double twisterPos1 = 0;
     public double twisterPos2 = 0;
@@ -351,7 +351,7 @@ public class UpliftRobot
 
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
-               webcam.setPipeline(pipelineBlueDepositSide);
+               webcam.setPipeline(pipelineBlueAudienceSide);
 //               telemetry.addData("pipelineBlueDepositSide", webcam.getCurrentPipelineMaxFps());
 
 //               if(!pipelineBlueDepositSide.blueClose)
