@@ -21,12 +21,12 @@ public class CenterStageBlueClose extends OpenCvPipeline {
 //            new Point(60, 170));
 
     static final Rect LEFT_ROI = new Rect(
-            new Point(0, 100),
-            new Point(60, 170));
+            new Point(30, 60),
+            new Point(90, 120));
 
     static final Rect MIDDLE_ROI = new Rect(
-            new Point(150, 100),
-            new Point(230, 170));
+            new Point(180, 60),
+            new Point(260, 120));
 
     public CenterStageBlueClose(Telemetry t) {
         telemetry = t;
@@ -87,7 +87,6 @@ public class CenterStageBlueClose extends OpenCvPipeline {
         else if(0.2 > middleValue && 0.2 > leftValue) {
             location = 2;
              blueClose = true;
-
          }
 
         return input;

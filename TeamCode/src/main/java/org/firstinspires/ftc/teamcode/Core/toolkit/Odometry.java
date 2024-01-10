@@ -66,7 +66,7 @@ public class Odometry implements Runnable {
 
         robot.worldX += ((((deltaLeftDistance + deltaRightDistance) / 2.0)) * Math.sin(Math.toRadians(robot.worldAngle + (0.5 * changeInRobotOrientation)))) + (deltaHorizontal * Math.cos(Math.toRadians(robot.worldAngle + (0.5 * changeInRobotOrientation))));
 
-        robot.worldY += (1.00572706 * ((((deltaLeftDistance + deltaRightDistance) / 2.0)) * Math.cos(Math.toRadians(robot.worldAngle + (0.5 * changeInRobotOrientation)))) - (deltaHorizontal * Math.sin(Math.toRadians(robot.worldAngle + (0.5 * changeInRobotOrientation)))));
+        robot.worldY += ((((deltaLeftDistance + deltaRightDistance) / 2.0)) * Math.cos(Math.toRadians(robot.worldAngle + (0.5 * changeInRobotOrientation)))) - (deltaHorizontal * Math.sin(Math.toRadians(robot.worldAngle + (0.5 * changeInRobotOrientation))));
 
         robot.rawAngle = robot.rawAngle + changeInRobotOrientation;
         robot.worldAngle = UpliftMath.angleRestrictions(robot.rawAngle);

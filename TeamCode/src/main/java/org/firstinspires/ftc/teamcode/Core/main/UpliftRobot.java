@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
@@ -347,34 +349,38 @@ public class UpliftRobot
 
                //changes this before each match depending on color and side
 
-//               webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+               webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
                webcam.setPipeline(pipelineBlueDepositSide);
+//               telemetry.addData("pipelineBlueDepositSide", webcam.getCurrentPipelineMaxFps());
 
-
-               if(!pipelineBlueDepositSide.blueClose)
-               {
-                   webcam.setPipeline(pipelineBlueAudienceSide);
-
-                   if (!pipelineBlueAudienceSide.blueFar)
-                   {
-                       webcam.setPipeline(pipelineRedDepositSide);
-
-                       if(!pipelineRedDepositSide.redClose)
-                       {
-                           webcam.setPipeline(pipelineRedAudienceSide);
-
-                       }
-
-                   }
-
-               }
-
+//               if(!pipelineBlueDepositSide.blueClose)
+//               {
+//                   webcam.setPipeline(pipelineBlueAudienceSide);
+////                   telemetry.addData("pipelineBlueAudienceSide", webcam.getCurrentPipelineMaxFps());
+//
+//
+//                   if (!pipelineBlueAudienceSide.blueFar)
+//                   {
+//                       webcam.setPipeline(pipelineRedDepositSide);
+//
+//                       if(!pipelineRedDepositSide.redClose)
+//                       {
+//                           webcam.setPipeline(pipelineRedAudienceSide);
+//
+//                       }
+//
+//                   }
+//
+//               }
+//
             }
 
             @Override
 
-           public void onError(int errorCode) {
+           public void onError(int errorCode)
+            {
+
             }
         });
     }
