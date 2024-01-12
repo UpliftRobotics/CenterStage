@@ -116,23 +116,23 @@ public class UpliftRobot
     public double depositWristTransfer = .45;
     public double depositWristDrop = .3;
 
-    public double frontRollerStore = 1;
+    public double frontRollerStore = 0.9;
     public double frontRollerGround = .5;
     public double frontRollerStack = .6;
 
-    public double intakeArmLeftStore = 1;
-    public double intakeArmLeftStack5 = .4;
-    public double intakeArmLeftStack4 = .3;
-    public double intakeArmLeftStack3 = .2;
-    public double intakeArmLeftStack2 = .1;
-    public double intakeArmLeftGround = .1;
+    public double intakeArmLeftStore = 0;
+    public double intakeArmLeftStack5 = .6;
+    public double intakeArmLeftStack4 = .7;
+    public double intakeArmLeftStack3 = .8;
+    public double intakeArmLeftStack2 = .9;
+    public double intakeArmLeftGround = .9;
 
-    public double intakeArmRightStore = 0;
-    public double intakeArmRightStack5 = .6;
-    public double intakeArmRightStack4 = .7;
-    public double intakeArmRightStack3 = .8;
-    public double intakeArmRightStack2 = .9;
-    public double intakeArmRightGround = .9;
+    public double intakeArmRightStore = 1;
+    public double intakeArmRightStack5 = .4;
+    public double intakeArmRightStack4 = .3;
+    public double intakeArmRightStack3 = .2;
+    public double intakeArmRightStack2 = .1;
+    public double intakeArmRightGround = .1;
 
     public double armLeftStore = 1;
     public double armLeftTransfer = .1;
@@ -340,7 +340,7 @@ public class UpliftRobot
          @Override
            public void onOpened()
            {
-             webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
+//             webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
 
              pipelineBlueDepositSide = new CenterStageBlueClose(opMode.telemetry);
              pipelineRedDepositSide = new CenterStageRedClose(opMode.telemetry);
@@ -351,13 +351,11 @@ public class UpliftRobot
 
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
-               webcam.setPipeline(pipelineBlueAudienceSide);
-//               telemetry.addData("pipelineBlueDepositSide", webcam.getCurrentPipelineMaxFps());
+               webcam.setPipeline(pipelineBlueDepositSide);
 
 //               if(!pipelineBlueDepositSide.blueClose)
 //               {
 //                   webcam.setPipeline(pipelineBlueAudienceSide);
-////                   telemetry.addData("pipelineBlueAudienceSide", webcam.getCurrentPipelineMaxFps());
 //
 //
 //                   if (!pipelineBlueAudienceSide.blueFar)
@@ -373,8 +371,14 @@ public class UpliftRobot
 //                   }
 //
 //               }
-//
-            }
+//               opMode.telemetry.addData("blueClose:", pipelineBlueDepositSide.blueClose);
+//               opMode.telemetry.addData("blueFar:", pipelineBlueAudienceSide.blueFar);
+//               opMode.telemetry.addData("redClose:", pipelineRedDepositSide.redClose);
+//               opMode.telemetry.addData("redFar:", pipelineRedAudienceSide.redFar);
+//               opMode.telemetry.update();
+
+
+           }
 
             @Override
 

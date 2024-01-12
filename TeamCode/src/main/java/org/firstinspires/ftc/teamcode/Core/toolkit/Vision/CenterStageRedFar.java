@@ -18,12 +18,12 @@ public class CenterStageRedFar extends OpenCvPipeline {
     public int location = -1;
 
     static final Rect MIDDLE_ROI = new Rect(
-            new Point(120, 60),
-            new Point(200, 120));
+            new Point(200, 80),
+            new Point(205, 110));
 
     static final Rect LEFT_ROI = new Rect(
-            new Point(0, 60),
-            new Point(80, 120));
+            new Point(50, 60),
+            new Point(110, 120));
 
     public CenterStageRedFar(Telemetry t) {
         telemetry = t;
@@ -52,20 +52,23 @@ public class CenterStageRedFar extends OpenCvPipeline {
         middle.release();
         left.release();
 
-        //telemetry.addData("Left Raw Value", (int) Core.sumElems(left).val[0]);
-        telemetry.addData("Middle Raw Value", (int) Core.sumElems(middle).val[0]);
-        telemetry.addData("Right Raw Value", (int) Core.sumElems(left).val[0]);
-        //telemetry.addData("Left Percentage", Math.round(leftValue * 100) + "%");
-        telemetry.addData("Middle Percentage", Math.round(middleValue * 100) + "%");
-        telemetry.addData("Right Percentage", Math.round(leftValue * 100) + "%");
-
-        // Imgproc.rectangle(input, LEFT_ROI, new Scalar(0, 255, 0), 4);
+//        //telemetry.addData("Left Raw Value", (int) Core.sumElems(left).val[0]);
+//        telemetry.addData("Middle Raw Value", (int) Core.sumElems(middle).val[0]);
+//        telemetry.addData("Right Raw Value", (int) Core.sumElems(left).val[0]);
+//        //telemetry.addData("Left Percentage", Math.round(leftValue * 100) + "%");
+//        telemetry.addData("Middle Percentage", Math.round(middleValue * 100) + "%");
+//        telemetry.addData("Right Percentage", Math.round(leftValue * 100) + "%");
+//
+//        // Imgproc.rectangle(input, LEFT_ROI, new Scalar(0, 255, 0), 4);
         Imgproc.rectangle(input, MIDDLE_ROI, new Scalar(0, 255, 0), 4);
         Imgproc.rectangle(input, LEFT_ROI, new Scalar(0, 255, 0), 4);
-        //telemetry.addData("left", leftValue);
-        telemetry.addData("middle", middleValue);
-        telemetry.addData("right", leftValue);
+//        //telemetry.addData("left", leftValue);
+//        telemetry.addData("middle", middleValue);
+//        telemetry.addData("right", leftValue);
         telemetry.addData("location", location);
+
+        telemetry.addData("redFar: ", redFar);
+
         telemetry.update();
 
 

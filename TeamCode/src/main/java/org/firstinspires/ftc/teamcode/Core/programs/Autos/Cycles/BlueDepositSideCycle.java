@@ -43,7 +43,7 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
     public void body() throws InterruptedException
     {
         int location = robot.pipelineBlueDepositSide.location;
-        odom.setOdometryPosition(48, 0, 180);
+        odom.setOdometryPosition(48, 0, 0);
 
         if(!goPark)
         {
@@ -51,26 +51,26 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
             if(location == 0 || location == -1 )
             {
                 //drop position
-                driveToPosition(30, 6, 0.8, 180);
-                driveToPosition(3.5, 10, 0.7, 90, 2);
+                driveToPosition(43.07, 28.704, 0.5, 0);
+//                driveToPosition(3.5, 10, 0.7, 90, 2);
                 Thread.sleep(1000);
 
 
 
-                deposit(400, 0.1);
-                Thread.sleep(500);
-
-
-                claw("open");
-                Thread.sleep(1000);
-                reset(true, false);
-
-
-                //outtake position
-                driveToPosition(10, 15, 0.5, 93);
-
-                //extend to outtake
-                extensionPID(400, 200, 0.5);
+//                deposit(400, 0.1);
+//                Thread.sleep(500);
+//
+//
+//                claw("open");
+//                Thread.sleep(1000);
+//                reset(true, false);
+//
+//
+//                //outtake position
+//                driveToPosition(10, 15, 0.5, 93);
+//
+//                //extend to outtake
+//                extensionPID(400, 200, 0.5);
 
             }
 
@@ -124,19 +124,19 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
 
             }
 
-            Thread.sleep(100);
-            intake(-0.175);
-
-            reset(false, true);
-
-            cycles("blue", 2);
+//            Thread.sleep(100);
+//            intake(-0.175);
+//
+//            reset(false, true);
+//
+//            cycles("blue", 2);
         }
 
 
         //park
 
-        driveToPosition(10, -10, 0.6, 90);
-        driveToPosition(5, -10, 0.6, 90);
+//        driveToPosition(10, -10, 0.6, 90);
+//        driveToPosition(5, -10, 0.6, 90);
 
 
 

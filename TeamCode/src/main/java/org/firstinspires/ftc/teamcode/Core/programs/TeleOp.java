@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftTele;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TestTeleOp", group = "Opmodes")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp", group = "Opmodes")
 public class TeleOp extends UpliftTele {
 
         UpliftRobot robot;
@@ -42,7 +42,7 @@ public class TeleOp extends UpliftTele {
 //                driveThread2.start();
                 operatorThread.start();
 
-                odom.setOdometryPosition(0, 0, 0);
+                odom.setOdometryPosition(48, 0, 0);
 
 //                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
 //                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
