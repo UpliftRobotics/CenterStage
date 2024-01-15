@@ -111,47 +111,50 @@ public class UpliftRobot
 
 
 
-
-    public double depositWristStore = .21;
-    public double depositWristTransfer = .45;
+    public double depositWristStore = .18;
+    public double depositWristTransfer = .35;
     public double depositWristDrop = .3;
 
-    public double frontRollerStore = 0.9;
+    public double frontRollerStore = 0.85;
     public double frontRollerGround = .5;
     public double frontRollerStack = .6;
 
-    public double intakeArmLeftStore = 0;
+    public double intakeArmLeftStore = 0.03;
+
+    public double intakeArmLeftHold = .17;
     public double intakeArmLeftStack5 = .6;
     public double intakeArmLeftStack4 = .7;
     public double intakeArmLeftStack3 = .8;
     public double intakeArmLeftStack2 = .9;
     public double intakeArmLeftGround = .9;
 
-    public double intakeArmRightStore = 1;
+    public double intakeArmRightStore = .97;
+
+    public double intakeArmRightHold = .83;
     public double intakeArmRightStack5 = .4;
     public double intakeArmRightStack4 = .3;
     public double intakeArmRightStack3 = .2;
     public double intakeArmRightStack2 = .1;
     public double intakeArmRightGround = .1;
 
-    public double armLeftStore = 1;
-    public double armLeftTransfer = .1;
+    public double armLeftStore = 0.84;
+    public double armLeftTransfer = 0.78;
     public double armLeftDrop = .3;
     public double armLeftReset = .5;
 
-    public double armRightStore = 0;
-    public double armRightTransfer = .9;
+    public double armRightStore = 0.16;
+    public double armRightTransfer = 0.22;
     public double armRightDrop = .7;
     public double armRightReset = .5;
 
-    public double grabberClose1 = .4;
-    public double grabberClose2 = .55;
-    public double grabberOpen = 0.5;
+    public double grabberClose1 = .2;
+    public double grabberClose2 = .15;
+    public double grabberOpen = 0;
 
     public double twisterPos1 = 0;
     public double twisterPos2 = 0;
     public double twisterPos3 = 0;
-    public double twisterPos4 = 0;
+    public double twisterPos4 = .49;
     public double twisterPos5 = 0;
     public double twisterPos6 = 0;
     public double twisterPos7 = 0;
@@ -205,11 +208,11 @@ public class UpliftRobot
         intakeArmRight = hardwareMap.get(Servo.class, "intake_arm_right");
 
         twister = hardwareMap.get(Servo.class, "twister");
-        intakeRoller = hardwareMap.get(Servo.class, "intakeRoller");
+        intakeRoller = hardwareMap.get(Servo.class, "intake_roller");
 
         //sensors
-        pixelDetectorLeft = hardwareMap.get(ColorRangeSensor.class, "pixelDetectorLeft");
-        pixelDetectorRight = hardwareMap.get(ColorRangeSensor.class, "pixelDetectorRight");
+        pixelDetectorLeft = hardwareMap.get(ColorRangeSensor.class, "pixel_detector_left");
+        pixelDetectorRight = hardwareMap.get(ColorRangeSensor.class, "pixel_detector_right");
 
 
 

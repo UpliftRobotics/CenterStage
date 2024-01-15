@@ -25,8 +25,8 @@ public class CenterStageBlueClose extends OpenCvPipeline {
             new Point(110, 120));
 
     static final Rect MIDDLE_ROI = new Rect(
-            new Point(185, 80),
-            new Point(190, 110));
+            new Point(190, 80),
+            new Point(220, 110));
 
     public CenterStageBlueClose(Telemetry t) {
         telemetry = t;

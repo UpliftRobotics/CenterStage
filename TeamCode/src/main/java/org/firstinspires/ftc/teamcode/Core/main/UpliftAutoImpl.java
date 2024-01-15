@@ -92,6 +92,8 @@ public class UpliftAutoImpl extends UpliftAuto {
                 yDistanceToPoint = yPosition - robot.worldY;
                 distanceToPoint = hypot(xDistanceToPoint, yDistanceToPoint);
                 relativeAngle = toDegrees(UpliftMath.atan2UL(yDistanceToPoint, xDistanceToPoint)) - robot.worldAngle;
+                telemetry.addData("time", timer.seconds());
+                telemetry.update();
             }
             else
             {

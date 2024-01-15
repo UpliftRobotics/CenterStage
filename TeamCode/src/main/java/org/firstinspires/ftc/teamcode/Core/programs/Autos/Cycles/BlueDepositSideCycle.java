@@ -50,81 +50,73 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
             //left
             if(location == 0 || location == -1 )
             {
-                //drop position
-                driveToPosition(43.07, 28.704, 0.5, 0);
-//                driveToPosition(3.5, 10, 0.7, 90, 2);
-                Thread.sleep(1000);
 
+                //drop purple pixel position
+                driveToPosition(42, 28, 0.5, 0);
 
+                //drop yellow pixel position
+                driveToPosition(42, 15, 0.5, 0);
+                driveToPosition(7, 24, 0.5, 85);
 
 //                deposit(400, 0.1);
 //                Thread.sleep(500);
-//
-//
+
 //                claw("open");
-//                Thread.sleep(1000);
+//                Thread.sleep(500);
 //                reset(true, false);
-//
-//
-//                //outtake position
-//                driveToPosition(10, 15, 0.5, 93);
-//
-//                //extend to outtake
-//                extensionPID(400, 200, 0.5);
 
             }
 
             //middle
             if(location == 1 )
             {
-                //drop position
-                driveToPosition(30, 6, 0.8, 180);
-                driveToPosition(3.5, 16, 0.7, 90, 2);
-                Thread.sleep(1000);
+                //drop purple pixel position
+                driveToPosition(48, 32, 0.5, 0);
 
+                //drop yellow pixel position
+                driveToPosition(48, 19, 0.5, 0);
+                driveToPosition(7, 32, 0.5, 85);
 
-                deposit(400, 0.1);
-                Thread.sleep(500);
+//                deposit(400, 0.1);
+//                Thread.sleep(500);
 
+//                claw("open");
+//                Thread.sleep(500);
+//                reset(true, false);
 
-                claw("open");
-                Thread.sleep(1000);
-                reset(true, false);
-
-
-                //outtake position
-                driveToPosition(10, 20, 0.5, 93);
-
-                //extend to outtake
-                extensionPID(500, 250, 0.5);
             }
 
             // right
 
             if(location == 2 )
             {
-                //drop position
-                driveToPosition(30, 6, 0.8, 180);
-                driveToPosition(3.5, 25, 0.7, 90, 2);
-                Thread.sleep(1000);
-
-                deposit(400, 0.1);
-                Thread.sleep(500);
+                //drop purple pixel position
+                driveToPosition(48, 20, 0.5, 0);
+                driveToPosition(56, 28, 0.5, 50);
 
 
-                claw("open");
-                Thread.sleep(1000);
-                reset(true, false);
+                //drop yellow pixel position
+                driveToPosition(42, 14, 0.5, 50);
+                driveToPosition(6, 40, 0.5, 80);
 
-                //outtake position
-                driveToPosition(10, 15, 0.5, 93);
+//                deposit(400, 0.1);
+//                Thread.sleep(500);
 
-                //extend to outtake
-                extensionPID(600, 300, 0.5);
+//                claw("open");
+//                Thread.sleep(500);
+//                reset(true, false);
+
 
             }
 
-//            Thread.sleep(100);
+            Thread.sleep(1000);
+            driveToPosition(12, 58, 0.5, 80);
+
+            driveToPosition(36, 61, 0.5, 77);
+            driveToPosition(66, 62, 0.5, 75);
+
+
+
 //            intake(-0.175);
 //
 //            reset(false, true);
