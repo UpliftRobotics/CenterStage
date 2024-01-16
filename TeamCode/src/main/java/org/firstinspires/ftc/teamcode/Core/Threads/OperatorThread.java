@@ -34,11 +34,10 @@ public class OperatorThread extends Thread {
 //                intake();
                 slides();
                 deposit();
-                d1reset();
                 rightTwister();
                 leftTwister();
-                intakeHeight();
-                dropIntake();
+                intakeControl();
+                automaticPixel();
 
 
 
@@ -128,10 +127,14 @@ public class OperatorThread extends Thread {
         }
     }
 
+
+
+
+
     public void deposit() throws InterruptedException {
         if (robot.opMode.gamepad2.y)
             {
-                if (robot.depositStage == 0)// intake on the ground for pick up, move inside the robot
+                if (robot.depositStage == 0 || robot.depositStage == -1)// intake on the ground for pick up, move inside the robot
                 {
                     robot.getArmRight().setPosition(robot.armRightStore);
                 robot.getArmLeft().setPosition(robot.armLeftStore);
@@ -142,20 +145,24 @@ public class OperatorThread extends Thread {
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
                 robot.getIntakeRoller().setPosition(robot.frontRollerStore);
-
+                robot.getIntake().setPower(.8);
                 Thread.sleep(1000);
+                robot.getIntake().setPower(0);
                 robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
                 robot.getArmLeft().setPosition(robot.armLeftTransfer);
                 robot.getArmRight().setPosition(robot.armRightTransfer);
                 Thread.sleep(500);
                 robot.getGrabber().setPosition(robot.grabberClose2);
                 Thread.sleep(200);
-                robot.depositStage++;
+                robot.getIntake().setPower(-.5);
+                Thread.sleep(100);
+                robot.getIntake().setPower(0);
+                robot.depositStage = 1;
                 }
                 else if (robot.depositStage == 1) //intake is in the robot, transfer by grabbing the pixels and then sending the intake out
                 {
-                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
                 robot.getArmRight().setPosition(robot.armRightDrop);
                 robot.getArmLeft().setPosition(robot.armLeftDrop);
                 Thread.sleep(200);
@@ -172,76 +179,28 @@ public class OperatorThread extends Thread {
                    robot.getArmLeft().setPosition(robot.armLeftStore);
                    robot.getDepositWrist().setPosition(robot.depositWristStore);
                    robot.getTwister().setPosition(robot.twisterPos4);
-                   robot.depositStage = 0;
+                   Thread.sleep(1000);
+                   robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+                    robot.depositStage = 0;
                 }
             }
 
         }
 
     public void rightTwister() throws InterruptedException {
-        if (robot.opMode.gamepad2.right_bumper && robot.depositStage == 3) {
-            if(robot.getTwister().getPosition() == robot.twisterPos1) {
-                robot.getTwister().setPosition(robot.twisterPos2);
-                Thread.sleep(100);
-            }
-            else if(robot.getTwister().getPosition() == robot.twisterPos2) {
-                robot.getTwister().setPosition(robot.twisterPos3);
-                Thread.sleep(100);
-            }
-            else if(robot.getTwister().getPosition() == robot.twisterPos3) {
-                robot.getTwister().setPosition(robot.twisterPos4);
-                Thread.sleep(100);
-            }
-            else if(robot.getTwister().getPosition() == robot.twisterPos4) {
-                robot.getTwister().setPosition(robot.twisterPos5);
-                Thread.sleep(100);
-            }
-            else if(robot.getTwister().getPosition() == robot.twisterPos5) {
-                robot.getTwister().setPosition(robot.twisterPos6);
-                Thread.sleep(100);
-            }
-            else if(robot.getTwister().getPosition() == robot.twisterPos6) {
-                robot.getTwister().setPosition(robot.twisterPos7);
-                Thread.sleep(100);
-            }
-            else if(robot.getTwister().getPosition() == robot.twisterPos7) {
-                robot.getTwister().setPosition(robot.twisterPos1);
-                Thread.sleep(500);
-            }
+        if (robot.opMode.gamepad2.right_bumper && robot.depositStage == 2)
+        {
+          robot.getTwister().setPosition(robot.getTwister().getPosition() + .1);
+          Thread.sleep(200);
 
         }
     }
 
     public void leftTwister() throws InterruptedException{
-        if(robot.opMode.gamepad2.left_bumper && robot.depositStage == 3){
-            if (robot.getTwister().getPosition() == robot.twisterPos7) {
-               robot.getTwister().setPosition(robot.twisterPos6);
-               Thread.sleep(100);
-            }
-            if (robot.getTwister().getPosition() == robot.twisterPos6) {
-                robot.getTwister().setPosition(robot.twisterPos5);
-                Thread.sleep(100);
-            }
-            if (robot.getTwister().getPosition() == robot.twisterPos5) {
-                robot.getTwister().setPosition(robot.twisterPos4);
-                Thread.sleep(100);
-            }
-            if (robot.getTwister().getPosition() == robot.twisterPos4) {
-                robot.getTwister().setPosition(robot.twisterPos3);
-                Thread.sleep(100);
-            }
-            if (robot.getTwister().getPosition() == robot.twisterPos3) {
-                robot.getTwister().setPosition(robot.twisterPos2);
-                Thread.sleep(100);
-            }
-            if (robot.getTwister().getPosition() == robot.twisterPos2) {
-                robot.getTwister().setPosition(robot.twisterPos1);
-                Thread.sleep(100);
-            }
-            if (robot.getTwister().getPosition() == robot.twisterPos1) {
-                robot.getTwister().setPosition(robot.twisterPos7);
-                Thread.sleep(500);
-            }
+        if(robot.opMode.gamepad2.left_bumper && robot.depositStage == 2)
+        {
+            robot.getTwister().setPosition(robot.getTwister().getPosition() - .1);
+            Thread.sleep(200);
 
         }
     }
@@ -328,11 +287,36 @@ public class OperatorThread extends Thread {
 
 
 
-    public void reset() throws InterruptedException
-    {
+    public void intakeControl() throws InterruptedException {
+        if (robot.opMode.gamepad2.dpad_down) {
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+            robot.getIntake().setPower(.8);
+            Thread.sleep(400);
+            robot.getIntake().setPower(0);
+            robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+        }
+        if (robot.opMode.gamepad2.dpad_up)
+        {
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+            robot.getIntake().setPower(.8);
+            Thread.sleep(400);
+            robot.getIntake().setPower(0);
+            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+        }
+    }
 
+    public void automaticPixel()
+    {
+        if (robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2
+                && robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2
+                && robot.depositStage == 0)
+        {
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+            robot.depositStage = -1;
+        }
     }
 }
-
-
-

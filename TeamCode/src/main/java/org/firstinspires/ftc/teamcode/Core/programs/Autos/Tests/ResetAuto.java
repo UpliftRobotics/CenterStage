@@ -27,9 +27,9 @@ public class ResetAuto extends UpliftAutoImpl {
 //            robot.getIntake().setPower(0.1);
 //        }
 
-robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
+robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+robot.getIntakeRoller().setPosition(robot.frontRollerReset);
 robot.getGrabber().setPosition(robot.grabberOpen);
 robot.getArmLeft().setPosition(robot.armLeftReset);
 robot.getArmRight().setPosition(robot.armRightReset);
