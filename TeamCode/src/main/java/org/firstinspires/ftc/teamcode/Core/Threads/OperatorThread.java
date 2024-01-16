@@ -31,7 +31,7 @@ public class OperatorThread extends Thread {
     public void run() {
         while (!shutDown) {
             try {
-                intake();
+//                intake();
                 slides();
                 deposit();
                 d1reset();
@@ -74,13 +74,13 @@ public class OperatorThread extends Thread {
     }
 
     public void slides() {
-        double power = .6 * robot.opMode.gamepad2.right_stick_y;
+        double power = .8 * robot.opMode.gamepad2.right_stick_y;
         if (robot.opMode.gamepad2.right_bumper)
             power  = power * .05;
 
         // if going up stop from overextending
         if (power < 0.0) {
-            if (robot.getSlideRight().getCurrentPosition()  > 2800 || robot.getSlideLeft().getCurrentPosition() > 2800) {
+            if (robot.getSlideRight().getCurrentPosition()  < -2800 || robot.getSlideLeft().getCurrentPosition() < -2800) {
                 robot.getSlideLeft().setPower(0);
                 robot.getSlideRight().setPower(0);
             } else {
@@ -90,7 +90,7 @@ public class OperatorThread extends Thread {
         }
         // stop from overretracting
         else {
-            if (robot.getSlideRight().getCurrentPosition() < 30 || robot.getSlideLeft().getCurrentPosition() < 30) {
+            if (robot.getSlideRight().getCurrentPosition() > -30 || robot.getSlideLeft().getCurrentPosition() > -30) {
                 robot.getSlideLeft().setPower(0);
                 robot.getSlideRight().setPower(0);
             } else {
@@ -131,53 +131,48 @@ public class OperatorThread extends Thread {
     public void deposit() throws InterruptedException {
         if (robot.opMode.gamepad2.y)
             {
-                if (robot.depositStage == 0)// intkae on the ground for pick up, move inside the robot
+                if (robot.depositStage == 0)// intake on the ground for pick up, move inside the robot
                 {
-                    robot.getIntakeRoller().setPosition(robot.frontRollerStore);
-                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
-                    robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
-                    robot.getArmLeft().setPosition(robot.armLeftStore);
                     robot.getArmRight().setPosition(robot.armRightStore);
-                    robot.depositStage++;
-                    Thread.sleep(1000);
+                robot.getArmLeft().setPosition(robot.armLeftStore);
+                robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
+                robot.getTwister().setPosition(robot.twisterPos4);
+                robot.getGrabber().setPosition(robot.grabberOpen);
+
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
+                robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+
+                Thread.sleep(1000);
+                robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
+                robot.getArmLeft().setPosition(robot.armLeftTransfer);
+                robot.getArmRight().setPosition(robot.armRightTransfer);
+                Thread.sleep(500);
+                robot.getGrabber().setPosition(robot.grabberClose2);
+                Thread.sleep(200);
+                robot.depositStage++;
                 }
                 else if (robot.depositStage == 1) //intake is in the robot, transfer by grabbing the pixels and then sending the intake out
                 {
-                    //make sure that slides are in the robot
-                    robot.getArmLeft().setPosition(robot.armLeftTransfer);
-                    robot.getArmRight().setPosition(robot.armRightTransfer);
-                    Thread.sleep(100);
-                    robot.getIntake().setZeroPowerBehavior(FLOAT);
-                    robot.getGrabber().setPosition(robot.grabberClose2); // has to be able to change if we have 1 or 2
-                    Thread.sleep(150);
-                    // send the slides out like 4 inches
-                    robot.getIntake().setZeroPowerBehavior(BRAKE);
-                    robot.depositStage++;
-                    Thread.sleep(1000);
+                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+                robot.getArmRight().setPosition(robot.armRightDrop);
+                robot.getArmLeft().setPosition(robot.armLeftDrop);
+                Thread.sleep(200);
+                robot.getDepositWrist().setPosition(robot.depositWristDrop);
+                Thread.sleep(200);
+                robot.depositStage++;
+
                 }
                 else if (robot.depositStage == 2) //move the pixels to scoring posistion and retract the intake
                 {
-                    robot.getArmLeft().setPosition(robot.armLeftDrop);
-                    robot.getArmRight().setPosition(robot.armRightDrop);
-                    robot.getDepositWrist().setPosition(robot.depositWristDrop);
-                    Thread.sleep(500);
-                    // pull slides back in
-                    robot.depositStage++;
-                    Thread.sleep(1000);
-                }
-                else if (robot.depositStage == 3) //drop pixels, reset arm, reset intake , reset twister
-                {
                    robot.getGrabber().setPosition(robot.grabberOpen);
-                   Thread.sleep(500);
-                   robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
-                   robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
-                   robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-                   robot.getArmLeft().setPosition(robot.armLeftStore);
+                   Thread.sleep(400);
                    robot.getArmRight().setPosition(robot.armRightStore);
+                   robot.getArmLeft().setPosition(robot.armLeftStore);
                    robot.getDepositWrist().setPosition(robot.depositWristStore);
                    robot.getTwister().setPosition(robot.twisterPos4);
                    robot.depositStage = 0;
-                   Thread.sleep(1000);
                 }
             }
 

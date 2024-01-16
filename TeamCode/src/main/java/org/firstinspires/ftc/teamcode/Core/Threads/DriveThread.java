@@ -78,6 +78,7 @@ public class DriveThread extends Thread {
 
                 extension();
                 plane();
+                intake();
 
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
@@ -88,6 +89,10 @@ public class DriveThread extends Thread {
         }
     }
 
+
+    public void intake() {
+        robot.getIntake().setPower(-.9 * robot.opMode.gamepad2.left_stick_y);
+    }
     public void extension()
     {
         double power = .5 * (robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);

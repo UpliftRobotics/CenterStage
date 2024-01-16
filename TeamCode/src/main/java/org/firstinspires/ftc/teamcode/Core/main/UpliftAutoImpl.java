@@ -286,7 +286,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     public void tranfer()
     {
 
-        robot.getDepositWrist().setPosition(robot.depositWristTransfer);
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
         robot.getArmLeft().setPosition(robot.armLeftTransfer);
         robot.getArmRight().setPosition(robot.armRightTransfer);
 

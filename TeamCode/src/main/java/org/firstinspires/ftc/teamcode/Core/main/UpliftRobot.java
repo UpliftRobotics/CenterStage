@@ -111,17 +111,17 @@ public class UpliftRobot
 
 
 
-    public double depositWristStore = .18;
-    public double depositWristTransfer = .35;
-    public double depositWristDrop = .3;
+    public double depositWristStore = .20;
+    public double depositWristTransfer1 = .28;
+    public double depositWristTransfer2 = .35;
+    public double depositWristDrop = .38;
 
     public double frontRollerStore = 0.85;
     public double frontRollerGround = .5;
     public double frontRollerStack = .6;
 
     public double intakeArmLeftStore = 0.03;
-
-    public double intakeArmLeftHold = .17;
+    public double intakeArmLeftTransfer = .16;
     public double intakeArmLeftStack5 = .6;
     public double intakeArmLeftStack4 = .7;
     public double intakeArmLeftStack3 = .8;
@@ -129,32 +129,31 @@ public class UpliftRobot
     public double intakeArmLeftGround = .9;
 
     public double intakeArmRightStore = .97;
-
-    public double intakeArmRightHold = .83;
+    public double intakeArmRightTransfer = .84;
     public double intakeArmRightStack5 = .4;
     public double intakeArmRightStack4 = .3;
     public double intakeArmRightStack3 = .2;
     public double intakeArmRightStack2 = .1;
     public double intakeArmRightGround = .1;
 
-    public double armLeftStore = 0.84;
-    public double armLeftTransfer = 0.78;
-    public double armLeftDrop = .3;
+    public double armLeftStore = 0.79;
+    public double armLeftTransfer = 0.70;
+    public double armLeftDrop = .15;
     public double armLeftReset = .5;
 
-    public double armRightStore = 0.16;
-    public double armRightTransfer = 0.22;
-    public double armRightDrop = .7;
+    public double armRightStore = 0.21;
+    public double armRightTransfer = 0.3;
+    public double armRightDrop = .85;
     public double armRightReset = .5;
 
-    public double grabberClose1 = .2;
-    public double grabberClose2 = .15;
-    public double grabberOpen = 0;
+    public double grabberClose1 = .7;
+    public double grabberClose2 = .6;
+    public double grabberOpen = .49;
 
     public double twisterPos1 = 0;
     public double twisterPos2 = 0;
     public double twisterPos3 = 0;
-    public double twisterPos4 = .49;
+    public double twisterPos4 = .512;
     public double twisterPos5 = 0;
     public double twisterPos6 = 0;
     public double twisterPos7 = 0;

@@ -3,13 +3,12 @@ package org.firstinspires.ftc.teamcode.Core.programs.Autos.Tests;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
-@Autonomous(name = "TestAuto", group = "Opmodes")
-public class TestAuto extends UpliftAutoImpl {
+@Autonomous(name = "ResetAuto", group = "Opmodes")
+public class ResetAuto extends UpliftAutoImpl {
 
     Odometry odom;
 
@@ -28,39 +27,17 @@ public class TestAuto extends UpliftAutoImpl {
 //            robot.getIntake().setPower(0.1);
 //        }
 
+robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+robot.getGrabber().setPosition(robot.grabberOpen);
+robot.getArmLeft().setPosition(robot.armLeftReset);
+robot.getArmRight().setPosition(robot.armRightReset);
+robot.getDepositWrist().setPosition(robot.depositWristStore);
+robot.getTwister().setPosition(robot.twisterPos4);
+Thread.sleep(20000);
 
-
-
-//
-//
-////        robot.getArmLeft().setPosition(robot.armLeftStore);
-////        robot.getArmRight().setPosition(robot.armRightStore);
-////        robot.getDepositWrist().setPosition(robot.depositWristStore);
-//
-//        Thread.sleep(1000);
-//
-//
-//        claw("open");
-//
-//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
-//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
-//        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
-//
-//        Thread.sleep(5000);
-//
-//
-//        Thread.sleep(1000);
-//
-//
-//
-//        Thread.sleep(5000);
-////
-////        claw("close2");
-////
-////        Thread.sleep(1000);
-
-
-    }
+       }
 
     @Override
     public void body() throws InterruptedException
