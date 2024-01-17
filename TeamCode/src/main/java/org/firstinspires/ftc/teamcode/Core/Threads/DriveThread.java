@@ -81,6 +81,8 @@ public class DriveThread extends Thread {
                 intake();
                 intakeControl();
 
+                intakeforce();
+
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
             } catch (Exception e) {
@@ -89,8 +91,14 @@ public class DriveThread extends Thread {
             }
         }
     }
-
-
+    public void intakeforce()
+    {
+        if(robot.opMode.gamepad1.right_trigger>.5)
+        {
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+        }
+    }
     public void intake() {
         robot.getIntake().setPower(-.9 * robot.opMode.gamepad2.left_stick_y);
     }

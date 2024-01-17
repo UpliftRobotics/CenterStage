@@ -117,15 +117,15 @@ public class UpliftRobot
     public double depositWristDrop = .38;
 
     public double frontRollerStore = 0.85;
-    public double frontRollerGround = .48;
+    public double frontRollerGround = .49;
     public double frontRollerReset = .5;
     public double frontRollerStack = .6;
 
     public double intakeArmLeftStore = 0.03;
     public double intakeArmLeftTransfer = .16;
-    public double intakeArmLeftStack5 = .6;
-    public double intakeArmLeftStack4 = .7;
-    public double intakeArmLeftStack3 = .8;
+    public double intakeArmLeftStack5 = .75;
+    public double intakeArmLeftStack4 = .78;
+    public double intakeArmLeftStack3 = .815;
     public double intakeArmLeftStack2 = .85;
     public double intakeArmLeftReset = .9;
     public double intakeArmLeftGround = .885;
@@ -133,9 +133,9 @@ public class UpliftRobot
 
     public double intakeArmRightStore = .97;
     public double intakeArmRightTransfer = .84;
-    public double intakeArmRightStack5 = .4;
-    public double intakeArmRightStack4 = .3;
-    public double intakeArmRightStack3 = .2;
+    public double intakeArmRightStack5 = .25;
+    public double intakeArmRightStack4 = .22;
+    public double intakeArmRightStack3 = .185;
     public double intakeArmRightStack2 = .15;
     public double intakeArmRightGround = .115;
     public double intakeArmRightReset = .1;
@@ -150,8 +150,10 @@ public class UpliftRobot
     public double armRightDrop = .92;
     public double armRightReset = .5;
 
-    public double grabberClose1 = .68;
-    public double grabberClose2 = .6;
+
+    public double grabberClose1 = .7;
+    public double grabberClose2 = .64;
+
     public double grabberOpen = .49;
 
     public double twisterPos4 = .512;

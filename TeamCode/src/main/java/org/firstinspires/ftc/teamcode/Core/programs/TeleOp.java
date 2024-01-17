@@ -73,8 +73,8 @@ public class TeleOp extends UpliftTele {
 //                robot.getArmRight().setPosition(robot.armRightDrop);
 //                robot.getArmLeft().setPosition(robot.armLeftDrop);
 //                Thread.sleep(1000);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
                 robot.getIntakeRoller().setPosition(robot.frontRollerGround);
 
                 robot.getArmLeft().setPosition(robot.armLeftStore);

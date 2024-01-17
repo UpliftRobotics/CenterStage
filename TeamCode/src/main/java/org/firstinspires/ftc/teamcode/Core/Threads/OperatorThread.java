@@ -38,6 +38,11 @@ public class OperatorThread extends Thread {
                 leftTwister();
                 intakeControl();
                 automaticPixel();
+                frontRollerToggle();
+                intakeStore();
+                intakeStack();
+                drop();
+
 
 
 
@@ -192,7 +197,7 @@ public class OperatorThread extends Thread {
         if (robot.opMode.gamepad2.right_bumper && robot.depositStage == 2)
         {
           robot.getTwister().setPosition(robot.getTwister().getPosition() + .1);
-          Thread.sleep(200);
+          Thread.sleep(120);
 
         }
     }
@@ -201,110 +206,81 @@ public class OperatorThread extends Thread {
         if(robot.opMode.gamepad2.left_bumper && robot.depositStage == 2)
         {
             robot.getTwister().setPosition(robot.getTwister().getPosition() - .1);
-            Thread.sleep(200);
+            Thread.sleep(120);
 
         }
     }
-
-    public void intakeHeight() throws InterruptedException{
-        if (robot.opMode.gamepad2.dpad_up && robot.depositStage == 0) {
-            if (robot.intakeHeight == 0) {
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
-                Thread.sleep(150);
-                robot.intakeHeight++;
-            }
-            if (robot.intakeHeight == 1) {
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
-                Thread.sleep(150);
-                robot.intakeHeight++;
-            }
-            if (robot.intakeHeight == 2) {
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack4);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack4);
-                Thread.sleep(150);
-                robot.intakeHeight++;
-            }
-            if (robot.intakeHeight == 3) {
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack5);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack5);
-                Thread.sleep(150);
-                robot.intakeHeight++;
-            }
-            if (robot.intakeHeight == 4) {
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
-                Thread.sleep(150);
-                robot.intakeHeight++;
-            }
-        }
-        if(robot.opMode.gamepad2.dpad_down && robot.depositStage == 0){
-            if(robot.intakeHeight == 5){
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack5);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack5);
-                Thread.sleep(150);
-                robot.intakeHeight--;
-            }
-            if(robot.intakeHeight == 4){
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack4);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack4);
-                Thread.sleep(150);
-                robot.intakeHeight--;
-            }
-            if(robot.intakeHeight == 3){
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
-                Thread.sleep(150);
-                robot.intakeHeight--;
-            }
-            if(robot.intakeHeight == 2){
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
-                Thread.sleep(150);
-                robot.intakeHeight--;
-            }
-            if(robot.intakeHeight == 1){
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-                Thread.sleep(150);
-                robot.intakeHeight--;
-            }
-        }
-    }
-
-    public void dropIntake() throws InterruptedException{
-        if(robot.opMode.gamepad2.dpad_left && robot.depositStage == 0)
-        {
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-            Thread.sleep(150);
-            robot.intakeHeight = 0;
-        }
-    }
-
-
-
-
-
 
     public void intakeControl() throws InterruptedException {
-        if (robot.opMode.gamepad2.dpad_down) {
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-            robot.getIntake().setPower(.8);
-            Thread.sleep(400);
-            robot.getIntake().setPower(0);
-            robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-        }
-        if (robot.opMode.gamepad2.dpad_up)
+        if (robot.opMode.gamepad1.x)
         {
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
-            robot.getIntake().setPower(.8);
-            Thread.sleep(400);
-            robot.getIntake().setPower(0);
+            if (robot.intakeHeight == 1)
+            {
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+                Thread.sleep(200);
+                robot.intakeHeight = 0;
+            }
+            else if ( robot.intakeHeight == 0)
+            {
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+                Thread.sleep(200);
+                robot.intakeHeight = 1;
+            }
+
+
+        }
+    }
+
+    public void intakeStore()
+    {
+        if(robot.opMode.gamepad2.a)
+        {
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
+            robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+        }
+    }
+
+    public void frontRollerToggle()
+    {
+        if(robot.opMode.gamepad2.x)
+        {
+                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+        }
+    }
+
+    public void intakeStack()
+    {
+        if(robot.opMode.gamepad2.dpad_up)
+        {
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack5);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack5);
             robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+        }
+        if(robot.opMode.gamepad2.dpad_left)
+        {
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack4);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack4);
+            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+
+        }
+        if(robot.opMode.gamepad2.dpad_down)
+        {
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+
+        }
+        if(robot.opMode.gamepad2.dpad_right)
+        {
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
+            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+
         }
     }
 
@@ -323,8 +299,7 @@ public class OperatorThread extends Thread {
 
     public void flipIntake()
     {
-        if(robot.opMode.gamepad2.a)
-        {
+        if (robot.opMode.gamepad2.a) {
             robot.getGrabber().setPosition(robot.grabberOpen);
             robot.getTwister().setPosition(robot.twisterPos4);
             robot.getDepositWrist().setPosition(robot.depositWristStore);
@@ -334,7 +309,22 @@ public class OperatorThread extends Thread {
             robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
             robot.getIntakeArmLeft().setPosition(robot.intakeArmRightTransfer);
             robot.getIntakeRoller().setPosition(robot.frontRollerReset);
+        }
+    }
 
+    public void drop () throws Exception
+    {
+        if ((robot.opMode.gamepad2.right_trigger > .25 || robot.opMode.gamepad2.left_trigger > .25) && robot.depositStage == 2)
+        {
+            robot.getGrabber().setPosition(robot.grabberOpen);
+            Thread.sleep(400);
+            robot.getArmRight().setPosition(robot.armRightStore);
+            robot.getArmLeft().setPosition(robot.armLeftStore);
+            robot.getDepositWrist().setPosition(robot.depositWristStore);
+            robot.getTwister().setPosition(robot.twisterPos4);
+            Thread.sleep(1000);
+            robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+            robot.depositStage = 0;
         }
     }
 }
