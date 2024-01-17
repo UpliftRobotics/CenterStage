@@ -187,7 +187,8 @@ public class OperatorThread extends Thread {
 
         }
 
-    public void rightTwister() throws InterruptedException {
+    public void rightTwister() throws InterruptedException
+    {
         if (robot.opMode.gamepad2.right_bumper && robot.depositStage == 2)
         {
           robot.getTwister().setPosition(robot.getTwister().getPosition() + .1);
@@ -317,6 +318,23 @@ public class OperatorThread extends Thread {
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
             robot.getIntakeRoller().setPosition(robot.frontRollerStack);
             robot.depositStage = -1;
+        }
+    }
+
+    public void flipIntake()
+    {
+        if(robot.opMode.gamepad2.a)
+        {
+            robot.getGrabber().setPosition(robot.grabberOpen);
+            robot.getTwister().setPosition(robot.twisterPos4);
+            robot.getDepositWrist().setPosition(robot.depositWristStore);
+            robot.getArmLeft().setPosition(robot.armLeftStore);
+            robot.getArmRight().setPosition(robot.armRightStore);
+
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmRightTransfer);
+            robot.getIntakeRoller().setPosition(robot.frontRollerReset);
+
         }
     }
 }

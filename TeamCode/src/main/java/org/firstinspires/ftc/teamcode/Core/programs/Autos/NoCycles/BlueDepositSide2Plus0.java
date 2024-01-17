@@ -23,113 +23,108 @@ public class BlueDepositSide2Plus0 extends UpliftAutoImpl
     @Override
     public void initAction() throws InterruptedException {
 
-        robot.getGrabber().setPosition(robot.grabberClose1);
+        claw("open");
 
-        Thread.sleep(2000);
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
+        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+        robot.getTwister().setPosition(robot.twisterPos4);
 
-        robot.getArmLeft().setPosition(0.7);
-        robot.getArmRight().setPosition(0.3);
+        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
+        robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
+        robot.getArmRight().setPosition(robot.armRightTransfer);
+        robot.getArmLeft().setPosition(robot.armLeftTransfer);
 
-        robot.getDepositWrist().setPosition(0.6);
+        Thread.sleep(1000);
+
+        claw("close1");
 
         robot.webcam.setPipeline(robot.pipelineBlueDepositSide);
 
     }
 
     @Override
-    public void body() throws InterruptedException
-    {
+    public void body() throws InterruptedException {
 
         int location = robot.pipelineBlueDepositSide.location;
-        odom.setOdometryPosition(48, 0, 180);
+        odom.setOdometryPosition(48, 0, 0);
 
-        if(!goPark)
-        {
+        if (!goPark) {
             //left
-            if(location == 0 || location == -1 ) {
-                //drop position
-                driveToPosition(30, 6, 0.8, 180);
-                driveToPosition(3.5, 10, 0.7, 90, 2);
+            if (location == 0 || location == -1) {
+
+                //drop purple pixel position
+                driveToPosition(42, 28, 0.5, 0);
+
+                //drop yellow pixel position
+                driveToPosition(42, 15, 0.5, 0);
+                driveToPosition(7, 24, 0.5, 85);
+
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+
                 Thread.sleep(1000);
 
-
-
-                deposit(400, 0.1);
+                deposit(200, 0.5);
                 Thread.sleep(500);
 
-
-
                 claw("open");
-                Thread.sleep(1000);
+                Thread.sleep(2000);
                 reset(true, false);
-
-
-                //outtake position
-                driveToPosition(23, 21, 0.5, 93);
 
             }
 
             //middle
-            if(location == 1 )
-            {
-                //drop position
-                driveToPosition(30, 6, 0.8, 180);
-                driveToPosition(3.5, 16, 0.7, 90, 2);
+            if (location == 1) {
+                //drop purple pixel position
+                driveToPosition(48, 32, 0.5, 0);
+
+                //drop yellow pixel position
+                driveToPosition(48, 19, 0.5, 0);
+                driveToPosition(6, 30, 0.5, 80);
+
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+
                 Thread.sleep(1000);
 
+                deposit(200, 0.5);
 
-                deposit(400, 0.1);
                 Thread.sleep(500);
 
-
                 claw("open");
-                Thread.sleep(1000);
+                Thread.sleep(2000);
                 reset(true, false);
 
-
-                //outtake position
-                driveToPosition(28, 28, 0.5, 93);
             }
 
             // right
 
-            if(location == 2 )
-            {
-                //drop position
-                driveToPosition(30, 6, 0.8, 180);
-                driveToPosition(3.5, 25, 0.7, 90, 2);
+            if (location == 2) {
+                //drop purple pixel position
+                driveToPosition(48, 20, 0.5, 0);
+                driveToPosition(56, 28, 0.5, 50);
+
+
+                //drop yellow pixel position
+                driveToPosition(42, 14, 0.5, 50);
+                driveToPosition(4, 40, 0.5, 80);
+
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+
                 Thread.sleep(1000);
 
-                deposit(400, 0.1);
+                deposit(200, 0.5);
                 Thread.sleep(500);
 
-
                 claw("open");
-                Thread.sleep(1000);
+                Thread.sleep(2000);
                 reset(true, false);
-
-                //outtake position
-                driveToPosition(41, 19, 0.5, 93);
 
             }
 
-            Thread.sleep(1000);
-
-            intake(-0.175);
-            Thread.sleep(5000);
-            intake(0);
 
         }
-
-
-        //park
-
-        driveToPosition(10, -10, 0.6, 90);
-        driveToPosition(5, -10, 0.6, 90);
-
-
-
-
     }
 
     @Override

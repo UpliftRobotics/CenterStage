@@ -298,13 +298,13 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getArmLeft().setPosition(robot.armLeftDrop);
         robot.getArmRight().setPosition(robot.armRightDrop);
 
-        while(robot.getSlideRight().getCurrentPosition() < slidesDist)
-
-        {
-            //negative power moves slides up
-            robot.getSlideRight().setPower(-slidesPower);
-            robot.getSlideLeft().setPower(-slidesPower);
-        }
+//        while(robot.getSlideRight().getCurrentPosition() < slidesDist)
+//
+//        {
+//            //negative power moves slides up
+//            robot.getSlideRight().setPower(-slidesPower);
+//            robot.getSlideLeft().setPower(-slidesPower);
+//        }
 
         robot.getSlideLeft().setPower(0);
         robot.getSlideRight().setPower(0);
@@ -407,41 +407,41 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         Thread.sleep(200);
 
-        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
-        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
+//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
+//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
+//
+//        Thread.sleep(200);
+//
+//        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+//
+//        Thread.sleep(500);
 
-        Thread.sleep(200);
-
-        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
-
-        Thread.sleep(500);
-
-        if(slidesDown)
-        {
-            while(robot.getSlideRight().getCurrentPosition() > 0)
-            {
-
-                //negative power moves slides up
-                robot.getSlideRight().setPower(0.001);
-                robot.getSlideLeft().setPower(0.001);
-
-            }
-
-            robot.getSlideLeft().setPower(0);
-            robot.getSlideRight().setPower(0);
-        }
-
-        if(extensionIn)
-        {
-            while(robot.getExtension().getCurrentPosition() > 0)
-            {
-
-                robot.getSlideRight().setPower(-0.1);
-
-            }
-
-            robot.getExtension().setPower(0);
-        }
+//        if(slidesDown)
+//        {
+//            while(robot.getSlideRight().getCurrentPosition() > 0)
+//            {
+//
+//                //negative power moves slides up
+//                robot.getSlideRight().setPower(0.001);
+//                robot.getSlideLeft().setPower(0.001);
+//
+//            }
+//
+//            robot.getSlideLeft().setPower(0);
+//            robot.getSlideRight().setPower(0);
+//        }
+//
+//        if(extensionIn)
+//        {
+//            while(robot.getExtension().getCurrentPosition() > 0)
+//            {
+//
+//                robot.getSlideRight().setPower(-0.1);
+//
+//            }
+//
+//            robot.getExtension().setPower(0);
+//        }
 
     }
 
