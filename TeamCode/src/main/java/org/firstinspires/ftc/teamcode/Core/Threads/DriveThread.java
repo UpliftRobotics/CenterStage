@@ -78,7 +78,7 @@ public class DriveThread extends Thread {
 
                 extension();
                 plane();
-                intake();
+                intake(robot.intakePower);
                 intakeControl();
 
                 intakeforce();
@@ -99,8 +99,11 @@ public class DriveThread extends Thread {
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset +.01);
         }
     }
-    public void intake() {
-        robot.getIntake().setPower(-.9 * robot.opMode.gamepad2.left_stick_y);
+    public void intake(double input)
+    {
+        double power = input + 2 * -robot.opMode.gamepad2.left_stick_y;
+        power = Range.clip(power , -1 , 1);
+        robot.getIntake().setPower(power);
     }
     public void extension()
     {

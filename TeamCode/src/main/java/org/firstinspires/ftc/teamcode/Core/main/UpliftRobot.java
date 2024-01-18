@@ -107,6 +107,7 @@ public class UpliftRobot
     // 3 = pixels will drop and reset arm back inside and folds intake back out
 
     public int intakeHeight = 0;
+    public double intakePower = 0;
 
 
 

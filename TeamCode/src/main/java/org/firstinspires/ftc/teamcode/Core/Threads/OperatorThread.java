@@ -150,18 +150,18 @@ public class OperatorThread extends Thread {
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
                 robot.getIntakeRoller().setPosition(robot.frontRollerStore);
-                robot.getIntake().setPower(.8);
+                robot.intakePower = .5;
                 Thread.sleep(1000);
-                robot.getIntake().setPower(0);
+                robot.intakePower = 0;
                 robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
                 robot.getArmLeft().setPosition(robot.armLeftTransfer);
                 robot.getArmRight().setPosition(robot.armRightTransfer);
                 Thread.sleep(500);
                 robot.getGrabber().setPosition(robot.grabberClose2);
                 Thread.sleep(200);
-                robot.getIntake().setPower(-.5);
-                Thread.sleep(100);
-                robot.getIntake().setPower(0);
+                robot.intakePower = -.3;
+                Thread.sleep(150);
+                robot.intakePower = 0;
                 robot.depositStage = 1;
                 }
                 else if (robot.depositStage == 1) //intake is in the robot, transfer by grabbing the pixels and then sending the intake out
