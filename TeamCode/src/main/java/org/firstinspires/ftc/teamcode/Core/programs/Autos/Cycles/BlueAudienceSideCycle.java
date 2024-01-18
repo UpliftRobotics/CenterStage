@@ -28,18 +28,19 @@ public class BlueAudienceSideCycle extends UpliftAutoImpl
 
         claw("open");
 
-        robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
         robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+
         robot.getTwister().setPosition(robot.twisterPos4);
 
         robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
         robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
-        robot.getArmRight().setPosition(robot.armRightTransfer);
-        robot.getArmLeft().setPosition(robot.armLeftTransfer);
+        robot.getArmRight().setPosition(robot.armRightStore);
+        robot.getArmLeft().setPosition(robot.armLeftStore);
 
         Thread.sleep(1000);
 
-        claw("close1");
+//        claw("close1");
 
         robot.webcam.setPipeline(robot.pipelineBlueDepositSide);
 
@@ -112,19 +113,56 @@ public class BlueAudienceSideCycle extends UpliftAutoImpl
             if(location == 2 )
             {
                 //drop position
-                driveToPosition(109, 28, 0.5, 0);
+                driveToPosition(108, 28, 0.7, 0);
 
-                driveToPosition(109, 15, 0.5, 0);
-                driveToPosition(96, 17, 0.7, 0);
-                driveToPosition(100, 50, 0.5, 0);
+                driveToPosition(109, 15, 0.7, 0);
+                driveToPosition(96, 17, 0.8, 0);
+                driveToPosition(96, 50, 0.7, -5);
 
-                driveToPosition(100, 50, 0.5, 90);
+                driveToPosition(100, 58, 0.7, 85);
 
-                Thread.sleep(200);
+                Thread.sleep(1000);
+
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+
+                Thread.sleep(1000);
+
+                driveToPosition(109, 58, 0.5, 85);
+
+                Thread.sleep(1000);
+
+                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+
+                intake(.5);
+
+                robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
+                robot.getIntake().setPower(.5);
+                Thread.sleep(1000);
+                robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
+                robot.getArmLeft().setPosition(robot.armLeftTransfer);
+                robot.getArmRight().setPosition(robot.armRightTransfer);
+                Thread.sleep(500);
+                robot.getGrabber().setPosition(robot.grabberClose2);
+                robot.getIntake().setPower(0);
+
+                driveToPosition(70, 58, 0.5, 85);
+
+//                robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
+
+                driveToPosition(30, 58, 0.5, 85);
+//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
+//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
+
+                driveToPosition(20, 30, 0.5, 85);
+                
 
 
-//
-//
+
+
+
 //                claw("open");
 //                Thread.sleep(1000);
 //                reset(true, false);
