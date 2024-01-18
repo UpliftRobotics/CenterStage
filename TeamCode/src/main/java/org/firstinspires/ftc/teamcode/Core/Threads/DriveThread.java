@@ -95,8 +95,8 @@ public class DriveThread extends Thread {
     {
         if(robot.opMode.gamepad1.right_trigger>.5)
         {
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset - 0.01);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset +.01);
         }
     }
     public void intake() {
