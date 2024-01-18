@@ -65,22 +65,19 @@ public class TestAuto extends UpliftAutoImpl {
     @Override
     public void body() throws InterruptedException
     {
-        ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
-        timer.startTime();
+//        ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+//        timer.startTime();
+//
+//        odom.setOdometryPosition(0, 0, 0);
+//
+//
+//        while(timer.seconds() < 25)
+//        {
+//            //do auto
+//        }
+//        //park
 
-        odom.setOdometryPosition(0, 0, 0);
-
-
-        while(timer.seconds() < 25)
-        {
-            //do auto
-        }
-        //park
-
-
-
-
-        intake(-0.175);
+        intake(0.7);
 
     }
 

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Core.programs;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread;
 //import org.firstinspires.ftc.teamcode.Core.Threads.DriveThread2;
 import org.firstinspires.ftc.teamcode.Core.Threads.OperatorThread;
@@ -42,7 +43,7 @@ public class TeleOp extends UpliftTele {
 //                driveThread2.start();
                 operatorThread.start();
 
-                odom.setOdometryPosition(48, 0, 0);
+                odom.setOdometryPosition(0, 0, 0);
 
 //                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
 //                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
@@ -93,8 +94,12 @@ public class TeleOp extends UpliftTele {
 //                telemetry.addData("color: ", robot.getPixelDetectorRight().alpha());
 //                telemetry.update();
 
-                telemetry.addData("slide pos left" , robot.getSlideLeft().getCurrentPosition());
-                telemetry.addData("slide pos right" , robot.getSlideRight().getCurrentPosition());
+//                telemetry.addData("slide pos left" , robot.getSlideLeft().getCurrentPosition());
+//                telemetry.addData("slide pos right" , robot.getSlideRight().getCurrentPosition());
+
+                telemetry.addData("left distance", robot.getPixelDetectorLeft().getDistance(DistanceUnit.MM));
+                telemetry.addData("right distance", robot.getPixelDetectorRight().getDistance(DistanceUnit.MM));
+
 
                 telemetry.update();
         }

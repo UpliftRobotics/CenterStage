@@ -331,36 +331,51 @@ public class UpliftAutoImpl extends UpliftAuto {
     {
         double velocity = power;
 
-        if(velocity > 0)
+        while (!(robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2
+                && robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2))
         {
-            //intake
-            while(robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) > 2 && robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) > 2)
-            {
-                robot.getIntake().setPower(velocity);
-            }
-            robot.getIntake().setPower(0);
+            robot.getIntake().setPower(power);
         }
-        else
-        {
-            //outtake
-            ElapsedTime intakeTimer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
-            intakeTimer.startTime();
-            double startTime = intakeTimer.seconds();
-
-            while(((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2)) && (intakeTimer.seconds() - startTime < 3))
-            {
-                robot.getIntake().setPower(velocity);
-            }
-            while((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2))
-            {
-                velocity *= 1.1;
-                robot.getIntake().setPower(velocity);
-            }
-        }
-
         robot.getIntake().setPower(0);
-
     }
+//        if(velocity > 0)
+//            //intake
+//            if (robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2
+//                    && robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2) {
+//
+//                robot.getIntake().setPower(velocity);
+//
+//                    telemetry.addData("left distance", robot.getPixelDetectorLeft().getDistance(DistanceUnit.MM));
+//                    telemetry.addData("right distance", robot.getPixelDetectorRight().getDistance(DistanceUnit.MM));
+//
+//
+//                    telemetry.update();
+//                }
+//
+//            }
+//            robot.getIntake().setPower(0);
+//        }
+//        else
+//        {
+//            //outtake
+//            ElapsedTime intakeTimer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+//            intakeTimer.startTime();
+//            double startTime = intakeTimer.seconds();
+//
+//            while(((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2)) && (intakeTimer.seconds() - startTime < 3))
+//            {
+//                robot.getIntake().setPower(velocity);
+//            }
+//            while((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2) || (robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2))
+//            {
+//                velocity *= 1.1;
+//                robot.getIntake().setPower(velocity);
+//            }
+//        }
+//
+//        robot.getIntake().setPower(0);
+
+
 
     public void extensionPID(int extensionDist, int slowDownDist, double extensionPower)
     {
