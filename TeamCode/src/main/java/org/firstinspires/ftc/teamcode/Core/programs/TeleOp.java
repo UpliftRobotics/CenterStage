@@ -97,11 +97,11 @@ public class TeleOp extends UpliftTele {
 //                telemetry.addData("slide pos left" , robot.getSlideLeft().getCurrentPosition());
 //                telemetry.addData("slide pos right" , robot.getSlideRight().getCurrentPosition());
 
-                telemetry.addData("left distance", robot.getPixelDetectorLeft().getDistance(DistanceUnit.MM));
-                telemetry.addData("right distance", robot.getPixelDetectorRight().getDistance(DistanceUnit.MM));
-
-
-                telemetry.update();
+//                telemetry.addData("left distance", robot.getPixelDetectorLeft().getDistance(DistanceUnit.MM));
+//                telemetry.addData("right distance", robot.getPixelDetectorRight().getDistance(DistanceUnit.MM));
+//
+//
+//                telemetry.update();
         }
 
         @Override

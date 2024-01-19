@@ -1,15 +1,13 @@
 package org.firstinspires.ftc.teamcode.Core.programs.Autos.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
-@Autonomous(name = "TestAuto", group = "Opmodes")
-public class TestAuto extends UpliftAutoImpl {
+@Autonomous(name = "IntakeTest", group = "Opmodes")
+public class IntakeTest extends UpliftAutoImpl {
 
     Odometry odom;
 

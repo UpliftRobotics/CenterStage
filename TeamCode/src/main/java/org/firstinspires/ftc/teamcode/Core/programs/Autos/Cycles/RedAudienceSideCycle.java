@@ -41,29 +41,58 @@ public class RedAudienceSideCycle extends UpliftAutoImpl
     public void body() throws InterruptedException
     {
         int location = robot.pipelineRedAudienceSide.location;
-        odom.setOdometryPosition(48, 0, 180);
+        odom.setOdometryPosition(100, 144, 180);
 
         //left
         if(location == 0 || location == -1 ) {
             //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 10, 0.7, 90, 2);
+            driveToPosition(110, 116, 0.7, 180);
+
+            driveToPosition(108, 129, 0.7, 180);
+            driveToPosition(96, 120, 0.8, 180);
+            driveToPosition(96, 90, 0.7, 180);
+            driveToPosition(96, 85, 0.7, 90, 2);
+
             Thread.sleep(1000);
 
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack4);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack4);
 
-
-            deposit(400, 0.1);
-            Thread.sleep(500);
-
-
-
-            claw("open");
             Thread.sleep(1000);
-            reset(true, false);
+
+            robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
+            driveToPosition(111, 87, 0.7, 90);
+
+            Thread.sleep(1000);
+
+            robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+
+            intake(.5);
 
 
-            //outtake position
-            driveToPosition(23, 21, 0.5, 93);
+
+
+
+
+
+
+//            driveToPosition(3.5, 10, 0.7, 90, 2);
+//            Thread.sleep(1000);
+//
+//
+//
+//            deposit(400, 0.1);
+//            Thread.sleep(500);
+//
+//
+//
+//            claw("open");
+//            Thread.sleep(1000);
+//            reset(true, false);
+//
+//
+//            //outtake position
+//            driveToPosition(23, 21, 0.5, 93);
 
         }
 
@@ -111,15 +140,15 @@ public class RedAudienceSideCycle extends UpliftAutoImpl
 
         }
 
-        Thread.sleep(1000);
-
-        intake(-0.175);
-        Thread.sleep(5000);
-        intake(0);
-
-
-        //park
-        driveToPosition(5, -10, 0.6, 90);
+//        Thread.sleep(1000);
+//
+//        intake(-0.175);
+//        Thread.sleep(5000);
+//        intake(0);
+//
+//
+//        //park
+//        driveToPosition(5, -10, 0.6, 90);
 
 
 

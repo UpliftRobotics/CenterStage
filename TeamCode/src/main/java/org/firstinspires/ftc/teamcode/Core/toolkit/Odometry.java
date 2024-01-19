@@ -37,10 +37,10 @@ public class Odometry implements Runnable {
             updatePosition();
             Log.i("Odometry:", "X: " + robot.worldX + "   Y: " + robot.worldY + "   Angle: " + robot.worldAngle);
 
-          //  opMode.telemetry.addData("X", robot.worldX);
-           // opMode.telemetry.addData("Y", robot.worldY);
-            //opMode.telemetry.addData("Angle", robot.worldAngle);
-            //opMode.telemetry.update();
+            opMode.telemetry.addData("X", robot.worldX);
+            opMode.telemetry.addData("Y", robot.worldY);
+            opMode.telemetry.addData("Angle", robot.worldAngle);
+            opMode.telemetry.update();
 
         }
     }

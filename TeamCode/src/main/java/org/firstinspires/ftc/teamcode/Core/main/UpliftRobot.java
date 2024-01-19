@@ -124,9 +124,9 @@ public class UpliftRobot
 
     public double intakeArmLeftStore = 0.03;
     public double intakeArmLeftTransfer = .16;
-    public double intakeArmLeftStack5 = .75;
-    public double intakeArmLeftStack4 = .78;
-    public double intakeArmLeftStack3 = .815;
+    public double intakeArmLeftStack5 = .78;
+    public double intakeArmLeftStack4 = .80;
+    public double intakeArmLeftStack3 = .83;
     public double intakeArmLeftStack2 = .85;
     public double intakeArmLeftReset = .9;
     public double intakeArmLeftGround = .885;
@@ -134,9 +134,9 @@ public class UpliftRobot
 
     public double intakeArmRightStore = .97;
     public double intakeArmRightTransfer = .84;
-    public double intakeArmRightStack5 = .25;
-    public double intakeArmRightStack4 = .22;
-    public double intakeArmRightStack3 = .185;
+    public double intakeArmRightStack5 = .22;
+    public double intakeArmRightStack4 = .2;
+    public double intakeArmRightStack3 = .17;
     public double intakeArmRightStack2 = .15;
     public double intakeArmRightGround = .115;
     public double intakeArmRightReset = .1;
@@ -355,7 +355,7 @@ public class UpliftRobot
 
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
-               webcam.setPipeline(pipelineBlueAudienceSide);
+               webcam.setPipeline(pipelineRedAudienceSide);
 
 //               if(!pipelineBlueDepositSide.blueClose)
 //               {

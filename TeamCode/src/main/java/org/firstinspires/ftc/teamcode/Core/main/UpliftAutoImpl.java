@@ -422,9 +422,11 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         Thread.sleep(200);
 
-//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
-//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
-//
+        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
+        robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
+
+
+
 //        Thread.sleep(200);
 //
 //        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
