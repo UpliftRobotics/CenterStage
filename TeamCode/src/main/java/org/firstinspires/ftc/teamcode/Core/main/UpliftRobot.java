@@ -114,7 +114,7 @@ public class UpliftRobot
 
     public double depositWristStore = .20;
     public double depositWristTransfer1 = .28;
-    public double depositWristTransfer2 = .35;
+    public double depositWristTransfer2 = .36;
     public double depositWristDrop = .38;
 
     public double frontRollerStore = 0.85;

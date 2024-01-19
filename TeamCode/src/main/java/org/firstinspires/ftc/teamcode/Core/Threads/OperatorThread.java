@@ -94,7 +94,7 @@ public class OperatorThread extends Thread {
         }
         // stop from overretracting
         else {
-            if (robot.getSlideRight().getCurrentPosition() > -30 || robot.getSlideLeft().getCurrentPosition() > -30) {
+            if (robot.getSlideRight().getCurrentPosition() > -10 || robot.getSlideLeft().getCurrentPosition() > -10) {
                 robot.getSlideLeft().setPower(0);
                 robot.getSlideRight().setPower(0);
             } else {
@@ -175,18 +175,6 @@ public class OperatorThread extends Thread {
                 Thread.sleep(200);
                 robot.depositStage++;
 
-                }
-                else if (robot.depositStage == 2) //move the pixels to scoring posistion and retract the intake
-                {
-                   robot.getGrabber().setPosition(robot.grabberOpen);
-                   Thread.sleep(400);
-                   robot.getArmRight().setPosition(robot.armRightStore);
-                   robot.getArmLeft().setPosition(robot.armLeftStore);
-                   robot.getDepositWrist().setPosition(robot.depositWristStore);
-                   robot.getTwister().setPosition(robot.twisterPos4);
-                   Thread.sleep(1000);
-                   robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-                    robot.depositStage = 0;
                 }
             }
 
