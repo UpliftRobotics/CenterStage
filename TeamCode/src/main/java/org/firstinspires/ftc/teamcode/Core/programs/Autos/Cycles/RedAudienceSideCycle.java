@@ -91,7 +91,6 @@ public class RedAudienceSideCycle extends UpliftAutoImpl
             driveToPosition(30, 90, .7,90);
 
 
-
             driveToPosition(4, 106, 0.8, 78);
             Thread.sleep(1000);
 
@@ -146,7 +145,7 @@ public class RedAudienceSideCycle extends UpliftAutoImpl
             driveToPosition(114, 122, 0.7, 182);
 
             driveToPosition(111, 97, 0.7, 180);
-            driveToPosition(111, 90,  0.7, 86, 2);
+            driveToPosition(115, 90,  0.7, 90, 2);
 
 
             Thread.sleep(1000);
@@ -158,7 +157,7 @@ public class RedAudienceSideCycle extends UpliftAutoImpl
 
 
             robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
-            driveToPosition(116.25, 90, 0.7, 86);
+            driveToPosition(118, 93, 0.7, 80);
 
             Thread.sleep(1000);
 

@@ -282,6 +282,7 @@ public class OperatorThread extends Thread {
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
             robot.getIntakeRoller().setPosition(robot.frontRollerStack);
             robot.depositStage = -1;
+            robot.opMode.gamepad1.rumbleBlips(2);
         }
     }
 

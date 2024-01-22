@@ -45,6 +45,7 @@ public class TeleOp extends UpliftTele {
 
                 odom.setOdometryPosition(0, 0, 0);
 
+
 //                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
 //                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
 //                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
@@ -91,6 +92,7 @@ public class TeleOp extends UpliftTele {
 
         public void bodyLoop() throws InterruptedException
         {
+
 //                telemetry.addData("color: ", robot.getPixelDetectorRight().alpha());
 //                telemetry.update();
 

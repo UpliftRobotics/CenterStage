@@ -76,7 +76,7 @@ public class DriveThread extends Thread {
 //                    Thread.sleep(3000);
 //                }
 
-                extension();
+//                extension();
                 plane();
                 intake(robot.intakePower);
                 intakeControl();
@@ -105,26 +105,26 @@ public class DriveThread extends Thread {
         power = Range.clip(power , -1 , 1);
         robot.getIntake().setPower(power);
     }
-    public void extension()
-    {
-        double power = .5 * (robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
-
-        if (power > 0.0) {
-            if (robot.getExtension().getCurrentPosition() > 850) {
-                robot.getExtension().setPower(0);
-            } else {
-                robot.getExtension().setPower(power);
-            }
-
-        } else {
-            if (robot.getExtension().getCurrentPosition() < 50) {
-                robot.getExtension().setPower(0);
-
-            } else {
-                robot.getExtension().setPower(power);
-            }
-        }
-    }
+//    public void extension()
+//    {
+//        double power = .5 * (robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
+//
+//        if (power > 0.0) {
+//            if (robot.getExtension().getCurrentPosition() > 850) {
+//                robot.getExtension().setPower(0);
+//            } else {
+//                robot.getExtension().setPower(power);
+//            }
+//
+//        } else {
+//            if (robot.getExtension().getCurrentPosition() < 50) {
+//                robot.getExtension().setPower(0);
+//
+//            } else {
+//                robot.getExtension().setPower(power);
+//            }
+//        }
+//    }
 
     public void plane () throws InterruptedException
     {
