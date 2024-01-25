@@ -108,6 +108,7 @@ public class UpliftRobot
 
     public int intakeHeight = 0;
     public double intakePower = 0;
+    public double extensionPower = -.2;
     public double intakeChange = .026;
     public double rollerChange = -.034;
 

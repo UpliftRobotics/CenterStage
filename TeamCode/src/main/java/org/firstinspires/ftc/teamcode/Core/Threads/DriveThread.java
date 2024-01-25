@@ -76,20 +76,26 @@ public class DriveThread extends Thread {
     {
         double power =(robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
 
-        if (power > 0.0) {
+        if (power > 0.1)
+        {
             if (robot.getExtension().getCurrentPosition() > 850) {
                 robot.getExtension().setPower(0);
             } else {
                 robot.getExtension().setPower(power);
             }
 
-        } else {
+        } else if (power < -.1)
+        {
             if (robot.getExtension().getCurrentPosition() < 50) {
                 robot.getExtension().setPower(0);
 
             } else {
                 robot.getExtension().setPower(power);
             }
+        }
+            else if( robot.getExtension().getCurrentPosition() < 100)
+        {
+            robot.getExtension().setPower(robot.extensionPower);
         }
     }
 
