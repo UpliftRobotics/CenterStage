@@ -109,39 +109,37 @@ public class UpliftRobot
     public int intakeHeight = 0;
     public double intakePower = 0;
     public double extensionPower = -.2;
-    public double intakeChange = .026;
-    public double rollerChange = -.034;
 
 
 
 
     public double depositWristStore = .20;
     public double depositWristTransfer1 = .28;
-    public double depositWristTransfer2 = .36;
+    public double depositWristTransfer2 = .365;
     public double depositWristDrop = .38;
 
-    public double frontRollerStore = 0.85;
-    public double frontRollerGround = .51;
+    public double frontRollerStore = 0.82;
+    public double frontRollerGround = .485;
     public double frontRollerReset = .5;
     public double frontRollerStack = .6;
 
     public double intakeArmLeftStore = 0.03;
     public double intakeArmLeftTransfer = .14;
-    public double intakeArmLeftStack5 = .78;
-    public double intakeArmLeftStack4 = .80;
-    public double intakeArmLeftStack3 = .83;
-    public double intakeArmLeftStack2 = .85;
+    public double intakeArmLeftStack5 = .76;
+    public double intakeArmLeftStack4 = .78;
+    public double intakeArmLeftStack3 = .81;
+    public double intakeArmLeftStack2 = .84;
     public double intakeArmLeftReset = .9;
-    public double intakeArmLeftGround = .93;
+    public double intakeArmLeftGround = .89;
 
 
     public double intakeArmRightStore = .97;
     public double intakeArmRightTransfer = .86;
-    public double intakeArmRightStack5 = .22;
-    public double intakeArmRightStack4 = .2;
-    public double intakeArmRightStack3 = .17;
-    public double intakeArmRightStack2 = .15;
-    public double intakeArmRightGround = .07;
+    public double intakeArmRightStack5 = .24;
+    public double intakeArmRightStack4 = .22;
+    public double intakeArmRightStack3 = .19;
+    public double intakeArmRightStack2 = .16;
+    public double intakeArmRightGround = .11;
     public double intakeArmRightReset = .1;
 
     public double armLeftStore = 0.79;

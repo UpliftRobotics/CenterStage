@@ -40,14 +40,48 @@ public class DriveThread extends Thread {
 
                 teleDrive(angle, magnitude, rightX, robot.opMode.gamepad1.right_bumper, robot);
 
+//                if(robot.opMode.gamepad1.dpad_right)
+//                {
+//                    robot.getLeftFront().setPower(0.5);
+//                    robot.getRightFront().setPower(-0.5);
+//                    robot.getLeftBack().setPower(-0.5);
+//                    robot.getRightBack().setPower(0.5);
+//                    Thread.sleep(3000);
+//                }
+//
+//                if(robot.opMode.gamepad1.dpad_left)
+//                {
+//                    robot.getLeftFront().setPower(-0.5);
+//                    robot.getRightFront().setPower(0.5);
+//                    robot.getLeftBack().setPower(0.5);
+//                    robot.getRightBack().setPower(-0.5);
+//                    Thread.sleep(3000);
+//                }
 
+//                if(robot.opMode.gamepad1.dpad_up)
+//                {
+//                    robot.getLeftFront().setPower(0.5);
+//                    robot.getRightFront().setPower(0.5);
+//                    robot.getLeftBack().setPower(0.5);
+//                    robot.getRightBack().setPower(0.5);
+//                    Thread.sleep(3000);
+//                }
+
+//                if(robot.opMode.gamepad1.dpad_down)
+//                {
+//                    robot.getLeftFront().setPower(-0.5);
+//                    robot.getRightFront().setPower(-0.5);
+//                    robot.getLeftBack().setPower(-0.5);
+//                    robot.getRightBack().setPower(-0.5);
+//                    Thread.sleep(3000);
+//                }
 
                 extension();
                 plane();
                 intake(robot.intakePower);
                 intakeControl();
 
-                intakeforce();
+//                intakeforce();
 
                 // todo: validate user responsiveness and set sleep
                 sleep(50);
@@ -55,15 +89,6 @@ public class DriveThread extends Thread {
                 e.printStackTrace();
 
             }
-        }
-    }
-    public void intakeforce()
-    {
-        if(robot.opMode.gamepad1.a)
-        {
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround - robot.intakeChange);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround + robot.intakeChange);
-            robot.getIntakeRoller().setPosition(robot.frontRollerGround - robot.rollerChange);
         }
     }
     public void intake(double input)
@@ -74,9 +99,9 @@ public class DriveThread extends Thread {
     }
     public void extension()
     {
-        double power =(robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
+        double power = (robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
 
-        if (power > 0.1)
+        if (power > 0)
         {
             if (robot.getExtension().getCurrentPosition() > 850) {
                 robot.getExtension().setPower(0);
@@ -84,24 +109,22 @@ public class DriveThread extends Thread {
                 robot.getExtension().setPower(power);
             }
 
-        } else if (power < -.1)
-        {
+        } else        {
             if (robot.getExtension().getCurrentPosition() < 50) {
-                robot.getExtension().setPower(0);
+                robot.getExtension().setPower(power * .1);
 
             } else {
                 robot.getExtension().setPower(power);
             }
         }
-            else if( robot.getExtension().getCurrentPosition() < 100)
-        {
-            robot.getExtension().setPower(robot.extensionPower);
-        }
+
     }
+
+
 
     public void plane () throws InterruptedException
     {
-        if (robot.opMode.gamepad1.y)
+        if (robot.opMode.gamepad1.dpad_up)
         {
             robot.getPlane().setPower(1);
             Thread.sleep(1000);
@@ -143,40 +166,23 @@ public class DriveThread extends Thread {
         robot.getBackLeft().setPower(speedFactor * (lbPow / maxVal));
     }
 
-    public void intakeControl() throws InterruptedException
-    {
-        if (robot.opMode.gamepad1.dpad_up)
-        {
-            robot.intakeChange = robot.intakeChange + .002;
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround - robot.intakeChange);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround + robot.intakeChange);
-            Thread.sleep(100);
-
-
-        }
-
-        if (robot.opMode.gamepad1.dpad_down)
-        {
-            robot.intakeChange = robot.intakeChange - .002;
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround - robot.intakeChange);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround + robot.intakeChange);
-            Thread.sleep(100);
-
-
+    public void intakeControl() throws InterruptedException {
+        if (robot.opMode.gamepad2.dpad_down) {
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+            robot.getIntake().setPower(.8);
+            Thread.sleep(400);
+            robot.getIntake().setPower(0);
+            robot.getIntakeRoller().setPosition(robot.frontRollerGround);
         }
         if (robot.opMode.gamepad1.dpad_right)
         {
-            robot.rollerChange = robot.rollerChange + .002;
-            robot.getIntakeRoller().setPosition(robot.frontRollerGround - robot.rollerChange);
-            Thread.sleep(100);
-
-        }
-
-        if (robot.opMode.gamepad1.dpad_left)
-        {
-            robot.rollerChange = robot.rollerChange - .002;
-            robot.getIntakeRoller().setPosition(robot.frontRollerGround - robot.rollerChange);
-            Thread.sleep(100);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+            robot.getIntake().setPower(.8);
+            Thread.sleep(400);
+            robot.getIntake().setPower(0);
+            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
         }
     }
 

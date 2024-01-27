@@ -45,38 +45,12 @@ public class TeleOp extends UpliftTele {
 
                 odom.setOdometryPosition(0, 0, 0);
 
+                robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-//                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-////
-//                robot.getArmRight().setPosition(robot.armRightStore);
-//                robot.getArmLeft().setPosition(robot.armLeftStore);
-//                robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
-//                robot.getTwister().setPosition(robot.twisterPos4);
-//                robot.getGrabber().setPosition(robot.grabberOpen);
-//
-//
-//                Thread.sleep(1000);
-////
-//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
-//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
-//                robot.getIntakeRoller().setPosition(robot.frontRollerStore);
-//
-//                Thread.sleep(2000);
-//                robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
-//                robot.getArmLeft().setPosition(robot.armLeftTransfer);
-//                robot.getArmRight().setPosition(robot.armRightTransfer);
-//                Thread.sleep(4000);
-//                robot.getGrabber().setPosition(robot.grabberClose2);
-//                Thread.sleep(4000);
-//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-//                robot.getArmRight().setPosition(robot.armRightDrop);
-//                robot.getArmLeft().setPosition(robot.armLeftDrop);
-//                Thread.sleep(1000);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
+
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
                 robot.getIntakeRoller().setPosition(robot.frontRollerGround);
 
                 robot.getArmLeft().setPosition(robot.armLeftStore);
@@ -84,9 +58,6 @@ public class TeleOp extends UpliftTele {
                 robot.getDepositWrist().setPosition(robot.depositWristStore);
                 robot.getGrabber().setPosition(robot.grabberOpen);
                 robot.getTwister().setPosition(robot.twisterPos4);
-
-                robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
         }
@@ -104,11 +75,10 @@ public class TeleOp extends UpliftTele {
 
 //                telemetry.addData("left distance", robot.getPixelDetectorLeft().getDistance(DistanceUnit.MM));
 //                telemetry.addData("right distance", robot.getPixelDetectorRight().getDistance(DistanceUnit.MM));
-//
-//
-                telemetry.addData("intake change" , robot.intakeChange);
-                telemetry.addData("roller change" , robot.rollerChange );
+
                 telemetry.addData("extension pos" , robot.getExtension().getCurrentPosition());
+//
+//
                 telemetry.update();
         }
 
