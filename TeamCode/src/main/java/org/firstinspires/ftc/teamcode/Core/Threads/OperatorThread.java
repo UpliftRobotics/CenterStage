@@ -210,14 +210,17 @@ public class OperatorThread extends Thread {
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+                robot.intakePower = 1;
                 Thread.sleep(200);
                 robot.intakeHeight = 0;
+
             }
             else if ( robot.intakeHeight == 0)
             {
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
                 robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+                robot.intakePower = 0;
                 Thread.sleep(200);
                 robot.intakeHeight = 1;
             }
@@ -286,6 +289,8 @@ public class OperatorThread extends Thread {
             robot.getIntakeRoller().setPosition(robot.frontRollerStack);
             robot.depositStage = -1;
             robot.opMode.gamepad1.rumbleBlips(2);
+            robot.intakePower = 0;
+            robot.extensionPower = -.2;
         }
     }
 

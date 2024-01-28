@@ -108,15 +108,15 @@ public class UpliftRobot
 
     public int intakeHeight = 0;
     public double intakePower = 0;
-    public double extensionPower = -.2;
+    public double extensionPower = 0;
 
 
 
 
-    public double depositWristStore = .20;
-    public double depositWristTransfer1 = .28;
-    public double depositWristTransfer2 = .365;
-    public double depositWristDrop = .38;
+    public double depositWristStore = .05;
+    public double depositWristTransfer1 = .13;
+    public double depositWristTransfer2 = .3;
+    public double depositWristDrop = .28;
 
     public double frontRollerStore = 0.82;
     public double frontRollerGround = .485;
@@ -130,7 +130,7 @@ public class UpliftRobot
     public double intakeArmLeftStack3 = .81;
     public double intakeArmLeftStack2 = .84;
     public double intakeArmLeftReset = .9;
-    public double intakeArmLeftGround = .89;
+    public double intakeArmLeftGround = .9;
 
 
     public double intakeArmRightStore = .97;
@@ -139,16 +139,16 @@ public class UpliftRobot
     public double intakeArmRightStack4 = .22;
     public double intakeArmRightStack3 = .19;
     public double intakeArmRightStack2 = .16;
-    public double intakeArmRightGround = .11;
+    public double intakeArmRightGround = .1;
     public double intakeArmRightReset = .1;
 
     public double armLeftStore = 0.79;
-    public double armLeftTransfer = 0.70;
+    public double armLeftTransfer = 0.685;
     public double armLeftDrop = .08;
     public double armLeftReset = .5;
 
     public double armRightStore = 0.21;
-    public double armRightTransfer = 0.3;
+    public double armRightTransfer = 0.315;
     public double armRightDrop = .92;
     public double armRightReset = .5;
 
@@ -356,7 +356,7 @@ public class UpliftRobot
 
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
-               webcam.setPipeline(pipelineBlueDepositSide);
+               webcam.setPipeline(pipelineBlueAudienceSide);
 
 //               if(!pipelineBlueDepositSide.blueClose)
 //               {
