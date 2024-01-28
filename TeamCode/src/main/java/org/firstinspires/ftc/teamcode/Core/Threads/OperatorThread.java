@@ -41,6 +41,11 @@ public class OperatorThread extends Thread {
                 intakeStore();
                 intakeStack();
                 drop();
+                automaticStore();
+
+                robot.opMode.telemetry.addData("right slide ticks", robot.getSlideRight().getCurrentPosition());
+                robot.opMode.telemetry.addData("left slide ticks", robot.getSlideLeft().getCurrentPosition());
+                robot.opMode.telemetry.update();
 
 
 
@@ -286,7 +291,7 @@ public class OperatorThread extends Thread {
 
     public void automaticStore()
     {
-        if( robot.getSlideRight().getCurrentPosition() < -2600 || robot.getSlideLeft().getCurrentPosition() < -2600 )
+        if( robot.getSlideRight().getCurrentPosition() < -2200 || robot.getSlideLeft().getCurrentPosition() < -2200)
         {
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
             robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);

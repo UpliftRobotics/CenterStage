@@ -29,30 +29,30 @@ public class TestAuto extends UpliftAutoImpl {
 //        }
 
 
-        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-        robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-
-        Thread.sleep(3000);
-
-        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
-
-        Thread.sleep(3000);
-
-        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
-        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
-
-        Thread.sleep(3000);
-
-        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack4);
-        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack4);
-
-        Thread.sleep(3000);
-
-        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack5);
-        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack5);
-
-        Thread.sleep(3000);
+//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+//
+//        Thread.sleep(3000);
+//
+//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
+//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+//
+//        Thread.sleep(3000);
+//
+//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+//
+//        Thread.sleep(3000);
+//
+//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack4);
+//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack4);
+//
+//        Thread.sleep(3000);
+//
+//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack5);
+//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack5);
+//
+//        Thread.sleep(3000);
 
 
 //
@@ -101,7 +101,13 @@ public class TestAuto extends UpliftAutoImpl {
 //        }
 //        //park
 
-        intake(0.7);
+//        intake(0.7);
+
+        deposit(700, 0.1);
+        Thread.sleep(3000);
+        reset(true, false);
+        Thread.sleep(3000);
+
 
     }
 

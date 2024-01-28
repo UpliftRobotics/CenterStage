@@ -25,18 +25,25 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
     {
         claw("open");
 
-        robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
-        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
-        robot.getTwister().setPosition(robot.twisterPos4);
-
         robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
         robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
+        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+        robot.getTwister().setPosition(robot.twisterPos4);
+        robot.getArmRight().setPosition(robot.armRightStore);
+        robot.getArmLeft().setPosition(robot.armLeftStore);
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
+
+        Thread.sleep(3000);
+
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
         robot.getArmRight().setPosition(robot.armRightTransfer);
         robot.getArmLeft().setPosition(robot.armLeftTransfer);
 
-        Thread.sleep(1000);
+        Thread.sleep(500);
 
         claw("close1");
+
+        Thread.sleep(1000);
 
         robot.webcam.setPipeline(robot.pipelineBlueDepositSide);
 
@@ -54,13 +61,12 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
             //left
             if(location == 0 || location == -1 )
             {
-
                 //drop purple pixel position
                 driveToPosition(42, 28, 0.5, 0);
 
                 //drop yellow pixel position
                 driveToPosition(42, 15, 0.5, 0);
-                driveToPosition(7, 24, 0.5, 85);
+                driveToPosition(5, 24, 0.5, 85);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
@@ -68,11 +74,15 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
                 Thread.sleep(1000);
 
                 deposit(200, 0.5);
-                Thread.sleep(500);
+                Thread.sleep(1000);
+
 
                 claw("open");
                 Thread.sleep(2000);
                 reset(true, false);
+
+                Thread.sleep(2000);
+
 
             }
 
@@ -84,7 +94,7 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
 
                 //drop yellow pixel position
                 driveToPosition(48, 19, 0.5, 0);
-                driveToPosition(6, 30, 0.5, 80);
+                driveToPosition(5, 30, 0.5, 80);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
@@ -112,7 +122,7 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
 
                 //drop yellow pixel position
                 driveToPosition(42, 14, 0.5, 50);
-                driveToPosition(4, 40, 0.5, 80);
+                driveToPosition(5, 40, 0.5, 80);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);

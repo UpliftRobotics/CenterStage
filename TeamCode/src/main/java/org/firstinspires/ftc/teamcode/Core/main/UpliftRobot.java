@@ -356,7 +356,7 @@ public class UpliftRobot
 
                webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
-               webcam.setPipeline(pipelineBlueAudienceSide);
+               webcam.setPipeline(pipelineBlueDepositSide);
 
 //               if(!pipelineBlueDepositSide.blueClose)
 //               {
