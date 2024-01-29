@@ -301,6 +301,7 @@ public class OperatorThread extends Thread {
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
             robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
             robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+            robot.extensionPower = -1;
         }
     }
 

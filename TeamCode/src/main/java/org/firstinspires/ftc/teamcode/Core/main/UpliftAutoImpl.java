@@ -297,6 +297,7 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getDepositWrist().setPosition(robot.depositWristDrop);
         robot.getArmLeft().setPosition(robot.armLeftDrop);
         robot.getArmRight().setPosition(robot.armRightDrop);
+//        robot.getTwister().setPosition(twisterPos);
 
         while(abs(robot.getSlideRight().getCurrentPosition()) < slidesDist)
 
@@ -416,12 +417,8 @@ public class UpliftAutoImpl extends UpliftAuto {
     public void reset(boolean slidesDown, boolean extensionIn) throws InterruptedException
     {
 
-        double slideRightEncPos = robot.getSlideRight().getCurrentPosition();
-        double extensionEncPos = robot.getExtension().getCurrentPosition();
-
         if(slidesDown)
         {
-//            robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             while(robot.getSlideRight().getCurrentPosition() < 0)
             {
@@ -429,11 +426,6 @@ public class UpliftAutoImpl extends UpliftAuto {
                 //negative power moves slides up
                 robot.getSlideRight().setPower(0.5);
                 robot.getSlideLeft().setPower(0.5);
-
-                robot.opMode.telemetry.addData("slideRightEncPos", slideRightEncPos);
-                robot.opMode.telemetry.addData("right slide ticks", robot.getSlideRight().getCurrentPosition());
-                robot.opMode.telemetry.addData("left slide ticks", robot.getSlideLeft().getCurrentPosition());
-                robot.opMode.telemetry.update();
 
             }
 
@@ -474,7 +466,7 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getArmLeft().setPosition(robot.armLeftStore);
         robot.getArmRight().setPosition(robot.armRightStore);
 
-        Thread.sleep(500);
+        Thread.sleep(200);
 
     }
 

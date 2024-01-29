@@ -76,7 +76,6 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
                 deposit(200, 0.5);
                 Thread.sleep(1000);
 
-
                 claw("open");
                 Thread.sleep(2000);
                 reset(true, false);

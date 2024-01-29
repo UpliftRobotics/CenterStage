@@ -29,13 +29,17 @@ public class UpliftMath {
         } else if(Math.abs(distToTarget) > tolerance) {
             double val = Math.abs(distToTarget) / (approachZoneRadius);
             moveSpeed = moveSpeed * val;
-            if(tolerance > 1) {
-                if (Math.abs(moveSpeed) < 0.4) {
-                    moveSpeed = 0.4;
+            if(tolerance > 1)
+            {
+                if (Math.abs(moveSpeed) < 0.6)
+                {
+                    moveSpeed = 0.6;
                 }
-            } else {
-                if(Math.abs(moveSpeed) < 0.25) {
-                    moveSpeed = 0.25;
+            } else
+            {
+                if(Math.abs(moveSpeed) < 0.4)
+                {
+                    moveSpeed = 0.4;
                 }
             }
         } else {
