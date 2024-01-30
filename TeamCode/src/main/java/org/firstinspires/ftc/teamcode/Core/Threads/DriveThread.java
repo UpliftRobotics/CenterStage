@@ -79,7 +79,6 @@ public class DriveThread extends Thread {
                 extension();
                 plane();
                 intake(robot.intakePower);
-//                intakeControl();
 
 
                 // todo: validate user responsiveness and set sleep
@@ -178,25 +177,7 @@ public class DriveThread extends Thread {
         robot.getBackLeft().setPower(speedFactor * (lbPow / maxVal));
     }
 
-    public void intakeControl() throws InterruptedException {
-        if (robot.opMode.gamepad2.dpad_down) {
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-            robot.getIntake().setPower(.8);
-            Thread.sleep(400);
-            robot.getIntake().setPower(0);
-            robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-        }
-        if (robot.opMode.gamepad1.dpad_right)
-        {
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
-            robot.getIntake().setPower(.8);
-            Thread.sleep(400);
-            robot.getIntake().setPower(0);
-            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
-        }
-    }
+
 
     public void end() {
         shutDown = true;
