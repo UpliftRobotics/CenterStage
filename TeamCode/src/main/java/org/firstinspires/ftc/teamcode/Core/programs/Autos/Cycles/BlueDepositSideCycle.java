@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@Autonomous(name = "Blue Deposit Side Cycle", group = "Opmodes")
+@Autonomous(name = "Blue Deposit Cycle", group = "Opmodes")
 public class BlueDepositSideCycle extends UpliftAutoImpl
 {
     Odometry odom;
@@ -28,6 +28,10 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
         robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
         robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
         robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+
+        robot.getIntake().setPower(0.1);
+        Thread.sleep(1000);
+
         robot.getTwister().setPosition(robot.twisterPos4);
         robot.getArmRight().setPosition(robot.armRightStore);
         robot.getArmLeft().setPosition(robot.armLeftStore);
@@ -62,18 +66,18 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
             if(location == 0 || location == -1 )
             {
                 //drop purple pixel position
-                driveToPosition(42, 28, 0.5, 0);
+                driveToPosition(42, 28, 0.9, 0);
 
                 //drop yellow pixel position
-                driveToPosition(42, 15, 0.5, 0);
-                driveToPosition(5, 24, 0.5, 85);
+                driveToPosition(42, 15, 0.9, 0);
+                driveToPosition(5, 24, 0.5, 80);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
 
-                Thread.sleep(1000);
+                Thread.sleep(1500);
 
-                deposit(200, 0.5);
+                deposit(300, 0.5);
                 Thread.sleep(1000);
 
                 claw("open");
@@ -89,18 +93,19 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
             if(location == 1 )
             {
                 //drop purple pixel position
-                driveToPosition(48, 32, 0.5, 0);
+                driveToPosition(48, 31, 0.8, 0);
 
                 //drop yellow pixel position
-                driveToPosition(48, 19, 0.5, 0);
-                driveToPosition(5, 30, 0.5, 80);
+                driveToPosition(48, 19, 0.8, 0);
+                driveToPosition(2, 32, 0.5, 80);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
 
-                Thread.sleep(1000);
+                Thread.sleep(1500);
 
-                deposit(200, 0.5);
+                deposit(300, 0.5);
+
 
                 Thread.sleep(500);
 
@@ -115,20 +120,20 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
             if(location == 2 )
             {
                 //drop purple pixel position
-                driveToPosition(48, 20, 0.5, 0);
-                driveToPosition(56, 28, 0.5, 50);
+                driveToPosition(48, 20, 0.6, 0);
+                driveToPosition(56, 28, 0.6, 50);
 
 
                 //drop yellow pixel position
-                driveToPosition(42, 14, 0.5, 50);
-                driveToPosition(5, 40, 0.5, 80);
+                driveToPosition(42, 14, 0.9, 50);
+                driveToPosition(4, 40, 0.6, 80);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
 
-                Thread.sleep(1000);
+                Thread.sleep(1500);
 
-                deposit(200, 0.5);
+                deposit(300, 0.5);
                 Thread.sleep(500);
 
                 claw("open");
@@ -137,11 +142,10 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
 
             }
 
-//            Thread.sleep(1000);
-//            driveToPosition(12, 58, 0.5, 80);
-//
-//            driveToPosition(36, 61, 0.5, 77);
-//            driveToPosition(66, 62, 0.5, 75);
+            Thread.sleep(1000);
+
+            driveToPosition(25, 65, 0.9, 80);
+            driveToPosition(66, 70, 0.9, 80);
 
 
 
@@ -150,13 +154,10 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
 //            reset(false, true);
 //
 //            cycles("blue", 2);
+
         }
 
 
-        //park
-
-//        driveToPosition(10, -10, 0.6, 90);
-//        driveToPosition(5, -10, 0.6, 90);
 
 
 

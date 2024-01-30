@@ -79,9 +79,8 @@ public class DriveThread extends Thread {
                 extension();
                 plane();
                 intake(robot.intakePower);
-                intakeControl();
+//                intakeControl();
 
-//                intakeforce();
 
                 // todo: validate user responsiveness and set sleep
                 sleep(50);

@@ -130,7 +130,8 @@ public class UpliftRobot
     public double intakeArmLeftStack3 = .81;
     public double intakeArmLeftStack2 = .84;
     public double intakeArmLeftReset = .9;
-    public double intakeArmLeftGround = .9;
+    public double intakeArmLeftGround = .91;
+    public double intakeArmLeftGround1 = .9;
 
 
     public double intakeArmRightStore = .97;
@@ -140,6 +141,8 @@ public class UpliftRobot
     public double intakeArmRightStack3 = .19;
     public double intakeArmRightStack2 = .16;
     public double intakeArmRightGround = .1;
+
+    public double intakeArmRightGround1 = .09;
     public double intakeArmRightReset = .1;
 
     public double armLeftStore = 0.79;

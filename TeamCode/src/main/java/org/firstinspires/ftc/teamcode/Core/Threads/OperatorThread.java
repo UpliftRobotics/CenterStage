@@ -207,12 +207,25 @@ public class OperatorThread extends Thread {
         {
             if (robot.intakeHeight == 1)
             {
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-                robot.intakePower = 1;
-                Thread.sleep(200);
-                robot.intakeHeight = 0;
+                if ((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) > 2) && (robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) > 2) )
+                {
+                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+                    robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+                    robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+                    robot.intakePower = 1;
+                    Thread.sleep(200);
+                    robot.intakeHeight = 0;
+                }
+
+                else
+                {
+                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround1);
+                    robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround1);
+                    robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+//                    robot.intakePower = 1;
+                    Thread.sleep(200);
+                    robot.intakeHeight = 0;
+                }
 
             }
             else if ( robot.intakeHeight == 0)
@@ -220,7 +233,7 @@ public class OperatorThread extends Thread {
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
                 robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-                robot.intakePower = 0;
+//                robot.intakePower = 0;
                 Thread.sleep(200);
                 robot.intakeHeight = 1;
             }

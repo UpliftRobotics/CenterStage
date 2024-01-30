@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
 
 
-@Autonomous(name = "Blue Audience Side Cycle", group = "Opmodes")
+@Autonomous(name = "Blue Audience Cycle", group = "Opmodes")
 public class BlueAudienceSideCycle extends UpliftAutoImpl
 {
     Odometry odom;
