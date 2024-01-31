@@ -47,6 +47,10 @@ public class TeleOp extends UpliftTele {
 
                 robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
@@ -58,6 +62,12 @@ public class TeleOp extends UpliftTele {
                 robot.getDepositWrist().setPosition(robot.depositWristStore);
                 robot.getGrabber().setPosition(robot.grabberOpen);
                 robot.getTwister().setPosition(robot.twisterPos4);
+
+                robot.getFrontRight().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                robot.getFrontLeft().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                robot.getBackRight().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                robot.getBackLeft().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
 
         }

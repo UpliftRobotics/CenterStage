@@ -31,7 +31,6 @@ public class OperatorThread extends Thread {
     public void run() {
         while (!shutDown) {
             try {
-                slides();
                 deposit();
                 twister();
                 intakeControl();
@@ -77,41 +76,9 @@ public class OperatorThread extends Thread {
                 '}';
     }
 
-    public void intake() {
-        robot.getIntake().setPower(-.6 * robot.opMode.gamepad2.left_stick_y);
-    }
-
-    public void slides() {
-        double power = .8 * robot.opMode.gamepad2.right_stick_y;
-        if (robot.opMode.gamepad2.right_bumper)
-            power  = power * .05;
-
-        // if going up stop from overextending
-        if (power < 0.0) {
-            if (robot.getSlideRight().getCurrentPosition()  < -2800 || robot.getSlideLeft().getCurrentPosition() < -2800) {
-                robot.getSlideLeft().setPower(0);
-                robot.getSlideRight().setPower(0);
-            } else {
-                robot.getSlideLeft().setPower(power);
-                robot.getSlideRight().setPower(power);
-            }
-        }
-        // stop from overretracting
-        else {
-            if (robot.getSlideRight().getCurrentPosition() > -10 || robot.getSlideLeft().getCurrentPosition() > -10) {
-                robot.getSlideLeft().setPower(0);
-                robot.getSlideRight().setPower(0);
-            } else {
-                robot.getSlideLeft().setPower(power);
-                robot.getSlideRight().setPower(power);
-            }
-        }
-
-
-        //robot.getSlideRight().setPower(.5 * robot.opMode.gamepad2.right_stick_y);
-        //robot.getSlideLeft().setPower(.5 * robot.opMode.gamepad2.right_stick_y);
-
-    }
+//    public void intake() {
+//        robot.getIntake().setPower(-.6 * robot.opMode.gamepad2.left_stick_y);
+//    }
 
 
 
@@ -123,6 +90,7 @@ public class OperatorThread extends Thread {
         {
             if (robot.depositStage == 0 || robot.depositStage == -1)// intake on the ground for pick up, move inside the robot
             {
+                robot.extensionPower = -.6;
                 robot.getArmRight().setPosition(robot.armRightStore);
                 robot.getArmLeft().setPosition(robot.armLeftStore);
                 robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
@@ -144,6 +112,7 @@ public class OperatorThread extends Thread {
                 robot.intakePower = -.3;
                 Thread.sleep(150);
                 robot.intakePower = 0;
+                robot.extensionPower = 0;
                 robot.depositStage = 1;
             }
             else if (robot.depositStage == 1) //intake is in the robot, transfer by grabbing the pixels and then sending the intake out
@@ -153,8 +122,10 @@ public class OperatorThread extends Thread {
                 robot.getArmRight().setPosition(robot.armRightDrop);
                 robot.getArmLeft().setPosition(robot.armLeftDrop);
                 Thread.sleep(200);
+//                robot.slidePower = 1;
                 robot.getDepositWrist().setPosition(robot.depositWristDrop);
-                Thread.sleep(200);
+                Thread.sleep(400);
+//                robot.slidePower = 0;
                 robot.depositStage++;
 
             }
@@ -167,6 +138,7 @@ public class OperatorThread extends Thread {
             {
                 if (robot.depositStage == 0 || robot.depositStage == -1)// intake on the ground for pick up, move inside the robot
                 {
+                    robot.extensionPower = -.6;
                     robot.getArmRight().setPosition(robot.armRightStore);
                 robot.getArmLeft().setPosition(robot.armLeftStore);
                 robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
@@ -188,6 +160,7 @@ public class OperatorThread extends Thread {
                 robot.intakePower = -.3;
                 Thread.sleep(150);
                 robot.intakePower = 0;
+                robot.extensionPower = 0;
                 robot.depositStage = 1;
                 }
                 else if (robot.depositStage == 1) //intake is in the robot, transfer by grabbing the pixels and then sending the intake out
@@ -262,7 +235,10 @@ public class OperatorThread extends Thread {
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
                 robot.getIntakeRoller().setPosition(robot.frontRollerGround);
                 if (robot.oneDriver)
-                robot.intakePower = 0;
+                {
+                    robot.intakePower = 0;
+
+                }
                 Thread.sleep(200);
                 robot.intakeHeight = 1;
             }
@@ -359,12 +335,20 @@ public class OperatorThread extends Thread {
         {
             robot.getGrabber().setPosition(robot.grabberOpen);
             Thread.sleep(400);
+//            if(robot.oneDriver)
+//            {
+//                robot.slidePower = -1;
+//            }
             robot.getArmRight().setPosition(robot.armRightStore);
             robot.getArmLeft().setPosition(robot.armLeftStore);
             robot.getDepositWrist().setPosition(robot.depositWristStore);
             robot.getTwister().setPosition(robot.twisterPos4);
-            Thread.sleep(1000);
             robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+            Thread.sleep(1000);
+//            if(robot.oneDriver)
+//            {
+//                robot.slidePower = 0;
+//            }
             robot.depositStage = 0;
         }
     }

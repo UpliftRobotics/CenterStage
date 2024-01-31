@@ -79,6 +79,7 @@ public class DriveThread extends Thread {
                 extension();
                 plane();
                 intake(robot.intakePower);
+                slides();
 
 
                 // todo: validate user responsiveness and set sleep
@@ -175,6 +176,41 @@ public class DriveThread extends Thread {
         robot.getFrontLeft().setPower(speedFactor * (lfPow / maxVal));
         robot.getBackRight().setPower(speedFactor * (rbPow / maxVal));
         robot.getBackLeft().setPower(speedFactor * (lbPow / maxVal));
+    }
+
+    public void slides() {
+        double power = .8 * robot.opMode.gamepad2.right_stick_y;
+        if (robot.opMode.gamepad2.right_bumper)
+            power = power * .05;
+
+        if (robot.oneDriver)
+        {
+            power = -robot.slidePower;
+        }
+
+
+        // if going up stop from overextending
+
+            if (power < 0.0) {
+                if (robot.getSlideRight().getCurrentPosition() < -2600 || robot.getSlideLeft().getCurrentPosition() < -2600) {
+                    robot.getSlideLeft().setPower(0);
+                    robot.getSlideRight().setPower(0);
+                } else {
+                    robot.getSlideLeft().setPower(power);
+                    robot.getSlideRight().setPower(power);
+                }
+            }
+            // stop from overretracting
+            else {
+                if (robot.getSlideRight().getCurrentPosition() > 100 || robot.getSlideLeft().getCurrentPosition() > 100) {
+                    robot.getSlideLeft().setPower(0);
+                    robot.getSlideRight().setPower(0);
+                } else {
+                    robot.getSlideLeft().setPower(power);
+                    robot.getSlideRight().setPower(power);
+                }
+            }
+
     }
 
 

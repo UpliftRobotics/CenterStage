@@ -109,7 +109,8 @@ public class UpliftRobot
     public int intakeHeight = 0;
     public double intakePower = 0;
     public double extensionPower = 0;
-    public boolean oneDriver = false;
+    public boolean oneDriver = true;
+    public double slidePower = 0;
 
 
 
