@@ -109,7 +109,7 @@ public class UpliftRobot
     public int intakeHeight = 0;
     public double intakePower = 0;
     public double extensionPower = 0;
-    public boolean oneDriver = true;
+    public boolean oneDriver = false;
 
 
 
@@ -158,7 +158,7 @@ public class UpliftRobot
 
 
     public double grabberClose1 = .7;
-    public double grabberClose2 = .64;
+    public double grabberClose2 = .655;
 
     public double grabberOpen = .49;
 

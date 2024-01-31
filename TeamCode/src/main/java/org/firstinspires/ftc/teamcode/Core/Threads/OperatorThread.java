@@ -235,7 +235,9 @@ public class OperatorThread extends Thread {
                     robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                     robot.getIntakeRoller().setPosition(robot.frontRollerGround);
                     if (robot.oneDriver)
-                    robot.intakePower = 1;
+                    {
+                        robot.intakePower = 1;
+                    }
                     Thread.sleep(200);
                     robot.intakeHeight = 0;
                 }
@@ -246,7 +248,9 @@ public class OperatorThread extends Thread {
                     robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround1);
                     robot.getIntakeRoller().setPosition(robot.frontRollerGround);
                     if (robot.oneDriver)
-                    robot.intakePower = 1;
+                    {
+                        robot.intakePower = 1;
+                    }
                     Thread.sleep(200);
                     robot.intakeHeight = 0;
                 }
