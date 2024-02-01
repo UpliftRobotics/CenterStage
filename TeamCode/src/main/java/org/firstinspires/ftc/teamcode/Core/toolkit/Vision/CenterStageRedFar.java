@@ -19,7 +19,7 @@ public class CenterStageRedFar extends OpenCvPipeline {
 
     static final Rect MIDDLE_ROI = new Rect(
             new Point(200, 80),
-            new Point(205, 110));
+            new Point(250, 110));
 
     static final Rect LEFT_ROI = new Rect(
             new Point(50, 60),

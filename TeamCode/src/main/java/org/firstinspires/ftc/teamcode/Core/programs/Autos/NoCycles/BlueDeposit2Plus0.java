@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
 @Autonomous(name = "Blue Deposit 2 + 0", group = "Opmodes")
-public class BlueDepositSide2Plus0 extends UpliftAutoImpl
+public class BlueDeposit2Plus0 extends UpliftAutoImpl
 {
     Odometry odom;
 

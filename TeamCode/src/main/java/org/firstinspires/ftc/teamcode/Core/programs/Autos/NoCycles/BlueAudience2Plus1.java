@@ -1,22 +1,20 @@
-package org.firstinspires.ftc.teamcode.Core.programs.Autos.Cycles;
-
-import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.blueLeftStack;
+package org.firstinspires.ftc.teamcode.Core.programs.Autos.NoCycles;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
-import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
 
 
-@Autonomous(name = "Blue Audience Cycle", group = "Opmodes")
-public class BlueAudienceSideCycle extends UpliftAutoImpl
+@Autonomous(name = "Blue Audience 2 + 1", group = "Opmodes")
+public class BlueAudience2Plus1 extends UpliftAutoImpl
 {
     Odometry odom;
 
 
-    public void initHardware() {
+    public void initHardware()
+    {
 
         robot = new UpliftRobot(this);
         odom = robot.odometry;

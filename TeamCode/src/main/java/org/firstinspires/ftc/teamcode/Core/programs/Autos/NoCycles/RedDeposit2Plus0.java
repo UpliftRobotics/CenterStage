@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
 @Autonomous(name = "Red Deposit 2 + 0", group = "Opmodes")
-public class RedDepositSide2Plus0 extends UpliftAutoImpl
+public class RedDeposit2Plus0 extends UpliftAutoImpl
 {
     Odometry odom;
 
@@ -20,14 +20,31 @@ public class RedDepositSide2Plus0 extends UpliftAutoImpl
 
     @Override
     public void initAction() throws InterruptedException {
-        robot.getGrabber().setPosition(robot.grabberClose1);
+        claw("open");
 
-        Thread.sleep(2000);
+        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
+        robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
+        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
 
-        robot.getArmLeft().setPosition(0.7);
-        robot.getArmRight().setPosition(0.3);
+        robot.getIntake().setPower(0.1);
+        Thread.sleep(1000);
 
-        robot.getDepositWrist().setPosition(0.6);
+        robot.getTwister().setPosition(robot.twisterPos4);
+        robot.getArmRight().setPosition(robot.armRightStore);
+        robot.getArmLeft().setPosition(robot.armLeftStore);
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
+
+        Thread.sleep(3000);
+
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
+        robot.getArmRight().setPosition(robot.armRightTransfer);
+        robot.getArmLeft().setPosition(robot.armLeftTransfer);
+
+        Thread.sleep(500);
+
+        claw("close1");
+
+        Thread.sleep(1000);
 
         robot.webcam.setPipeline(robot.pipelineRedDepositSide);
     }
@@ -41,21 +58,7 @@ public class RedDepositSide2Plus0 extends UpliftAutoImpl
         //left
         if(location == 0 || location == -1 ) {
             //drop position
-            driveToPosition(30, 135, 0.8, 0);
-            driveToPosition(4, 119, 0.7, 90);
-            Thread.sleep(1000);
 
-            deposit(400, 0.1);
-            Thread.sleep(500);
-
-
-            claw("open");
-            Thread.sleep(1000);
-            reset(true, false);
-
-
-            //outtake position
-            driveToPosition(43, 124, 0.5, 95);
 
         }
 

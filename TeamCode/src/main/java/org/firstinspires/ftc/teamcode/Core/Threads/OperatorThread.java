@@ -198,7 +198,7 @@ public class OperatorThread extends Thread {
     }
 
     public void intakeControl() throws InterruptedException {
-        if (robot.opMode.gamepad1.x)
+        if (robot.opMode.gamepad1.left_bumper)
         {
             if (robot.intakeHeight == 1)
             {
