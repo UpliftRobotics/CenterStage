@@ -48,8 +48,8 @@ public class TeleOp extends UpliftTele {
                 robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 

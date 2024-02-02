@@ -117,7 +117,7 @@ public class UpliftRobot
 
     public double depositWristStore = .05;
     public double depositWristTransfer1 = .13;
-    public double depositWristTransfer2 = .3;
+    public double depositWristTransfer2 = .22;
     public double depositWristDrop = .28;
 
     public double frontRollerStore = 0.82;
@@ -148,12 +148,12 @@ public class UpliftRobot
     public double intakeArmRightReset = .1;
 
     public double armLeftStore = 0.79;
-    public double armLeftTransfer = 0.685;
+    public double armLeftTransfer = 0.695;
     public double armLeftDrop = .08;
     public double armLeftReset = .5;
 
     public double armRightStore = 0.21;
-    public double armRightTransfer = 0.315;
+    public double armRightTransfer = 0.305;
     public double armRightDrop = .92;
     public double armRightReset = .5;
 
