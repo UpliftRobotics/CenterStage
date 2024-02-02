@@ -77,7 +77,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
 
                 robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
 
-                driveToPosition(114, 59, 0.5, 90);
+                driveToPosition(113, 57.5, 0.5, 90);
 
                 Thread.sleep(1000);
 
@@ -110,7 +110,10 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 robot.getIntake().setPower(0);
 
                 driveToPosition(15, 40, 0.9, 92);
-                driveToPosition(5, 28, 0.9, 92);
+                driveToPosition(10, 32, 0.9, 92);
+
+                Thread.sleep(1000);
+                driveToPosition(5, 32, 0.9, 92);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
@@ -118,7 +121,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 Thread.sleep(2000);
 
                 deposit(200, 0.5);
-                robot.getTwister().setPosition(0.8);
+                robot.getTwister().setPosition(0.2);
 
                 Thread.sleep(1000);
 
@@ -165,6 +168,8 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
 
                 intake(.7);
 
+                driveToPosition(75, 62, 0.9, 90);
+
                 robot.getIntakeRoller().setPosition(robot.frontRollerStore);
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
@@ -179,7 +184,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
 
                 robot.getIntake().setPower(0);
 
-                driveToPosition(75, 62, 0.9, 90);
+
 
                 driveToPosition(25, 60, 0.9, 90);
 
@@ -240,6 +245,8 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
 
                 intake(.7);
 
+                driveToPosition(75, 58, 0.7, 85);
+
                 robot.getIntakeRoller().setPosition(robot.frontRollerStore);
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
@@ -254,7 +261,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
 
                 robot.getIntake().setPower(0);
 
-                driveToPosition(75, 58, 0.7, 85);
+
 
                 driveToPosition(30, 58, 0.7, 85);
 
