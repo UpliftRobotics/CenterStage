@@ -125,24 +125,24 @@ public class UpliftRobot
     public double frontRollerReset = .5;
     public double frontRollerStack = .6;
 
-    public double intakeArmLeftStore = 0.03;
+    public double intakeArmLeftStore = 0.02;
     public double intakeArmLeftTransfer = .14;
     public double intakeArmLeftStack5 = .76;
     public double intakeArmLeftStack4 = .78;
     public double intakeArmLeftStack3 = .81;
     public double intakeArmLeftStack2 = .84;
     public double intakeArmLeftReset = .9;
-    public double intakeArmLeftGround = .92;
+    public double intakeArmLeftGround = .93;
     public double intakeArmLeftGround1 = .91;
 
 
-    public double intakeArmRightStore = .97;
+    public double intakeArmRightStore = .98;
     public double intakeArmRightTransfer = .86;
     public double intakeArmRightStack5 = .24;
     public double intakeArmRightStack4 = .22;
     public double intakeArmRightStack3 = .19;
     public double intakeArmRightStack2 = .16;
-    public double intakeArmRightGround = .08;
+    public double intakeArmRightGround = .07;
 
     public double intakeArmRightGround1 = .09;
     public double intakeArmRightReset = .1;
