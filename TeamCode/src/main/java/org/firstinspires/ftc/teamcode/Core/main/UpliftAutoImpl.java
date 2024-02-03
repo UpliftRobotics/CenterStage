@@ -338,8 +338,8 @@ public class UpliftAutoImpl extends UpliftAuto {
     {
         double velocity = power;
 
-        while (!(robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2
-                && robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2))
+        while (!(robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 1
+                && robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 1))
         {
             robot.getIntake().setPower(power);
         }

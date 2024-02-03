@@ -41,7 +41,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
 
 //        claw("close1");-
 
-        robot.webcam.setPipeline(robot.pipelineBlueDepositSide);
+        robot.webcam.setPipeline(robot.pipelineBlueAudienceSide);
 
 
     }
@@ -52,8 +52,6 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
         int location = robot.pipelineBlueAudienceSide.location;
         odom.setOdometryPosition(100, 0, 0);
 
-        if(!goPark)
-        {
 
             robot.getExtension().setPower(-.1);
             //left
@@ -109,11 +107,11 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 Thread.sleep(200);
                 robot.getIntake().setPower(0);
 
-                driveToPosition(15, 40, 0.9, 92);
-                driveToPosition(10, 32, 0.9, 92);
+                driveToPosition(15, 45, 0.9, 92);
+                driveToPosition(10, 40, 0.9, 92);
 
-                Thread.sleep(1000);
-                driveToPosition(5, 32, 0.9, 92);
+//                Thread.sleep(1000);
+                driveToPosition(6, 32, 0.9, 92);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
@@ -121,14 +119,14 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 Thread.sleep(2000);
 
                 deposit(200, 0.5);
-                robot.getTwister().setPosition(0.2);
+                robot.getTwister().setPosition(0.9);
 
                 Thread.sleep(1000);
 
                 claw("open");
                 Thread.sleep(1000);
 
-                driveToPosition(10, 28, 0.8, 90);
+                driveToPosition(10, 32, 0.8, 90);
                 robot.getTwister().setPosition(robot.twisterPos4);
 
                 reset(true, false);
@@ -193,7 +191,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 robot.getIntake().setPower(0);
 
                 driveToPosition(15, 56, 0.8, 92);
-                driveToPosition(6, 45, 0.8, 92);
+                driveToPosition(8, 45, 0.8, 92);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
@@ -201,6 +199,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 Thread.sleep(2000);
 
                 deposit(200, 0.5);
+                robot.getTwister().setPosition(0.9);
 
                 Thread.sleep(1000);
 
@@ -208,6 +207,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 Thread.sleep(1000);
 
                 driveToPosition(10, 45, 0.8, 90);
+                robot.getTwister().setPosition(robot.twisterPos4);
 
                 reset(true, false);
 
@@ -226,7 +226,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 driveToPosition(96, 15, 1, 0);
                 driveToPosition(100, 50, 0.85, 0);
 
-                driveToPosition(100, 57, 0.85, 88);
+                driveToPosition(105, 57, 0.85, 88);
 
                 Thread.sleep(1000);
 
@@ -237,7 +237,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
 
                 robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
 
-                driveToPosition(113.5, 57, 0.5, 90);
+                driveToPosition(112, 59, 0.5, 90);
 
                 Thread.sleep(1000);
 
@@ -270,8 +270,8 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 robot.getIntake().setPower(0);
 
 
-                driveToPosition(15, 47, 1, 92);
-                driveToPosition(5, 42, 1, 92);
+                driveToPosition(15, 50, 1, 92);
+                driveToPosition(6, 43, 1, 92);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
@@ -286,77 +286,14 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
                 claw("open");
                 Thread.sleep(1000);
 
-                driveToPosition(10, 42, 0.8, 90);
+                driveToPosition(10, 43, 0.8, 90);
                 robot.getTwister().setPosition(robot.twisterPos4);
 
                 reset(true, false);
 
                 Thread.sleep(1000);
 
-
-
-
-
-
-
-
-                //2nd cycle
-
-//                driveToPosition(30, 50, 0.7, 85);
-//                driveToPosition(100, 50, 0.7, 85);
-//
-//                Thread.sleep(1000);
-//
-//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
-//
-//                Thread.sleep(1000);
-//
-//                robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
-//
-//                driveToPosition(110, 58, 0.5, 85);
-//
-//                Thread.sleep(1000);
-//
-//                robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-//
-//                intake(.5);
-
-
-
-
-
-
-
-
-
-
-//                claw("open");
-//                Thread.sleep(1000);
-//                reset(true, false);
-//
-//                //outtake position
-//                driveToPosition(10, 15, 0.5, 93);
-//
-//                //extend to outtake
-//                extensionPID(600, 300, 0.5);
-
-            }
-
-//            Thread.sleep(100);
-//            intake(-0.175);
-//
-//            reset(false, true);
-//
-//            cycles("blue", 2);
         }
-
-
-        //park
-
-//        driveToPosition(10, -10, 0.6, 90);
-//        driveToPosition(5, -10, 0.6, 90);
-
 
 
 
