@@ -192,7 +192,7 @@ public class DriveThread extends Thread {
         // if going up stop from overextending
 
             if (power < 0.0) {
-                if (robot.getSlideRight().getCurrentPosition() < -2600 || robot.getSlideLeft().getCurrentPosition() < -2600)
+                if (robot.getSlideRight().getCurrentPosition() < -2250 || robot.getSlideLeft().getCurrentPosition() < -2250)
                 {
                     robot.getSlideLeft().setPower(0);
                     robot.getSlideRight().setPower(0);

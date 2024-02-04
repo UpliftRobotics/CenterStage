@@ -60,24 +60,24 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             driveToPosition(107, 129, 0.8, 180);
             driveToPosition(94, 120, 0.9, 180);
-            driveToPosition(96, 90, 0.9, 180);
+            driveToPosition(94, 90, 0.9, 180);
             driveToPosition(100, 86, 0.9, 90, 2);
 
             Thread.sleep(1000);
 
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack5);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack5);
 
             Thread.sleep(1000);
 
             robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
-            driveToPosition(107, 85, 0.5, 92);
+            driveToPosition(105, 86, 0.5, 92);
 
-            Thread.sleep(1000);
+            //Thread.sleep(1000);
 
-            robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+          //  robot.getIntakeRoller().setPosition(robot.frontRollerGround);
 
-            intake(.7);
+            //intake(.7);
 
             driveToPosition(70, 85, .9,90); // under bridge
 
@@ -95,9 +95,9 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             robot.getIntake().setPower(0);
 
-            driveToPosition(25, 90, 0.9,90);
+            driveToPosition(25, 95, 0.9,90);
 
-            driveToPosition(-1, 108, 0.9, 92);
+            driveToPosition(-2, 110, 0.9, 92);
 
             robot.getIntake().setPower(-.5);
             Thread.sleep(400);
@@ -108,7 +108,7 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             Thread.sleep(1000);
 
-            deposit(300, 0.5);
+            deposit(100, 0.5);
             robot.getTwister().setPosition(0.2);
 
             Thread.sleep(1000);
@@ -116,7 +116,7 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
             claw("open");
             Thread.sleep(1000);
 
-            driveToPosition(5, 111, 0.8, 90);
+            driveToPosition(5, 110, 0.8, 92);
             robot.getTwister().setPosition(robot.twisterPos4);
 
             reset(true, false);
@@ -140,8 +140,8 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             Thread.sleep(1000);
 
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack5);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack5);
 
             Thread.sleep(1000);
 
@@ -149,11 +149,11 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
             robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
             driveToPosition(112, 85, 0.5, 92);
 
-            Thread.sleep(1000);
+          //  Thread.sleep(1000);
 
-            robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+           // robot.getIntakeRoller().setPosition(robot.frontRollerGround);
 
-            intake(.7);
+           // intake(.7);
 
             driveToPosition(70, 85, .9,90); // under bridge
 
@@ -173,7 +173,7 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             driveToPosition(30, 95, 0.9,90);
 
-            driveToPosition(1, 115, 0.9, 80);
+            driveToPosition(0, 115, 0.9, 80);
 
             robot.getIntake().setPower(-.5);
             Thread.sleep(400);
@@ -184,7 +184,7 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             Thread.sleep(1000);
 
-            deposit(300, 0.5);
+            deposit(100, 0.5);
             robot.getTwister().setPosition(.2);
 
             Thread.sleep(1000);
@@ -212,23 +212,23 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
             driveToPosition(90, 115, 0.7, 215);
             driveToPosition(110, 125, 0.7, 215);
 
-            driveToPosition(108, 85, 0.9, 95,2);
+            driveToPosition(106, 85, 0.9, 95,2);
             Thread.sleep(1000);
 
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack5);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack5);
 
             Thread.sleep(1000);
 
 
             robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
-            driveToPosition(110, 82, 0.5, 92);
+            driveToPosition(108, 82, 0.5, 92);
 
-            Thread.sleep(1000);
+          //  Thread.sleep(1000);
 
-            robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+          //  robot.getIntakeRoller().setPosition(robot.frontRollerGround);
 
-            intake(.7);
+           // intake(.7);
 
             driveToPosition(70, 90, 0.9,90); // under bridge
 
@@ -251,7 +251,7 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             driveToPosition(5, 128, 1, 80);
             Thread.sleep(1000);
-            driveToPosition(.5, 128, 1, 80);
+            driveToPosition(0, 128, 1, 80);
 
             robot.getIntake().setPower(-.5);
             Thread.sleep(400);
@@ -262,7 +262,7 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             Thread.sleep(1000);
 
-            deposit(300, 0.5);
+            deposit(100, 0.5);
             robot.getTwister().setPosition(0.2);
 
             Thread.sleep(1000);

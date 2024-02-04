@@ -117,7 +117,7 @@ public class UpliftRobot
 
     public double depositWristStore = .05;
     public double depositWristTransfer1 = .13;
-    public double depositWristTransfer2 = .22;
+    public double depositWristTransfer2 = .24;
     public double depositWristDrop = .28;
 
     public double frontRollerStore = 0.82;
@@ -127,10 +127,10 @@ public class UpliftRobot
 
     public double intakeArmLeftStore = 0.02;
     public double intakeArmLeftTransfer = .14;
-    public double intakeArmLeftStack5 = .76;
-    public double intakeArmLeftStack4 = .78;
-    public double intakeArmLeftStack3 = .81;
-    public double intakeArmLeftStack2 = .84;
+    public double intakeArmLeftStack5 = .81;
+    public double intakeArmLeftStack4 = .83;
+    public double intakeArmLeftStack3 = .86;
+    public double intakeArmLeftStack2 = .89;
     public double intakeArmLeftReset = .9;
     public double intakeArmLeftGround = .93;
     public double intakeArmLeftGround1 = .91;
@@ -138,27 +138,27 @@ public class UpliftRobot
 
     public double intakeArmRightStore = .98;
     public double intakeArmRightTransfer = .86;
-    public double intakeArmRightStack5 = .24;
-    public double intakeArmRightStack4 = .22;
-    public double intakeArmRightStack3 = .19;
-    public double intakeArmRightStack2 = .16;
+    public double intakeArmRightStack5 = .19;
+    public double intakeArmRightStack4 = .17;
+    public double intakeArmRightStack3 = .14;
+    public double intakeArmRightStack2 = .11;
     public double intakeArmRightGround = .07;
 
     public double intakeArmRightGround1 = .09;
     public double intakeArmRightReset = .1;
 
     public double armLeftStore = 0.79;
-    public double armLeftTransfer = 0.695;
+    public double armLeftTransfer = 0.685;
     public double armLeftDrop = .08;
     public double armLeftReset = .5;
 
     public double armRightStore = 0.21;
-    public double armRightTransfer = 0.305;
+    public double armRightTransfer = 0.325;
     public double armRightDrop = .92;
     public double armRightReset = .5;
 
 
-    public double grabberClose1 = .7;
+    public double grabberClose1 = .69;
     public double grabberClose2 = .655;
 
     public double grabberOpen = .49;
