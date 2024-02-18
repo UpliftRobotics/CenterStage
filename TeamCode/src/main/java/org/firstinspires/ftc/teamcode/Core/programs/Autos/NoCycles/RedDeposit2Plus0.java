@@ -46,7 +46,7 @@ public class RedDeposit2Plus0 extends UpliftAutoImpl
 
         Thread.sleep(1000);
 
-        robot.webcam.setPipeline(robot.pipelineRedDepositSide);
+        robot.frontWebcam.setPipeline(robot.pipelineRedDepositSide);
     }
 
     @Override

@@ -1,6 +1,12 @@
 package org.firstinspires.ftc.teamcode.Core.main;
 
+import android.util.Size;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 public abstract class UpliftTele extends LinearOpMode {
 
@@ -16,6 +22,10 @@ public abstract class UpliftTele extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+
+
+
+
 
         telemetry.addData("Initializing", "Started");
         telemetry.update();

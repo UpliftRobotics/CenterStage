@@ -25,7 +25,7 @@ public class VisionTest extends UpliftAutoImpl {
         int location = robot.pipelineRedAudienceSide.location;
 
         if(location == 0 || location == -1 ) {
-            robot.getWebcam().stopRecordingPipeline();
+            robot.getFrontWebcam().stopRecordingPipeline();
 
             Thread.sleep(10000);
 

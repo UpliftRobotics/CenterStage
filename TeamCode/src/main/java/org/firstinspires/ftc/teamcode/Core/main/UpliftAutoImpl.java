@@ -3,8 +3,7 @@ package org.firstinspires.ftc.teamcode.Core.main;
 import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.CLOCKWISE;
 import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.COUNTER_CLOCKWISE;
 import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.QUICKEST_DIRECTION;
-import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.blueLeftStack;
-import static org.firstinspires.ftc.teamcode.Core.main.UpliftRobot.redRightStack;
+
 import static org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath.atan2UL;
 import static java.lang.Math.PI;
 import static java.lang.Math.abs;
@@ -16,21 +15,48 @@ import static java.lang.Math.sqrt;
 import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
 
+import android.util.Size;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.Quaternion;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 import org.firstinspires.ftc.teamcode.Core.toolkit.UpliftMath;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagLibrary;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+
+import java.util.List;
+
 
 import java.util.concurrent.TimeUnit;
 
-public class UpliftAutoImpl extends UpliftAuto {
+public class UpliftAutoImpl extends UpliftAuto
+{
+//    AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
+//
+//            .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
+//            .build();
+//
+//    VisionPortal portal = new VisionPortal.Builder()
+//            .addProcessor(aprilProcessor)
+//            .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
+//            .setCameraResolution(new Size(640, 480))
+//            .build();
+
 
     public UpliftRobot robot;
     public boolean goPark = false;
@@ -42,8 +68,7 @@ public class UpliftAutoImpl extends UpliftAuto {
     }
 
     @Override
-    public void initAction() throws InterruptedException
-    {
+    public void initAction() throws InterruptedException {
 
     }
 
@@ -82,10 +107,8 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         double approachZone = 20;
 
-        while ((abs(distanceToPoint) > tolerance) )
-        {
-            if(timer.seconds() - startTime < 5)
-            {
+        while ((abs(distanceToPoint) > tolerance)) {
+            if (timer.seconds() - startTime < 5) {
                 driveTowards(UpliftMath.slowApproach(movementSpeed, distanceToPoint, approachZone, tolerance), relativeAngle, targetAngle, initialDistanceToPoint, turnDirection);
 
                 xDistanceToPoint = xPosition - robot.worldX;
@@ -94,9 +117,7 @@ public class UpliftAutoImpl extends UpliftAuto {
                 relativeAngle = toDegrees(UpliftMath.atan2UL(yDistanceToPoint, xDistanceToPoint)) - robot.worldAngle;
                 telemetry.addData("time", timer.seconds());
                 telemetry.update();
-            }
-            else
-            {
+            } else {
                 goPark = true;
             }
         }
@@ -108,49 +129,34 @@ public class UpliftAutoImpl extends UpliftAuto {
         turnTo(targetAngle, movementSpeed, QUICKEST_DIRECTION);
 
     }
-        public void driveTowards(double speedVal, double relativeAngleToPoint, double targetAngle, double initialDistToPt, int turnDirection) {
-            double turnVal = 0;
-            double initialAngle = robot.worldAngle;
-            double turnAngle = UpliftMath.angleRestrictions(targetAngle - initialAngle);
 
-            if(turnAngle > 30)
-            {
-                if(turnDirection == CLOCKWISE)
-                {
+    public void driveTowards(double speedVal, double relativeAngleToPoint, double targetAngle, double initialDistToPt, int turnDirection) {
+        double turnVal = 0;
+        double initialAngle = robot.worldAngle;
+        double turnAngle = UpliftMath.angleRestrictions(targetAngle - initialAngle);
+
+        if (turnAngle > 30) {
+            if (turnDirection == CLOCKWISE) {
                 turnVal = Range.clip(60 / initialDistToPt * (180 / Math.abs(turnAngle)), -1, 1);
-                }
-                else if(turnDirection == COUNTER_CLOCKWISE)
-                {
+            } else if (turnDirection == COUNTER_CLOCKWISE) {
                 turnVal = -Range.clip(60 / initialDistToPt * (180 / Math.abs(turnAngle)), -1, 1);
-                }
-                else
-                {
+            } else {
                 turnVal = Range.clip(60 / initialDistToPt * (180 / Math.abs(turnAngle)), -1, 1);
-                }
             }
-            else if(turnAngle > 5)
-            {
-                turnVal = 0.15;
+        } else if (turnAngle > 5) {
+            turnVal = 0.15;
+        } else if (turnAngle < -30) {
+            if (turnDirection == CLOCKWISE) {
+                turnVal = Range.clip(60 / initialDistToPt * (180 / Math.abs(turnAngle)), -1, 1);
+            } else if (turnDirection == COUNTER_CLOCKWISE) {
+                turnVal = -Range.clip(60 / initialDistToPt * (180 / Math.abs(turnAngle)), -1, 1);
+            } else {
+                turnVal = Range.clip(60 / initialDistToPt * (180 / Math.abs(turnAngle)), -1, 1);
             }
-            else if(turnAngle < -30)
-            {
-                if(turnDirection == CLOCKWISE)
-                {
-                    turnVal = Range.clip(60 / initialDistToPt * (180 / Math.abs(turnAngle)), -1, 1);
-                } else if(turnDirection == COUNTER_CLOCKWISE)
-                {
-                    turnVal = -Range.clip(60 / initialDistToPt * (180 / Math.abs(turnAngle)), -1, 1);
-                } else {
-                    turnVal = Range.clip(60 / initialDistToPt * (180 / Math.abs(turnAngle)), -1, 1);
-                }
-            }
-            else if(turnAngle < -5)
-            {
-                turnVal = -0.15;
-            }
-            else
-            {
-                turnVal = 0;
+        } else if (turnAngle < -5) {
+            turnVal = -0.15;
+        } else {
+            turnVal = 0;
         }
 
 //        if(turnAngle > 10) {
@@ -181,20 +187,19 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         // find max total input out of the 4 motors
         double maxVal = abs(lf);
-        if(abs(rf) > maxVal){
+        if (abs(rf) > maxVal) {
             maxVal = abs(rf);
         }
-        if(abs(lb) > maxVal){
+        if (abs(lb) > maxVal) {
             maxVal = abs(lb);
         }
-        if(abs(rb) > maxVal){
+        if (abs(rb) > maxVal) {
             maxVal = abs(rb);
         }
 
-        if(maxVal < (1 / sqrt(2))) {
+        if (maxVal < (1 / sqrt(2))) {
             maxVal = 1 / sqrt(2);
         }
-
 
 
         robot.getFrontRight().setPower((rf / maxVal));
@@ -226,25 +231,25 @@ public class UpliftAutoImpl extends UpliftAuto {
     public void turn(double degrees, double speed) {
         double initialAngle = robot.rawAngle;
         // if turning counter-clockwise
-        if(degrees < 0) {
-            while(robot.rawAngle > (initialAngle + degrees)) {
+        if (degrees < 0) {
+            while (robot.rawAngle > (initialAngle + degrees)) {
 
-                if(abs(degrees) < 10) {
-                    spin(-0.2);
-                } else if(abs(degrees) < 30) {
-                    spin(-0.4);
+                if (abs(degrees) < 10) {
+                    spin(-0.3);
+                } else if (abs(degrees) < 30) {
+                    spin(-0.5);
                 } else {
                     spin(-speed);
                 }
             }
             // if turning clockwise
-        } else if(degrees > 0) {
-            while(robot.rawAngle < (initialAngle + degrees)) {
+        } else if (degrees > 0) {
+            while (robot.rawAngle < (initialAngle + degrees)) {
 
-                if(abs(degrees) < 10) {
-                    spin(0.2);
-                } else if(abs(degrees) < 30) {
-                    spin(0.4);
+                if (abs(degrees) < 10) {
+                    spin(0.3);
+                } else if (abs(degrees) < 30) {
+                    spin(0.5);
                 } else {
                     spin(speed);
                 }
@@ -261,18 +266,18 @@ public class UpliftAutoImpl extends UpliftAuto {
     public void turnTo(double targetAngle, double speed, int directionIndex) {
         double initialAngle = robot.worldAngle;
         double quickestTurnAngle = UpliftMath.angleRestrictions(targetAngle - initialAngle);
-        if(quickestTurnAngle > 0) {
-            if(directionIndex == CLOCKWISE) {
+        if (quickestTurnAngle > 0) {
+            if (directionIndex == CLOCKWISE) {
                 turn(quickestTurnAngle, speed);
-            } else if(directionIndex == COUNTER_CLOCKWISE) {
+            } else if (directionIndex == COUNTER_CLOCKWISE) {
                 turn(quickestTurnAngle - 360, speed);
             } else {
                 turn(quickestTurnAngle, speed);
             }
-        } else if(quickestTurnAngle < 0) {
-            if(directionIndex == CLOCKWISE) {
+        } else if (quickestTurnAngle < 0) {
+            if (directionIndex == CLOCKWISE) {
                 turn(quickestTurnAngle + 360, speed);
-            } else if(directionIndex == COUNTER_CLOCKWISE) {
+            } else if (directionIndex == COUNTER_CLOCKWISE) {
                 turn(quickestTurnAngle, speed);
             } else {
                 turn(quickestTurnAngle, speed);
@@ -283,8 +288,8 @@ public class UpliftAutoImpl extends UpliftAuto {
 
 
     }
-    public void tranfer()
-    {
+
+    public void transfer() {
 
         robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
         robot.getArmLeft().setPosition(robot.armLeftTransfer);
@@ -292,16 +297,13 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
-    public void deposit(int slidesDist, double slidesPower) throws InterruptedException
-    {
+    public void deposit(int slidesDist, double slidesPower) throws InterruptedException {
         robot.getDepositWrist().setPosition(robot.depositWristDrop);
         robot.getArmLeft().setPosition(robot.armLeftDrop);
         robot.getArmRight().setPosition(robot.armRightDrop);
 //        robot.getTwister().setPosition(twisterPos);
 
-        while(abs(robot.getSlideRight().getCurrentPosition()) < slidesDist)
-
-        {
+        while (abs(robot.getSlideRight().getCurrentPosition()) < slidesDist) {
             //negative power moves slides up
             robot.getSlideRight().setPower(-slidesPower);
             robot.getSlideLeft().setPower(-slidesPower);
@@ -317,30 +319,23 @@ public class UpliftAutoImpl extends UpliftAuto {
         robot.getSlideRight().setPower(0);
 
     }
-    public void claw(String instance) throws InterruptedException
-    {
-        if(instance.equals("open"))
-        {
+
+    public void claw(String instance) throws InterruptedException {
+        if (instance.equals("open")) {
             robot.getGrabber().setPosition(robot.grabberOpen);
-        }
-        else if (instance.equals("close1"))
-        {
+        } else if (instance.equals("close1")) {
             robot.getGrabber().setPosition(robot.grabberClose1);
-        }
-        else if(instance.equals("close2"))
-        {
+        } else if (instance.equals("close2")) {
             robot.getGrabber().setPosition(robot.grabberClose2);
         }
 
     }
 
-    public void intake(double power) throws InterruptedException
-    {
+    public void intake(double power) throws InterruptedException {
         double velocity = power;
 
         while (!(robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 1
-                && robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 1))
-        {
+                && robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 1)) {
             robot.getIntake().setPower(power);
         }
         robot.getIntake().setPower(0);
@@ -383,24 +378,18 @@ public class UpliftAutoImpl extends UpliftAuto {
 //        robot.getIntake().setPower(0);
 
 
-
-    public void extensionPID(int extensionDist, int slowDownDist, double extensionPower)
-    {
+    public void extensionPID(int extensionDist, int slowDownDist, double extensionPower) {
         robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         double minPower = 0.1;
         int realSlowDownDist = extensionDist - slowDownDist;
 
-        while(robot.getExtension().getCurrentPosition() < extensionDist)
-        {
+        while (robot.getExtension().getCurrentPosition() < extensionDist) {
             double remainingDistance = extensionDist - robot.getExtension().getCurrentPosition();
 
-            if(remainingDistance > realSlowDownDist)
-            {
+            if (remainingDistance > realSlowDownDist) {
                 robot.getExtension().setPower(extensionPower);
-            }
-            else
-            {
+            } else {
                 // Adjust power based on remaining distance
                 double slowdownFactor = remainingDistance / realSlowDownDist;
                 double slowedPower = minPower + (extensionPower - minPower) * slowdownFactor;
@@ -414,14 +403,11 @@ public class UpliftAutoImpl extends UpliftAuto {
         }
     }
 
-    public void reset(boolean slidesDown, boolean extensionIn) throws InterruptedException
-    {
+    public void reset(boolean slidesDown, boolean extensionIn) throws InterruptedException {
 
-        if(slidesDown)
-        {
+        if (slidesDown) {
 
-            while(robot.getSlideRight().getCurrentPosition() < 0)
-            {
+            while (robot.getSlideRight().getCurrentPosition() < 0) {
 
                 //negative power moves slides up
                 robot.getSlideRight().setPower(0.5);
@@ -434,10 +420,8 @@ public class UpliftAutoImpl extends UpliftAuto {
 
         }
 
-        if(extensionIn)
-        {
-            while(robot.getExtension().getCurrentPosition() > 0)
-            {
+        if (extensionIn) {
+            while (robot.getExtension().getCurrentPosition() > 0) {
 
                 robot.getSlideRight().setPower(-0.1);
 
@@ -470,84 +454,99 @@ public class UpliftAutoImpl extends UpliftAuto {
 
     }
 
-    public void cycles(String color, int numCycles) throws InterruptedException
-    {
-
-        double[] leftStackPos;
-        leftStackPos = new double[numCycles];
-
-        leftStackPos[0] = robot.intakeArmLeftStack5;
-        leftStackPos[1] = robot.intakeArmLeftStack4;
-        leftStackPos[2] = robot.intakeArmLeftStack3;
-        leftStackPos[3] = robot.intakeArmLeftStack2;
-        leftStackPos[4] = robot.intakeArmLeftGround;
-
-        double[] rightStackPos;
-        rightStackPos = new double[numCycles];
-
-        rightStackPos[0] = robot.intakeArmRightStack5;
-        rightStackPos[1] = robot.intakeArmRightStack4;
-        rightStackPos[2] = robot.intakeArmRightStack3;
-        rightStackPos[3] = robot.intakeArmRightStack2;
-        rightStackPos[4] = robot.intakeArmRightGround;
-
-        for(int i = 0; i < numCycles; i++)
-        {
-            //goes to intake position
-            if(color.equals("blue"))
-            {
-                driveToPosition(blueLeftStack.x, blueLeftStack.y, 0.5, blueLeftStack.angle);
-            }
-            else if (color.equals("red"))
-            {
-                driveToPosition(redRightStack.x, redRightStack.y, 0.5, redRightStack.angle);
-            }
-
-            //sets left and right intake arm positions
-            robot.getIntakeArmLeft().setPosition(leftStackPos[i]);
-            robot.getIntakeArmRight().setPosition(rightStackPos[i]);
-
-            Thread.sleep(200);
-
-            //extends to stack
-            extensionPID(600, 300, 0.5);
-
-            //sets roller position
-            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
-
-            //intakes pixels
-            intake(0.2);
-
-            //pulls extension back in
-            reset(false, true);
-
-            //goes to deposit position
-            if(color.equals("blue"))
-            {
-                driveToPosition(3.5, 25, 0.7, 90, 2);
-            }
-            else if (color.equals("red"))
-            {
-                driveToPosition(4, 119, 0.7, 90);
-            }
-            Thread.sleep(1000);
-
-            //drops pixel
-            deposit(400, 0.1);
-            Thread.sleep(500);
-            claw("close2");
-
-            Thread.sleep(500);
-
-            //resets slides
-            reset(true, false);
-        }
-    }
-
-
+//    public void cycles(String color, int numCycles) throws InterruptedException
+//    {
+//
+//        double[] leftStackPos;
+//        leftStackPos = new double[numCycles];
+//
+//        leftStackPos[0] = robot.intakeArmLeftStack5;
+//        leftStackPos[1] = robot.intakeArmLeftStack4;
+//        leftStackPos[2] = robot.intakeArmLeftStack3;
+//        leftStackPos[3] = robot.intakeArmLeftStack2;
+//        leftStackPos[4] = robot.intakeArmLeftGround;
+//
+//        double[] rightStackPos;
+//        rightStackPos = new double[numCycles];
+//
+//        rightStackPos[0] = robot.intakeArmRightStack5;
+//        rightStackPos[1] = robot.intakeArmRightStack4;
+//        rightStackPos[2] = robot.intakeArmRightStack3;
+//        rightStackPos[3] = robot.intakeArmRightStack2;
+//        rightStackPos[4] = robot.intakeArmRightGround;
+//
+//        for(int i = 0; i < numCycles; i++)
+//        {
+//            //goes to intake position
+//            if(color.equals("blue"))
+//            {
+//                driveToPosition(blueLeftStack.x, blueLeftStack.y, 0.5, blueLeftStack.angle);
+//            }
+//            else if (color.equals("red"))
+//            {
+//                driveToPosition(redRightStack.x, redRightStack.y, 0.5, redRightStack.angle);
+//            }
+//
+//            //sets left and right intake arm positions
+//            robot.getIntakeArmLeft().setPosition(leftStackPos[i]);
+//            robot.getIntakeArmRight().setPosition(rightStackPos[i]);
+//
+//            Thread.sleep(200);
+//
+//            //extends to stack
+//            extensionPID(600, 300, 0.5);
+//
+//            //sets roller position
+//            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+//
+//            //intakes pixels
+//            intake(0.2);
+//
+//            //pulls extension back in
+//            reset(false, true);
+//
+//            //goes to deposit position
+//            if(color.equals("blue"))
+//            {
+//                driveToPosition(3.5, 25, 0.7, 90, 2);
+//            }
+//            else if (color.equals("red"))
+//            {
+//                driveToPosition(4, 119, 0.7, 90);
+//            }
+//            Thread.sleep(1000);
+//
+//            //drops pixel
+//            deposit(400, 0.1);
+//            Thread.sleep(500);
+//            claw("close2");
+//
+//            Thread.sleep(500);
+//
+//            //resets slides
+//            reset(true, false);
+//        }
+//    }
 
 
-
-
-
+//    public void driveToAprilTag(double currentX, double currentY, double currentAngle)
+//    {
+//        if(aprilProcessor.getDetections().size() > 0)
+//        {
+//            AprilTagDetection tag = aprilProcessor.getDetections().get(0);
+//
+//            driveToPosition(currentX + tag.ftcPose.y, currentY +  tag.ftcPose.x, 0.3, currentAngle + tag.ftcPose.yaw);
+//
+//            telemetry.addData("Tag: ", tag.id);
+//            telemetry.addData("X: ", tag.ftcPose.x);
+//            telemetry.addData("Y: ", tag.ftcPose.y);
+//            telemetry.addData("Angle: ", tag.ftcPose.yaw);
+//            telemetry.update();
+//        }
+//    }
 }
+
+
+
+
+

@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.Core.main;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+import android.util.Size;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
@@ -22,9 +24,14 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageBlueFar;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageRedClose;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageRedFar;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.ExposureControl;
+
+import java.util.concurrent.TimeUnit;
 
 public class UpliftRobot
 {
@@ -52,11 +59,11 @@ public class UpliftRobot
     public IMU imu;
 
     public CenterStageBlueClose pipelineBlueDepositSide;
-
     public CenterStageBlueFar pipelineBlueAudienceSide;
     public CenterStageRedClose pipelineRedDepositSide;
     public CenterStageRedFar pipelineRedAudienceSide;
-    public OpenCvCamera webcam;
+
+    public OpenCvCamera frontWebcam;
 
     public double worldX;
     public double worldY;
@@ -72,16 +79,7 @@ public class UpliftRobot
     public static double robotEncoderWheelDistance = 8.7007;
     //12.73
     public static double horizontalEncoderInchesPerDegreeOffset = 0;
-    //0.0275
-    //1.37480
 
-    public static final Point blueLeftStack = new Point(50, 50, 93);
-    public static final Point blueMiddleStack = new Point(0, 0, 0);
-    public static final Point blueRightStack = new Point(0, 0, 0);
-
-    public static final Point redLeftStack = new Point(0, 0, 0);
-    public static final Point redMiddleStack = new Point(0, 0, 0);
-    public static final Point redRightStack = new Point(67.5, 70, 93);
 
     // direction constants
     public static final int CLOCKWISE = 1;
@@ -184,7 +182,8 @@ public class UpliftRobot
         odometry = new Odometry(this);
     }
 
-    public void getHardware() {
+    public void getHardware()
+    {
 
         hardwareMap = opMode.hardwareMap;
 
@@ -224,12 +223,8 @@ public class UpliftRobot
 
 
 
-
-
-
-
-
-        initializeCamera();
+        initializeFrontCamera();
+//        initializeBackCamera();
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -265,10 +260,6 @@ public class UpliftRobot
 
     }
 
-//    public OpenCvCamera getWebcam()
-//    {
-//        return webcam;
-//    }
 
     public DcMotor getFrontRight() {
         return frontRight;
@@ -307,8 +298,8 @@ public class UpliftRobot
 
     public Servo getGrabber(){return grabber;}
 
-
     public Servo getArmLeft(){return armLeft;}
+
     public Servo getArmRight(){return armRight;}
 
     public Servo getTwister()
@@ -339,56 +330,36 @@ public class UpliftRobot
     }
 
 
-    public void initializeCamera()
-  {
+    public void initializeFrontCamera()
+    {
 
        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-       webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+       frontWebcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
 
 
-     webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+      frontWebcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
          @Override
            public void onOpened()
            {
-//             webcam.startStreaming(800, 448, OpenCvCameraRotation.UPRIGHT);
+
+             //  myExposureControl.setExposure(30, TimeUnit.MILLISECONDS);
 
              pipelineBlueDepositSide = new CenterStageBlueClose(opMode.telemetry);
              pipelineRedDepositSide = new CenterStageRedClose(opMode.telemetry);
              pipelineBlueAudienceSide = new CenterStageBlueFar(opMode.telemetry);
              pipelineRedAudienceSide = new CenterStageRedFar(opMode.telemetry);
 
-               //changes this before each match depending on color and side
+             //changes this before each match depending on color and side
 
-               webcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+               frontWebcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
-               webcam.setPipeline(pipelineBlueAudienceSide);
+               frontWebcam.setPipeline(pipelineBlueDepositSide);
 
-//               if(!pipelineBlueDepositSide.blueClose)
-//               {
-//                   webcam.setPipeline(pipelineBlueAudienceSide);
-//
-//
-//                   if (!pipelineBlueAudienceSide.blueFar)
-//                   {
-//                       webcam.setPipeline(pipelineRedDepositSide);
-//
-//                       if(!pipelineRedDepositSide.redClose)
-//                       {
-//                           webcam.setPipeline(pipelineRedAudienceSide);
-//
-//                       }
-//
-//                   }
-//
-//               }
-//               opMode.telemetry.addData("blueClose:", pipelineBlueDepositSide.blueClose);
-//               opMode.telemetry.addData("blueFar:", pipelineBlueAudienceSide.blueFar);
-//               opMode.telemetry.addData("redClose:", pipelineRedDepositSide.redClose);
-//               opMode.telemetry.addData("redFar:", pipelineRedAudienceSide.redFar);
-//               opMode.telemetry.update();
 
 
            }
+
+
 
             @Override
 
@@ -399,7 +370,12 @@ public class UpliftRobot
         });
     }
 
-    public OpenCvCamera getWebcam() {
-        return webcam;
+
+
+    public OpenCvCamera getFrontWebcam() {
+        return frontWebcam;
     }
+//    public OpenCvCamera getBackWebcam() {
+//        return backWebcam;
+//    }
 }

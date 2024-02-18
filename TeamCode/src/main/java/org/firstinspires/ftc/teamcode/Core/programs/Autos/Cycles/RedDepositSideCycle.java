@@ -32,7 +32,7 @@ public class RedDepositSideCycle extends UpliftAutoImpl
 //
 //        robot.getDepositWrist().setPosition(0.6);
 
-        robot.webcam.setPipeline(robot.pipelineRedDepositSide);
+        robot.frontWebcam.setPipeline(robot.pipelineRedDepositSide);
 
 
     }

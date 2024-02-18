@@ -40,7 +40,7 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
 //        claw("close1");
 
-        robot.webcam.setPipeline(robot.pipelineRedAudienceSide);
+        robot.frontWebcam.setPipeline(robot.pipelineRedAudienceSide);
 
 
     }

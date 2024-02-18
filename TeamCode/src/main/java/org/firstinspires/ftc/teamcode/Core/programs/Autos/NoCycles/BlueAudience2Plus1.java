@@ -41,7 +41,7 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
 
 //        claw("close1");-
 
-        robot.webcam.setPipeline(robot.pipelineBlueAudienceSide);
+        robot.frontWebcam.setPipeline(robot.pipelineBlueAudienceSide);
 
 
     }

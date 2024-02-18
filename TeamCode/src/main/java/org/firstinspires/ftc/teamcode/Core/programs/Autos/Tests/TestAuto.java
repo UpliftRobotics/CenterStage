@@ -13,7 +13,8 @@ public class TestAuto extends UpliftAutoImpl {
 
     Odometry odom;
 
-    public void initHardware() {
+    public void initHardware()
+    {
 
         robot = new UpliftRobot(this);
         odom = robot.odometry;
@@ -23,90 +24,15 @@ public class TestAuto extends UpliftAutoImpl {
     @Override
     public void initAction() throws InterruptedException
     {
-//        while(robot.getPixelDetectorLeft().getDistance(DistanceUnit.INCH) < 1)
-//        {
-//            robot.getIntake().setPower(0.1);
-//        }
-
-
-//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-//
-//        Thread.sleep(3000);
-//
-//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
-//
-//        Thread.sleep(3000);
-//
-//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
-//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
-//
-//        Thread.sleep(3000);
-//
-//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack4);
-//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack4);
-//
-//        Thread.sleep(3000);
-//
-//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack5);
-//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack5);
-//
-//        Thread.sleep(3000);
-
-
-//
-//
-////        robot.getArmLeft().setPosition(robot.armLeftStore);
-////        robot.getArmRight().setPosition(robot.armRightStore);
-////        robot.getDepositWrist().setPosition(robot.depositWristStore);
-//
-//        Thread.sleep(1000);
-//
-//
-//        claw("open");
-//
-//        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStore);
-//        robot.getIntakeArmRight().setPosition(robot.intakeArmRightStore);
-//        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
-//
-//        Thread.sleep(5000);
-//
-//
-//        Thread.sleep(1000);
-//
-//
-//
-//        Thread.sleep(5000);
-////
-////        claw("close2");
-////
-////        Thread.sleep(1000);
-
 
     }
 
     @Override
     public void body() throws InterruptedException
     {
-//        ElapsedTime timer = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
-//        timer.startTime();
-//
-//        odom.setOdometryPosition(0, 0, 0);
-//
-//
-//        while(timer.seconds() < 25)
-//        {
-//            //do auto
-//        }
-//        //park
-
-//        intake(0.7);
-
-        deposit(700, 0.1);
-        Thread.sleep(3000);
-        reset(true, false);
-        Thread.sleep(3000);
+        odom.setOdometryPosition(48, 0, 0);
+        driveToPosition(42, 28, 0.9, 0);
+        Thread.sleep(10000);
 
 
     }

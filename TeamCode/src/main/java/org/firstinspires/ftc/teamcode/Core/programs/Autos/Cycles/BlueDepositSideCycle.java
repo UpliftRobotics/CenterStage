@@ -49,8 +49,7 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
 
         Thread.sleep(1000);
 
-        robot.webcam.setPipeline(robot.pipelineBlueDepositSide);
-
+        robot.frontWebcam.setPipeline(robot.pipelineBlueDepositSide);
 
     }
 
