@@ -64,6 +64,7 @@ public class UpliftRobot
     public CenterStageRedFar pipelineRedAudienceSide;
 
     public OpenCvCamera frontWebcam;
+    public OpenCvCamera backWebcam;
 
     public double worldX;
     public double worldY;
@@ -224,7 +225,7 @@ public class UpliftRobot
 
 
         initializeFrontCamera();
-//        initializeBackCamera();
+        initializeBackCamera();
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -370,12 +371,24 @@ public class UpliftRobot
         });
     }
 
+    public void initializeBackCamera() {
+        AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
 
+                .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
+                .build();
+
+        VisionPortal portal = new VisionPortal.Builder()
+                .addProcessor(aprilProcessor)
+                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
+                .setCameraResolution(new Size(640, 480))
+
+                .build();
+    }
 
     public OpenCvCamera getFrontWebcam() {
         return frontWebcam;
     }
-//    public OpenCvCamera getBackWebcam() {
-//        return backWebcam;
-//    }
+    public OpenCvCamera getBackWebcam() {
+        return backWebcam;
+    }
 }

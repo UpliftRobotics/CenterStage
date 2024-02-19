@@ -50,6 +50,9 @@ public class BlueAudience2Plus1 extends UpliftAutoImpl
     public void body() throws InterruptedException
     {
         int location = robot.pipelineBlueAudienceSide.location;
+        robot.frontWebcam.closeCameraDevice();
+        robot.backWebcam.startStreaming(640,480);
+
         odom.setOdometryPosition(100, 0, 0);
 
 

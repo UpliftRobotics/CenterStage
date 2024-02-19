@@ -55,8 +55,8 @@ public class UpliftAutoImpl extends UpliftAuto
 //            .addProcessor(aprilProcessor)
 //            .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
 //            .setCameraResolution(new Size(640, 480))
+//
 //            .build();
-
 
     public UpliftRobot robot;
     public boolean goPark = false;
