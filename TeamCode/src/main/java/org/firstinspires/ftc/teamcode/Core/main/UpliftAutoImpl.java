@@ -527,23 +527,114 @@ public class UpliftAutoImpl extends UpliftAuto
 //            reset(true, false);
 //        }
 //    }
-
-
-//    public void driveToAprilTag(double currentX, double currentY, double currentAngle)
+//    public void cycles(String color, int numCycles) throws InterruptedException
 //    {
-//        if(aprilProcessor.getDetections().size() > 0)
+//
+//        double[] leftStackPos;
+//        leftStackPos = new double[numCycles];
+//
+//        leftStackPos[0] = robot.intakeArmLeftStack5;
+//        leftStackPos[1] = robot.intakeArmLeftStack4;
+//        leftStackPos[2] = robot.intakeArmLeftStack3;
+//        leftStackPos[3] = robot.intakeArmLeftStack2;
+//        leftStackPos[4] = robot.intakeArmLeftReset;
+//
+//        double[] rightStackPos;
+//        rightStackPos = new double[numCycles];
+//
+//        rightStackPos[0] = robot.intakeArmRightStack5;
+//        rightStackPos[1] = robot.intakeArmRightStack4;
+//        rightStackPos[2] = robot.intakeArmRightStack3;
+//        rightStackPos[3] = robot.intakeArmRightStack2;
+//        rightStackPos[4] = robot.intakeArmRightReset;
+//
+//        for(int i = 0; i < numCycles; i++)
 //        {
-//            AprilTagDetection tag = aprilProcessor.getDetections().get(0);
+//            //goes to intake position
+//            if(color.equals("blue"))
+//            {
+//                driveToPosition(blueLeftStack.x, blueLeftStack.y, 0.5, blueLeftStack.angle);
+//            }
+//            else if (color.equals("red"))
+//            {
+//                driveToPosition(redRightStack.x, redRightStack.y, 0.5, redRightStack.angle);
+//            }
 //
-//            driveToPosition(currentX + tag.ftcPose.y, currentY +  tag.ftcPose.x, 0.3, currentAngle + tag.ftcPose.yaw);
+//            //sets left and right intake arm positions
+//            robot.getIntakeArmLeft().setPosition(leftStackPos[i]);
+//            robot.getIntakeArmRight().setPosition(rightStackPos[i]);
 //
-//            telemetry.addData("Tag: ", tag.id);
-//            telemetry.addData("X: ", tag.ftcPose.x);
-//            telemetry.addData("Y: ", tag.ftcPose.y);
-//            telemetry.addData("Angle: ", tag.ftcPose.yaw);
-//            telemetry.update();
+//            Thread.sleep(200);
+//
+//            //extends to stack
+//            extensionPID(600, 300, 0.5);
+//
+//            //sets roller position
+//            robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+//
+//            //intakes pixels
+//            intake(0.2);
+//
+//            //pulls extension back in
+//            reset(false, true);
+//
+//            //goes to deposit position
+//            if(color.equals("blue"))
+//            {
+//                driveToPosition(3.5, 25, 0.7, 90, 2);
+//            }
+//            else if (color.equals("red"))
+//            {
+//                driveToPosition(4, 119, 0.7, 90);
+//            }
+//            Thread.sleep(1000);
+//
+//            //drops pixel
+//            deposit(400, 0.1);
+//            Thread.sleep(500);
+//            claw("close2");
+//
+//            Thread.sleep(500);
+//
+//            //resets slides
+//            reset(true, false);
 //        }
 //    }
+
+
+
+
+
+
+
+    public void driveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException {
+        AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
+
+                .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
+                .build();
+
+        VisionPortal portal = new VisionPortal.Builder()
+                .addProcessor(aprilProcessor)
+                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
+                .setCameraResolution(new Size(640, 480))
+
+                .build();
+
+        if(aprilProcessor.getDetections().size() > 0)
+        {
+            AprilTagDetection tag = aprilProcessor.getDetections().get(0);
+
+            Thread.sleep(1000);
+
+            driveToPosition(currentX + tag.ftcPose.y + 30, currentY +  tag.ftcPose.x, 0.3, currentAngle + tag.ftcPose.yaw);
+
+            telemetry.addData("Tag: ", tag.id);
+            telemetry.addData("X: ", tag.ftcPose.x);
+            telemetry.addData("Y: ", tag.ftcPose.y);
+            telemetry.addData("Angle: ", tag.ftcPose.yaw);
+            telemetry.update();
+        }
+    }
 }
 
 

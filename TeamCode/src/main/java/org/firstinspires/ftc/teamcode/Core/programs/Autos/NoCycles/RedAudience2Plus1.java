@@ -103,8 +103,8 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
             Thread.sleep(400);
             robot.getIntake().setPower(0);
 
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
 
             Thread.sleep(1000);
 
@@ -179,8 +179,8 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
             Thread.sleep(400);
             robot.getIntake().setPower(0);
 
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
 
             Thread.sleep(1000);
 
@@ -257,8 +257,8 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
             Thread.sleep(400);
             robot.getIntake().setPower(0);
 
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
 
             Thread.sleep(1000);
 

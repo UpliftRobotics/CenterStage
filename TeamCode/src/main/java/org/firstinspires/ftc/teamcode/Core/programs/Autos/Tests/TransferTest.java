@@ -50,6 +50,7 @@ public class TransferTest extends UpliftAutoImpl {
         Thread.sleep(200);
         robot.getIntake().setPower(0);
 
+        robot.getIntakeRoller().setPosition(robot.frontRollerGround);
         robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
         robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
         robot.getArmLeft().setPosition(robot.armLeftDrop);

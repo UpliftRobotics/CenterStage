@@ -114,16 +114,18 @@ public class UpliftRobot
 
 
 
-    public double depositWristStore = .05;
-    public double depositWristTransfer1 = .13;
-    public double depositWristTransfer2 = .24;
-    public double depositWristDrop = .28;
 
-    public double frontRollerStore = 0.82;
-    public double frontRollerGround = .495;
+    public double depositWristStore = .3;
+    public double depositWristReset = .45;
+    public double depositWristTransfer1 = .42;
+    public double depositWristTransfer2 = .48;
+    public double depositWristDrop = .54;
+
+    public double frontRollerStore = .9;
+    public double frontRollerGround = .5;
     public double frontRollerReset = .5;
     public double frontRollerStack = .6;
-
+    
     public double intakeArmLeftStore = 0.02;
     public double intakeArmLeftTransfer = .14;
     public double intakeArmLeftStack5 = .81;
@@ -131,19 +133,16 @@ public class UpliftRobot
     public double intakeArmLeftStack3 = .86;
     public double intakeArmLeftStack2 = .89;
     public double intakeArmLeftReset = .9;
-    public double intakeArmLeftGround = .93;
-    public double intakeArmLeftGround1 = .91;
+
 
 
     public double intakeArmRightStore = .98;
     public double intakeArmRightTransfer = .86;
+
     public double intakeArmRightStack5 = .19;
     public double intakeArmRightStack4 = .17;
     public double intakeArmRightStack3 = .14;
     public double intakeArmRightStack2 = .11;
-    public double intakeArmRightGround = .07;
-
-    public double intakeArmRightGround1 = .09;
     public double intakeArmRightReset = .1;
 
     public double armLeftStore = 0.79;
@@ -225,7 +224,7 @@ public class UpliftRobot
 
 
         initializeFrontCamera();
-        initializeBackCamera();
+//        initializeBackCamera();
 
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);

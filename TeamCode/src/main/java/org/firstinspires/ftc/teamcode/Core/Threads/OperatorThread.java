@@ -149,7 +149,7 @@ public class OperatorThread extends Thread {
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
                 robot.getIntakeRoller().setPosition(robot.frontRollerStore);
                 robot.intakePower = .5;
-                Thread.sleep(1000);
+                Thread.sleep(1500);
                 robot.intakePower = 0;
                 robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
                 robot.getArmLeft().setPosition(robot.armLeftTransfer);
@@ -171,9 +171,10 @@ public class OperatorThread extends Thread {
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
                 robot.getArmRight().setPosition(robot.armRightDrop);
                 robot.getArmLeft().setPosition(robot.armLeftDrop);
-                Thread.sleep(200);
+                Thread.sleep(50);
                 robot.getDepositWrist().setPosition(robot.depositWristDrop);
-                Thread.sleep(200);
+                    robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+                    Thread.sleep(200);
                 robot.depositStage++;
 
                 }
@@ -204,10 +205,8 @@ public class OperatorThread extends Thread {
         {
             if (robot.intakeHeight == 1)
             {
-                if ((robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) > 2) && (robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) > 2) )
-                {
-                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-                    robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
+                    robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
                     robot.getIntakeRoller().setPosition(robot.frontRollerGround);
                     if (robot.oneDriver)
                     {
@@ -215,20 +214,7 @@ public class OperatorThread extends Thread {
                     }
                     Thread.sleep(200);
                     robot.intakeHeight = 0;
-                }
 
-                else
-                {
-                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround1);
-                    robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround1);
-                    robot.getIntakeRoller().setPosition(robot.frontRollerGround);
-                    if (robot.oneDriver)
-                    {
-                        robot.intakePower = 1;
-                    }
-                    Thread.sleep(200);
-                    robot.intakeHeight = 0;
-                }
 
             }
             else if ( robot.intakeHeight == 0)
@@ -310,7 +296,7 @@ public class OperatorThread extends Thread {
                     && robot.depositStage == 0) {
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
-                robot.getIntakeRoller().setPosition(robot.frontRollerStack);
+                robot.getIntakeRoller().setPosition(robot.frontRollerStore);
                 robot.depositStage = -1;
                 robot.opMode.gamepad1.rumbleBlips(2);
                 robot.intakePower = 0;

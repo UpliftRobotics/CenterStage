@@ -27,8 +27,8 @@ public class IntakeTest extends UpliftAutoImpl {
 //        }
 
         robot.getIntakeRoller().setPosition(robot.frontRollerStore);
-        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-        robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
+        robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
 
         Thread.sleep(3000);
 

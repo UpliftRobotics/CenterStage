@@ -71,8 +71,8 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
                 driveToPosition(42, 15, 0.9, 0);
                 driveToPosition(5, 24, 0.5, 80);
 
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
 
                 Thread.sleep(1500);
 
@@ -98,8 +98,8 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
                 driveToPosition(48, 19, 0.8, 0);
                 driveToPosition(2, 32, 0.5, 80);
 
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
 
                 Thread.sleep(1500);
 
@@ -127,8 +127,8 @@ public class BlueDepositSideCycle extends UpliftAutoImpl
                 driveToPosition(42, 14, 0.9, 50);
                 driveToPosition(4, 40, 0.6, 80);
 
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
 
                 Thread.sleep(1500);
 

@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
-@Autonomous(name = "ResetAuto", group = "Opmodes")
-public class ResetAuto extends UpliftAutoImpl {
+@Autonomous(name = "RollerTest", group = "Opmodes")
+public class RollerTest extends UpliftAutoImpl {
 
     Odometry odom;
 
@@ -22,20 +22,11 @@ public class ResetAuto extends UpliftAutoImpl {
     @Override
     public void initAction() throws InterruptedException
     {
-//        while(robot.getPixelDetectorLeft().getDistance(DistanceUnit.INCH) < 1)
-//        {
-//            robot.getIntake().setPower(0.1);
-//        }
+        robot.getIntakeRoller().setPosition(robot.frontRollerGround);
+        Thread.sleep(2000);
+        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
 
-robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
-robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
-robot.getIntakeRoller().setPosition(robot.frontRollerReset);
-robot.getGrabber().setPosition(robot.grabberOpen);
-robot.getArmLeft().setPosition(robot.armLeftReset);
-robot.getArmRight().setPosition(robot.armRightReset);
-robot.getDepositWrist().setPosition(robot.depositWristReset);
-robot.getTwister().setPosition(robot.twisterPos4);
-Thread.sleep(20000);
+
 
        }
 
