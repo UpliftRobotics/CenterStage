@@ -53,8 +53,8 @@ public class TeleOp extends UpliftTele {
                 robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
                 robot.getIntakeRoller().setPosition(robot.frontRollerGround);
 
                 robot.getArmLeft().setPosition(robot.armLeftStore);

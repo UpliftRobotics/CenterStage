@@ -41,6 +41,7 @@ public class OperatorThread extends Thread {
                 drop();
                 automaticStore();
                 driverOneCycle();
+                verticalTwister();
 
                 robot.opMode.telemetry.addData("right slide ticks", robot.getSlideRight().getCurrentPosition());
                 robot.opMode.telemetry.addData("left slide ticks", robot.getSlideLeft().getCurrentPosition());
@@ -117,8 +118,8 @@ public class OperatorThread extends Thread {
             }
             else if (robot.depositStage == 1) //intake is in the robot, transfer by grabbing the pixels and then sending the intake out
             {
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
                 robot.getArmRight().setPosition(robot.armRightDrop);
                 robot.getArmLeft().setPosition(robot.armLeftDrop);
                 Thread.sleep(200);
@@ -149,7 +150,7 @@ public class OperatorThread extends Thread {
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
                 robot.getIntakeRoller().setPosition(robot.frontRollerStore);
                 robot.intakePower = .5;
-                Thread.sleep(1500);
+                Thread.sleep(1250);
                 robot.intakePower = 0;
                 robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
                 robot.getArmLeft().setPosition(robot.armLeftTransfer);
@@ -167,8 +168,8 @@ public class OperatorThread extends Thread {
                 }
                 else if (robot.depositStage == 1) //intake is in the robot, transfer by grabbing the pixels and then sending the intake out
                 {
-                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+                    robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
                 robot.getArmRight().setPosition(robot.armRightDrop);
                 robot.getArmLeft().setPosition(robot.armLeftDrop);
                 Thread.sleep(50);
@@ -294,13 +295,13 @@ public class OperatorThread extends Thread {
             if (robot.getPixelDetectorRight().getDistance(DistanceUnit.CM) < 2
                     && robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 2
                     && robot.depositStage == 0) {
-                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack2);
-                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack2);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
                 robot.getIntakeRoller().setPosition(robot.frontRollerStore);
                 robot.depositStage = -1;
                 robot.opMode.gamepad1.rumbleBlips(2);
                 robot.intakePower = 0;
-                robot.extensionPower = -.2;
+//                robot.extensionPower = -.2;
             }
         }
     }
@@ -338,6 +339,25 @@ public class OperatorThread extends Thread {
 //                robot.slidePower = 0;
 //            }
             robot.depositStage = 0;
+        }
+    }
+
+    public void verticalTwister() throws Exception
+    {
+        if (robot.opMode.gamepad2.b && robot.depositStage == 2 )
+        {
+            if (robot.twisterVerticalStage == 0)
+            {
+                robot.getTwister().setPosition(robot.twisterPos1);
+                robot.twisterVerticalStage++;
+                Thread.sleep(200);
+            }
+            else
+            {
+                robot.getTwister().setPosition(robot.twisterPos7);
+                robot.twisterVerticalStage--;
+                Thread.sleep(200);
+            }
         }
     }
 

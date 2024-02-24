@@ -32,9 +32,22 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.ExposureControl;
 
 import java.util.concurrent.TimeUnit;
+import com.arcrobotics.ftclib.purepursuit.Waypoint;
+import com.arcrobotics.ftclib.command.CommandOpMode;
+import com.arcrobotics.ftclib.command.OdometrySubsystem;
+import com.arcrobotics.ftclib.command.PurePursuitCommand;
+import com.arcrobotics.ftclib.drivebase.MecanumDrive;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
+import com.arcrobotics.ftclib.kinematics.HolonomicOdometry;
+import com.arcrobotics.ftclib.purepursuit.waypoints.EndWaypoint;
+import com.arcrobotics.ftclib.purepursuit.waypoints.GeneralWaypoint;
+import com.arcrobotics.ftclib.purepursuit.waypoints.StartWaypoint;
 
 public class UpliftRobot
 {
+
+
     public Odometry odometry;
 
     //Drive Motors
@@ -110,6 +123,7 @@ public class UpliftRobot
     public double extensionPower = 0;
     public boolean oneDriver = false;
     public double slidePower = 0;
+    public int twisterVerticalStage = 0;
 
 
 
@@ -128,10 +142,10 @@ public class UpliftRobot
     
     public double intakeArmLeftStore = 0.02;
     public double intakeArmLeftTransfer = .14;
-    public double intakeArmLeftStack5 = .81;
-    public double intakeArmLeftStack4 = .83;
-    public double intakeArmLeftStack3 = .86;
-    public double intakeArmLeftStack2 = .89;
+    public double intakeArmLeftStack5 = .79;
+    public double intakeArmLeftStack4 = .81;
+    public double intakeArmLeftStack3 = .84;
+    public double intakeArmLeftStack2 = .87;
     public double intakeArmLeftReset = .9;
 
 
@@ -139,10 +153,10 @@ public class UpliftRobot
     public double intakeArmRightStore = .98;
     public double intakeArmRightTransfer = .86;
 
-    public double intakeArmRightStack5 = .19;
-    public double intakeArmRightStack4 = .17;
-    public double intakeArmRightStack3 = .14;
-    public double intakeArmRightStack2 = .11;
+    public double intakeArmRightStack5 = .21;
+    public double intakeArmRightStack4 = .19;
+    public double intakeArmRightStack3 = .16;
+    public double intakeArmRightStack2 = .13;
     public double intakeArmRightReset = .1;
 
     public double armLeftStore = 0.79;
@@ -157,12 +171,13 @@ public class UpliftRobot
 
 
     public double grabberClose1 = .69;
-    public double grabberClose2 = .655;
+    public double grabberClose2 = .62;
 
     public double grabberOpen = .49;
 
     public double twisterPos4 = .532;
-
+    public double twisterPos1 = .264;
+    public double twisterPos7 = .8;
 
 
 
@@ -257,6 +272,8 @@ public class UpliftRobot
         slideLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         slideRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         extension.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
 
     }
 
@@ -390,4 +407,5 @@ public class UpliftRobot
     public OpenCvCamera getBackWebcam() {
         return backWebcam;
     }
+
 }

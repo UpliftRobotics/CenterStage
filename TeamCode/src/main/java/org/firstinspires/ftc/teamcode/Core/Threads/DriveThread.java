@@ -98,12 +98,13 @@ public class DriveThread extends Thread {
     }
     public void extension()
     {
-        double power = (robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
+        double power = -(robot.opMode.gamepad1.right_trigger - robot.opMode.gamepad1.left_trigger);
 
-        if (power > .1)
+
+        if (power < -.1)
         {
             robot.extensionPower = 0;
-            if (robot.getExtension().getCurrentPosition() > 850)
+            if (robot.getExtension().getCurrentPosition() < -850)
             {
                 robot.getExtension().setPower(0);
             }
@@ -112,10 +113,10 @@ public class DriveThread extends Thread {
                 robot.getExtension().setPower(power);
             }
 
-        } else if (power < -.1)
+        } else if (power > .1)
         {
             robot.extensionPower = 0;
-            if (robot.getExtension().getCurrentPosition() < 50)
+            if (robot.getExtension().getCurrentPosition() > -50)
             {
                 robot.getExtension().setPower(power * .1);
 
@@ -127,7 +128,7 @@ public class DriveThread extends Thread {
         }
         else
         {
-            robot.getExtension().setPower(robot.extensionPower);
+            robot.getExtension().setPower(-robot.extensionPower);
         }
 
     }
@@ -192,10 +193,10 @@ public class DriveThread extends Thread {
         // if going up stop from overextending
 
             if (power < 0.0) {
-                if (robot.getSlideRight().getCurrentPosition() < -2250 || robot.getSlideLeft().getCurrentPosition() < -2250)
+                if (robot.getSlideRight().getCurrentPosition() < -2200 || robot.getSlideLeft().getCurrentPosition() < -2200)
                 {
-                    robot.getSlideLeft().setPower(0);
-                    robot.getSlideRight().setPower(0);
+                    robot.getSlideLeft().setPower( power * .1);
+                    robot.getSlideRight().setPower(power * .1);
                 } else {
                     robot.getSlideLeft().setPower(power);
                     robot.getSlideRight().setPower(power);
