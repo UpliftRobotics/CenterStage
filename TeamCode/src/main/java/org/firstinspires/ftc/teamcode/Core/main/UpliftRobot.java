@@ -170,7 +170,7 @@ public class UpliftRobot
     public double armRightReset = .5;
 
 
-    public double grabberClose1 = .69;
+    public double grabberClose1 = .675;
     public double grabberClose2 = .62;
 
     public double grabberOpen = .49;

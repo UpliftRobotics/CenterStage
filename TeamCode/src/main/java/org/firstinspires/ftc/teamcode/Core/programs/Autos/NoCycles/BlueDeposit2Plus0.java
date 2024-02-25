@@ -28,14 +28,16 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
     @Override
     public void initAction() throws InterruptedException
     {
+
+        robot.getExtension().setPower(.05);
         claw("open");
+
+        robot.getIntake().setPower(.2);
 
         robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
         robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
         robot.getIntakeRoller().setPosition(robot.frontRollerStore);
 
-        robot.getIntake().setPower(0.1);
-        Thread.sleep(1000);
 
         robot.getTwister().setPosition(robot.twisterPos4);
         robot.getArmRight().setPosition(robot.armRightStore);
@@ -51,24 +53,28 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
         Thread.sleep(500);
 
         claw("close1");
+        robot.getIntake().setPower(0);
 
         Thread.sleep(1000);
 
-        robot.frontWebcam.setPipeline(robot.pipelineBlueDepositSide);
 
+
+        robot.frontWebcam.setPipeline(robot.pipelineBlueDepositSide);
 
     }
 
     @Override
     public void body() throws InterruptedException
     {
-        int location = robot.pipelineBlueDepositSide.location;
+//        robot.getExtension().setPower(.05);
+//        int location = robot.pipelineBlueDepositSide.location;
+        int location = 0;
         odom.setOdometryPosition(48, 0, 0);
 
         if(!goPark)
         {
             //left
-            if(location == 2 || location == -1 )
+            if(location == 0 || location == -1 )
             {
                 //drop purple pixel position
                 driveToPosition(42, 28, 0.9, 0);
@@ -79,82 +85,87 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
 
                 robot.frontWebcam.closeCameraDevice();
 
-                driveToAprilTag(15, 24, 85);
-//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
-//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
+                driveToAprilTag(14.8, 24, 85);
+
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
 
 
+                deposit(0, 0.5);
+                Thread.sleep(500);
+                claw("open");
+                reset(true, false);
 
-
-//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightGround);
-//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftGround);
-//
-//                Thread.sleep(1500);
-//
-//                deposit(300, 0.5);
-//                Thread.sleep(1000);
-//
-//                claw("open");
-//                Thread.sleep(2000);
-//                reset(true, false);
-//
-//                Thread.sleep(2000);
+                odom.setOdometryPosition(12, 24, 85);
+                driveToPosition(15, 5, 0.9, 85);
+                Thread.sleep(1000);
 
 
             }
 
-//            //middle
-//            if(location == 1 )
-//            {
-//                //drop purple pixel position
-//                driveToPosition(48, 31, 0.8, 0);
-//
-//                //drop yellow pixel position
-//                driveToPosition(48, 19, 0.8, 0);
-//                driveToPosition(2, 32, 0.5, 80);
-//
-//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
-//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
-//
-//                Thread.sleep(1500);
-//
-//                deposit(300, 0.5);
-//
-//
-//                Thread.sleep(500);
-//
-//                claw("open");
-//                Thread.sleep(2000);
-//                reset(true, false);
-//
-//            }
-//
-//            // right
-//
-//            if(location == 2 )
-//            {
-//                //drop purple pixel position
-//                driveToPosition(48, 20, 0.6, 0);
-//                driveToPosition(56, 28, 0.6, 50);
-//
-//
-//                //drop yellow pixel position
-//                driveToPosition(42, 14, 0.9, 50);
-//                driveToPosition(4, 40, 0.6, 80);
-//
-//                robot.getIntakeArmRight().setPosition(robot.intakeArmRightReset);
-//                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftReset);
-//
-//                Thread.sleep(1500);
-//
-//                deposit(300, 0.5);
-//                Thread.sleep(500);
-//
-//                claw("open");
-//                Thread.sleep(2000);
-//                reset(true, false);
-//
-//            }
+            //middle
+            if(location == 1 )
+            {
+                //drop purple pixel position
+                driveToPosition(48, 31, 0.8, 0);
+
+                //drop yellow pixel position
+                driveToPosition(48, 19, 0.8, 0);
+                driveToPosition(15, 32, 0.5, 85);
+
+                robot.frontWebcam.closeCameraDevice();
+
+                driveToAprilTag(14.75, 32, 85);
+
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+
+
+                deposit(0, 0.5);
+
+                Thread.sleep(500);
+                claw("open");
+                reset(true, false);
+
+                odom.setOdometryPosition(12, 32, 85);
+                driveToPosition(15, 8, 0.9, 85);
+                Thread.sleep(1000);
+
+
+            }
+
+            // right
+
+            if(location == 2 )
+            {
+                //drop purple pixel position
+                driveToPosition(48, 20, 0.6, 0);
+                driveToPosition(56, 28, 0.6, 50);
+
+
+                //drop yellow pixel position
+                driveToPosition(42, 14, 0.9, 50);
+                driveToPosition(15, 41, 0.6, 75);
+
+            robot.frontWebcam.closeCameraDevice();
+
+            driveToAprilTag(13, 41, 75);
+
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+
+
+            deposit(0, 0.5);
+
+            Thread.sleep(500);
+            claw("open");
+            reset(true, false);
+
+            odom.setOdometryPosition(12, 41, 75);
+            driveToPosition(15, 8, 0.9, 75);
+            Thread.sleep(1000);
+
+            }
 
 //            driveToPosition(20, 32, 0.6, 90);
 //            driveToPosition(5, 10, 0.6, 90);

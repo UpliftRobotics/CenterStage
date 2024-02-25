@@ -20,14 +20,16 @@ public class RedDeposit2Plus0 extends UpliftAutoImpl
 
     @Override
     public void initAction() throws InterruptedException {
+
+        robot.getExtension().setPower(.05);
         claw("open");
+
+        robot.getIntake().setPower(.2);
 
         robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
         robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
         robot.getIntakeRoller().setPosition(robot.frontRollerStore);
 
-        robot.getIntake().setPower(0.1);
-        Thread.sleep(1000);
 
         robot.getTwister().setPosition(robot.twisterPos4);
         robot.getArmRight().setPosition(robot.armRightStore);
@@ -43,6 +45,7 @@ public class RedDeposit2Plus0 extends UpliftAutoImpl
         Thread.sleep(500);
 
         claw("close1");
+        robot.getIntake().setPower(0);
 
         Thread.sleep(1000);
 
@@ -52,11 +55,13 @@ public class RedDeposit2Plus0 extends UpliftAutoImpl
     @Override
     public void body() throws InterruptedException
     {
-        int location = robot.pipelineRedDepositSide.location;
+//        int location = robot.pipelineRedDepositSide.location;
+        int location = 1;
         odom.setOdometryPosition(48, 144, 0);
 
         //left
-        if(location == 0 || location == -1 ) {
+        if(location == 0 || location == -1 )
+        {
             //drop position
 
 
@@ -67,20 +72,24 @@ public class RedDeposit2Plus0 extends UpliftAutoImpl
         {
             //drop position
             driveToPosition(30, 135, 0.8, 0);
-            driveToPosition(4, 125, 0.7, 90);
-            Thread.sleep(1000);
+            driveToPosition(14, 125, 0.7, 90);
+
+            robot.frontWebcam.closeCameraDevice();
+
+            driveToAprilTag(14.8, 125, 90);
+
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
 
 
-            deposit(400, 0.1);
+            deposit(0, 0.5);
             Thread.sleep(500);
-
             claw("open");
-            Thread.sleep(1000);
             reset(true, false);
 
-
-            //outtake position
-            driveToPosition(33, 115, 0.5, 85);
+            odom.setOdometryPosition(14, 125, 90);
+            driveToPosition(15, 140, 0.9, 90);
+            Thread.sleep(1000);
         }
 
         // right

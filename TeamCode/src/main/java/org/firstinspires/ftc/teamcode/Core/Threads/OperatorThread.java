@@ -165,6 +165,7 @@ public class OperatorThread extends Thread {
                 robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 robot.depositStage = 1;
+
                 }
                 else if (robot.depositStage == 1) //intake is in the robot, transfer by grabbing the pixels and then sending the intake out
                 {

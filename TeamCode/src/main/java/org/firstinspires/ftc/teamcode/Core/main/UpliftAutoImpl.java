@@ -123,7 +123,7 @@ public class UpliftAutoImpl extends UpliftAuto
         }
 
         // arrived at point, so stop
-        stopMotors();
+//        stopMotors();
 
         // correct angle to be preferred angle * DON'T NEED IF slowTurn() works correctly (within +-1 degree)
         turnTo(targetAngle, movementSpeed, QUICKEST_DIRECTION);
@@ -607,7 +607,13 @@ public class UpliftAutoImpl extends UpliftAuto
 
 
 
-    public void driveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException {
+    public void driveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException
+    {
+
+        double changeX = 0;
+        double changeY = 0;
+        double changeAngle = 0;
+
         AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
 
                 .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
@@ -624,9 +630,11 @@ public class UpliftAutoImpl extends UpliftAuto
         {
             AprilTagDetection tag = aprilProcessor.getDetections().get(0);
 
-            Thread.sleep(1000);
+            Thread.sleep(500);
 
-            driveToPosition(currentX + tag.ftcPose.y + 30, currentY +  tag.ftcPose.x, 0.3, currentAngle + tag.ftcPose.yaw);
+            changeX = tag.ftcPose.y;
+            changeY = tag.ftcPose.x;
+            changeAngle = tag.ftcPose.yaw;
 
             telemetry.addData("Tag: ", tag.id);
             telemetry.addData("X: ", tag.ftcPose.x);
@@ -634,6 +642,9 @@ public class UpliftAutoImpl extends UpliftAuto
             telemetry.addData("Angle: ", tag.ftcPose.yaw);
             telemetry.update();
         }
+
+        driveToPosition(currentX + changeX - 7, currentY +  changeY, 0.3, currentAngle + changeAngle);
+
     }
 }
 
