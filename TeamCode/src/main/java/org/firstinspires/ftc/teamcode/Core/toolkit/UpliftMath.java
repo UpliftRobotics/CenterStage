@@ -31,13 +31,13 @@ public class UpliftMath {
             moveSpeed = moveSpeed * val;
             if(tolerance > 1)
             {
-                if (Math.abs(moveSpeed) < 0.6)
+                if (Math.abs(moveSpeed) < 0.8)
                 {
                     moveSpeed = 0.6;
                 }
             } else
             {
-                if(Math.abs(moveSpeed) < 0.4)
+                if(Math.abs(moveSpeed) < 0.6)
                 {
                     moveSpeed = 0.4;
                 }

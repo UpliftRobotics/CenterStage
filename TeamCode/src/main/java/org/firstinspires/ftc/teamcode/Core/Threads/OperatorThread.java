@@ -156,7 +156,10 @@ public class OperatorThread extends Thread {
                 robot.getArmLeft().setPosition(robot.armLeftTransfer);
                 robot.getArmRight().setPosition(robot.armRightTransfer);
                 Thread.sleep(500);
-                robot.getGrabber().setPosition(robot.grabberClose2);
+                if(robot.getPixelDetectorLeft().getDistance(DistanceUnit.CM) < 1 && robot.getPixelDetectorRight().getDistance(DistanceUnit.CM)< 1)
+                    robot.getGrabber().setPosition(robot.grabberClose2);
+                else
+                    robot.getGrabber().setPosition(robot.grabberClose1);
                 Thread.sleep(200);
                 robot.intakePower = -.3;
                 Thread.sleep(150);
@@ -164,7 +167,13 @@ public class OperatorThread extends Thread {
                 robot.extensionPower = 0;
                 robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 robot.getExtension().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                robot.depositStage = 1;
+                robot.getSlideRight().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getSlideRight().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                robot.getSlideLeft().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+                    robot.depositStage = 1;
 
                 }
                 else if (robot.depositStage == 1) //intake is in the robot, transfer by grabbing the pixels and then sending the intake out

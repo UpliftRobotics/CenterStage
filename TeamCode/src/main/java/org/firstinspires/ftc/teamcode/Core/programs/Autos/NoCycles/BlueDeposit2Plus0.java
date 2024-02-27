@@ -60,6 +60,7 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
 
 
         robot.frontWebcam.setPipeline(robot.pipelineBlueDepositSide);
+        robot.getExtension().setPower(0);
 
     }
 
@@ -92,11 +93,15 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
 
 
                 deposit(0, 0.5);
-                Thread.sleep(500);
+                Thread.sleep(2000);
                 claw("open");
-                reset(true, false);
+                Thread.sleep(1000);
 
                 odom.setOdometryPosition(12, 24, 85);
+                driveToPosition(16, 24, 0.9, 85);
+
+                reset(true, false);
+
                 driveToPosition(15, 5, 0.9, 85);
                 Thread.sleep(1000);
 
@@ -123,11 +128,15 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
 
                 deposit(0, 0.5);
 
-                Thread.sleep(500);
+                Thread.sleep(2000);
                 claw("open");
+                Thread.sleep(1000);
+                odom.setOdometryPosition(12, 32, 85);
+                driveToPosition(16, 32, 0.9, 85);
+
+
                 reset(true, false);
 
-                odom.setOdometryPosition(12, 32, 85);
                 driveToPosition(15, 8, 0.9, 85);
                 Thread.sleep(1000);
 
@@ -147,23 +156,27 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
                 driveToPosition(42, 14, 0.9, 50);
                 driveToPosition(15, 41, 0.6, 75);
 
-            robot.frontWebcam.closeCameraDevice();
+                robot.frontWebcam.closeCameraDevice();
 
-            driveToAprilTag(13, 41, 75);
+                driveToAprilTag(13, 41, 75);
 
-            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
-            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+                robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+                robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
 
 
-            deposit(0, 0.5);
+                deposit(0, 0.5);
 
-            Thread.sleep(500);
-            claw("open");
-            reset(true, false);
+                Thread.sleep(2000);
+                claw("open");
+                Thread.sleep(1000);
 
-            odom.setOdometryPosition(12, 41, 75);
-            driveToPosition(15, 8, 0.9, 75);
-            Thread.sleep(1000);
+                odom.setOdometryPosition(12, 41, 75);
+                driveToPosition(16, 41, 0.9, 75);
+
+                reset(true, false);
+
+                driveToPosition(15, 8, 0.9, 75);
+                Thread.sleep(1000);
 
             }
 

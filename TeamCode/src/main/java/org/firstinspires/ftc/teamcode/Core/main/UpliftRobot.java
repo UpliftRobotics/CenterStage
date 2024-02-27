@@ -138,11 +138,11 @@ public class UpliftRobot
     public double frontRollerStore = .9;
     public double frontRollerGround = .5;
     public double frontRollerReset = .5;
-    public double frontRollerStack = .6;
+    public double frontRollerStack = .55;
     
     public double intakeArmLeftStore = 0.02;
     public double intakeArmLeftTransfer = .14;
-    public double intakeArmLeftStack5 = .79;
+    public double intakeArmLeftStack5 = .78;
     public double intakeArmLeftStack4 = .81;
     public double intakeArmLeftStack3 = .84;
     public double intakeArmLeftStack2 = .87;
@@ -153,7 +153,7 @@ public class UpliftRobot
     public double intakeArmRightStore = .98;
     public double intakeArmRightTransfer = .86;
 
-    public double intakeArmRightStack5 = .21;
+    public double intakeArmRightStack5 = .22;
     public double intakeArmRightStack4 = .19;
     public double intakeArmRightStack3 = .16;
     public double intakeArmRightStack2 = .13;
@@ -245,6 +245,8 @@ public class UpliftRobot
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         slideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+//        extension.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -370,7 +372,7 @@ public class UpliftRobot
 
                frontWebcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
-               frontWebcam.setPipeline(pipelineBlueDepositSide);
+               frontWebcam.setPipeline(pipelineRedAudienceSide);
 
 
 

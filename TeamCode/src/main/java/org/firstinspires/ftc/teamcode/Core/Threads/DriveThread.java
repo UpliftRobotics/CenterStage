@@ -179,7 +179,8 @@ public class DriveThread extends Thread {
         robot.getBackLeft().setPower(speedFactor * (lbPow / maxVal));
     }
 
-    public void slides() {
+    public void slides()
+    {
         double power = .8 * robot.opMode.gamepad2.right_stick_y;
         if (robot.opMode.gamepad2.right_bumper)
             power = power * .05;
@@ -204,7 +205,7 @@ public class DriveThread extends Thread {
             }
             // stop from overretracting
             else {
-                if (robot.getSlideRight().getCurrentPosition() > 100 || robot.getSlideLeft().getCurrentPosition() > 100) {
+                if (robot.getSlideRight().getCurrentPosition() > 0 || robot.getSlideLeft().getCurrentPosition() > 0) {
                     robot.getSlideLeft().setPower(0);
                     robot.getSlideRight().setPower(0);
                 } else {

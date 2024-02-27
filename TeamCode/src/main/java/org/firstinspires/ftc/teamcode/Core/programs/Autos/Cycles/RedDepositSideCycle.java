@@ -7,117 +7,171 @@ import org.firstinspires.ftc.teamcode.Core.main.UpliftRobot;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Odometry;
 
 
-@Autonomous(name = "Red Deposit Cycle", group = "Opmodes")
+@Autonomous(name = "Red Deposit 2 + 2", group = "Opmodes")
 public class RedDepositSideCycle extends UpliftAutoImpl
 {
     Odometry odom;
 
-
-    public void initHardware() {
-
+    public void initHardware()
+    {
         robot = new UpliftRobot(this);
         odom = robot.odometry;
-
     }
 
     @Override
     public void initAction() throws InterruptedException {
 
-//        robot.getGrabber().setPosition(robot.grabberClose1);
-//
-//        Thread.sleep(2000);
-//
-//        robot.getArmLeft().setPosition(0.7);
-//        robot.getArmRight().setPosition(0.3);
-//
-//        robot.getDepositWrist().setPosition(0.6);
+        robot.getExtension().setPower(.05);
+        claw("open");
+
+        robot.getIntake().setPower(.2);
+
+        robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftTransfer);
+        robot.getIntakeArmRight().setPosition(robot.intakeArmRightTransfer);
+        robot.getIntakeRoller().setPosition(robot.frontRollerStore);
+
+
+        robot.getTwister().setPosition(robot.twisterPos4);
+        robot.getArmRight().setPosition(robot.armRightStore);
+        robot.getArmLeft().setPosition(robot.armLeftStore);
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer1);
+
+        Thread.sleep(3000);
+
+        robot.getDepositWrist().setPosition(robot.depositWristTransfer2);
+        robot.getArmRight().setPosition(robot.armRightTransfer);
+        robot.getArmLeft().setPosition(robot.armLeftTransfer);
+
+        Thread.sleep(500);
+
+        claw("close1");
+        robot.getIntake().setPower(0);
+
+        Thread.sleep(1000);
 
         robot.frontWebcam.setPipeline(robot.pipelineRedDepositSide);
-
-
+        robot.getExtension().setPower(0);
     }
 
     @Override
     public void body() throws InterruptedException
     {
-        int location = robot.pipelineRedDepositSide.location;
-        odom.setOdometryPosition(48, 0, 180);
+//        int location = robot.pipelineRedDepositSide.location;
+        int location = 2;
+        odom.setOdometryPosition(48, 144, 180);
 
         //left
-        if(location == 0 || location == -1 ) {
-            //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 10, 0.7, 90, 2);
-            Thread.sleep(1000);
+        if(location == 0 || location == -1 )
+        {
+            //drop purple pixel position
+            driveToPosition(48, 126, 0.6, 180);
+            driveToPosition(54, 115, 0.6, 130, 2);
+
+//            Thread.sleep(2000);
 
 
+            //drop yellow pixel position
+            driveToPosition(42, 116, 0.9, 130);
+            driveToPosition(13.25, 116, 0.6, 100,2);
 
-            deposit(400, 0.1);
-            Thread.sleep(500);
+            robot.frontWebcam.closeCameraDevice();
+
+            driveToAprilTag(9.75, 116, 100);
+
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
 
 
+            deposit(0, 0.5);
+
+            Thread.sleep(2000);
             claw("open");
             Thread.sleep(1000);
+
+
+            odom.setOdometryPosition(13.25, 116, 100);
+            driveToPosition(20, 116, 0.9, 100);
+
             reset(true, false);
 
+            driveToPosition(20, 116, 0.9, 100);
 
-            //outtake position
-            driveToPosition(23, 21, 0.5, 93);
+
+
 
         }
 
         //middle
         if(location == 1 )
         {
-            //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 16, 0.7, 90, 2);
-            Thread.sleep(1000);
+            driveToPosition(48, 113, 0.8, 180);
+
+            //drop yellow pixel position
+            driveToPosition(48, 125, 0.8, 180);
+            driveToPosition(12.5, 121.5, 0.5, 95,2);
+
+            robot.frontWebcam.closeCameraDevice();
+
+            driveToAprilTag(9.25, 121.5, 95);
+
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
 
 
-            deposit(400, 0.1);
-            Thread.sleep(500);
+            deposit(0, 0.5);
 
+            Thread.sleep(2000);
             claw("open");
             Thread.sleep(1000);
+
+            odom.setOdometryPosition(9.5, 121.5, 95);
+            driveToPosition(15, 121.5, 0.9, 100);
             reset(true, false);
 
 
-            //outtake position
-            driveToPosition(28, 28, 0.5, 93);
+
         }
 
         // right
 
         if(location == 2 )
         {
-            //drop position
-            driveToPosition(30, 6, 0.8, 180);
-            driveToPosition(3.5, 25, 0.7, 90, 2);
-            Thread.sleep(1000);
+            //drop purple pixel position
+            driveToPosition(38, 118, 0.9, 180);
 
-            deposit(400, 0.1);
-            Thread.sleep(500);
+//                drop yellow pixel position
+            driveToPosition(38, 130, 0.9, 180);
+            driveToPosition(11.5, 127, 0.5, 95,2);
 
+            robot.frontWebcam.closeCameraDevice();
+
+            driveToAprilTag(9.75, 127, 95);
+
+            robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
+            robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
+
+
+            deposit(0, 0.5);
+
+            Thread.sleep(2000);
             claw("open");
             Thread.sleep(1000);
+
+            odom.setOdometryPosition(11.5, 127, 95);
+            driveToPosition(15, 127, 0.9, 95);
+
             reset(true, false);
 
-            //outtake position
-            driveToPosition(41, 19, 0.5, 93);
+            driveToPosition(18, 90, 0.9, 135);
+            driveToPosition(55, 70, 0.9, 110, 2);
+            driveToPosition(85, 60, 0.9, 105, 2);
+
+
+            extension(800, 1);
+
+
 
         }
-
-        Thread.sleep(1000);
-
-        intake(-0.175);
-        Thread.sleep(5000);
-        intake(0);
-
-
-        //park
-        driveToPosition(5, -10, 0.6, 90);
-
 
 
 

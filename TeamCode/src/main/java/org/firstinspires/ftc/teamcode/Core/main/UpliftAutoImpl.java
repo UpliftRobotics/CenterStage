@@ -286,7 +286,6 @@ public class UpliftAutoImpl extends UpliftAuto
             // NOTHING...
         }
 
-
     }
 
     public void transfer() {
@@ -381,24 +380,42 @@ public class UpliftAutoImpl extends UpliftAuto
     public void extensionPID(int extensionDist, int slowDownDist, double extensionPower) {
         robot.getExtension().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+//        double pow = abs(extensionPower);
+
         double minPower = 0.1;
         int realSlowDownDist = extensionDist - slowDownDist;
 
-        while (robot.getExtension().getCurrentPosition() < extensionDist) {
+        while (robot.getExtension().getCurrentPosition() < extensionDist)
+        {
+            telemetry.addData("extensionPos", robot.getExtension().getCurrentPosition());
+            telemetry.update();
+
             double remainingDistance = extensionDist - robot.getExtension().getCurrentPosition();
 
-            if (remainingDistance > realSlowDownDist) {
+            if (remainingDistance > realSlowDownDist)
+            {
                 robot.getExtension().setPower(extensionPower);
-            } else {
+            }
+            else
+            {
                 // Adjust power based on remaining distance
                 double slowdownFactor = remainingDistance / realSlowDownDist;
                 double slowedPower = minPower + (extensionPower - minPower) * slowdownFactor;
 
-//                double slowedPower = Math.max(minPower + (extensionPower - minPower) * slowdownFactor, extensionPower / 2);
-
                 // Set the slowed power to extension
                 robot.getExtension().setPower(slowedPower);
             }
+
+        }
+    }
+
+    public void extension(int dist, double pow)
+    {
+        int extensionDist = -dist;
+
+        while (robot.getExtension().getCurrentPosition() > extensionDist)
+        {
+            robot.getExtension().setPower(-pow);
 
         }
     }
@@ -607,7 +624,86 @@ public class UpliftAutoImpl extends UpliftAuto
 
 
 
-    public void driveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException
+//    public void driveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException
+//    {
+//
+//        double changeX = 0;
+//        double changeY = 0;
+//        double changeAngle = 0;
+//
+//        AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
+//
+//                .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
+//                .build();
+//
+//        VisionPortal portal = new VisionPortal.Builder()
+//                .addProcessor(aprilProcessor)
+//                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
+//                .setCameraResolution(new Size(640, 480))
+//
+//                .build();
+//
+//        if(aprilProcessor.getDetections().size() > 0)
+//        {
+//            AprilTagDetection tag = aprilProcessor.getDetections().get(0);
+//
+//            Thread.sleep(500);
+//
+//            changeX = tag.ftcPose.y;
+//            changeY = tag.ftcPose.x;
+//            changeAngle = tag.ftcPose.yaw;
+//
+//            telemetry.addData("Tag: ", tag.id);
+//            telemetry.addData("X: ", tag.ftcPose.x);
+//            telemetry.addData("Y: ", tag.ftcPose.y);
+//            telemetry.addData("Angle: ", tag.ftcPose.yaw);
+//            telemetry.update();
+//        }
+//
+//        driveToPosition(currentX + changeX - 7, currentY +  changeY, 0.3, currentAngle + changeAngle);
+//
+//    }
+public void driveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException
+{
+
+    double changeX = 0;
+    double changeY = 0;
+    double changeAngle = 0;
+
+    AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
+
+            .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
+            .build();
+
+    VisionPortal portal = new VisionPortal.Builder()
+            .addProcessor(aprilProcessor)
+            .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
+            .setCameraResolution(new Size(640, 480))
+
+            .build();
+
+    if(aprilProcessor.getDetections().size() > 0)
+    {
+        AprilTagDetection tag = aprilProcessor.getDetections().get(0);
+
+        Thread.sleep(500);
+
+        changeX = -tag.ftcPose.y+15;
+        changeY = tag.ftcPose.x;
+        changeAngle = tag.ftcPose.yaw;
+
+        telemetry.addData("Tag: ", tag.id);
+        telemetry.addData("X: ", tag.ftcPose.x);
+        telemetry.addData("Y: ", tag.ftcPose.y);
+        telemetry.addData("Angle: ", tag.ftcPose.yaw);
+        telemetry.update();
+    }
+
+    driveToPosition(currentX + changeX, currentY +  changeY, 0.3, currentAngle + changeAngle);
+
+}
+
+    public void SlowdriveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException
     {
 
         double changeX = 0;
@@ -632,7 +728,7 @@ public class UpliftAutoImpl extends UpliftAuto
 
             Thread.sleep(500);
 
-            changeX = tag.ftcPose.y;
+            changeX = -tag.ftcPose.y+15;
             changeY = tag.ftcPose.x;
             changeAngle = tag.ftcPose.yaw;
 
@@ -641,11 +737,23 @@ public class UpliftAutoImpl extends UpliftAuto
             telemetry.addData("Y: ", tag.ftcPose.y);
             telemetry.addData("Angle: ", tag.ftcPose.yaw);
             telemetry.update();
+            while (aprilProcessor.getDetections().size() > 0 && (Math.abs(changeX) > 1 || Math.abs(changeY) > 1 || Math.abs(changeAngle) > 1))
+            {
+                driveToPosition(currentX + changeX, currentY +  changeY, 0.3, currentAngle + changeAngle);
+                changeX = -tag.ftcPose.y+15;
+                changeY = tag.ftcPose.x;
+                changeAngle = tag.ftcPose.yaw;
+                telemetry.addData("Tag: ", tag.id);
+                telemetry.addData("X: ", changeY);
+                telemetry.addData("Y: ", changeX);
+                telemetry.addData("Angle: ", changeAngle);
+                telemetry.update();
+            }
         }
 
-        driveToPosition(currentX + changeX - 7, currentY +  changeY, 0.3, currentAngle + changeAngle);
 
     }
+
 }
 
 

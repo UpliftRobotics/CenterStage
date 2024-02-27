@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+import org.firstinspires.ftc.teamcode.Core.main.UpliftAutoImpl;
 
 
 @TeleOp(name="Test April Tags")
@@ -40,6 +41,12 @@ public class AprilTagTest extends LinearOpMode {
                 telemetry.addData("Y: ", tag.ftcPose.y);
                 telemetry.addData("Angle", tag.ftcPose.yaw);
                 telemetry.update();
+            }
+
+
+            if (gamepad1.dpad_down)
+            {
+
             }
         }
     }
