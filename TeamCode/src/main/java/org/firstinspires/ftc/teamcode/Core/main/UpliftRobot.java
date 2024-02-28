@@ -46,6 +46,10 @@ import com.arcrobotics.ftclib.purepursuit.waypoints.EndWaypoint;
 import com.arcrobotics.ftclib.purepursuit.waypoints.GeneralWaypoint;
 import com.arcrobotics.ftclib.purepursuit.waypoints.StartWaypoint;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.ExposureControl;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.GainControl;
+
+
 public class UpliftRobot
 {
 
@@ -195,10 +199,17 @@ public class UpliftRobot
 
 
 
-    public UpliftRobot(LinearOpMode opMode) {
+    public UpliftRobot(LinearOpMode opMode)
+    {
         this.opMode = opMode;
         getHardware();
         odometry = new Odometry(this);
+//        ExposureControl myExposureControl;
+//        myExposureControl.setMode(ExposureControl.Mode.Manual);
+//        myExposureControl.setExposure(12, TimeUnit.MILLISECONDS);
+//        GainControl myGainControl;
+//        myExposureControl.setMode(ExposureControl.Mode.Manual);
+//        myGainControl.setGain(40);
     }
 
     public void getHardware()
@@ -378,7 +389,18 @@ public class UpliftRobot
 
                frontWebcam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
 
-               frontWebcam.setPipeline(pipelineRedAudienceSide);
+               frontWebcam.setPipeline(pipelineRedDepositSide);
+
+
+
+
+
+
+
+
+
+
+
 
 
 

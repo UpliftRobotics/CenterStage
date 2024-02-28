@@ -682,24 +682,30 @@ public void driveToAprilTag(double currentX, double currentY, double currentAngl
 
             .build();
 
-    if(aprilProcessor.getDetections().size() > 0)
+    while(!isStopRequested() && opModeIsActive())
     {
-        AprilTagDetection tag = aprilProcessor.getDetections().get(0);
+        if(aprilProcessor.getDetections().size() > 0)
+        {
+            AprilTagDetection tag = aprilProcessor.getDetections().get(0);
 
-        Thread.sleep(500);
+            Thread.sleep(500);
 
-        changeX = -tag.ftcPose.y+15;
-        changeY = tag.ftcPose.x;
-        changeAngle = tag.ftcPose.yaw;
+            changeX = -tag.ftcPose.y+15;
+            changeY = tag.ftcPose.x;
+            changeAngle = tag.ftcPose.yaw;
 
-        telemetry.addData("Tag: ", tag.id);
-        telemetry.addData("X: ", tag.ftcPose.x);
-        telemetry.addData("Y: ", tag.ftcPose.y);
-        telemetry.addData("Angle: ", tag.ftcPose.yaw);
-        telemetry.update();
+            telemetry.addData("Tag: ", tag.id);
+            telemetry.addData("X: ", tag.ftcPose.x);
+            telemetry.addData("Y: ", tag.ftcPose.y);
+            telemetry.addData("Angle: ", tag.ftcPose.yaw);
+            telemetry.update();
+
+            driveToPosition(currentX + changeX, currentY +  changeY, 0.3, currentAngle + changeAngle);
+
+        }
     }
 
-    driveToPosition(currentX + changeX, currentY +  changeY, 0.3, currentAngle + changeAngle);
+
 
 }
 
@@ -751,8 +757,69 @@ public void driveToAprilTag(double currentX, double currentY, double currentAngl
             }
         }
 
-
     }
+
+    public void newAprilTagMethod(double power)
+    {
+        AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
+
+                .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
+                .build();
+
+        VisionPortal portal = new VisionPortal.Builder()
+                .addProcessor(aprilProcessor)
+                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
+                .setCameraResolution(new Size(640, 480))
+
+                .build();
+
+
+        while(!isStopRequested() && opModeIsActive())
+        {
+
+            if(aprilProcessor.getDetections().size() > 0)
+            {
+                AprilTagDetection tag = aprilProcessor.getDetections().get(0);
+
+                telemetry.addData("Tag: ", tag.id);
+                telemetry.addData("X: ", tag.ftcPose.x);
+                telemetry.addData("Y: ", tag.ftcPose.y);
+                telemetry.addData("Angle: ", tag.ftcPose.yaw);
+                telemetry.update();
+
+//                if(tag.ftcPose.x < 0)
+//                {
+//                    while(tag.ftcPose.x < 0)
+//                    {
+//                        robot.getFrontLeft().setPower(power);
+//                        robot.getFrontRight().setPower(-power);
+//                        robot.getBackLeft().setPower(-power);
+//                        robot.getBackRight().setPower(power);
+//
+//
+//
+//                    }
+//                }
+//                else
+//                {
+//                    while(tag.ftcPose.x > 0)
+//                    {
+//                        robot.getFrontLeft().setPower(-power);
+//                        robot.getFrontRight().setPower(power);
+//                        robot.getBackLeft().setPower(power);
+//                        robot.getBackRight().setPower(-power);
+//                    }
+//                }
+
+
+            }
+
+
+
+
+        }
+    }
+
 
 }
 

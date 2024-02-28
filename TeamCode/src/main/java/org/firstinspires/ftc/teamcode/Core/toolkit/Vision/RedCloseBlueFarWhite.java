@@ -88,7 +88,7 @@ public class RedCloseBlueFarWhite extends OpenCvPipeline {
 
         }
 
-        return input;
+        return mat;
 
     }
 }

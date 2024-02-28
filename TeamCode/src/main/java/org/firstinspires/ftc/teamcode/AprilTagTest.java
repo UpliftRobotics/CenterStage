@@ -43,11 +43,6 @@ public class AprilTagTest extends LinearOpMode {
                 telemetry.update();
             }
 
-
-            if (gamepad1.dpad_down)
-            {
-
-            }
         }
     }
 }
