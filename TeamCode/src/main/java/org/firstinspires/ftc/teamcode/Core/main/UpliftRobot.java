@@ -24,6 +24,8 @@ import org.firstinspires.ftc.teamcode.Core.toolkit.Point;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageBlueFar;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageRedClose;
 import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.CenterStageRedFar;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.RedCloseBlueFarWhite;
+import org.firstinspires.ftc.teamcode.Core.toolkit.Vision.RedFarBlueCloseWhite;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import org.openftc.easyopencv.OpenCvCamera;
@@ -75,6 +77,8 @@ public class UpliftRobot
     public CenterStageBlueFar pipelineBlueAudienceSide;
     public CenterStageRedClose pipelineRedDepositSide;
     public CenterStageRedFar pipelineRedAudienceSide;
+    public RedFarBlueCloseWhite pipelineRedFarBlueCloseWhite;
+    public RedCloseBlueFarWhite pipelineRedCloseBlueFarWhite;
 
     public OpenCvCamera frontWebcam;
     public OpenCvCamera backWebcam;
@@ -367,6 +371,8 @@ public class UpliftRobot
              pipelineRedDepositSide = new CenterStageRedClose(opMode.telemetry);
              pipelineBlueAudienceSide = new CenterStageBlueFar(opMode.telemetry);
              pipelineRedAudienceSide = new CenterStageRedFar(opMode.telemetry);
+             pipelineRedFarBlueCloseWhite = new RedFarBlueCloseWhite(opMode.telemetry);
+             pipelineRedCloseBlueFarWhite = new RedCloseBlueFarWhite(opMode.telemetry);
 
              //changes this before each match depending on color and side
 
