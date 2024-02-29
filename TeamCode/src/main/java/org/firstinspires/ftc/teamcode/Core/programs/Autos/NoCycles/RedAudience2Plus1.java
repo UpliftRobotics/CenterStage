@@ -109,7 +109,7 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             robot.frontWebcam.closeCameraDevice();
 
-            driveToAprilTag(3, 100, 85);
+//            driveToAprilTag(3, 100, 85);
 
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
             robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
@@ -189,7 +189,7 @@ public class RedAudience2Plus1 extends UpliftAutoImpl
 
             robot.frontWebcam.closeCameraDevice();
 
-            driveToAprilTag(0, 115, 80);
+//            driveToAprilTag(0, 115, 80);
 
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
             robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);

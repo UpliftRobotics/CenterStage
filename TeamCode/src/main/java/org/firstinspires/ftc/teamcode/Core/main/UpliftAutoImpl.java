@@ -21,7 +21,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.ExposureControl;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.controls.GainControl;
 import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -44,19 +47,38 @@ import java.util.List;
 
 import java.util.concurrent.TimeUnit;
 
-public class UpliftAutoImpl extends UpliftAuto
-{
-//    AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
-//
-//            .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
-//            .build();
-//
-//    VisionPortal portal = new VisionPortal.Builder()
-//            .addProcessor(aprilProcessor)
-//            .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
-//            .setCameraResolution(new Size(640, 480))
-//
-//            .build();
+public class UpliftAutoImpl extends UpliftAuto {
+
+    private DcMotor leftFrontDrive = null;  //  Used to control the left front drive wheel
+    private DcMotor rightFrontDrive = null;  //  Used to control the right front drive wheel
+    private DcMotor leftBackDrive = null;  //  Used to control the left back drive wheel
+    private DcMotor rightBackDrive = null;  //  Used to control the right back drive wheel
+
+    boolean targetFound = false;    // Set to true when an AprilTag target is detected
+    double drive = 0;        // Desired forward power/speed (-1 to +1)
+    double strafe = 0;        // Desired strafe power/speed (-1 to +1)
+    double turn = 0;        // Desired turning power/speed (-1 to +1)
+
+    // Adjust these numbers to suit your robot.
+    final double DESIRED_DISTANCE = 4.0; //  this is how close the camera should get to the target (inches)
+
+    //  Set the GAIN constants to control the relationship between the measured position error, and how much power is
+    //  applied to the drive motors to correct the error.
+    //  Drive = Error * Gain    Make these values smaller for smoother control, or larger for a more aggressive response.
+    final double SPEED_GAIN = 0.015;   //  Forward Speed Control "Gain". eg: Ramp up to 50% power at a 25 inch error.   (0.50 / 25.0)
+    final double STRAFE_GAIN = 0.02;   //  Strafe Speed Control "Gain".  eg: Ramp up to 25% power at a 25 degree Yaw error.   (0.25 / 25.0)
+    final double TURN_GAIN = 0.01;   //  Turn Control "Gain".  eg: Ramp up to 25% power at a 25 degree error. (0.25 / 25.0)
+
+    final double MAX_AUTO_SPEED = 0.6;   //  Clip the approach speed to this max value (adjust for your robot)
+    final double MAX_AUTO_STRAFE = 0.5;   //  Clip the approach speed to this max value (adjust for your robot)
+    final double MAX_AUTO_TURN = 0.3;   //  Clip the turn speed to this max value (adjust for your robot)
+
+    private static final boolean USE_WEBCAM = true;  // Set true to use a webcam, or false for a phone camera
+    private static final int DESIRED_TAG_ID = 4;     // Choose the tag you want to approach or set to -1 for ANY tag.
+    private VisionPortal visionPortal;               // Used to manage the video source.
+    private AprilTagProcessor aprilTag;              // Used for managing the AprilTag detection process.
+    private AprilTagDetection desiredTag = null;     // Used to hold the data for a detected AprilTag
+
 
     public UpliftRobot robot;
     public boolean goPark = false;
@@ -385,19 +407,15 @@ public class UpliftAutoImpl extends UpliftAuto
         double minPower = 0.1;
         int realSlowDownDist = extensionDist - slowDownDist;
 
-        while (robot.getExtension().getCurrentPosition() < extensionDist)
-        {
+        while (robot.getExtension().getCurrentPosition() < extensionDist) {
             telemetry.addData("extensionPos", robot.getExtension().getCurrentPosition());
             telemetry.update();
 
             double remainingDistance = extensionDist - robot.getExtension().getCurrentPosition();
 
-            if (remainingDistance > realSlowDownDist)
-            {
+            if (remainingDistance > realSlowDownDist) {
                 robot.getExtension().setPower(extensionPower);
-            }
-            else
-            {
+            } else {
                 // Adjust power based on remaining distance
                 double slowdownFactor = remainingDistance / realSlowDownDist;
                 double slowedPower = minPower + (extensionPower - minPower) * slowdownFactor;
@@ -409,12 +427,10 @@ public class UpliftAutoImpl extends UpliftAuto
         }
     }
 
-    public void extension(int dist, double pow)
-    {
+    public void extension(int dist, double pow) {
         int extensionDist = -dist;
 
-        while (robot.getExtension().getCurrentPosition() > extensionDist)
-        {
+        while (robot.getExtension().getCurrentPosition() > extensionDist) {
             robot.getExtension().setPower(-pow);
 
         }
@@ -619,209 +635,181 @@ public class UpliftAutoImpl extends UpliftAuto
 //    }
 
 
+    public void driveToAprilTag(int goalTag, double goalDistance ) {
+        // Initialize the Apriltag Detection process
+        initAprilTag();
 
+        // Initialize the hardware variables. Note that the strings used here as parameters
+        // to 'get' must match the names assigned during the robot configuration.
+        // step (using the FTC Robot Controller app on the phone).
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "front_left");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "front_right");
+        leftBackDrive = hardwareMap.get(DcMotor.class, "back_left");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "back_right");
 
+        // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
+        // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
+        // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
+        leftFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightBackDrive.setDirection(DcMotor.Direction.REVERSE);
 
+        if (USE_WEBCAM)
+            setManualExposure(6, 250);  // Use low exposure time to reduce motion blur
 
+        // Wait for driver to press start
+        telemetry.addData("Camera preview on/off", "3 dots, Camera Stream");
+        telemetry.addData(">", "Touch Play to start OpMode");
+        telemetry.update();
 
-//    public void driveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException
-//    {
-//
-//        double changeX = 0;
-//        double changeY = 0;
-//        double changeAngle = 0;
-//
-//        AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
-//
-//                .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
-//                .build();
-//
-//        VisionPortal portal = new VisionPortal.Builder()
-//                .addProcessor(aprilProcessor)
-//                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
-//                .setCameraResolution(new Size(640, 480))
-//
-//                .build();
-//
-//        if(aprilProcessor.getDetections().size() > 0)
-//        {
-//            AprilTagDetection tag = aprilProcessor.getDetections().get(0);
-//
-//            Thread.sleep(500);
-//
-//            changeX = tag.ftcPose.y;
-//            changeY = tag.ftcPose.x;
-//            changeAngle = tag.ftcPose.yaw;
-//
-//            telemetry.addData("Tag: ", tag.id);
-//            telemetry.addData("X: ", tag.ftcPose.x);
-//            telemetry.addData("Y: ", tag.ftcPose.y);
-//            telemetry.addData("Angle: ", tag.ftcPose.yaw);
-//            telemetry.update();
-//        }
-//
-//        driveToPosition(currentX + changeX - 7, currentY +  changeY, 0.3, currentAngle + changeAngle);
-//
-//    }
-public void driveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException
-{
-
-    double changeX = 0;
-    double changeY = 0;
-    double changeAngle = 0;
-
-    AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
-
-            .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
-            .build();
-
-    VisionPortal portal = new VisionPortal.Builder()
-            .addProcessor(aprilProcessor)
-            .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
-            .setCameraResolution(new Size(640, 480))
-
-            .build();
-
-    while(!isStopRequested() && opModeIsActive())
-    {
-        if(aprilProcessor.getDetections().size() > 0)
+        while (opModeIsActive())
         {
-            AprilTagDetection tag = aprilProcessor.getDetections().get(0);
 
-            Thread.sleep(500);
+            targetFound = false;
+            desiredTag = null;
 
-            changeX = -tag.ftcPose.y+15;
-            changeY = tag.ftcPose.x;
-            changeAngle = tag.ftcPose.yaw;
-
-            telemetry.addData("Tag: ", tag.id);
-            telemetry.addData("X: ", tag.ftcPose.x);
-            telemetry.addData("Y: ", tag.ftcPose.y);
-            telemetry.addData("Angle: ", tag.ftcPose.yaw);
-            telemetry.update();
-
-            driveToPosition(currentX + changeX, currentY +  changeY, 0.3, currentAngle + changeAngle);
-
-        }
-    }
-
-
-
-}
-
-    public void SlowdriveToAprilTag(double currentX, double currentY, double currentAngle) throws InterruptedException
-    {
-
-        double changeX = 0;
-        double changeY = 0;
-        double changeAngle = 0;
-
-        AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
-
-                .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
-                .build();
-
-        VisionPortal portal = new VisionPortal.Builder()
-                .addProcessor(aprilProcessor)
-                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
-                .setCameraResolution(new Size(640, 480))
-
-                .build();
-
-        if(aprilProcessor.getDetections().size() > 0)
-        {
-            AprilTagDetection tag = aprilProcessor.getDetections().get(0);
-
-            Thread.sleep(500);
-
-            changeX = -tag.ftcPose.y+15;
-            changeY = tag.ftcPose.x;
-            changeAngle = tag.ftcPose.yaw;
-
-            telemetry.addData("Tag: ", tag.id);
-            telemetry.addData("X: ", tag.ftcPose.x);
-            telemetry.addData("Y: ", tag.ftcPose.y);
-            telemetry.addData("Angle: ", tag.ftcPose.yaw);
-            telemetry.update();
-            while (aprilProcessor.getDetections().size() > 0 && (Math.abs(changeX) > 1 || Math.abs(changeY) > 1 || Math.abs(changeAngle) > 1))
-            {
-                driveToPosition(currentX + changeX, currentY +  changeY, 0.3, currentAngle + changeAngle);
-                changeX = -tag.ftcPose.y+15;
-                changeY = tag.ftcPose.x;
-                changeAngle = tag.ftcPose.yaw;
-                telemetry.addData("Tag: ", tag.id);
-                telemetry.addData("X: ", changeY);
-                telemetry.addData("Y: ", changeX);
-                telemetry.addData("Angle: ", changeAngle);
-                telemetry.update();
+            // Step through the list of detected tags and look for a matching tag
+            List<AprilTagDetection> currentDetections = aprilTag.getDetections();
+            for (AprilTagDetection detection : currentDetections) {
+                if ((detection.metadata != null) &&
+                        ((DESIRED_TAG_ID < 0) || (detection.id == goalTag))) {
+                    targetFound = true;
+                    desiredTag = detection;
+                    break;  // don't look any further.
+                } else {
+                    telemetry.addData("Unknown Target", "Tag ID %d is not in TagLibrary\n", detection.id);
+                }
             }
-        }
 
-    }
+            // Tell the driver what we see, and what to do.
+            if (targetFound) {
+                telemetry.addData(">", "HOLD Left-Bumper to Drive to Target\n");
+                telemetry.addData("Target", "ID %d (%s)", desiredTag.id, desiredTag.metadata.name);
+                telemetry.addData("Range", "%5.1f inches", desiredTag.ftcPose.range);
+                telemetry.addData("Bearing", "%3.0f degrees", desiredTag.ftcPose.bearing);
+                telemetry.addData("Yaw", "%3.0f degrees", desiredTag.ftcPose.yaw);
+            } else {
+                telemetry.addData(">", "Drive using joysticks to find valid target\n");
+            }
 
-    public void newAprilTagMethod(double power)
-    {
-        AprilTagProcessor aprilProcessor = new AprilTagProcessor.Builder()
-
-                .setLensIntrinsics(822.317, 822.317, 319.495, 242.05)
-                .build();
-
-        VisionPortal portal = new VisionPortal.Builder()
-                .addProcessor(aprilProcessor)
-                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
-                .setCameraResolution(new Size(640, 480))
-
-                .build();
-
-
-        while(!isStopRequested() && opModeIsActive())
-        {
-
-            if(aprilProcessor.getDetections().size() > 0)
+//            // If Left Bumper is being pressed, AND we have found the desired target, Drive to target Automatically .
+            if (targetFound)
             {
-                AprilTagDetection tag = aprilProcessor.getDetections().get(0);
 
-                telemetry.addData("Tag: ", tag.id);
-                telemetry.addData("X: ", tag.ftcPose.x);
-                telemetry.addData("Y: ", tag.ftcPose.y);
-                telemetry.addData("Angle: ", tag.ftcPose.yaw);
+                // Determine heading, range and Yaw (tag image rotation) error so we can use them to control the robot automatically.
+                double rangeError = (desiredTag.ftcPose.range - goalDistance);
+                double headingError = desiredTag.ftcPose.bearing;
+                double yawError = desiredTag.ftcPose.yaw;
+
+                // Use the speed and turn "gains" to calculate how we want the robot to move.
+                drive = Range.clip(rangeError * SPEED_GAIN, -MAX_AUTO_SPEED, MAX_AUTO_SPEED);
+                turn = Range.clip(headingError * TURN_GAIN, -MAX_AUTO_TURN, MAX_AUTO_TURN);
+                strafe = Range.clip(-yawError * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
+
+                telemetry.addData("Auto", "Drive %5.2f, Strafe %5.2f, Turn %5.2f ", drive, strafe, turn);
                 telemetry.update();
 
-//                if(tag.ftcPose.x < 0)
-//                {
-//                    while(tag.ftcPose.x < 0)
-//                    {
-//                        robot.getFrontLeft().setPower(power);
-//                        robot.getFrontRight().setPower(-power);
-//                        robot.getBackLeft().setPower(-power);
-//                        robot.getBackRight().setPower(power);
-//
-//
-//
-//                    }
-//                }
-//                else
-//                {
-//                    while(tag.ftcPose.x > 0)
-//                    {
-//                        robot.getFrontLeft().setPower(-power);
-//                        robot.getFrontRight().setPower(power);
-//                        robot.getBackLeft().setPower(power);
-//                        robot.getBackRight().setPower(-power);
-//                    }
-//                }
-
+                // Apply desired axes motions to the drivetrain.
+                moveRobot(drive, strafe, turn);
+                sleep(10);
+                if (desiredTag.ftcPose.range < goalDistance + 5)
+                {
+                    stopMotors();
+                    break;
+                }
 
             }
 
-
-
-
         }
+
+
     }
 
 
+        public void moveRobot ( double x, double y, double yaw){
+            // Calculate wheel powers.
+            double leftFrontPower = x - y - yaw;
+            double rightFrontPower = x + y + yaw;
+            double leftBackPower = x + y - yaw;
+            double rightBackPower = x - y + yaw;
+
+            // Normalize wheel powers to be less than 1.0
+            double max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+            max = Math.max(max, Math.abs(leftBackPower));
+            max = Math.max(max, Math.abs(rightBackPower));
+
+            if (max > 1.0) {
+                leftFrontPower /= max;
+                rightFrontPower /= max;
+                leftBackPower /= max;
+                rightBackPower /= max;
+            }
+
+            // Send powers to the wheels.
+
+            leftFrontDrive.setPower(rightBackPower);
+            rightFrontDrive.setPower(leftBackPower);
+            leftBackDrive.setPower(rightFrontPower);
+            rightBackDrive.setPower(leftFrontPower);
+        }
+
+        private void initAprilTag () {
+            // Create the AprilTag processor by using a builder.
+            aprilTag = new AprilTagProcessor.Builder().build();
+
+            // Create the vision portal by using a builder.
+            if (USE_WEBCAM) {
+                visionPortal = new VisionPortal.Builder()
+                        .setCamera(hardwareMap.get(WebcamName.class, "Webcam 2"))
+                        .addProcessor(aprilTag)
+                        .build();
+            } else {
+                visionPortal = new VisionPortal.Builder()
+                        .setCamera(BuiltinCameraDirection.BACK)
+                        .addProcessor(aprilTag)
+                        .build();
+            }
+        }
+
+    /*
+     Manually set the camera gain and exposure.
+     This can only be called AFTER calling initAprilTag(), and only works for Webcams;
+    */
+        private void setManualExposure ( int exposureMS, int gain){
+            // Wait for the camera to be open, then use the controls
+
+            if (visionPortal == null) {
+                return;
+            }
+
+            // Make sure camera is streaming before we try to set the exposure controls
+            if (visionPortal.getCameraState() != VisionPortal.CameraState.STREAMING) {
+                telemetry.addData("Camera", "Waiting");
+                telemetry.update();
+                while (!isStopRequested() && (visionPortal.getCameraState() != VisionPortal.CameraState.STREAMING)) {
+                    sleep(20);
+                }
+                telemetry.addData("Camera", "Ready");
+                telemetry.update();
+            }
+
+            // Set camera controls unless we are stopping.
+            if (!isStopRequested()) {
+                ExposureControl exposureControl = visionPortal.getCameraControl(ExposureControl.class);
+                if (exposureControl.getMode() != ExposureControl.Mode.Manual) {
+                    exposureControl.setMode(ExposureControl.Mode.Manual);
+                    sleep(50);
+                }
+                exposureControl.setExposure((long) exposureMS, TimeUnit.MILLISECONDS);
+                sleep(20);
+                GainControl gainControl = visionPortal.getCameraControl(GainControl.class);
+                gainControl.setGain(gain);
+                sleep(20);
+            }
+        }
 }
+
 
 
 

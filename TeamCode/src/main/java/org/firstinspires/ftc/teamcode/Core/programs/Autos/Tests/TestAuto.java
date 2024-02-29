@@ -43,13 +43,8 @@ public class TestAuto extends UpliftAutoImpl
 //        driveToPosition(24,108,.5,90);
         robot.frontWebcam.closeCameraDevice();
 
-//        driveToAprilTag(0, 0, 0);
 
-        newAprilTagMethod(0.1);
-
-//        Thread.sleep(20000);
-
-
+        driveToAprilTag(4,3);
 
 
 

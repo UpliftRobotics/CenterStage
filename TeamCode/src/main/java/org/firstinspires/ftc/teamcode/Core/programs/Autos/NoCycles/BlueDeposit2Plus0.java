@@ -86,7 +86,7 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
 
                 robot.frontWebcam.closeCameraDevice();
 
-                driveToAprilTag(14.8, 24, 85);
+//                driveToAprilTag(14.8, 24, 85);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
@@ -120,7 +120,7 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
 
                 robot.frontWebcam.closeCameraDevice();
 
-                driveToAprilTag(14.75, 32, 85);
+//                driveToAprilTag(14.75, 32, 85);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
@@ -158,7 +158,7 @@ public class BlueDeposit2Plus0 extends UpliftAutoImpl
 
                 robot.frontWebcam.closeCameraDevice();
 
-                driveToAprilTag(13, 41, 75);
+//                driveToAprilTag(13, 41, 75);
 
                 robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
                 robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);

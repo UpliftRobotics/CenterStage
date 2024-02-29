@@ -76,7 +76,7 @@ public class RedDepositSideCycle extends UpliftAutoImpl
 
             robot.frontWebcam.closeCameraDevice();
 
-            driveToAprilTag(9.75, 116, 100);
+//            driveToAprilTag(9.75, 116, 100);
 
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
             robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
@@ -112,7 +112,7 @@ public class RedDepositSideCycle extends UpliftAutoImpl
 
             robot.frontWebcam.closeCameraDevice();
 
-            driveToAprilTag(9.25, 121.5, 95);
+//            driveToAprilTag(9.25, 121.5, 95);
 
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
             robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
@@ -145,7 +145,7 @@ public class RedDepositSideCycle extends UpliftAutoImpl
 
             robot.frontWebcam.closeCameraDevice();
 
-            driveToAprilTag(9.75, 127, 95);
+//            driveToAprilTag(9.75, 127, 95);
 
             robot.getIntakeArmRight().setPosition(robot.intakeArmRightStack3);
             robot.getIntakeArmLeft().setPosition(robot.intakeArmLeftStack3);
